@@ -21,3 +21,10 @@ A class that represents posts in a discussion forum
 
 
 The student class takes care of the functions students can perform in the discussion board.
+
+## UserInfo.txt
+The text file that includes all the user data
+In the format showing below:
+Username
+Password
+User Type (T for Teachaer, S for Student)
