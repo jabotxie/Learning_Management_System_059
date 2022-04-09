@@ -1,5 +1,3 @@
-package Exception;
-
 public class UsernameAlreadyTakenException {
     @Override
     public String toString() {

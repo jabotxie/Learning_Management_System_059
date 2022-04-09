@@ -1,6 +1,3 @@
-import Exceptions.NoPermissionException;
-import Exceptions.NoSuchTargetException;
-
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -9,15 +6,36 @@ import java.util.ArrayList;
 
 public abstract class User {
     public static ArrayList<DiscussionForum> forums;
+    private String username;
+    private String password;
 
-    public User() {
+    public User(String username, String password) {
         forums = new ArrayList<>();
+        this.username = username;
+        this.password = password;
     }
 
-    public User(ArrayList<DiscussionForum> forums) {
-        this.forums = forums;
+    public User(String username, String password,ArrayList<DiscussionForum> forums) {
+        this.username = username;
+        this.password = password;
+        User.forums = forums;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public static ArrayList<String> getImportedFile(String fileName) throws FileNotFoundException {
         BufferedReader bf = new BufferedReader(new FileReader(fileName));
@@ -36,7 +54,7 @@ public abstract class User {
 
     public abstract void addPost(DiscussionForum forum, DiscussionPost post);
 
-    public abstract void addReply(DiscussionPost post, DiscussionPost reply);
+    public abstract void addReply(DiscussionPost post, DiscussionPost reply) throws NoSuchTargetException;
 
     public abstract void createForum(String topic) throws NoPermissionException;
 

@@ -1,6 +1,14 @@
-import Exceptions.NoPermissionException;
+import java.util.ArrayList;
 
 public class Student extends User {
+
+    public Student(String username, String password) {
+        super(username, password);
+    }
+
+    public Student(String username, String password, ArrayList<DiscussionForum> forums) {
+        super(username, password, forums);
+    }
 
     @Override
     public void addPost(DiscussionForum forum, DiscussionPost post) {

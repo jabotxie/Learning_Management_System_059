@@ -1,20 +1,14 @@
-import Exceptions.NoPermissionException;
-import Exceptions.NoSuchTargetException;
-
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class Teacher extends User {
 
-    public Teacher(ArrayList<DiscussionForum> forums) {
-        super(forums);
+
+    public Teacher(String username, String password) {
+        super(username, password);
     }
 
-    public Teacher() {
-        super();
+    public Teacher(String username, String password, ArrayList<DiscussionForum> forums) {
+        super(username, password, forums);
     }
 
     @Override

@@ -1,5 +1,3 @@
-package Exception;
-
 public class LoginUnsuccessfulException {
     @Override
     public String toString() {

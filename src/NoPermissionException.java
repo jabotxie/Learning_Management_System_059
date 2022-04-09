@@ -1,5 +1,3 @@
-package Exception;
-
 public class NoPermissionException extends Exception{
     @Override
     public String toString() {

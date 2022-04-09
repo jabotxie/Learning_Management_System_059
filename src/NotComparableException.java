@@ -1,5 +1,3 @@
-package Exception;
-
 public class NotComparableException extends Exception {
     @Override
     public String toString() {

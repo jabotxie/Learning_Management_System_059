@@ -1,5 +1,3 @@
-package Exception;
-
 public class NoSuchTargetException extends Exception {
     @Override
     public String toString() {
