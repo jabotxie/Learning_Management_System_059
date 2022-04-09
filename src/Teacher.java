@@ -23,17 +23,23 @@ public class Teacher extends User {
 
     @Override
     public void createForum(String topic) {
-        User.forums.add(new DiscussionForum(topic));
+        synchronized (o) {
+            User.forums.add(new DiscussionForum(topic));
+        }
     }
 
     @Override
     public void deleteForum(DiscussionForum forum) throws NoSuchTargetException {
-        if (!User.forums.remove(forum)) throw new NoSuchTargetException();
+        synchronized (o) {
+            if (!User.forums.remove(forum)) throw new NoSuchTargetException();
+        }
     }
 
     @Override
     public void editForum(DiscussionForum forum, String topic) throws NoSuchTargetException {
-        int i = User.forums.indexOf(forum);
-        if (i == -1) throw new NoSuchTargetException();
+        synchronized (o) {
+            int i = User.forums.indexOf(forum);
+            if (i == -1) throw new NoSuchTargetException();
+        }
     }
 }
