@@ -3,6 +3,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public abstract class User {
     public static ArrayList<DiscussionForum> forums;
@@ -52,6 +53,19 @@ public abstract class User {
         return lines;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || (o.getClass() != Teacher.class && o.getClass() != Student.class)) return false;
+        User user = (User) o;
+        return Objects.equals(username, user.username);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(username, password);
+    }
+
     public abstract void addPost(DiscussionForum forum, DiscussionPost post);
 
     public abstract void addReply(DiscussionPost post, DiscussionPost reply) throws NoSuchTargetException;
@@ -62,4 +76,10 @@ public abstract class User {
 
     public abstract void editForum(DiscussionForum forum, String topic) throws NoPermissionException, NoSuchTargetException;
 
+    public String toString() {
+        String sb = getClass().toString() + '\n' +
+                "Username: " + username + '\n' +
+                "Password: " + password + '\n';
+        return sb;
+    }
 }
