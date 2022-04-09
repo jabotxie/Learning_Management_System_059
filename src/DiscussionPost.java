@@ -3,7 +3,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.Objects;
 
-public class DiscussionPost implements Comparable<DiscussionPost>{
+public class DiscussionPost implements Comparable<DiscussionPost> {
 
     private ArrayList<DiscussionPost> replies;
     private String postContent;
@@ -21,7 +21,7 @@ public class DiscussionPost implements Comparable<DiscussionPost>{
         this.postTime = postTime;
     }
 
-    public DiscussionPost(String postContent, long postTime,ArrayList<DiscussionPost> replies) {
+    public DiscussionPost(String postContent, long postTime, ArrayList<DiscussionPost> replies) {
         this.replies = replies;
         this.postContent = postContent;
         this.postTime = new Date(postTime);
@@ -51,7 +51,7 @@ public class DiscussionPost implements Comparable<DiscussionPost>{
     }
 
     public void deleteReply(DiscussionPost deletingReply) throws NoPermissionException, NoSuchTargetException {
-        if (Teacher.class == SystemActivities.currentUser.getClass()) {
+        if (Teacher.class == UserActivities.currentUser.getClass()) {
             if (!replies.remove(deletingReply)) throw new NoSuchTargetException();
         } else {
             throw new NoPermissionException();
