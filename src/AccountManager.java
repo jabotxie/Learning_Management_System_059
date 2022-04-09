@@ -1,7 +1,4 @@
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 
 /**
@@ -16,11 +13,18 @@ public class AccountManager {
 
     public static ArrayList<User> users;
 
-    public AccountManager(ArrayList<User> users) {
-        AccountManager.users = users;
+    public static String userInfoFileName = "UserInfo.txt";
+
+    public static void updateUsers() {
+        try {
+            AccountManager.users = getUsers(userInfoFileName);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
-    private ArrayList<User> getUsers(String filename) throws FileNotFoundException {
+    private static ArrayList<User> getUsers(String filename) throws FileNotFoundException {
+
         BufferedReader bf = new BufferedReader(new FileReader(filename));
         ArrayList<String> lines = new ArrayList<>();
         ArrayList<User> users = new ArrayList<>();
@@ -43,6 +47,7 @@ public class AccountManager {
                 } else {
                     users.add(new Student(username, password));
                 }
+
             }
 
         } catch (IOException e) {
@@ -50,5 +55,54 @@ public class AccountManager {
         }
         return users;
     }
+
+    public synchronized static void saveUserInfo(String fileName) {
+
+        StringBuilder sb = new StringBuilder();
+        for (User user: users) {
+            sb.append(user.getUsername()).append('\n');
+            sb.append(user.getPassword()).append('\n');
+            sb.append(user.getClass() == Teacher.class ? "T" : "S").append('\n');
+        }
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter(fileName));
+            bw.write(sb.toString());
+            bw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public synchronized static void login(String username, String password) throws LoginUnsuccessfulException {
+
+        int i = users.indexOf(new Student(username, password));
+        try {
+            if(users.get(i).getPassword().equals(password)) {
+                SystemActivities.currentUser = users.get(i);
+            }  else {
+                throw new LoginUnsuccessfulException();
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new LoginUnsuccessfulException();
+        }
+
+
+    }
+
+    public static synchronized void createAccount(Class<? extends User> c, String username, String password)
+            throws UsernameAlreadyTakenException {
+        if (users.contains(new Student(username, password))) {
+            throw new UsernameAlreadyTakenException();
+        } else {
+            if (c == Teacher.class) {
+                users.add(new Teacher(username, password));
+            } else {
+                users.add(new Student(username, password));
+            }
+            saveUserInfo(userInfoFileName);
+        }
+    }
+
 
 }
