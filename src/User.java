@@ -7,6 +7,9 @@ import java.util.Objects;
 
 public abstract class User {
     public static ArrayList<DiscussionForum> forums;
+    public static String forumFileName = "";
+    private static boolean isForumInitialized = false;
+    public final Object o = new Object();
     private String username;
     private String password;
 
@@ -81,5 +84,18 @@ public abstract class User {
                 "Username: " + username + '\n' +
                 "Password: " + password + '\n';
         return sb;
+    }
+
+
+    public static void initForum() {
+        if (!isForumInitialized) {
+            ArrayList<DiscussionForum> forums = new ArrayList<>();
+            //TODO: implement method to read forum from local file
+            User.forums = forums;
+        }
+    }
+
+    public static void saveForum() {
+        //TODO: implement method to save forums to local file
     }
 }
