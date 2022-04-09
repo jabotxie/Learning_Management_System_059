@@ -8,6 +8,8 @@ import java.util.ArrayList;
  * username
  * password
  * User Type(T for Teacher, S for Student)
+ * ************************************
+ *
  */
 public class AccountManager {
 
@@ -79,7 +81,7 @@ public class AccountManager {
         int i = users.indexOf(new Student(username, password));
         try {
             if(users.get(i).getPassword().equals(password)) {
-                SystemActivities.currentUser = users.get(i);
+                UserActivities.currentUser = users.get(i);
             }  else {
                 throw new LoginUnsuccessfulException();
             }
