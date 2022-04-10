@@ -37,7 +37,7 @@ public class Teacher extends User {
     @Override
     public void editForum(Course course, DiscussionForum forum, String topic) {
         synchronized (course.forumSync) {
-            course.deleteForum(forum);
+            course.editForum(forum, topic);
         }
     }
 
