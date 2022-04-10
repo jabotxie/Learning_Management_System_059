@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * ************************************
  */
 
-public class DataManager {
+public class DataManager implements Serializable {
 
     public static ArrayList<User> users;
     public static final Object usersSync = new Object();
@@ -25,15 +25,28 @@ public class DataManager {
         synchronized (coursesSync) {
             synchronized (usersSync) {
                 if (!isDataInitializedFromFile) {
-                    try {
-                        users = getUsersFromFile();
-                    } catch (FileNotFoundException e) {//No users in database
-                        users = new ArrayList<>();
-                    }
+//                    try {
+//                        ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(coursesInfoFileName));
+//                        DataManager dataManager = (DataManager) objectInputStream.readObject();
+//                    } catch (ClassNotFoundException | IOException e) {
+//                        users = new ArrayList<>();
+//                        courses = new ArrayList<>();
+//                        e.printStackTrace();
+//                    }
+
                     try {
                         courses = getCoursesFromFile();
+                        if (courses == null) {
+                            courses = new ArrayList<>();
+                        }
                     } catch (IOException | ClassNotFoundException e) {
                         courses = new ArrayList<>();
+                    }
+                    try {
+                        users = getUsersFromFile();
+
+                    } catch (FileNotFoundException e) {//No users in database
+                        users = new ArrayList<>();
                     }
                     isDataInitializedFromFile = true;
                 }
@@ -44,18 +57,20 @@ public class DataManager {
     public static void saveData() {
         saveUserInfo();
         saveCoursesToFile();
+
     }
 
     private static ArrayList<Course> getCoursesFromFile() throws IOException, ClassNotFoundException {
         ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(coursesInfoFileName));
-        DataManager dataManager = (DataManager) objectInputStream.readObject();
-        return dataManager.getCourses();
+        CourseList courseList = (CourseList) objectInputStream.readObject();
+        return courseList.getCourses();
     }
 
     private static void saveCoursesToFile(){
         try {
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(coursesInfoFileName));
-            objectOutputStream.writeObject(courses);
+            DataManager.isDataInitializedFromFile = false;
+            objectOutputStream.writeObject(new CourseList(DataManager.courses));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -95,7 +110,7 @@ public class DataManager {
         return users;
     }
 
-    public static void saveUserInfo() {
+    private static void saveUserInfo() {
         synchronized (usersSync) {
 
             StringBuilder sb = new StringBuilder();
