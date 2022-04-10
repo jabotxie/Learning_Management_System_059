@@ -1,9 +1,10 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.Objects;
 
-public class DiscussionPost implements Comparable<DiscussionPost> {
+public class DiscussionPost implements Comparable<DiscussionPost>, Serializable {
 
     private ArrayList<DiscussionPost> replies;
     private String postContent;

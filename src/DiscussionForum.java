@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class DiscussionForum {
+public class DiscussionForum implements Serializable {
 
     private String topic;
     private ArrayList<DiscussionPost> posts;
