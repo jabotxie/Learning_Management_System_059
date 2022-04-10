@@ -206,7 +206,7 @@ public class UserActivities implements Runnable {
     private int courseActivities() {
         final String MENU = "Do you want to\n1. Create a course\n2. Delete a course\n3. Edit a course\n" +
                 "4. Enter a course\n5. Log out";
-        final String ENTER_METHOD = "How do you like to enter the title:\n1. Command line\n" +
+        final String ENTER_METHOD = "How do you like to enter the topic:\n1. Command line\n" +
                 "2. Import through text file";
         final String FILE_NAME = "Please enter the files name: ";
         final String COURSE_TITLE = "Enter the title of the course: ";
@@ -215,7 +215,7 @@ public class UserActivities implements Runnable {
         final String UPDATING_TITLE = "Please enter the updating course title: ";
 
         final String IMPORT_UNSUCCESSFUL = "The import process is not successful!";
-        final String RETRY = "Do you want to try again?";
+        final String RETRY = "Do you want to try again?\n1. Yes\n2. No";
         final String EMPTY_COURSE_LIST = "The course list is empty. You have to create a course first.";
         System.out.println(MENU);
 
@@ -227,14 +227,14 @@ public class UserActivities implements Runnable {
                 try {
                     verifyPermission();
                     System.out.println(ENTER_METHOD);
-                    int methodChoice = getValidInt(3);
+                    int methodChoice = getValidInt(2);
                     String courseTitle;
                     if (methodChoice == 1) {
                         System.out.println(COURSE_TITLE);
                         courseTitle = getStringInput();
                         currentUser.createCourse(courseTitle);
 
-                    } else if (methodChoice == 2) {
+                    } else {
                         boolean isProcessFinished = false;
                         do {
                             try {
@@ -250,8 +250,6 @@ public class UserActivities implements Runnable {
                                 if (retryChoice == 2) break;
                             }
                         } while (!isProcessFinished);
-                    } else {
-                        break;
                     }
 
                 } catch (NoPermissionException e) {
@@ -317,18 +315,113 @@ public class UserActivities implements Runnable {
         int forumSelection = 0;
         final String MENU = "Do you want to\n1. Create a forum\n2. Delete a forum\n3. Edit a forum\n4. Enter a forum" +
                 "\n5. Back to last menu";
+        final String ENTER_METHOD = "How do you like to enter the title:\n1. Command line\n" +
+                "2. Import through text file";
+        final String FILE_NAME = "Please enter the files name: ";
         final String FORUM_TOPIC = "Please enter the topic of the created forum: ";
+        final String SELECT_FORUM = "Select a forum";
+
+
+        final String NO_PERMISSION = "You don't have permission to proceed the action.";
+        final String IMPORT_UNSUCCESSFUL = "The import process is not successful!";
+        final String RETRY = "Do you want to try again?\n1. Yes\n2. No";
+        final String NO_FORUMS = "No forum under this course. Please create one and try again.";
+
         System.out.println(MENU);
         int menuChoice = getValidInt(5);
         switch (menuChoice) {
             case 1:
+                try {
+                    verifyPermission();
+                    System.out.println(ENTER_METHOD);
+                    int methodChoice = getValidInt(2);
+                    String forumTopic;
+                    if (methodChoice == 1) {
+                        System.out.println(FORUM_TOPIC);
+                        forumTopic = getStringInput();
+                        currentUser.createCourse(forumTopic);
 
+                    } else {
+                        boolean isProcessFinished = false;
+                        do {
+                            try {
+                                System.out.println(FILE_NAME);
+                                String fileName = getStringInput();
+                                forumTopic = User.getImportedFile(fileName);
+                                currentUser.createCourse(forumTopic);
+                                isProcessFinished = true;
+                            } catch (FileNotFoundException e) {
+                                System.out.println(IMPORT_UNSUCCESSFUL);
+                                System.out.println(RETRY);
+                                int retryChoice = getValidInt(2);
+                                if (retryChoice == 2) break;
+                            }
+                        } while (!isProcessFinished);
+                    }
+
+                } catch (NoPermissionException e) {
+                    System.out.println(NO_PERMISSION);
+                }
                 break;
             case 2:
+                try {
+                    verifyPermission();
+                    if (course.forums.size() == 0) {
+                        System.out.println(NO_FORUMS);
+                        break;
+                    }
+                    System.out.println(SELECT_FORUM);
+                    displayForumTopics(course);
+                    int forumIndex = getValidInt(course.forums.size()) - 1;
+                    currentUser.deleteForum(course, course.forums.get(forumIndex));
+
+                } catch (NoPermissionException e) {
+                    e.printStackTrace();
+                }
                 break;
             case 3:
+                try {
+                    verifyPermission();
+                    if (course.forums.size() == 0) {
+                        System.out.println(NO_FORUMS);
+                        break;
+                    }
+                    System.out.println(SELECT_FORUM);
+                    displayForumTopics(course);
+                    int forumIndex = getValidInt(course.forums.size()) - 1;
+                    DiscussionForum forum = course.forums.get(forumIndex);
+                    int methodChoice = getValidInt(2);
+                    String forumTopic;
+                    if (methodChoice == 1) {
+                        System.out.println(FORUM_TOPIC);
+                        forumTopic = getStringInput();
+                        currentUser.editForum(course, forum, forumTopic);
+
+                    } else {
+                        boolean isProcessFinished = false;
+                        do {
+                            try {
+                                System.out.println(FILE_NAME);
+                                String fileName = getStringInput();
+                                forumTopic = User.getImportedFile(fileName);
+                                currentUser.editForum(course, forum, forumTopic);
+                                isProcessFinished = true;
+                            } catch (FileNotFoundException e) {
+                                System.out.println(IMPORT_UNSUCCESSFUL);
+                                System.out.println(RETRY);
+                                int retryChoice = getValidInt(2);
+                                if (retryChoice == 2) break;
+                            }
+                        } while (!isProcessFinished);
+                    }
+                } catch (NoPermissionException e) {
+                    e.printStackTrace();
+                }
                 break;
             case 4:
+                System.out.println(SELECT_FORUM);
+                displayForumTopics(course);
+                forumSelection = getValidInt(course.forums.size());
                 break;
             case 5:
                 forumSelection = -1;
@@ -363,8 +456,14 @@ public class UserActivities implements Runnable {
 
     private void displayCoursesTitles() {
         for (int i = 0; i < DataManager.courses.size(); i++) {
-            System.out.print((i + 1) + "." + DataManager.courses.get(i) + '\n');
+            System.out.print((i + 1) + "." + DataManager.courses.get(i).getCourseTitle() + '\n');
 
+        }
+    }
+
+    private void displayForumTopics(Course course) {
+        for (int i = 0; i < course.forums.size(); i++) {
+            System.out.print((i + 1) + "." + course.forums.get(i).getTopic() + '\n');
         }
     }
 
