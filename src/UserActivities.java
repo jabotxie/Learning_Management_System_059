@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
+import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -17,6 +18,7 @@ public class UserActivities implements Runnable {
         scanner = new Scanner(System.in);
         Thread user1 = new Thread(new UserActivities());
         user1.start();
+        DataManager.saveData();
     }
 
     /**
@@ -125,6 +127,24 @@ public class UserActivities implements Runnable {
         String WELCOME = "Welcome to the Learning Management System";
         System.out.println(WELCOME);
         login();
+        int courseSelection;
+        do {
+            courseSelection = courseActivities();
+
+            if (courseSelection > 0) {
+                int forumSelection;
+                do {
+                    forumSelection = forumActivities();
+                    int postSelection;
+                    if (forumSelection > 0) {
+                        postSelection = postActivities();
+                    }
+
+                } while (forumSelection != -1);
+            }
+
+        } while (courseSelection != -1);
+        logOut();
     }
 
     private void login() {
@@ -170,26 +190,41 @@ public class UserActivities implements Runnable {
         } while (!loggedIn);
         System.out.println(LOGIN_SUCCESSFUL);
     }
-
-    private void courseActivities() {
-        final String MENU = "Do you want to\n1. Create a course\n2. Delete a course\n3. Edit a course\n4. Select a course";
+    private void logOut() {
+        final String GOODBYE = "Thanks for using Learning Management System!";
+        System.out.println(GOODBYE);
+    }
+    /**
+     *
+     * @return
+     * -1: user chooses to log out
+     * 0: user chooses to create, edit, or delete a course (subsequently run this again)
+     * positive integer: the course user wants to enter
+     */
+    private int courseActivities() {
+        final String MENU = "Do you want to\n1. Create a course\n2. Delete a course\n3. Edit a course\n" +
+                "4. Enter a course\n5. Log out";
         final String COURSE_TITLE = "Enter the title of the course: ";
-        final String SELECT_COURSE = "Please select a course:";
+        final String SELECT_COURSE = "Please select a course: ";
         final String NO_PERMISSION = "You don't have permission to proceed the action.";
+        final String UPDATING_TITLE = "Please enter the updating course title: ";
         System.out.println(MENU);
 
-        int menuChoice = getValidInt(4);
+        int courseChoice = 0;
+
+        int menuChoice = getValidInt(5);
         switch (menuChoice) {
-            case 1: {//add a course
+            case 1: //add a course
                 try {
                     System.out.println(COURSE_TITLE);
                     currentUser.createCourse(getStringInput());
                 } catch (NoPermissionException e) {
                     System.out.println(NO_PERMISSION);
                 }
+
                 break;
-            }
-            case 2: {//delete a course
+
+            case 2: //delete a course
                 try {
                     System.out.println(SELECT_COURSE);
                     displayCoursesTitles();
@@ -197,17 +232,85 @@ public class UserActivities implements Runnable {
                 } catch (NoPermissionException e) {
                     System.out.println(NO_PERMISSION);
                 }
+
                 break;
-            }
+
+            case 3: //Edit a course
+                System.out.println(SELECT_COURSE);
+                displayCoursesTitles();
+                int i = getValidInt(DataManager.courses.size()) - 1;
+                System.out.println(UPDATING_TITLE);
+                String updatingTopic = getStringInput();
+                try {
+                    currentUser.editCourse(DataManager.courses.get(i), updatingTopic);
+                } catch (NoPermissionException e) {
+                    System.out.println(NO_PERMISSION);
+                }
+
+                break;
+
+            case 4:
+                System.out.println(SELECT_COURSE);
+                displayCoursesTitles();
+                courseChoice = getValidInt(DataManager.courses.size()) - 1;
+                break;
+            case 5:
+                courseChoice = -1;
         }
+        return courseChoice;
+    }
+
+    private int forumActivities() {
+        int forumSelection = 0;
+        final String MENU = "Do you want to\n1. Create a forum\n2. Delete a forum\n3. Edit a forum\n4. Enter a forum" +
+                "\n5. Back to last menu";
+        final String FORUM_TOPIC = "Please enter the topic of the created forum: ";
+        System.out.println(MENU);
+        int menuChoice = getValidInt(5);
+        switch (menuChoice) {
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                forumSelection = -1;
+                break;
+        }
+
+        return forumSelection;
+    }
+
+    private int postActivities() {
+        int postSelection = 0;
+        final String MENU = "Do you want to\n1. Create a post\n2. Delete a post\n3. reply a forum\n4. Enter a post" +
+                "\n5. Back to last menu";
+        final String FORUM_TOPIC = "Please enter the topic of the created forum: ";
+        System.out.println(MENU);
+        int menuChoice = getValidInt(5);
+        switch (menuChoice) {
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                postSelection = -1;
+                break;
+        }
+        return postSelection;
     }
 
     private void displayCoursesTitles() {
         for (int i = 0; i < DataManager.courses.size(); i++) {
-            System.out.print((i + 1) + "." + DataManager.courses.get(i));
-            if (i != DataManager.courses.size() - 1) {
-                System.out.println();
-            }
+            System.out.print((i + 1) + "." + DataManager.courses.get(i) + '\n');
+
         }
     }
 
@@ -216,11 +319,13 @@ public class UserActivities implements Runnable {
         do {
             try {
                 integer = scanner.nextInt();
-                scanner.nextLine();
+
             } catch (NoSuchElementException e) {
+
                 System.out.println("Please enter an integer");
                 e.printStackTrace();
             }
+            scanner.nextLine();
         } while (integer == null);
         return integer;
     }
