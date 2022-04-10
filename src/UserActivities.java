@@ -113,11 +113,11 @@ public class UserActivities implements Runnable {
 //
 //            }
 //        });
-//        Scanner scanner = new Scanner(System.in);
-//        System.out.println("Welcome to the Learning Management System.\n");
-//        System.out.println("Press 1 to login, Press 2 to create account.\n");
-//        int loginChoice = scanner.nextInt();
-//        if (loginChoice == 1)
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Welcome to the Learning Management System.\n");
+        System.out.println("Press 1 to login, Press 2 to create account.\n");
+        int loginChoice = scanner.nextInt();
+        if (loginChoice == 1)
     }
 
 }
