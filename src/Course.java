@@ -1,15 +1,13 @@
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.ObjectInputStream;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Objects;
 
-public class Course {
+public class Course implements Serializable {
 
     private String courseTitle;
-    ArrayList<DiscussionForum> forums;
-    public final Object forumSync = new Object();
+    ArrayList<DiscussionForum> forums = new ArrayList<>();
+    public final Date forumSync = new Date(System.currentTimeMillis());
 
     public Course(String courseTitle) {
         this.courseTitle = courseTitle;
@@ -55,7 +53,7 @@ public class Course {
 
     public String toString() {
         StringBuilder sb = new StringBuilder("Course: ").append(courseTitle);
-        if (forums.size() != 0) {
+        if (forums != null && forums.size() != 0) {
             sb.append('\n').append("Forums:");
             for (DiscussionForum forum : forums) {
                 sb.append('\n').append(forum);

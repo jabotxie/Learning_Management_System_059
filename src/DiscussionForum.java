@@ -1,6 +1,7 @@
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -19,7 +20,9 @@ public class DiscussionForum implements Serializable {
 
     private String topic;
     private ArrayList<DiscussionPost> posts;
-    public final Object postsSync = new Object();
+    public final Date postsSync = new Date(System.currentTimeMillis());
+
+    public DiscussionForum() {}
 
     public DiscussionForum(String topic, ArrayList<DiscussionPost> posts) {
         this.topic = topic;
