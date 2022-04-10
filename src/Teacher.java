@@ -61,4 +61,9 @@ public class Teacher extends User {
             course.setCourseTitle(courseTitle);
         }
     }
+
+    @Override
+    public void vote(DiscussionPost post) throws TeacherCannotVote {
+        throw new TeacherCannotVote();
+    }
 }
