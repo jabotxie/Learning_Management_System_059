@@ -19,6 +19,7 @@ public class DiscussionPost implements Comparable<DiscussionPost>, Serializable 
 
     public final Date repliesSync = new Date(System.currentTimeMillis());
     private ArrayList<DiscussionPost> replies;
+    private ArrayList<Vote> votes;
     private String postContent;
     Date postTime;
 
@@ -26,24 +27,28 @@ public class DiscussionPost implements Comparable<DiscussionPost>, Serializable 
         replies = new ArrayList<>();
         this.postContent = postContent;
         this.postTime = new Date(postTime);
+        this.votes = new ArrayList<>();
     }
 
     public DiscussionPost(String postContent, Date postTime) {
         replies = new ArrayList<>();
         this.postContent = postContent;
         this.postTime = postTime;
+        this.votes = new ArrayList<>();
     }
 
     public DiscussionPost(String postContent, long postTime, ArrayList<DiscussionPost> replies) {
         this.replies = replies;
         this.postContent = postContent;
         this.postTime = new Date(postTime);
+        this.votes = new ArrayList<>();
     }
 
     public DiscussionPost(String postContent, Date postTime, ArrayList<DiscussionPost> replies) {
         this.replies = replies;
         this.postContent = postContent;
         this.postTime = postTime;
+        this.votes = new ArrayList<>();
     }
 
     public DiscussionPost() {
@@ -76,12 +81,19 @@ public class DiscussionPost implements Comparable<DiscussionPost>, Serializable 
         }
     }
 
+    public void addVote(Vote vote) {
+        votes.add(vote);
+    }
+
+    public int getVotes() {
+        return votes.size();
+    }
 
     @Override
     public int compareTo(DiscussionPost o) {
-        Long thisPostTime = postTime.getTime();
-        Long anotherPostTime = o.postTime.getTime();
-        return thisPostTime.compareTo(anotherPostTime);
+        Integer voteNum = getVotes();
+        Integer anotherVoteNum = o.getVotes();
+        return voteNum.compareTo(anotherVoteNum);
     }
 
     @Override
@@ -103,6 +115,10 @@ public class DiscussionPost implements Comparable<DiscussionPost>, Serializable 
 
         sb.append("Post Time: ").append(postTime).append('\n');
         sb.append("Content: ").append(postContent);
+
+        if (votes.size() != 0) {
+            sb.append('\n').append("Votes: ").append(getVotes());
+        }
 
         if (replies.size() != 0) {
             sb.append('\n').append("Replies: ");
