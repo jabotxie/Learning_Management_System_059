@@ -36,19 +36,22 @@ public abstract class User {
         this.password = password;
     }
 
-    public static ArrayList<String> getImportedFile(String fileName) throws FileNotFoundException {
+    public static String getImportedFile(String fileName) throws FileNotFoundException {
         BufferedReader bf = new BufferedReader(new FileReader(fileName));
-        ArrayList<String> lines = new ArrayList<>();
+        StringBuilder sb = new StringBuilder();
         try {
             String line = bf.readLine();
             while (line != null) {
-                lines.add(line);
+                sb.append(line);
                 line = bf.readLine();
+                if (line != null) {
+                    sb.append('\n');
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return lines;
+        return sb.toString();
     }
 
     @Override
@@ -86,7 +89,5 @@ public abstract class User {
                 "Password: " + password + '\n';
     }
     
-    public void vote() {
-        
-    }
+    public abstract void vote(DiscussionPost post);
 }
