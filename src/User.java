@@ -85,4 +85,8 @@ public abstract class User {
                 "Username: " + username + '\n' +
                 "Password: " + password + '\n';
     }
+    
+    public void vote() {
+        
+    }
 }
