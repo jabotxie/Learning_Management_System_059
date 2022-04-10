@@ -17,13 +17,8 @@ public class Course implements Serializable {
         forums.add(forum);
     }
 
-    public void editForum(DiscussionForum discussionForum, String topic) throws NoSuchTargetException {
-        int i = forums.indexOf(discussionForum);
-        try {
-            forums.get(i).setTopic(topic);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new NoSuchTargetException();
-        }
+    public void editForum(DiscussionForum discussionForum, String topic) {
+        discussionForum.setTopic(topic);
     }
 
     public void deleteForum(DiscussionForum discussionForum) {
@@ -37,6 +32,7 @@ public class Course implements Serializable {
     public void setCourseTitle(String courseTitle) {
         this.courseTitle = courseTitle;
     }
+
 
     @Override
     public boolean equals(Object o) {
