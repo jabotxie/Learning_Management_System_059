@@ -89,5 +89,5 @@ public abstract class User {
                 "Password: " + password + '\n';
     }
     
-    public abstract void vote(DiscussionPost post);
+    public abstract void vote(DiscussionPost post) throws TeacherCannotVote;
 }
