@@ -50,5 +50,10 @@ public class Student extends User {
         throw new NoPermissionException();
     }
 
+    @Override
+    public void vote(DiscussionPost post) throws TeacherCannotVote {
+
+    }
+
 
 }
