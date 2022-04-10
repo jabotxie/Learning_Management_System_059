@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
+import java.io.FileNotFoundException;
 import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -13,11 +14,12 @@ public class UserActivities implements Runnable {
     public static User currentUser;
     private static boolean isDataLoaded = false;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         DataManager.initData();
         scanner = new Scanner(System.in);
         Thread user1 = new Thread(new UserActivities());
         user1.start();
+        user1.join();
         DataManager.saveData();
     }
 
@@ -134,7 +136,7 @@ public class UserActivities implements Runnable {
             if (courseSelection > 0) {
                 int forumSelection;
                 do {
-                    forumSelection = forumActivities();
+                    forumSelection = forumActivities(DataManager.courses.get(courseSelection - 1));
                     int postSelection;
                     if (forumSelection > 0) {
                         postSelection = postActivities();
@@ -190,24 +192,31 @@ public class UserActivities implements Runnable {
         } while (!loggedIn);
         System.out.println(LOGIN_SUCCESSFUL);
     }
+
     private void logOut() {
         final String GOODBYE = "Thanks for using Learning Management System!";
         System.out.println(GOODBYE);
     }
+
     /**
-     *
-     * @return
-     * -1: user chooses to log out
+     * @return -1: user chooses to log out
      * 0: user chooses to create, edit, or delete a course (subsequently run this again)
      * positive integer: the course user wants to enter
      */
     private int courseActivities() {
         final String MENU = "Do you want to\n1. Create a course\n2. Delete a course\n3. Edit a course\n" +
                 "4. Enter a course\n5. Log out";
+        final String ENTER_METHOD = "How do you like to enter the title:\n1. Command line\n" +
+                "2. Import through text file";
+        final String FILE_NAME = "Please enter the files name: ";
         final String COURSE_TITLE = "Enter the title of the course: ";
         final String SELECT_COURSE = "Please select a course: ";
         final String NO_PERMISSION = "You don't have permission to proceed the action.";
         final String UPDATING_TITLE = "Please enter the updating course title: ";
+
+        final String IMPORT_UNSUCCESSFUL = "The import process is not successful!";
+        final String RETRY = "Do you want to try again?";
+        final String EMPTY_COURSE_LIST = "The course list is empty. You have to create a course first.";
         System.out.println(MENU);
 
         int courseChoice = 0;
@@ -216,8 +225,35 @@ public class UserActivities implements Runnable {
         switch (menuChoice) {
             case 1: //add a course
                 try {
-                    System.out.println(COURSE_TITLE);
-                    currentUser.createCourse(getStringInput());
+                    verifyPermission();
+                    System.out.println(ENTER_METHOD);
+                    int methodChoice = getValidInt(3);
+                    String courseTitle;
+                    if (methodChoice == 1) {
+                        System.out.println(COURSE_TITLE);
+                        courseTitle = getStringInput();
+                        currentUser.createCourse(courseTitle);
+
+                    } else if (methodChoice == 2) {
+                        boolean isProcessFinished = false;
+                        do {
+                            try {
+                                System.out.println(FILE_NAME);
+                                String fileName = getStringInput();
+                                courseTitle = User.getImportedFile(fileName);
+                                currentUser.createCourse(courseTitle);
+                                isProcessFinished = true;
+                            } catch (FileNotFoundException e) {
+                                System.out.println(IMPORT_UNSUCCESSFUL);
+                                System.out.println(RETRY);
+                                int retryChoice = getValidInt(2);
+                                if (retryChoice == 2) break;
+                            }
+                        } while (!isProcessFinished);
+                    } else {
+                        break;
+                    }
+
                 } catch (NoPermissionException e) {
                     System.out.println(NO_PERMISSION);
                 }
@@ -226,9 +262,17 @@ public class UserActivities implements Runnable {
 
             case 2: //delete a course
                 try {
+                    verifyPermission();
+                    if (DataManager.courses.size() == 0) {
+                        System.out.println(EMPTY_COURSE_LIST);
+                        break;
+                    }
+
                     System.out.println(SELECT_COURSE);
                     displayCoursesTitles();
-                    currentUser.deleteCourse(new Course(getStringInput()));
+                    int courseIndex = getValidInt(DataManager.courses.size()) - 1;
+                    String deletingCourseTitle = DataManager.courses.get(courseIndex).getCourseTitle();
+                    currentUser.deleteCourse(new Course(deletingCourseTitle));
                 } catch (NoPermissionException e) {
                     System.out.println(NO_PERMISSION);
                 }
@@ -236,31 +280,40 @@ public class UserActivities implements Runnable {
                 break;
 
             case 3: //Edit a course
-                System.out.println(SELECT_COURSE);
-                displayCoursesTitles();
-                int i = getValidInt(DataManager.courses.size()) - 1;
-                System.out.println(UPDATING_TITLE);
-                String updatingTopic = getStringInput();
                 try {
+                    verifyPermission();
+                    if (DataManager.courses.size() == 0) {
+                        System.out.println(EMPTY_COURSE_LIST);
+                        break;
+                    }
+                    System.out.println(SELECT_COURSE);
+                    displayCoursesTitles();
+                    int i = getValidInt(DataManager.courses.size()) - 1;
+                    System.out.println(UPDATING_TITLE);
+                    String updatingTopic = getStringInput();
+
                     currentUser.editCourse(DataManager.courses.get(i), updatingTopic);
                 } catch (NoPermissionException e) {
                     System.out.println(NO_PERMISSION);
                 }
-
                 break;
-
             case 4:
+                if (DataManager.courses.size() == 0) {
+                    System.out.println(EMPTY_COURSE_LIST);
+                    break;
+                }
                 System.out.println(SELECT_COURSE);
                 displayCoursesTitles();
-                courseChoice = getValidInt(DataManager.courses.size()) - 1;
+                courseChoice = getValidInt(DataManager.courses.size());
                 break;
             case 5:
                 courseChoice = -1;
+                break;
         }
         return courseChoice;
     }
 
-    private int forumActivities() {
+    private int forumActivities(Course course) {
         int forumSelection = 0;
         final String MENU = "Do you want to\n1. Create a forum\n2. Delete a forum\n3. Edit a forum\n4. Enter a forum" +
                 "\n5. Back to last menu";
@@ -269,6 +322,7 @@ public class UserActivities implements Runnable {
         int menuChoice = getValidInt(5);
         switch (menuChoice) {
             case 1:
+
                 break;
             case 2:
                 break;
@@ -286,7 +340,7 @@ public class UserActivities implements Runnable {
 
     private int postActivities() {
         int postSelection = 0;
-        final String MENU = "Do you want to\n1. Create a post\n2. Delete a post\n3. reply a forum\n4. Enter a post" +
+        final String MENU = "Do you want to\n1. Create a post\n2. Delete a post\n3. reply a post\n4. Enter a post" +
                 "\n5. Back to last menu";
         final String FORUM_TOPIC = "Please enter the topic of the created forum: ";
         System.out.println(MENU);
@@ -344,4 +398,7 @@ public class UserActivities implements Runnable {
         return scanner.nextLine();
     }
 
+    private void verifyPermission() throws NoPermissionException {
+        if (currentUser.getClass() == Student.class) throw new NoPermissionException();
+    }
 }
