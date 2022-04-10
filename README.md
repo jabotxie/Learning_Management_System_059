@@ -2,6 +2,8 @@
 
 ## Instructions to compile and run the project:
 
+In order to compile the project
+
 ## Submissions
 
 ### Class Descriptions
@@ -14,11 +16,11 @@ A static ArrayList of forum is stored in User class, which can be access be mult
 #### Teacher.java extends User.class
 A class that represents a teacher
 #### Student.java extends User.class
-A class that represents a student
+A class that represents a student and takes care of the functions students can perform in the discussion board. Specifically, students are able to view the courses on their dashboard, create their own replies to discussions, and upvote other students' posts.
 #### DiscussionForum.java
 A class that represents a discussion forum
 #### DiscussionPost.java:
-A class that represents posts in a discussion forum
+A class that represents posts in a discussion forum. This class includes the functionality for teachers and students through their ability to edit, create, and reply to posts.
 
 ### Program Decription
 In this thread, the user is asked to do the following things in linear order
@@ -86,10 +88,6 @@ In this thread, the user is asked to do the following things in linear order
    a. save the user info again
    b. save the forum (and the post in it)
    c. End the program
-
-
-
-The student class takes care of the functions students can perform in the discussion board.
 
 #### UserInfo.txt
 The text file that includes all the user data
