@@ -9,4 +9,11 @@ public class CourseList implements Serializable {
     public ArrayList<Course> getCourses() {
         return courses;
     }
+
+    @Override
+    public String toString() {
+        String sb = "CourseList{" + "courses=" + courses +
+                '}';
+        return sb;
+    }
 }
