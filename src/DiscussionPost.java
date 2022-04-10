@@ -17,6 +17,7 @@ import java.util.Objects;
  */
 public class DiscussionPost implements Comparable<DiscussionPost>, Serializable {
 
+    public final Object repliesSync = new Object();
     private ArrayList<DiscussionPost> replies;
     private String postContent;
     Date postTime;

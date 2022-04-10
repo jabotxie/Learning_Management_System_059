@@ -2,44 +2,63 @@ import java.util.ArrayList;
 
 public class Teacher extends User {
 
-
     public Teacher(String username, String password) {
         super(username, password);
     }
 
-    public Teacher(String username, String password, ArrayList<DiscussionForum> forums) {
-        super(username, password, forums);
-    }
-
     @Override
     public void addPost(DiscussionForum forum, DiscussionPost post) {
-        forum.addPost(post);
+        synchronized (forum.postsSync) {
+            forum.addPost(post);
+        }
     }
 
     @Override
     public void addReply(DiscussionPost post, DiscussionPost reply) {
-        post.addReply(reply);
-    }
-
-    @Override
-    public void createForum(String topic) {
-        synchronized (o) {
-            User.forums.add(new DiscussionForum(topic));
+        synchronized (post.repliesSync) {
+            post.addReply(reply);
         }
     }
 
     @Override
-    public void deleteForum(DiscussionForum forum) throws NoSuchTargetException {
-        synchronized (o) {
-            if (!User.forums.remove(forum)) throw new NoSuchTargetException();
+    public void createForum(Course course, String topic) {
+        synchronized (course.forumSync) {
+            course.addForum(new DiscussionForum(topic));
         }
     }
 
     @Override
-    public void editForum(DiscussionForum forum, String topic) throws NoSuchTargetException {
-        synchronized (o) {
-            int i = User.forums.indexOf(forum);
-            if (i == -1) throw new NoSuchTargetException();
+    public void deleteForum(Course course, DiscussionForum forum) {
+        synchronized (course.forumSync) {
+            course.deleteForum(forum);
+        }
+    }
+
+    @Override
+    public void editForum(Course course, DiscussionForum forum, String topic) {
+        synchronized (course.forumSync) {
+            course.deleteForum(forum);
+        }
+    }
+
+    @Override
+    public void createCourse(String courseTitle) {
+        synchronized (DataManager.coursesSync) {
+            DataManager.courses.add(new Course(courseTitle));
+        }
+    }
+
+    @Override
+    public void deleteCourse(Course course) {
+        synchronized (DataManager.coursesSync) {
+            DataManager.courses.remove(course);
+        }
+    }
+
+    @Override
+    public void editCourse(Course course, String courseTitle) {
+        synchronized (DataManager.coursesSync) {
+            course.setCourseTitle(courseTitle);
         }
     }
 }

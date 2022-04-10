@@ -6,32 +6,49 @@ public class Student extends User {
         super(username, password);
     }
 
-    public Student(String username, String password, ArrayList<DiscussionForum> forums) {
-        super(username, password, forums);
-    }
-
     @Override
     public void addPost(DiscussionForum forum, DiscussionPost post) {
-        forum.addPost(post);
+        synchronized (forum.postsSync) {
+            forum.addPost(post);
+        }
     }
 
     @Override
     public void addReply(DiscussionPost post, DiscussionPost reply) {
-        post.addReply(reply);
+        synchronized (post.repliesSync) {
+            post.addReply(reply);
+        }
     }
 
     @Override
-    public void createForum(String topic) throws NoPermissionException {
+    public void createForum(Course course, String topic) throws NoPermissionException {
         throw new NoPermissionException();
     }
 
     @Override
-    public void deleteForum(DiscussionForum forum) throws NoPermissionException {
+    public void deleteForum(Course course, DiscussionForum forum) throws NoPermissionException {
         throw new NoPermissionException();
     }
 
     @Override
-    public void editForum(DiscussionForum forum, String topic) throws NoPermissionException {
+    public void editForum(Course course, DiscussionForum forum, String topic) throws NoPermissionException {
         throw new NoPermissionException();
     }
+
+    @Override
+    public void createCourse(String courseTitle) throws NoPermissionException {
+        throw new NoPermissionException();
+    }
+
+    @Override
+    public void deleteCourse(Course course) throws NoPermissionException {
+        throw new NoPermissionException();
+    }
+
+    @Override
+    public void editCourse(Course course, String courseTitle) throws NoPermissionException {
+        throw new NoPermissionException();
+    }
+
+
 }

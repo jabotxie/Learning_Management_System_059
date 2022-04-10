@@ -1,6 +1,8 @@
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Objects;
+
 /**
  * Project 4 -- Learning Management System
  *
@@ -17,6 +19,7 @@ public class DiscussionForum implements Serializable {
 
     private String topic;
     private ArrayList<DiscussionPost> posts;
+    public final Object postsSync = new Object();
 
     public DiscussionForum(String topic, ArrayList<DiscussionPost> posts) {
         this.topic = topic;
@@ -59,5 +62,18 @@ public class DiscussionForum implements Serializable {
             }
         }
         return sb.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        DiscussionForum forum = (DiscussionForum) o;
+        return Objects.equals(topic, forum.topic);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(topic);
     }
 }
