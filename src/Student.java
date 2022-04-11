@@ -14,6 +14,16 @@ public class Student extends User {
     }
 
     @Override
+    public void deletePost(DiscussionForum forum, DiscussionPost post) throws NoPermissionException {
+        throw new NoPermissionException();
+    }
+
+    @Override
+    public void editPost(DiscussionPost post, String content) throws NoPermissionException {
+        throw new NoPermissionException();
+    }
+
+    @Override
     public void addReply(DiscussionPost post, DiscussionPost reply) {
         synchronized (post.repliesSync) {
             post.addReply(reply);
@@ -51,7 +61,8 @@ public class Student extends User {
     }
 
     @Override
-    public void vote(DiscussionPost post) throws TeacherCannotVote {
+    public void vote(DiscussionForum forum, DiscussionPost post) throws AlreadyVotedException{
+        if (forum.isUserVoted(this)) throw new AlreadyVotedException();
 
     }
 

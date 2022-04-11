@@ -14,6 +14,16 @@ public class Teacher extends User {
     }
 
     @Override
+    public void deletePost(DiscussionForum forum, DiscussionPost post) {
+        forum.deletePost(post);
+    }
+
+    @Override
+    public void editPost(DiscussionPost post, String content) {
+        post.setPostContent(content);
+    }
+
+    @Override
     public void addReply(DiscussionPost post, DiscussionPost reply) {
         synchronized (post.repliesSync) {
             post.addReply(reply);
@@ -63,7 +73,7 @@ public class Teacher extends User {
     }
 
     @Override
-    public void vote(DiscussionPost post) throws TeacherCannotVote {
+    public void vote(DiscussionForum forum, DiscussionPost post) throws TeacherCannotVote {
         throw new TeacherCannotVote();
     }
 }
