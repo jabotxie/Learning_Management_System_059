@@ -36,10 +36,11 @@ public class RunLocalTest {
     /**
      * A set of public test cases.
      *
-     * <p>Purdue University -- CS18000 -- Spring 2021</p>
+     * <p>Purdue University -- CS18000 -- Spring 2022</p>
      *
      * @author Purdue CS
-     * @version January 10, 2022
+     *
+     * @version April 11, 2022
      */
     public static class TestCase {
         private final PrintStream originalOutput = System.out;
