@@ -519,7 +519,7 @@ public class UserActivities {
                         break;
                     }
                     System.out.println(SELECT_POST);
-                    displayPost(forum, false);
+                    displayPost(forum);
                     int postIndex = getValidInt(forum.getPostsNum()) - 1;
                     DiscussionPost selectedPost = forum.getPosts(false).get(postIndex);
                     currentUser.deletePost(forum, selectedPost);
@@ -534,7 +534,7 @@ public class UserActivities {
                         break;
                     }
                     System.out.println(SELECT_POST);
-                    displayPost(forum, false);
+                    displayPost(forum);
                     int postIndex = getValidInt(forum.getPostsNum()) - 1;
                     DiscussionPost selectedPost = forum.getPosts(false).get(postIndex);
                     System.out.println(ENTER_CONTENT);
@@ -551,7 +551,7 @@ public class UserActivities {
                         System.out.println(NO_POSTS);
                         break;
                     }
-                    displayPost(forum, true);
+                    disPlayVotes(forum);
                     System.out.println("Hit enter to proceed...");
                     getStringInput();
                 } catch (NoPermissionException e) {
@@ -567,7 +567,7 @@ public class UserActivities {
                         break;
                     }
                     System.out.println(SELECT_POST);
-                    displayPost(forum, false);
+                    displayPost(forum);
                     postSelection = getValidInt(forum.getPostsNum());
                     currentUser.vote(forum, forum.getPosts(false).get(postSelection - 1));
                 } catch (AlreadyVotedException | TeacherCannotVote e) {
@@ -636,21 +636,33 @@ public class UserActivities {
 
     private void displayCoursesTitles() {
         for (int i = 0; i < DataManager.courses.size(); i++) {
-            System.out.print((i + 1) + "." + DataManager.courses.get(i).getCourseTitle() + '\n');
+            System.out.print((i + 1) + ". " + DataManager.courses.get(i).getCourseTitle() + '\n');
 
         }
     }
 
     private void displayForumTopics(Course course) {
         for (int i = 0; i < course.forums.size(); i++) {
-            System.out.print((i + 1) + "." + course.forums.get(i).getTopic() + '\n');
+            System.out.print((i + 1) + ". " + course.forums.get(i).getTopic() + '\n');
         }
     }
 
-    private void displayPost(DiscussionForum forum, boolean isSorted) {
-        ArrayList<DiscussionPost> posts = forum.getPosts(isSorted);
+    private void disPlayVotes(DiscussionForum forum) {
+        ArrayList<DiscussionPost> posts = forum.getPosts(true);
         for (int i = 0; i < posts.size(); i++) {
-            System.out.print((i + 1) + "." + posts.get(i) + '\n');
+            DiscussionPost post = posts.get(i);
+            User user = post.getOwner();
+            System.out.println((i + 1) + ". " + user.getUsername() + "'s post");
+            System.out.println("Votes: " + post.getVotesNum() + '\n');
+        }
+    }
+
+    private void displayPost(DiscussionForum forum) {
+        ArrayList<DiscussionPost> posts = forum.getPosts(false);
+        for (int i = 0; i < posts.size(); i++) {
+            String postContentHeader = posts.get(i).getPostContent();
+            postContentHeader = postContentHeader.substring(0, Math.min(postContentHeader.length(), 40));
+            System.out.print((i + 1) + ". " + postContentHeader + '\n');
         }
     }
 
