@@ -86,9 +86,7 @@ public abstract class User implements Serializable {
     public abstract void editCourse(Course course, String courseTitle) throws NoPermissionException;
 
     public String toString() {
-        return getClass().toString() + '\n' +
-                "Username: " + username + '\n' +
-                "Password: " + password + '\n';
+        return getClass() == Teacher.class ? "Teacher " : "Student " + username;
     }
     
     public abstract void vote(DiscussionForum forum, DiscussionPost post) throws TeacherCannotVote, AlreadyVotedException;

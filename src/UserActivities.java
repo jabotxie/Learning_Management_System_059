@@ -1,8 +1,5 @@
-import javax.swing.*;
-import java.awt.event.ActionEvent;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -12,7 +9,7 @@ import java.util.Scanner;
 public class UserActivities {
     private static Scanner scanner;
 
-    public static User currentUser;
+    public User currentUser;
 
     private final String LINE = "_____________________________________\n";
 
@@ -135,60 +132,73 @@ public class UserActivities {
 //        });
         String WELCOME = "Welcome to the Learning Management System";
         System.out.println(WELCOME);
-        login();
-        int courseSelection;
-        do {
-            courseSelection = courseActivities();
+        if (login()) {
+            int courseSelection;
+            do {
+                courseSelection = courseActivities();
 
-            if (courseSelection > 0) {
-                int forumSelection;
-                do {
-                    Course selectedCourse = DataManager.courses.get(courseSelection - 1);
-                    forumSelection = forumActivities(selectedCourse);
+                if (courseSelection > 0) {
+                    int forumSelection;
+                    do {
+                        Course selectedCourse = DataManager.courses.get(courseSelection - 1);
+                        forumSelection = forumActivities(selectedCourse);
 
-                    if (forumSelection > 0) {
-                        int postSelection;
-                        do {
-                            DiscussionForum selectedForum = selectedCourse.forums.get(forumSelection - 1);
-                            postSelection = postActivities(selectedForum);
-                            if (postSelection == -2) {
-                                forumSelection = -2;
-                                courseSelection = -1;
-                                break;
-                            }
-                        } while (postSelection != -1);
-                        if (forumSelection == -2) break;
-                    } else if (forumSelection == -2) {
-                        courseSelection = -1;
-                        break;
-                    }
-                } while (forumSelection != -1);
-            }
-        } while (courseSelection != -1);
+                        if (forumSelection > 0) {
+                            int postSelection;
+                            do {
+                                DiscussionForum selectedForum = selectedCourse.forums.get(forumSelection - 1);
+                                postSelection = postActivities(selectedForum);
+                                if (postSelection == -2) {
+                                    forumSelection = -2;
+                                    courseSelection = -1;
+                                    break;
+                                }
+                            } while (postSelection != -1);
+                            if (forumSelection == -2) break;
+                        } else if (forumSelection == -2) {
+                            courseSelection = -1;
+                            break;
+                        }
+                    } while (forumSelection != -1);
+                }
+            } while (courseSelection != -1);
+        }
         logOut();
     }
 
-    private void login() {
-        String LOGIN_OR_CREATE = LINE + "Do you want to\n1. Log in\n2. Create an account";
-        String ACCOUNT_TYPE = LINE + "What type of account would you like to create?\n1. Teacher\n2. Student";
-        String ENTER_USERNAME = LINE + "Please enter the username: ";
-        String ENTER_PASSWORD = "Please enter the password: ";
-        String LOGIN_SUCCESSFUL = "Successfully logged in!";
-        String LOGIN_UNSUCCESSFUL = LINE + "Username entered doesn't exist or the password is incorrect. Please try again.";
-        String USERNAME_TAKEN = LINE + "The username is already taken. Please try another one.";
+    private boolean login() {
+        final String MENU = LINE + "Selection an option\n1. Log in\n2. Create an account\n3. Delete an account" +
+                 "\n4. Quit the system";
+        final String ACCOUNT_TYPE = LINE + "What type of account would you like to create?\n1. Teacher\n2. Student";
+        final String ENTER_USERNAME = LINE + "Please enter the username: ";
+        final String ENTER_USERNAME_DELETE = LINE + "Please enter the username you want to delete: ";
+        final String ENTER_PASSWORD = "Please enter the password: ";
+        final String ENTER_PASSWORD_DELETE = "Please enter the password you want to delete: ";
+
+        final String CONFIRM_DELETE_WARNING = "!!!WARNING!!!\n Deleting an account will void all the posts and" +
+                " votes created by this user!" +
+                "\n1. I understand, and I am responsible for any data lost" +
+                "\n2. Cancel the deleting process";
+
+        final String DELETE_SUCCESSFUL = "The account has been successfully deleted";
+        final String DELETE_CANCELED = "The deleting process has been canceled";
+        final String LOGIN_SUCCESSFUL = "Successfully logged in!";
+        final String LOGIN_UNSUCCESSFUL = LINE + "Username entered doesn't exist or the password is incorrect. Please try again.";
+        final String USERNAME_TAKEN = LINE + "The username is already taken. Please try another one.";
         boolean loggedIn = false;
         do {
-            System.out.println(LOGIN_OR_CREATE);
-            int loginChoice = getValidInt(2);
+            System.out.println(MENU);
+            int loginChoice = getValidInt(4);
             if (loginChoice == 1) {
                 System.out.println(ENTER_USERNAME);
                 String username = getStringInput();
                 System.out.println(ENTER_PASSWORD);
                 String password = getStringInput();
                 try {
-                    DataManager.login(username, password);
+                    DataManager.login(this, username, password);
                     loggedIn = true;
-                } catch (LoginUnsuccessfulException e) {
+                    System.out.println(LOGIN_SUCCESSFUL);
+                } catch (AccountInfoNotMatchException e) {
                     System.out.println(LOGIN_UNSUCCESSFUL);
                 }
             } else if (loginChoice == 2) {
@@ -200,16 +210,38 @@ public class UserActivities {
                     System.out.println(ENTER_PASSWORD);
                     String password = getStringInput();
                     try {
-                        DataManager.createAccount(accountTypeChoice == 1 ?
+                        DataManager.createAccount(this, accountTypeChoice == 1 ?
                                 Teacher.class : Student.class, username, password);
                         loggedIn = true;
                     } catch (UsernameAlreadyTakenException e) {
                         System.out.println(USERNAME_TAKEN);
                     }
                 } while (!loggedIn);
+                System.out.println(LOGIN_SUCCESSFUL);
+            } else if (loginChoice == 3) {
+                System.out.println(ENTER_USERNAME_DELETE);
+                String username = getStringInput();
+                System.out.println(ENTER_PASSWORD_DELETE);
+                String password = getStringInput();
+
+                System.out.println(CONFIRM_DELETE_WARNING);
+                int confirmChoice = getValidInt(2);
+                if (confirmChoice == 1) {
+                    try {
+                        DataManager.deleteAccount(this, username, password);
+                        System.out.println(DELETE_SUCCESSFUL);
+                    } catch (AccountInfoNotMatchException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    System.out.println(DELETE_CANCELED);
+                }
+            } else {
+                break;
             }
         } while (!loggedIn);
-        System.out.println(LOGIN_SUCCESSFUL);
+
+        return loggedIn;
     }
 
     private void logOut() {

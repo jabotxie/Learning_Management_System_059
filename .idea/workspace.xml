@@ -4,18 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d28170b6-672d-4479-8927-b4c27361f032" name="Changes" comment="Reverse the compareTo() method so with respect to sort the post">
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="d28170b6-672d-4479-8927-b4c27361f032" name="Changes" comment="Improved display of votes">
+      <change afterPath="$PROJECT_DIR$/src/RunLocalTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CoursesInfo.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CoursesInfo.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Learning_Management_System_059.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Learning_Management_System_059.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserInfo.txt" beforeDir="false" afterPath="$PROJECT_DIR$/UserInfo.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DiscussionForum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DiscussionForum.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DiscussionPost.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DiscussionPost.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/LoginUnsuccessfulException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AccountInfoNotMatchException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TestCase.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/UserActivities.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserActivities.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Vote.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Vote.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,6 +43,10 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
@@ -52,7 +57,7 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.UserActivities">
+  <component name="RunManager" selected="JUnit.RunLocalTest$TestCase.testExpectedOutput">
     <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="1.8" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
@@ -69,12 +74,24 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="RunLocalTest$TestCase.testExpectedOutput" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Learning_Management_System_059" />
+      <option name="PACKAGE_NAME" value="RunLocalTest" />
+      <option name="MAIN_CLASS_NAME" value="RunLocalTest$TestCase" />
+      <option name="METHOD_NAME" value="testExpectedOutput" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <list>
       <item itemvalue="Application.Test" />
       <item itemvalue="Application.UserActivities" />
+      <item itemvalue="JUnit.RunLocalTest$TestCase.testExpectedOutput" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.RunLocalTest$TestCase.testExpectedOutput" />
         <item itemvalue="Application.UserActivities" />
         <item itemvalue="Application.Test" />
       </list>
@@ -327,7 +344,42 @@
       <option name="project" value="LOCAL" />
       <updated>1649651151005</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="Project completed">
+      <created>1649654548172</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1649654548172</updated>
+    </task>
+    <task id="LOCAL-00036" summary="Test Data updated">
+      <created>1649686615477</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1649686615477</updated>
+    </task>
+    <task id="LOCAL-00037" summary="Update toString method">
+      <created>1649686639340</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1649686639340</updated>
+    </task>
+    <task id="LOCAL-00038" summary="Update toString method">
+      <created>1649686646497</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1649686646497</updated>
+    </task>
+    <task id="LOCAL-00039" summary="Improved display of votes">
+      <created>1649687586825</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1649687586825</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -351,10 +403,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Created forumActivities() and improved structure for run()" />
-    <MESSAGE value="abstract vote() method modified" />
-    <MESSAGE value="TeacherCannotVote Exception created" />
-    <MESSAGE value="Completed courseActivities()" />
     <MESSAGE value="Implement vote()" />
     <MESSAGE value="Competed forumActivities()" />
     <MESSAGE value="Bug Fixed&#10;wrong body function called. Course.editForum" />
@@ -376,7 +424,11 @@
     <MESSAGE value="Updated forum, post, course display method" />
     <MESSAGE value="Bug Fixed" />
     <MESSAGE value="Reverse the compareTo() method so with respect to sort the post" />
-    <option name="LAST_COMMIT_MESSAGE" value="Reverse the compareTo() method so with respect to sort the post" />
+    <MESSAGE value="Project completed" />
+    <MESSAGE value="Test Data updated" />
+    <MESSAGE value="Improved format menu for UserActivities" />
+    <MESSAGE value="Improved display of votes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Improved display of votes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -387,7 +439,7 @@
         </breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/UserActivities.java</url>
-          <line>167</line>
+          <line>165</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
       </breakpoints>

@@ -1,3 +1,5 @@
+import javafx.geometry.VPos;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -131,23 +133,23 @@ public class DataManager implements Serializable {
 
     }
 
-    public static void login(String username, String password) throws LoginUnsuccessfulException {
+    public static void login(UserActivities userActivities, String username, String password) throws AccountInfoNotMatchException {
         synchronized (usersSync) {
             int i = users.indexOf(new Student(username, password));
             try {
                 if (users.get(i).getPassword().equals(password)) {
-                    UserActivities.currentUser = users.get(i);
+                    userActivities.currentUser = users.get(i);
                 } else {
-                    throw new LoginUnsuccessfulException();
+                    throw new AccountInfoNotMatchException();
                 }
             } catch (ArrayIndexOutOfBoundsException e) {
-                throw new LoginUnsuccessfulException();
+                throw new AccountInfoNotMatchException();
             }
         }
 
     }
 
-    public static void createAccount(Class<? extends User> c, String username, String password)
+    public static void createAccount(UserActivities userActivities, Class<? extends User> c, String username, String password)
             throws UsernameAlreadyTakenException {
         synchronized (usersSync) {
             if (users.contains(new Student(username, password))) {
@@ -155,10 +157,10 @@ public class DataManager implements Serializable {
             } else {
                 if (c == Teacher.class) {
                     users.add(new Teacher(username, password));
-                    UserActivities.currentUser = new Teacher(username, password);
+                    userActivities.currentUser = new Teacher(username, password);
                 } else {
                     users.add(new Student(username, password));
-                    UserActivities.currentUser = new Student(username, password);
+                    userActivities.currentUser = new Student(username, password);
                 }
                 saveUserInfo();
             }
@@ -166,8 +168,33 @@ public class DataManager implements Serializable {
 
     }
 
-    private ArrayList<Course> getCourses() {
-        return courses;
+    public static void deleteAccount(UserActivities userActivities, String username, String password)
+            throws AccountInfoNotMatchException {
+        synchronized (usersSync) {
+            synchronized (coursesSync) {
+                login(userActivities, username, password);
+                for (Course course : courses) {
+                    for (DiscussionForum forum : course.forums) {
+                        ArrayList<Integer> removingPostsIndex = new ArrayList<>();
+                        for (int i = 0; i < forum.posts.size(); i++) {
+                            DiscussionPost post = forum.posts.get(i);
+                            post.votes.removeIf(vote -> vote.getStudent().equals(userActivities.currentUser));
+
+
+                            post.replies.removeIf(reply -> reply.getOwner().equals(userActivities.currentUser));
+                            if (post.getOwner().equals(userActivities.currentUser))
+                                removingPostsIndex.add(i);
+                        }
+                        for (int i = removingPostsIndex.size() - 1; i >= 0; i--) {
+                            forum.posts.remove(removingPostsIndex.get(i).intValue());
+                        }
+                    }
+                }
+                users.remove(userActivities.currentUser);
+                userActivities.currentUser = null;
+            }
+        }
+        saveData();
     }
 
 }

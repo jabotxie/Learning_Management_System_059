@@ -19,8 +19,8 @@ public class DiscussionPost implements Comparable<DiscussionPost>, Serializable 
 
     public final Date repliesSync = new Date(System.currentTimeMillis());
     private User owner;
-    private ArrayList<DiscussionPost> replies;
-    private ArrayList<Vote> votes;
+    ArrayList<DiscussionPost> replies;
+    ArrayList<Vote> votes;
     private String postContent;
     Date postTime;
 
@@ -66,8 +66,8 @@ public class DiscussionPost implements Comparable<DiscussionPost>, Serializable 
         replies.add(reply);
     }
 
-    public void deleteReply(DiscussionPost deletingReply) throws NoPermissionException, NoSuchTargetException {
-        if (Teacher.class == UserActivities.currentUser.getClass()) {
+    public void deleteReply(UserActivities userActivities, DiscussionPost deletingReply) throws NoPermissionException, NoSuchTargetException {
+        if (Teacher.class == userActivities.currentUser.getClass()) {
             if (!replies.remove(deletingReply)) throw new NoSuchTargetException();
         } else {
             throw new NoPermissionException();
@@ -114,14 +114,15 @@ public class DiscussionPost implements Comparable<DiscussionPost>, Serializable 
         if (votes.size() != 0) {
             sb.append('\n').append("Votes: ").append(getVotesNum());
         }
-        sb.append('\n').append(postContent);
+        sb.append('\n').append(owner).append(": ").append(postContent);
 
 
 
         if (replies.size() != 0) {
             sb.append('\n').append("    Replies: ");
             for (DiscussionPost reply : replies) {
-                sb.append('\n').append("    ").append("- ").append(reply.getPostContent());
+                sb.append('\n').append("    ").append(reply.getOwner()).
+                        append(": ").append(reply.getPostContent());
             }
         }
 
