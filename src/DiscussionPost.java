@@ -114,7 +114,7 @@ public class DiscussionPost implements Comparable<DiscussionPost>, Serializable 
         sb.append("Content: ").append(postContent);
 
         if (votes.size() != 0) {
-            sb.append('\n').append("Votes: ").append(getVotes());
+            sb.append('\n').append("Votes: ").append(getVotesNum());
         }
 
         if (replies.size() != 0) {

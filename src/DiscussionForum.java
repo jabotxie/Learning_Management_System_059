@@ -19,7 +19,7 @@ import java.util.Objects;
 public class DiscussionForum implements Serializable {
 
     private String topic;
-    private ArrayList<DiscussionPost> posts;
+    ArrayList<DiscussionPost> posts;
     public final Date postsSync = new Date(System.currentTimeMillis());
 
     public DiscussionForum() {}
@@ -42,8 +42,8 @@ public class DiscussionForum implements Serializable {
         this.topic = topic;
     }
 
-    public ArrayList<DiscussionPost> getPosts(boolean isSorted) {
-        if (isSorted) Collections.sort(posts);
+    public ArrayList<DiscussionPost> getPosts() {
+        Collections.sort(posts);
         return posts;
 
     }

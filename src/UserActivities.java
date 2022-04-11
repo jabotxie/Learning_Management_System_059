@@ -13,16 +13,17 @@ public class UserActivities {
     private static Scanner scanner;
 
     public static User currentUser;
-    private static boolean isDataLoaded = false;
+
+    private final String LINE = "_____________________________________\n";
 
     public static void main(String[] args) {
+
         DataManager.initData();
         scanner = new Scanner(System.in);
         UserActivities activityOne = new UserActivities();
         try {
             activityOne.run();
         } catch (Throwable e) {
-            DataManager.saveData();
             e.printStackTrace();
         }
 
@@ -168,13 +169,13 @@ public class UserActivities {
     }
 
     private void login() {
-        String LOGIN_OR_CREATE = "Do you want to\n1. Log in\n2. Create an account";
-        String ACCOUNT_TYPE = "What type of account would you like to create?\n1. Teacher\n2. Student";
-        String ENTER_USERNAME = "Please enter the username: ";
+        String LOGIN_OR_CREATE = LINE + "Do you want to\n1. Log in\n2. Create an account";
+        String ACCOUNT_TYPE = LINE + "What type of account would you like to create?\n1. Teacher\n2. Student";
+        String ENTER_USERNAME = LINE + "Please enter the username: ";
         String ENTER_PASSWORD = "Please enter the password: ";
         String LOGIN_SUCCESSFUL = "Successfully logged in!";
-        String LOGIN_UNSUCCESSFUL = "Username entered doesn't exist or the password is incorrect. Please try again.";
-        String USERNAME_TAKEN = "The username is already taken. Please try another one.";
+        String LOGIN_UNSUCCESSFUL = LINE + "Username entered doesn't exist or the password is incorrect. Please try again.";
+        String USERNAME_TAKEN = LINE + "The username is already taken. Please try another one.";
         boolean loggedIn = false;
         do {
             System.out.println(LOGIN_OR_CREATE);
@@ -222,16 +223,25 @@ public class UserActivities {
      * positive integer: the course user wants to enter
      */
     private int courseActivities() {
-        final String MENU = "Do you want to\n1. Create a course\n2. Delete a course\n3. Edit a course\n" +
+        StringBuilder header = new StringBuilder();
+        if (DataManager.courses.size() != 0) {
+            header.append("Course List:\n");
+            for (int i = 0; i < DataManager.courses.size(); i++) {
+                Course course = DataManager.courses.get(i);
+                header.append(i + 1).append(". ").append(course.getCourseTitle()).append("\n");
+            }
+        }
+        String HEADER = header.toString();
+        final String MENU = LINE + HEADER + "Please choose an operation\n1. Create a course\n2. Delete a course\n3. Edit a course\n" +
                 "4. Enter a course\n5. Log out";
-        final String ENTER_METHOD = "How do you like to enter the topic:\n1. Command line\n" +
+        final String ENTER_METHOD = LINE + "How do you like to enter the topic:\n1. Command line\n" +
                 "2. Import through text file";
         final String FILE_NAME = "Please enter the files name: ";
         final String COURSE_TITLE = "Enter the title of the course: ";
-        final String SELECT_COURSE = "Please select a course: ";
+        final String SELECT_COURSE = LINE + "Please select a course: ";
+
         final String NO_PERMISSION = "You don't have permission to proceed the action.";
         final String UPDATING_TITLE = "Please enter the updating course title: ";
-
         final String IMPORT_UNSUCCESSFUL = "The import process is not successful!";
         final String RETRY = "Do you want to try again?\n1. Yes\n2. No";
         final String EMPTY_COURSE_LIST = "The course list is empty. You have to create a course first.";
@@ -330,14 +340,23 @@ public class UserActivities {
     }
 
     private int forumActivities(Course course) {
+        StringBuilder header = new StringBuilder();
+        if (course.forums.size() != 0) {
+            header.append("Topic List:\n");
+            for (int i = 0; i < course.forums.size(); i++) {
+                DiscussionForum forum = course.forums.get(i);
+                header.append(i + 1).append(". ").append(forum.getTopic()).append("\n");
+            }
+        }
+        String HEADER = header.toString();
         int forumSelection = 0;
-        final String MENU = "Do you want to\n1. Create a forum\n2. Delete a forum\n3. Edit a forum\n4. Enter a forum" +
+        final String MENU = LINE + HEADER + "Please choose an operation\n1. Create a forum\n2. Delete a forum\n3. Edit a forum\n4. Enter a forum" +
                 "\n5. Back to last menu\n6. Log out";
         final String ENTER_METHOD = "How do you like to enter the title:\n1. Command line\n" +
                 "2. Import through text file";
         final String FILE_NAME = "Please enter the files name: ";
         final String FORUM_TOPIC = "Please enter the topic of the created forum: ";
-        final String SELECT_FORUM = "Select a forum";
+        final String SELECT_FORUM = LINE + "Select a topic";
 
 
         final String NO_PERMISSION = "You don't have permission to proceed the action.";
@@ -459,13 +478,23 @@ public class UserActivities {
     }
 
     private int postActivities(DiscussionForum forum) {
+
+        StringBuilder header = new StringBuilder();
+        if (forum.posts.size() != 0) {
+            header.append("Post List:\n");
+            for (int i = 0; i < forum.posts.size(); i++) {
+                DiscussionPost post = forum.posts.get(i);
+                header.append(i + 1).append(". ").append(post).append("\n");
+            }
+        }
+        String HEADER = header.toString();
         int postSelection = 0;
-        final String MENU = "Do you want to\n1. Create a post\n2. Delete a post\n3. reply a post\n4. Sort the posts\n" +
+        final String MENU = LINE + HEADER + "Please choose an operation\n1. Create a post\n2. Delete a post\n3. reply a post\n4. Sort the posts\n" +
                 "5. Vote a post\n6. Back to last menu\n7. Log out";
         final String ENTER_METHOD = "How do you like to enter the title:\n1. Command line\n" +
                 "2. Import through text file";
         final String POST_CONTENT = "Please enter the content of your post:";
-        final String SELECT_POST = "Select a forum";
+        final String SELECT_POST = "Select a post";
         final String FILE_NAME = "Please enter the files name: ";
         final String ENTER_CONTENT = "Please enter the content of the post.";
 
@@ -521,7 +550,7 @@ public class UserActivities {
                     System.out.println(SELECT_POST);
                     displayPost(forum);
                     int postIndex = getValidInt(forum.getPostsNum()) - 1;
-                    DiscussionPost selectedPost = forum.getPosts(false).get(postIndex);
+                    DiscussionPost selectedPost = forum.posts.get(postIndex);
                     currentUser.deletePost(forum, selectedPost);
                 } catch (NoPermissionException e) {
                     e.printStackTrace();
@@ -536,7 +565,7 @@ public class UserActivities {
                     System.out.println(SELECT_POST);
                     displayPost(forum);
                     int postIndex = getValidInt(forum.getPostsNum()) - 1;
-                    DiscussionPost selectedPost = forum.getPosts(false).get(postIndex);
+                    DiscussionPost selectedPost = forum.posts.get(postIndex);
                     System.out.println(ENTER_CONTENT);
                     String updatingContent = getStringInput();
                     currentUser.editPost(selectedPost, updatingContent);
@@ -569,7 +598,7 @@ public class UserActivities {
                     System.out.println(SELECT_POST);
                     displayPost(forum);
                     postSelection = getValidInt(forum.getPostsNum());
-                    currentUser.vote(forum, forum.getPosts(false).get(postSelection - 1));
+                    currentUser.vote(forum, forum.posts.get(postSelection - 1));
                 } catch (AlreadyVotedException | TeacherCannotVote e) {
                     e.printStackTrace();
                 }
@@ -648,7 +677,7 @@ public class UserActivities {
     }
 
     private void disPlayVotes(DiscussionForum forum) {
-        ArrayList<DiscussionPost> posts = forum.getPosts(true);
+        ArrayList<DiscussionPost> posts = forum.getPosts();
         for (int i = 0; i < posts.size(); i++) {
             DiscussionPost post = posts.get(i);
             User user = post.getOwner();
@@ -658,11 +687,9 @@ public class UserActivities {
     }
 
     private void displayPost(DiscussionForum forum) {
-        ArrayList<DiscussionPost> posts = forum.getPosts(false);
+        ArrayList<DiscussionPost> posts = forum.posts;
         for (int i = 0; i < posts.size(); i++) {
-            String postContentHeader = posts.get(i).getPostContent();
-            postContentHeader = postContentHeader.substring(0, Math.min(postContentHeader.length(), 40));
-            System.out.print((i + 1) + ". " + postContentHeader + '\n');
+            System.out.print((i + 1) + ". " + posts.get(i) + '\n');
         }
     }
 

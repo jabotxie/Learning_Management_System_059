@@ -10,4 +10,9 @@ public class Vote implements Serializable {
     public Student getStudent() {
         return student;
     }
+
+    @Override
+    public String toString() {
+        return "Voter: " + student.getUsername();
+    }
 }
