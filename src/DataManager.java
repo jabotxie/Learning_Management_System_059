@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * A class that helps to read and store the user information in a format of
@@ -14,9 +15,9 @@ import java.util.ArrayList;
 public class DataManager implements Serializable {
 
     public static ArrayList<User> users;
-    public static final Object usersSync = new Object();
+    public static final Date usersSync = new Date(System.currentTimeMillis());
     public static ArrayList<Course> courses;
-    public static final Object coursesSync = new Object();
+    public static final Date coursesSync = new Date(System.currentTimeMillis());
     private static boolean isDataInitializedFromFile = false;
     public static String usersInfoFileName = "UserInfo.txt";
     public static String coursesInfoFileName = "CoursesInfo.txt";

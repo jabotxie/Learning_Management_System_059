@@ -438,6 +438,11 @@ public class UserActivities {
                 }
                 break;
             case 4:
+                if (course.forums.size() == 0) {
+                    System.out.println(NO_FORUMS);
+                    break;
+
+                }
                 System.out.println(SELECT_FORUM);
                 displayForumTopics(course);
                 forumSelection = getValidInt(course.forums.size());

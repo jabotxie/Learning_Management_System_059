@@ -1,5 +1,7 @@
-public class Vote {
-    Student student;
+import java.io.Serializable;
+
+public class Vote implements Serializable {
+    private Student student;
 
     public Vote(Student student) {
         this.student = student;

@@ -60,7 +60,10 @@ public class DiscussionForum implements Serializable {
 
     public boolean isUserVoted(User user) {
         for (DiscussionPost post: posts) {
-            if (post.getOwner().equals(user)) return true;
+            ArrayList<Vote> votes = post.getVotes();
+            for (Vote vote : votes) {
+                if (vote.getStudent().equals(user)) return true;
+            }
         }
         return false;
     }

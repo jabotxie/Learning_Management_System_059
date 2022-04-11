@@ -2,11 +2,12 @@ import com.sun.org.apache.bcel.internal.generic.CPInstruction;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Objects;
 
 public abstract class User implements Serializable {
 
-    public final Object o = new Object();
+    public final Date o = new Date();
     private String username;
     private String password;
 
