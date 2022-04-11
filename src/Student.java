@@ -1,79 +1,92 @@
 /**
  * Project 4 -- Learning Management System
  * <p>
- * A student class that represents a student. It is extended from User
+ * A student class that represents a student. It is extended from User. The class handles all functionality students can perform such as replying, voting, and viewing
+ their course dashboard.
+
  *
- * <p>Purdue University -- CS18000 -- Spring 2021</p>
+ * <p>Purdue University -- CS18000 -- Spring 2022</p>
  *
- * @author Jia Xie, Shreyash, Kundana, Garv
+ * @author Kundana Nittala, Jia Xie
  * @version April 11, 2022
  */
 public class Student extends User {
-    //constructor for Student Class
+    
+    //Here the Student constructor is declared with the username and password parameters. The username and password variables are brought into the class
+    //through inheritance and the utilization of super.
+
     public Student(String username, String password) {
         super(username, password);
     }
+    
+    //Here the addPost method is utilized for parameters forum and post. Adding a post to the forum is synchronized.
 
     @Override
-    //method to add posts to the discussion forum
     public void addPost(DiscussionForum forum, DiscussionPost post) {
         synchronized (forum.postsSync) {
             forum.addPost(post);
         }
     }
 
+     //Here the deletePost method is utilized for parameters forum and post. Throws the NoPermissionException.
+    
     @Override
-    //prevents student user from deleting posts or forums
     public void deletePost(DiscussionForum forum, DiscussionPost post) throws NoPermissionException {
         throw new NoPermissionException();
     }
+    
+//Here the addReply method is utilized for the parameters post and reply. Adding a reply to a discussion post is synchronized.
 
     @Override
-    //overridden method to add replies to discussion posts
     public void addReply(DiscussionPost post, DiscussionPost reply) {
         synchronized (post.repliesSync) {
             post.addReply(reply);
         }
     }
 
+ //Here the createForum method is utilized for parameters course and topic. This throws the NoPermissionException which denies students to create forums.
+    
     @Override
-    //overridden method to prevent student users from creating forums
     public void createForum(Course course, String topic) throws NoPermissionException {
         throw new NoPermissionException();
     }
 
+ 
+    //Here the deleteForum method is utilized for parameters course and forum. This throws the NoPermissionException which denies students to delete forums.
+
+ 
     @Override
-    //overridden method to prevent student from deleting posts or forums
     public void deleteForum(Course course, DiscussionForum forum) throws NoPermissionException {
         throw new NoPermissionException();
     }
 
+ //Here the editForum method is utilized for parameters course, forum, and topic. This throws the NoPermissionException which denies students to edit forums.
     @Override
-    //overridden method to prevent student from editing the forum
     public void editForum(Course course, DiscussionForum forum, String topic) throws NoPermissionException {
         throw new NoPermissionException();
     }
 
+ //Here the createCourse method is utilized for the parameter courseTitle. This throws the NoPermissionException which denies students to create courses.
     @Override
-    //overridden method to prevent student from creating a course
     public void createCourse(String courseTitle) throws NoPermissionException {
         throw new NoPermissionException();
     }
 
+ //Here the deleteCourse method is utilized for parameter course. This throws the NoPermissionException which denies students to delete courses.
+ 
     @Override
-    //overridden method to prevent student from deleting a course
     public void deleteCourse(Course course) throws NoPermissionException {
         throw new NoPermissionException();
     }
-
+    //Here the editCourse method is utilized for parameters courseTitle. This throws the NoPermissionException which denies students to createForums.
     @Override
-    //overridden method to prevent student from editing a course
     public void editCourse(Course course, String courseTitle) throws NoPermissionException {
         throw new NoPermissionException();
     }
+ 
+ //Here the vote method is utilized for parameters forum and post. This throws the AlreadyVotedException which informs students that they have already voted.
 
     @Override
-    //overridden method to prevent student from voting more than once
     public void vote(DiscussionForum forum, DiscussionPost post) throws AlreadyVotedException {
         if (forum.isUserVoted(this)) throw new AlreadyVotedException();
         post.addVote(new Vote(this));

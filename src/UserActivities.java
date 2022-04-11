@@ -8,9 +8,10 @@ import java.util.Scanner;
  * <p>
  * This is the major class that holds all the operations and menus
  *
- * <p>Purdue University -- CS18000 -- Spring 2021</p>
+ * <p>Purdue University -- CS18000 -- Spring 2022</p>
  *
  * @author Jia Xie, Shreyash, Kundana, Garv
+ *
  * @version April 11, 2022
  */
 public class UserActivities {

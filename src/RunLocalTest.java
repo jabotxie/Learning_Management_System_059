@@ -15,9 +15,10 @@ import static org.junit.Assert.*;
 /**
  * A framework to run public test cases.
  *
- * <p>Purdue University -- CS18000 -- Spring 2021</p>
+ * <p>Purdue University -- CS18000 -- Spring 2022</p>
  *
  * @author Jia Xie, Shreyash, Kundana, Garv
+ *
  * @version April 11, 2022
  */
 public class RunLocalTest {
@@ -35,10 +36,11 @@ public class RunLocalTest {
     /**
      * A set of public test cases.
      *
-     * <p>Purdue University -- CS18000 -- Spring 2021</p>
+     * <p>Purdue University -- CS18000 -- Spring 2022</p>
      *
      * @author Purdue CS
-     * @version January 10, 2022
+     *
+     * @version April 11, 2022
      */
     public static class TestCase {
         private final PrintStream originalOutput = System.out;
@@ -74,7 +76,58 @@ public class RunLocalTest {
 
 
         @Test(timeout = 1000)
-        public void testExpectedOutput() {
+        public void testExpectedOutputOne() {
+
+            // Set the input
+            String input = commandGenerator("2", "1", "teacher1", "teacher1", "5");
+
+            // Pair the input with the expected result
+            String expected =
+                    "Welcome to the Learning Management System\n" +
+                            "_____________________________________\n" +
+                            "Selection an option\n" +
+                            "1. Log in\n" +
+                            "2. Create an account\n" +
+                            "3. Delete an account\n" +
+                            "4. Quit the system" +
+                            System.lineSeparator() +
+                            "_____________________________________\n" +
+                            "What type of account would you like to create?\n" +
+                            "1. Teacher\n" +
+                            "2. Student" +
+                            System.lineSeparator() +
+                            "_____________________________________\n" +
+                            "Please enter the username: " +
+                            System.lineSeparator() +
+                            "Please enter the password: " +
+                            System.lineSeparator() +
+                            "Successfully logged in!\n" +
+                            "_____________________________________\n" +
+                            "Please choose an operation\n" +
+                            "    1. Create a course\n" +
+                            "    2. Delete a course\n" +
+                            "    3. Edit a course\n" +
+                            "    4. Enter a course\n" +
+                            "    5. Log out" +
+                            System.lineSeparator() +
+                            "Thanks for using Learning Management System!" +
+                            System.lineSeparator();
+
+            // Runs the program with the input values
+            receiveInput(input);
+            UserActivities.main(new String[0]);
+
+            // Retrieves the output from the program
+            String output = getOutput();
+
+//            // Trims the output and verifies it is correct.
+            output = output.replace("\r\n", "\n");
+            assertEquals("Make sure your output matches the expected format",
+                    expected, output);
+        }
+
+        @Test(timeout = 1000)
+        public void testExpectedOutputTwo() {
 
             // Set the input
             String input = commandGenerator("2", "1", "teacher1", "teacher1", "5");
