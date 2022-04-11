@@ -47,15 +47,23 @@ public class DiscussionForum implements Serializable {
         return posts;
 
     }
-
+    public int getPostsNum() {
+        return posts.size();
+    }
     public void addPost(DiscussionPost post) {
         posts.add(post);
     }
 
-    public void deletePost(DiscussionPost post) throws NoSuchTargetException {
-        if (!posts.remove(post)) throw new NoSuchTargetException();
+    public void deletePost(DiscussionPost post){
+        posts.remove(post);
     }
 
+    public boolean isUserVoted(User user) {
+        for (DiscussionPost post: posts) {
+            if (post.getOwner().equals(user)) return true;
+        }
+        return false;
+    }
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Topic: ").append(topic);

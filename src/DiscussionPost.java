@@ -18,34 +18,23 @@ import java.util.Objects;
 public class DiscussionPost implements Comparable<DiscussionPost>, Serializable {
 
     public final Date repliesSync = new Date(System.currentTimeMillis());
+    private User owner;
     private ArrayList<DiscussionPost> replies;
     private ArrayList<Vote> votes;
     private String postContent;
     Date postTime;
 
-    public DiscussionPost(String postContent, long postTime) {
+    public DiscussionPost(User owner, String postContent, long postTime) {
+        this.owner = owner;
         replies = new ArrayList<>();
         this.postContent = postContent;
         this.postTime = new Date(postTime);
         this.votes = new ArrayList<>();
     }
 
-    public DiscussionPost(String postContent, Date postTime) {
+    public DiscussionPost(User owner, String postContent, Date postTime) {
+        this.owner = owner;
         replies = new ArrayList<>();
-        this.postContent = postContent;
-        this.postTime = postTime;
-        this.votes = new ArrayList<>();
-    }
-
-    public DiscussionPost(String postContent, long postTime, ArrayList<DiscussionPost> replies) {
-        this.replies = replies;
-        this.postContent = postContent;
-        this.postTime = new Date(postTime);
-        this.votes = new ArrayList<>();
-    }
-
-    public DiscussionPost(String postContent, Date postTime, ArrayList<DiscussionPost> replies) {
-        this.replies = replies;
         this.postContent = postContent;
         this.postTime = postTime;
         this.votes = new ArrayList<>();
@@ -59,6 +48,10 @@ public class DiscussionPost implements Comparable<DiscussionPost>, Serializable 
     public ArrayList<DiscussionPost> getReplies(boolean isSorted) {
         if (isSorted) Collections.sort(replies);
         return replies;
+    }
+
+    public User getOwner() {
+        return owner;
     }
 
     public String getPostContent() {
@@ -129,5 +122,9 @@ public class DiscussionPost implements Comparable<DiscussionPost>, Serializable 
 
         return sb.toString();
 
+    }
+
+    public void setPostContent(String postContent) {
+        this.postContent = postContent;
     }
 }
