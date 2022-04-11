@@ -11,6 +11,8 @@ import java.util.Objects;
  * that can be created and edited by the users i.e Teachers
  * and Students
  *
+ *<p>Purdue University -- CS18000 -- Spring 2022</p>
+ *
  * @author Kundana, Shreyash, Jia Xie, Garv , lab sec L14
  *
  * @version April 9, 2022
