@@ -34,15 +34,6 @@ public class DataManager implements Serializable {
         synchronized (coursesSync) {
             synchronized (usersSync) {
                 if (!isDataInitializedFromFile) {
-//                    try {
-//                        ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(coursesInfoFileName));
-//                        DataManager dataManager = (DataManager) objectInputStream.readObject();
-//                    } catch (ClassNotFoundException | IOException e) {
-//                        users = new ArrayList<>();
-//                        courses = new ArrayList<>();
-//                        e.printStackTrace();
-//                    }
-
                     try {
                         courses = getCoursesFromFile();
                         if (courses == null) {

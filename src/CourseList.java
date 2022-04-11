@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * @version April 11, 2022
  */
 public class CourseList implements Serializable {
-    private ArrayList<Course> courses;
+    private final ArrayList<Course> courses;
 
     public CourseList(ArrayList<Course> courses) {
         this.courses = courses;

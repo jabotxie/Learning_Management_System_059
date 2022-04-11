@@ -1,5 +1,4 @@
 import java.io.*;
-import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -14,9 +13,8 @@ import java.util.Objects;
  */
 public abstract class User implements Serializable {
 
-    public final Date o = new Date();
-    private String username;
-    private String password;
+    private final String username;
+    private final String password;
 
     public User(String username, String password) {
 
@@ -29,16 +27,8 @@ public abstract class User implements Serializable {
         return username;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     public String getPassword() {
         return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public static String getImportedFile(String fileName) throws FileNotFoundException {
@@ -75,8 +65,6 @@ public abstract class User implements Serializable {
     public abstract void addPost(DiscussionForum forum, DiscussionPost post);
 
     public abstract void deletePost(DiscussionForum forum, DiscussionPost post) throws NoPermissionException;
-
-    public abstract void editPost(DiscussionPost post, String content) throws NoPermissionException;
 
     public abstract void addReply(DiscussionPost post, DiscussionPost reply);
 

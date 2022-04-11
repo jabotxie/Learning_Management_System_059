@@ -1,6 +1,5 @@
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.Objects;
 
@@ -45,11 +44,6 @@ public class DiscussionPost implements Comparable<DiscussionPost>, Serializable 
     }
 
 
-    public ArrayList<DiscussionPost> getReplies(boolean isSorted) {
-        if (isSorted) Collections.sort(replies);
-        return replies;
-    }
-
     public User getOwner() {
         return owner;
     }
@@ -58,20 +52,8 @@ public class DiscussionPost implements Comparable<DiscussionPost>, Serializable 
         return postContent;
     }
 
-    public Date getPostTime() {
-        return postTime;
-    }
-
     public void addReply(DiscussionPost reply) {
         replies.add(reply);
-    }
-
-    public void deleteReply(UserActivities userActivities, DiscussionPost deletingReply) throws NoPermissionException, NoSuchTargetException {
-        if (Teacher.class == userActivities.currentUser.getClass()) {
-            if (!replies.remove(deletingReply)) throw new NoSuchTargetException();
-        } else {
-            throw new NoPermissionException();
-        }
     }
 
     public void addVote(Vote vote) {
@@ -129,7 +111,4 @@ public class DiscussionPost implements Comparable<DiscussionPost>, Serializable 
 
     }
 
-    public void setPostContent(String postContent) {
-        this.postContent = postContent;
-    }
 }

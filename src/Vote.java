@@ -11,7 +11,7 @@ import java.io.Serializable;
  * @version April 11, 2022
  */
 public class Vote implements Serializable {
-    private Student student;
+    private final Student student;
 
     public Vote(Student student) {
         this.student = student;

@@ -27,11 +27,6 @@ public class Teacher extends User {
     }
 
     @Override
-    public void editPost(DiscussionPost post, String content) {
-        post.setPostContent(content);
-    }
-
-    @Override
     public void addReply(DiscussionPost post, DiscussionPost reply) {
         synchronized (post.repliesSync) {
             post.addReply(reply);

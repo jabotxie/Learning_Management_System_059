@@ -27,11 +27,6 @@ public class Student extends User {
     }
 
     @Override
-    public void editPost(DiscussionPost post, String content) throws NoPermissionException {
-        throw new NoPermissionException();
-    }
-
-    @Override
     public void addReply(DiscussionPost post, DiscussionPost reply) {
         synchronized (post.repliesSync) {
             post.addReply(reply);

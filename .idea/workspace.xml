@@ -4,10 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d28170b6-672d-4479-8927-b4c27361f032" name="Changes" comment="Finalized Project">
+    <list default="true" id="d28170b6-672d-4479-8927-b4c27361f032" name="Changes" comment="Fixed Coding Style and added comments">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DiscussionForum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DiscussionForum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Learning_Management_System_059.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Learning_Management_System_059.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CourseList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CourseList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DiscussionPost.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DiscussionPost.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Student.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Teacher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Teacher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UserActivities.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserActivities.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Vote.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Vote.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -377,7 +384,14 @@
       <option name="project" value="LOCAL" />
       <updated>1649695531614</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="Fixed Coding Style and added comments">
+      <created>1649702979746</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1649702979746</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -400,7 +414,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Competed forumActivities()" />
     <MESSAGE value="Bug Fixed&#10;wrong body function called. Course.editForum" />
     <MESSAGE value="Vote implemented" />
     <MESSAGE value="Function Logic Improved" />
@@ -425,7 +438,8 @@
     <MESSAGE value="Improved format menu for UserActivities" />
     <MESSAGE value="Improved display of votes" />
     <MESSAGE value="Finalized Project" />
-    <option name="LAST_COMMIT_MESSAGE" value="Finalized Project" />
+    <MESSAGE value="Fixed Coding Style and added comments" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed Coding Style and added comments" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -434,11 +448,6 @@
           <properties class="java.lang.NullPointerException" package="java.lang" />
           <option name="timeStamp" value="5" />
         </breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/UserActivities.java</url>
-          <line>173</line>
-          <option name="timeStamp" value="11" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <watches-manager>
