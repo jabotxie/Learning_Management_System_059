@@ -605,7 +605,7 @@ public class UserActivities {
                         break;
                     }
                     System.out.println(SELECT_POST + TO_VOTE);
-                    displayPost(forum);
+                    forum.displayContentList();
                     postSelection = getValidInt(forum.getPostsNum());
                     currentUser.vote(forum, forum.posts.get(postSelection - 1));
                 } catch (AlreadyVotedException | TeacherCannotVote e) {

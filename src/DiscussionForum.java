@@ -42,6 +42,14 @@ public class DiscussionForum implements Serializable {
         this.topic = topic;
     }
 
+    public void displayContentList() {
+        for (int i = 0; i < posts.size(); i++) {
+            DiscussionPost post = posts.get(i);
+            System.out.println((i + 1) + ". " + post.getPostContent());
+            if (i != posts.size() - 1) System.out.println();
+        }
+    }
+
     public ArrayList<DiscussionPost> getPosts() {
         Collections.sort(posts);
         return posts;
