@@ -6,6 +6,10 @@ In order to compile the project
 
 ## Submissions
 
+Project 4 Report - Kundana Nittala
+
+Project 4 Code - Jia Xie
+
 ### Project Description
 Our choice is option one, to implement a learning management system discussion board. The Discussion Board gives access to teachers to create discussion forums and allows students to post replies. This discussion board works similar to the discussion boards on brightspace. Teachers are allowed to add, edit and delete courses while students can access the discussion posts and forums within these courses. Our implementation also allows students to vote for the best discussion posts within the forum.
 
