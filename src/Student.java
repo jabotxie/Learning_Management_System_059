@@ -43,12 +43,14 @@ public class Student extends User {
         }
     }
 
+ //Here the createForum method is utilized for parameters course and topic. This throws the NoPermissionException which denies students to create forums.
     
     @Override
     public void createForum(Course course, String topic) throws NoPermissionException {
         throw new NoPermissionException();
     }
 
+ 
     @Override
     public void deleteForum(Course course, DiscussionForum forum) throws NoPermissionException {
         throw new NoPermissionException();
