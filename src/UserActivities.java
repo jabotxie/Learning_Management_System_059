@@ -490,7 +490,12 @@ public class UserActivities {
 
         return forumSelection;
     }
-
+    
+    /* 
+    * posActivities() is the method that dislpays the menu to the user(teacher/student) to
+    * perform activities on the post.
+    */
+    
     private int postActivities(DiscussionForum forum) {
 
         StringBuilder header = new StringBuilder();
