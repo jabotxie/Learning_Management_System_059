@@ -1,21 +1,9 @@
 import java.util.ArrayList;
-import java.io.Serializable;
 
-public class Student extends User implements Serializable {
-    
-    ArrayList<Reply> Replies;
-    ArrayList<String> votedReplies;//replies on forum votes
+public class Student extends User {
 
     public Student(String username, String password) {
         super(username, password);
-        this.Replies = new ArrayList<Reply>();
-        this.votedReplies = new ArrayList<String>();
-    }
-    public ArrayList<Reply> getAllReplies(){
-        return Replies;
-    }
-    public ArrayList<String> getVotedForumReply(){
-        return votedReplies;
     }
 
     @Override
@@ -75,12 +63,8 @@ public class Student extends User implements Serializable {
     @Override
     public void vote(DiscussionForum forum, DiscussionPost post) throws AlreadyVotedException{
         if (forum.isUserVoted(this)) throw new AlreadyVotedException();
-
+        post.addVote(new Vote(this));
     }
-     public String toString(){
-        return String.format("Student[Username = %s, Password = %s]", super.getUsername(), super.getPassword());
-    }
-}
 
 
 }
