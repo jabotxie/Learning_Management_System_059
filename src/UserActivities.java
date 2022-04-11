@@ -11,7 +11,6 @@ import java.util.Scanner;
  * <p>Purdue University -- CS18000 -- Spring 2022</p>
  *
  * @author Jia Xie, Shreyash, Kundana, Garv
- *
  * @version April 11, 2022
  */
 public class UserActivities {
@@ -491,12 +490,12 @@ public class UserActivities {
 
         return forumSelection;
     }
-    
-    /* 
-    * posActivities() is the method that dislpays the menu to the user(teacher/student) to
-    * perform activities on the post.
-    */
-    
+
+    /*
+     * posActivities() is the method that dislpays the menu to the user(teacher/student) to
+     * perform activities on the post.
+     */
+
     private int postActivities(DiscussionForum forum) {
 
         StringBuilder header = new StringBuilder();
