@@ -35,6 +35,7 @@ public class Student extends User {
         throw new NoPermissionException();
     }
     
+//Here the addReply method is utilized for the parameters post and reply. Adding a reply to a discussion post is synchronized.
 
     @Override
     public void addReply(DiscussionPost post, DiscussionPost reply) {
