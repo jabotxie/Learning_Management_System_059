@@ -18,12 +18,55 @@ A static ArrayList of forum is stored in User class, which can be access be mult
 
 #### Teacher.java extends User.class
 A class that represents a teacher
+
 #### Student.java extends User.class
 A class that represents a student and takes care of the functions students can perform in the discussion board. Specifically, students are able to view the courses on their dashboard, create their own replies to discussions, and upvote other students' posts.
+
 #### DiscussionForum.java
 A class that represents a discussion forum
+
 #### DiscussionPost.java:
 A class that represents posts in a discussion forum. This class includes the functionality for teachers and students through their ability to edit, create, and reply to posts.
+
+#### userActivites.java
+This is the major class that holds all the operations and menus
+
+#### Course.java
+A class that represents a course. A course is identified by its title. There are forums in a course
+
+#### Courselist.java
+This class helps to store the data to local file
+
+#### DataManager.java
+A class that helps to read and store the user information in a format of
+ * ************************************
+ * username
+ * password
+ * User Type(T for Teacher, S for Student)
+ * ************************************
+
+#### Vote.java
+This class represents a vote.
+
+### Exceptions Descriptions
+
+#### AcountInfoNotMatchException.java
+Exception is thrown when the username entered doesn't exist or the password is incorrect.
+
+#### AlreadyVotedException.java
+Exception is thrown when a student has already voted and is attempting to vote again
+
+#### NoPermissionException.java
+Exception is thrown when a user of a type does not have permission to do the intended operation. For example, a user of type teacher cannot vote and a user of type student cannot create or edit courses. This exception is thrown when an attempt is made.
+
+#### NoSuchTargetException.java
+Ecxception is thrown when a specified course, forum, post or reply does not exist.
+
+#### TeacherCannotVoteException.java
+Exception is thrown when a teacher user attemps to vote.
+
+#### UsernameAlreadyTakenException.java
+Exception is thrown when a user enters a username that is already on file while creating an account.
 
 ### Program Decription
 In this thread, the user is asked to do the following things in linear order
