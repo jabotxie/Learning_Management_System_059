@@ -69,6 +69,10 @@ public abstract class User {
 
     public abstract void addPost(DiscussionForum forum, DiscussionPost post);
 
+    public abstract void deletePost(DiscussionForum forum, DiscussionPost post) throws NoPermissionException;
+
+    public abstract void editPost(DiscussionPost post, String content) throws NoPermissionException;
+
     public abstract void addReply(DiscussionPost post, DiscussionPost reply);
 
     public abstract void createForum(Course course, String topic) throws NoPermissionException;
@@ -89,5 +93,5 @@ public abstract class User {
                 "Password: " + password + '\n';
     }
     
-    public abstract void vote(DiscussionPost post) throws TeacherCannotVote;
+    public abstract void vote(DiscussionForum forum, DiscussionPost post) throws TeacherCannotVote, AlreadyVotedException;
 }
