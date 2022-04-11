@@ -78,15 +78,19 @@ public class DiscussionPost implements Comparable<DiscussionPost>, Serializable 
         votes.add(vote);
     }
 
-    public int getVotes() {
+    public int getVotesNum() {
         return votes.size();
+    }
+
+    public ArrayList<Vote> getVotes() {
+        return votes;
     }
 
     @Override
     public int compareTo(DiscussionPost o) {
-        Integer voteNum = getVotes();
-        Integer anotherVoteNum = o.getVotes();
-        return voteNum.compareTo(anotherVoteNum);
+        Integer voteNum = getVotesNum();
+        Integer anotherVoteNum = o.getVotesNum();
+        return voteNum.compareTo(anotherVoteNum) * (-1);
     }
 
     @Override
