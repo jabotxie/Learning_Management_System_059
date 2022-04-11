@@ -6,9 +6,10 @@ import java.util.ArrayList;
  * <p>
  * This class helps to store the data to local file
  *
- * <p>Purdue University -- CS18000 -- Spring 2021</p>
+ * <p>Purdue University -- CS18000 -- Spring 2022</p>
  *
  * @author Jia Xie, Shreyash, Kundana, Garv
+ 
  * @version April 11, 2022
  */
 public class CourseList implements Serializable {
