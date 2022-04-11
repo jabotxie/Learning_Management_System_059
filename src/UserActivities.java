@@ -228,17 +228,21 @@ public class UserActivities {
             header.append("Course List:\n");
             for (int i = 0; i < DataManager.courses.size(); i++) {
                 Course course = DataManager.courses.get(i);
-                header.append(i + 1).append(". ").append(course.getCourseTitle()).append("\n");
+                header.append("-").append(course.getCourseTitle()).append("\n");
             }
         }
         String HEADER = header.toString();
-        final String MENU = LINE + HEADER + "Please choose an operation\n1. Create a course\n2. Delete a course\n3. Edit a course\n" +
-                "4. Enter a course\n5. Log out";
+        final String MENU = LINE + HEADER + "Please choose an operation\n    1. Create a course" +
+                "\n    2. Delete a course\n    3. Edit a course\n    " +
+                "4. Enter a course\n    5. Log out";
         final String ENTER_METHOD = LINE + "How do you like to enter the topic:\n1. Command line\n" +
                 "2. Import through text file";
         final String FILE_NAME = "Please enter the files name: ";
         final String COURSE_TITLE = "Enter the title of the course: ";
-        final String SELECT_COURSE = LINE + "Please select a course: ";
+        final String SELECT_COURSE = LINE + "Please select a course";
+        final String TO_DELETE = " to delete:";
+        final String TO_EDIT = " to edit:";
+        final String TO_ENTER = " to enter:";
 
         final String NO_PERMISSION = "You don't have permission to proceed the action.";
         final String UPDATING_TITLE = "Please enter the updating course title: ";
@@ -281,7 +285,7 @@ public class UserActivities {
                     }
 
                 } catch (NoPermissionException e) {
-                    System.out.println(NO_PERMISSION);
+                    e.printStackTrace();
                 }
 
                 break;
@@ -294,13 +298,13 @@ public class UserActivities {
                         break;
                     }
 
-                    System.out.println(SELECT_COURSE);
+                    System.out.println(SELECT_COURSE + TO_DELETE);
                     displayCoursesTitles();
                     int courseIndex = getValidInt(DataManager.courses.size()) - 1;
                     String deletingCourseTitle = DataManager.courses.get(courseIndex).getCourseTitle();
                     currentUser.deleteCourse(new Course(deletingCourseTitle));
                 } catch (NoPermissionException e) {
-                    System.out.println(NO_PERMISSION);
+                    e.printStackTrace();
                 }
 
                 break;
@@ -312,7 +316,7 @@ public class UserActivities {
                         System.out.println(EMPTY_COURSE_LIST);
                         break;
                     }
-                    System.out.println(SELECT_COURSE);
+                    System.out.println(SELECT_COURSE + TO_EDIT);
                     displayCoursesTitles();
                     int i = getValidInt(DataManager.courses.size()) - 1;
                     System.out.println(UPDATING_TITLE);
@@ -320,7 +324,7 @@ public class UserActivities {
 
                     currentUser.editCourse(DataManager.courses.get(i), updatingTopic);
                 } catch (NoPermissionException e) {
-                    System.out.println(NO_PERMISSION);
+                    e.printStackTrace();
                 }
                 break;
             case 4:
@@ -328,7 +332,7 @@ public class UserActivities {
                     System.out.println(EMPTY_COURSE_LIST);
                     break;
                 }
-                System.out.println(SELECT_COURSE);
+                System.out.println(SELECT_COURSE + TO_ENTER);
                 displayCoursesTitles();
                 courseChoice = getValidInt(DataManager.courses.size());
                 break;
@@ -345,21 +349,24 @@ public class UserActivities {
             header.append("Topic List:\n");
             for (int i = 0; i < course.forums.size(); i++) {
                 DiscussionForum forum = course.forums.get(i);
-                header.append(i + 1).append(". ").append(forum.getTopic()).append("\n");
+                header.append("-").append(forum.getTopic()).append("\n");
             }
         }
         String HEADER = header.toString();
         int forumSelection = 0;
-        final String MENU = LINE + HEADER + "Please choose an operation\n1. Create a forum\n2. Delete a forum\n3. Edit a forum\n4. Enter a forum" +
-                "\n5. Back to last menu\n6. Log out";
+        final String MENU = LINE + HEADER + "Please choose an operation\n    1. Create a forum\n    2. Delete a forum" +
+                "\n    3. Edit a forum\n    4. Enter a forum" +
+                "\n    5. Back to last menu\n    6. Log out";
         final String ENTER_METHOD = "How do you like to enter the title:\n1. Command line\n" +
                 "2. Import through text file";
         final String FILE_NAME = "Please enter the files name: ";
         final String FORUM_TOPIC = "Please enter the topic of the created forum: ";
         final String SELECT_FORUM = LINE + "Select a topic";
 
+        final String TO_DELETE = " to delete:";
+        final String TO_EDIT = " to edit:";
+        final String TO_ENTER = " to enter:";
 
-        final String NO_PERMISSION = "You don't have permission to proceed the action.";
         final String IMPORT_UNSUCCESSFUL = "The import process is not successful!";
         final String RETRY = "Do you want to try again?\n1. Yes\n2. No";
         final String NO_FORUMS = "No forum under this course. Please create one and try again.";
@@ -397,7 +404,7 @@ public class UserActivities {
                     }
 
                 } catch (NoPermissionException e) {
-                    System.out.println(NO_PERMISSION);
+                    e.printStackTrace();
                 }
                 break;
             case 2:
@@ -407,7 +414,7 @@ public class UserActivities {
                         System.out.println(NO_FORUMS);
                         break;
                     }
-                    System.out.println(SELECT_FORUM);
+                    System.out.println(SELECT_FORUM + TO_DELETE);
                     displayForumTopics(course);
                     int forumIndex = getValidInt(course.forums.size()) - 1;
                     currentUser.deleteForum(course, course.forums.get(forumIndex));
@@ -423,7 +430,7 @@ public class UserActivities {
                         System.out.println(NO_FORUMS);
                         break;
                     }
-                    System.out.println(SELECT_FORUM);
+                    System.out.println(SELECT_FORUM + TO_EDIT);
                     displayForumTopics(course);
                     int forumIndex = getValidInt(course.forums.size()) - 1;
                     DiscussionForum forum = course.forums.get(forumIndex);
@@ -462,7 +469,7 @@ public class UserActivities {
                     break;
 
                 }
-                System.out.println(SELECT_FORUM);
+                System.out.println(SELECT_FORUM + TO_ENTER);
                 displayForumTopics(course);
                 forumSelection = getValidInt(course.forums.size());
                 break;
@@ -484,17 +491,22 @@ public class UserActivities {
             header.append("Post List:\n");
             for (int i = 0; i < forum.posts.size(); i++) {
                 DiscussionPost post = forum.posts.get(i);
-                header.append(i + 1).append(". ").append(post).append("\n");
+                header.append('\n').append("-").append(post).append("\n");
             }
+            header.append('\n');
         }
         String HEADER = header.toString();
         int postSelection = 0;
-        final String MENU = LINE + HEADER + "Please choose an operation\n1. Create a post\n2. Delete a post\n3. reply a post\n4. Sort the posts\n" +
-                "5. Vote a post\n6. Back to last menu\n7. Log out";
+        final String MENU = LINE + HEADER + "Please choose an operation\n    1. Create a post\n    2. Delete a post" +
+                "\n    3. reply a post\n    4. Sort the posts\n    " +
+                "5. Vote a post\n    6. Back to last menu\n    7. Log out";
         final String ENTER_METHOD = "How do you like to enter the title:\n1. Command line\n" +
                 "2. Import through text file";
         final String POST_CONTENT = "Please enter the content of your post:";
         final String SELECT_POST = "Select a post";
+        final String TO_DELETE = " to delete:";
+        final String TO_REPLY = " to edit:";
+        final String TO_VOTE = " to enter:";
         final String FILE_NAME = "Please enter the files name: ";
         final String ENTER_CONTENT = "Please enter the content of the post.";
 
@@ -547,7 +559,7 @@ public class UserActivities {
                         System.out.println(NO_POSTS);
                         break;
                     }
-                    System.out.println(SELECT_POST);
+                    System.out.println(SELECT_POST + TO_DELETE);
                     displayPost(forum);
                     int postIndex = getValidInt(forum.getPostsNum()) - 1;
                     DiscussionPost selectedPost = forum.posts.get(postIndex);
@@ -557,21 +569,18 @@ public class UserActivities {
                 }
                 break;
             case 3:
-                try {
-                    if (forum.getPostsNum() == 0) {
-                        System.out.println(NO_POSTS);
-                        break;
-                    }
-                    System.out.println(SELECT_POST);
-                    displayPost(forum);
-                    int postIndex = getValidInt(forum.getPostsNum()) - 1;
-                    DiscussionPost selectedPost = forum.posts.get(postIndex);
-                    System.out.println(ENTER_CONTENT);
-                    String updatingContent = getStringInput();
-                    currentUser.editPost(selectedPost, updatingContent);
-                } catch (NoPermissionException e) {
-                    e.printStackTrace();
+                if (forum.getPostsNum() == 0) {
+                    System.out.println(NO_POSTS);
+                    break;
                 }
+                System.out.println(SELECT_POST + TO_REPLY);
+                displayPost(forum);
+                int postIndex = getValidInt(forum.getPostsNum()) - 1;
+                DiscussionPost selectedPost = forum.posts.get(postIndex);
+                System.out.println(ENTER_CONTENT);
+                String updatingContent = getStringInput();
+                currentUser.addReply(selectedPost,
+                        new DiscussionPost(currentUser, updatingContent, System.currentTimeMillis()));
                 break;
             case 4:
                 try {
@@ -595,7 +604,7 @@ public class UserActivities {
                         System.out.println(NO_POSTS);
                         break;
                     }
-                    System.out.println(SELECT_POST);
+                    System.out.println(SELECT_POST + TO_VOTE);
                     displayPost(forum);
                     postSelection = getValidInt(forum.getPostsNum());
                     currentUser.vote(forum, forum.posts.get(postSelection - 1));
@@ -701,8 +710,8 @@ public class UserActivities {
 
             } catch (NoSuchElementException e) {
 
-                System.out.println("Please enter an integer");
-                e.printStackTrace();
+                System.out.println("Your input is not an integer.\nPlease try again:");
+
             }
             scanner.nextLine();
         } while (integer == null);
@@ -712,8 +721,8 @@ public class UserActivities {
     private int getValidInt(int optionNum) {
         int validInt;
         validInt = getIntInput();
-        while (validInt > optionNum) {
-            System.out.println("Please enter a valid option.");
+        while (validInt > optionNum || validInt < 1) {
+            System.out.println("Your input is out of valid range.\nPlease enter a valid option:");
             validInt = getIntInput();
         }
         return validInt;
