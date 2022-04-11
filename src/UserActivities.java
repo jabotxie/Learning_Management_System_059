@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -8,18 +9,23 @@ import java.util.Scanner;
 /**
  * UserActivities class stores a static current user
  */
-public class UserActivities implements Runnable {
+public class UserActivities {
     private static Scanner scanner;
 
     public static User currentUser;
     private static boolean isDataLoaded = false;
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
         DataManager.initData();
         scanner = new Scanner(System.in);
-        Thread user1 = new Thread(new UserActivities());
-        user1.start();
-        user1.join();
+        UserActivities activityOne = new UserActivities();
+        try {
+            activityOne.run();
+        } catch (Throwable e) {
+            DataManager.saveData();
+            e.printStackTrace();
+        }
+
         DataManager.saveData();
     }
 
@@ -92,7 +98,7 @@ public class UserActivities implements Runnable {
      * b. save the forum (and the post in it)
      * c. End the program
      */
-    @Override
+
     public void run() {
         //TODO: implement user behavior
 
@@ -136,10 +142,19 @@ public class UserActivities implements Runnable {
             if (courseSelection > 0) {
                 int forumSelection;
                 do {
-                    forumSelection = forumActivities(DataManager.courses.get(courseSelection - 1));
-                    int postSelection;
+                    Course selectedCourse = DataManager.courses.get(courseSelection - 1);
+                    forumSelection = forumActivities(selectedCourse);
+
                     if (forumSelection > 0) {
-                        postSelection = postActivities();
+                        int postSelection;
+                        do {
+                            DiscussionForum selectedForum = selectedCourse.forums.get(forumSelection - 1);
+                            postSelection = postActivities(selectedForum);
+                            if (postSelection > 0) {
+                                DiscussionPost post = selectedForum.getPosts(false).get(postSelection);
+                                replyActivities(post);
+                            }
+                        } while (postSelection != -1);
                     }
 
                 } while (forumSelection != -1);
@@ -225,7 +240,7 @@ public class UserActivities implements Runnable {
         switch (menuChoice) {
             case 1: //add a course
                 try {
-                    verifyPermission();
+                    verifyPermission(Teacher.class);
                     System.out.println(ENTER_METHOD);
                     int methodChoice = getValidInt(2);
                     String courseTitle;
@@ -260,7 +275,7 @@ public class UserActivities implements Runnable {
 
             case 2: //delete a course
                 try {
-                    verifyPermission();
+                    verifyPermission(Teacher.class);
                     if (DataManager.courses.size() == 0) {
                         System.out.println(EMPTY_COURSE_LIST);
                         break;
@@ -279,7 +294,7 @@ public class UserActivities implements Runnable {
 
             case 3: //Edit a course
                 try {
-                    verifyPermission();
+                    verifyPermission(Teacher.class);
                     if (DataManager.courses.size() == 0) {
                         System.out.println(EMPTY_COURSE_LIST);
                         break;
@@ -332,14 +347,14 @@ public class UserActivities implements Runnable {
         switch (menuChoice) {
             case 1:
                 try {
-                    verifyPermission();
+                    verifyPermission(Teacher.class);
                     System.out.println(ENTER_METHOD);
                     int methodChoice = getValidInt(2);
                     String forumTopic;
                     if (methodChoice == 1) {
                         System.out.println(FORUM_TOPIC);
                         forumTopic = getStringInput();
-                        currentUser.createCourse(forumTopic);
+                        currentUser.createForum(course, forumTopic);
 
                     } else {
                         boolean isProcessFinished = false;
@@ -365,7 +380,7 @@ public class UserActivities implements Runnable {
                 break;
             case 2:
                 try {
-                    verifyPermission();
+                    verifyPermission(Teacher.class);
                     if (course.forums.size() == 0) {
                         System.out.println(NO_FORUMS);
                         break;
@@ -381,7 +396,7 @@ public class UserActivities implements Runnable {
                 break;
             case 3:
                 try {
-                    verifyPermission();
+                    verifyPermission(Teacher.class);
                     if (course.forums.size() == 0) {
                         System.out.println(NO_FORUMS);
                         break;
@@ -390,6 +405,7 @@ public class UserActivities implements Runnable {
                     displayForumTopics(course);
                     int forumIndex = getValidInt(course.forums.size()) - 1;
                     DiscussionForum forum = course.forums.get(forumIndex);
+                    System.out.println(ENTER_METHOD);
                     int methodChoice = getValidInt(2);
                     String forumTopic;
                     if (methodChoice == 1) {
@@ -431,27 +447,128 @@ public class UserActivities implements Runnable {
         return forumSelection;
     }
 
-    private int postActivities() {
+    private int postActivities(DiscussionForum forum) {
         int postSelection = 0;
-        final String MENU = "Do you want to\n1. Create a post\n2. Delete a post\n3. reply a post\n4. Enter a post" +
-                "\n5. Back to last menu";
-        final String FORUM_TOPIC = "Please enter the topic of the created forum: ";
+        final String MENU = "Do you want to\n1. Create a post\n2. Delete a post\n3. reply a post\n4. Sort the posts\n" +
+                "5. Enter a post\n6. Back to last menu";
+        final String ENTER_METHOD = "How do you like to enter the title:\n1. Command line\n" +
+                "2. Import through text file";
+        final String POST_CONTENT = "Please enter the content of your post:";
+        final String SELECT_POST = "Select a forum";
+        final String FILE_NAME = "Please enter the files name: ";
+        final String ENTER_CONTENT = "Please enter the content of the post.";
+
+
+        final String NO_POSTS = "No posts under the forum. Please create one and try again.";
+        final String IMPORT_UNSUCCESSFUL = "The import process is not successful!";
+        final String RETRY = "Do you want to try again?\n1. Yes\n2. No";
+
         System.out.println(MENU);
-        int menuChoice = getValidInt(5);
+        int menuChoice = getValidInt(6);
         switch (menuChoice) {
             case 1:
+                try {
+                    verifyPermission(Student.class);
+                    System.out.println(ENTER_METHOD);
+                    int methodChoice = getValidInt(2);
+                    String postContent;
+                    if (methodChoice == 1) {
+                        System.out.println(POST_CONTENT);
+                        postContent = getStringInput();
+                        currentUser.addPost(forum,
+                                new DiscussionPost(currentUser, postContent, System.currentTimeMillis()));
+
+                    } else {
+                        boolean isProcessFinished = false;
+                        do {
+                            try {
+                                System.out.println(FILE_NAME);
+                                String fileName = getStringInput();
+                                postContent = User.getImportedFile(fileName);
+                                currentUser.addPost(forum,
+                                        new DiscussionPost(currentUser, postContent, System.currentTimeMillis()));
+                                isProcessFinished = true;
+                            } catch (FileNotFoundException e) {
+                                System.out.println(IMPORT_UNSUCCESSFUL);
+                                System.out.println(RETRY);
+                                int retryChoice = getValidInt(2);
+                                if (retryChoice == 2) break;
+                            }
+                        } while (!isProcessFinished);
+                    }
+                } catch (NoPermissionException e) {
+                    e.printStackTrace();
+                }
                 break;
             case 2:
+                try {
+                    verifyPermission(Teacher.class);
+                    if (forum.getPostsNum() == 0) {
+                        System.out.println(NO_POSTS);
+                        break;
+                    }
+                    System.out.println(SELECT_POST);
+                    displayPost(forum, false);
+                    int postIndex = getValidInt(forum.getPostsNum()) - 1;
+                    DiscussionPost selectedPost = forum.getPosts(false).get(postIndex);
+                    currentUser.deletePost(forum, selectedPost);
+                } catch (NoPermissionException e) {
+                    e.printStackTrace();
+                }
                 break;
             case 3:
+                try {
+                    verifyPermission(Teacher.class);
+                    if (forum.getPostsNum() == 0) {
+                        System.out.println(NO_POSTS);
+                        break;
+                    }
+                    System.out.println(SELECT_POST);
+                    displayPost(forum, false);
+                    int postIndex = getValidInt(forum.getPostsNum()) - 1;
+                    DiscussionPost selectedPost = forum.getPosts(false).get(postIndex);
+                    System.out.println(ENTER_CONTENT);
+                    String updatingContent = getStringInput();
+                    currentUser.editPost(selectedPost, updatingContent);
+                } catch (NoPermissionException e) {
+                    e.printStackTrace();
+                }
                 break;
             case 4:
+                try {
+                    verifyPermission(Teacher.class);
+                    if (forum.getPostsNum() == 0) {
+                        System.out.println(NO_POSTS);
+                        break;
+                    }
+                    displayPost(forum, true);
+                    System.out.println("Hit enter to proceed...");
+                    getStringInput();
+                } catch (NoPermissionException e) {
+                    e.printStackTrace();
+                }
                 break;
             case 5:
+                if (forum.getPostsNum() == 0) {
+                    System.out.println(NO_POSTS);
+                    break;
+                }
+                System.out.println(SELECT_POST);
+                displayPost(forum, false);
+                postSelection = getValidInt(forum.getPostsNum());
+
+                break;
+            case 6:
                 postSelection = -1;
                 break;
         }
         return postSelection;
+    }
+
+    private int replyActivities(DiscussionPost post) {
+
+        final String MENU = "Do you want to\n1. Add a reply\n2. Vote for this post\n3. ";
+        return -1;
     }
 
     private void displayCoursesTitles() {
@@ -464,6 +581,13 @@ public class UserActivities implements Runnable {
     private void displayForumTopics(Course course) {
         for (int i = 0; i < course.forums.size(); i++) {
             System.out.print((i + 1) + "." + course.forums.get(i).getTopic() + '\n');
+        }
+    }
+
+    private void displayPost(DiscussionForum forum, boolean isSorted) {
+        ArrayList<DiscussionPost> posts = forum.getPosts(isSorted);
+        for (int i = 0; i < posts.size(); i++) {
+            System.out.print((i + 1) + "." + posts.get(i) + '\n');
         }
     }
 
@@ -497,7 +621,7 @@ public class UserActivities implements Runnable {
         return scanner.nextLine();
     }
 
-    private void verifyPermission() throws NoPermissionException {
-        if (currentUser.getClass() == Student.class) throw new NoPermissionException();
+    private void verifyPermission(Class<? extends User> permittedUserType) throws NoPermissionException {
+        if (currentUser.getClass() != permittedUserType) throw new NoPermissionException();
     }
 }
