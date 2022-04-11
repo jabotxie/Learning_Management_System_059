@@ -1,0 +1,334 @@
+Index: src/Student.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import java.util.ArrayList;\r\n\r\npublic class Student extends User {\r\n\r\n    public Student(String username, String password) {\r\n        super(username, password);\r\n    }\r\n\r\n    public Student(String username, String password, ArrayList<DiscussionForum> forums) {\r\n        super(username, password, forums);\r\n    }\r\n\r\n    @Override\r\n    public void addPost(DiscussionForum forum, DiscussionPost post) {\r\n        forum.addPost(post);\r\n    }\r\n\r\n    @Override\r\n    public void addReply(DiscussionPost post, DiscussionPost reply) {\r\n        post.addReply(reply);\r\n    }\r\n\r\n    @Override\r\n    public void createForum(String topic) throws NoPermissionException {\r\n        throw new NoPermissionException();\r\n    }\r\n\r\n    @Override\r\n    public void deleteForum(DiscussionForum forum) throws NoPermissionException {\r\n        throw new NoPermissionException();\r\n    }\r\n\r\n    @Override\r\n    public void editForum(DiscussionForum forum, String topic) throws NoPermissionException {\r\n        throw new NoPermissionException();\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Student.java b/src/Student.java
+--- a/src/Student.java	(revision 0a51e9aae13e30ec66db66c9e5b40bdec6994b15)
++++ b/src/Student.java	(date 1649556571435)
+@@ -1,5 +1,16 @@
+ import java.util.ArrayList;
+-
++/**
++ * Project 4 -- Learning Management System
++ *
++ * This class contains methods for Student Object which is
++ * a subclass of User Class. The Student class can add Discussion
++ * posts and forums.
++ *
++ * @author Nandana, Shreyash, Jason, Garv , lab sec L14
++ *
++ * @version April 9, 2022
++ *
++ */
+ public class Student extends User {
+ 
+     public Student(String username, String password) {
+Index: src/UserActivities.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import javax.swing.*;\r\nimport java.awt.event.ActionEvent;\r\nimport java.util.Scanner;\r\n\r\n/**\r\n * UserActivities class stores a static current user\r\n *\r\n *\r\n */\r\npublic class UserActivities implements Runnable {\r\n    public static User currentUser;\r\n    public static boolean isForumRead;\r\n\r\n    /**\r\n     * In this thread, the user is asked to do the following things in linear order:\r\n     * 1. Read from files to update users information, forum information (including the posts in forums)\r\n     * 2. Ask if they to create an account or log in\r\n     *    I. If they want to create the account, then\r\n     *      a. let them enter a username\r\n     *          i. if the username is taken, handle exception and enter another username\r\n     *          ii. if the username is available, proceed program\r\n     *      b. let the user enter the passcode\r\n     *      c. assign the user to current user\r\n     *    II. If the user want to log in\r\n     *      a. let them enter username and password\r\n     *      b. check if match with Users info\r\n     *          i. match, assign the user to current user, proceed the program\r\n     *          ii. not match, handle exception, return to beginning of 2.\r\n     * 3. select from menu\r\n     *      a.  Create forum\r\n     *              Add a DiscussionForum instance in User.forums\r\n     *              Then repeat 3\r\n     *              P.S. Handle the exception if the user does not have permission\r\n     *      b.  Edit forum\r\n     *              Edit the given forum's topic with a user input, which is the topic of the forum\r\n     *              Then repeat 3\r\n     *              P.S. Handle the exception if the user does not have permission\r\n     *      c.  Delete forum\r\n     *              Delete the given forum\r\n     *              Then repeat 3\r\n     *              P.S. Handle the exception if the user does not have permission\r\n     *              P.S. Handle the exception if the given forum does not exist\r\n     *      d.  Choose a forum\r\n     *              proceed to 4\r\n     *      E.  Log out\r\n     *              proceed to 8\r\n     * 4. select forum\r\n     *      a. e.g. forum one (topic)\r\n     *          proceed to 5\r\n     *      b. e.g. forum two\r\n     *          proceed to 5\r\n     *      c. e.g. forum three\r\n     *          proceed to 5\r\n     *      d. back to last menu\r\n     *          back to 3\r\n     *  5. select action (Display the topic of the forum selected)\r\n     *      a. add post\r\n     *          add the post, and repeat 5\r\n     *      b. reply post\r\n     *          proceed to 6\r\n     *      c. back to last menu\r\n     *          back to 4\r\n     *      d. log out\r\n     *  6. select action\r\n     *      a. e.g. post one (the first 30 character...)\r\n     *          proceed to 7\r\n     *      b. e.g. post two\r\n     *          same with a.\r\n     *      c. e.g. post three\r\n     *          same with a.\r\n     *      d. back to last menu\r\n     *          back to 3\r\n     *   7. select action\r\n     *      a. import from file\r\n     *          let the user enter a file name, add the reply and back to 5\r\n     *      b. enter reply\r\n     *          let the user enter a String type reply, and add the reply, then back to 5\r\n     *   8. Log out\r\n     *      a. save the user info again\r\n     *      b. save the forum (and the post in it)\r\n     *      c. End the program\r\n     */\r\n    @Override\r\n    public void run() {\r\n        //TODO: implement user behavior\r\n//        JFrame frame = new JFrame(\"Learning Management System\");\r\n//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);\r\n//        frame.setSize(300,300);\r\n//\r\n//        // Adds Button to content pane of frame\r\n//\r\n//\r\n//        JTextField userNameTF = new JTextField(\"Username\",10);\r\n//        JTextField passwordTF = new JTextField(\"password\", 10);\r\n//        JButton loginButton = new JButton(\"Log In\");\r\n//\r\n//        JPanel panel = new JPanel();\r\n//        panel.add(userNameTF);\r\n//        panel.add(passwordTF);\r\n//        panel.add(loginButton);\r\n//        frame.getContentPane().add(panel);\r\n//        frame.setVisible(true);\r\n//\r\n//        loginButton.addActionListener(new AbstractAction() {\r\n//            @Override\r\n//            public void actionPerformed(ActionEvent e) {\r\n//\r\n//                String username = userNameTF.getText();\r\n//                String password = passwordTF.getText();\r\n//\r\n//                System.out.println(username);\r\n//                System.out.println(password);\r\n//\r\n//            }\r\n//        });\r\n        Scanner scanner = new Scanner(System.in);\r\n        System.out.println(\"Welcome to the Learning Management System.\\n\");\r\n        System.out.println(\"Press 1 to login, Press 2 to create account.\\n\");\r\n        int loginChoice = scanner.nextInt();\r\n        if (loginChoice == 1)\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/UserActivities.java b/src/UserActivities.java
+--- a/src/UserActivities.java	(revision 0a51e9aae13e30ec66db66c9e5b40bdec6994b15)
++++ b/src/UserActivities.java	(date 1649556824769)
+@@ -3,10 +3,16 @@
+ import java.util.Scanner;
+ 
+ /**
++ * Project 4 -- Learning Management System
++ *
+  * UserActivities class stores a static current user
+  *
++ * @author Nandana, Shreyash, Jason, Garv , lab sec L14
++ *
++ * @version April 9, 2022
+  *
+  */
++
+ public class UserActivities implements Runnable {
+     public static User currentUser;
+     public static boolean isForumRead;
+@@ -113,11 +119,6 @@
+ //
+ //            }
+ //        });
+-        Scanner scanner = new Scanner(System.in);
+-        System.out.println("Welcome to the Learning Management System.\n");
+-        System.out.println("Press 1 to login, Press 2 to create account.\n");
+-        int loginChoice = scanner.nextInt();
+-        if (loginChoice == 1)
+     }
+ 
+ }
+Index: src/User.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import java.io.BufferedReader;\r\nimport java.io.FileNotFoundException;\r\nimport java.io.FileReader;\r\nimport java.io.IOException;\r\nimport java.util.ArrayList;\r\nimport java.util.Objects;\r\n\r\npublic abstract class User {\r\n    public static ArrayList<DiscussionForum> forums;\r\n    public static String forumFileName = \"\";\r\n    private static boolean isForumInitialized = false;\r\n    public final Object o = new Object();\r\n    private String username;\r\n    private String password;\r\n\r\n    public User(String username, String password) {\r\n        forums = new ArrayList<>();\r\n        this.username = username;\r\n        this.password = password;\r\n    }\r\n\r\n    public User(String username, String password,ArrayList<DiscussionForum> forums) {\r\n        this.username = username;\r\n        this.password = password;\r\n        User.forums = forums;\r\n    }\r\n\r\n    public String getUsername() {\r\n        return username;\r\n    }\r\n\r\n    public void setUsername(String username) {\r\n        this.username = username;\r\n    }\r\n\r\n    public String getPassword() {\r\n        return password;\r\n    }\r\n\r\n    public void setPassword(String password) {\r\n        this.password = password;\r\n    }\r\n\r\n    public static ArrayList<String> getImportedFile(String fileName) throws FileNotFoundException {\r\n        BufferedReader bf = new BufferedReader(new FileReader(fileName));\r\n        ArrayList<String> lines = new ArrayList<>();\r\n        try {\r\n            String line = bf.readLine();\r\n            while (line != null) {\r\n                lines.add(line);\r\n                line = bf.readLine();\r\n            }\r\n        } catch (IOException e) {\r\n            e.printStackTrace();\r\n        }\r\n        return lines;\r\n    }\r\n\r\n    @Override\r\n    public boolean equals(Object o) {\r\n        if (this == o) return true;\r\n        if (o == null || (o.getClass() != Teacher.class && o.getClass() != Student.class)) return false;\r\n        User user = (User) o;\r\n        return Objects.equals(username, user.username);\r\n    }\r\n\r\n    @Override\r\n    public int hashCode() {\r\n        return Objects.hash(username, password);\r\n    }\r\n\r\n    public abstract void addPost(DiscussionForum forum, DiscussionPost post);\r\n\r\n    public abstract void addReply(DiscussionPost post, DiscussionPost reply) throws NoSuchTargetException;\r\n\r\n    public abstract void createForum(String topic) throws NoPermissionException;\r\n\r\n    public abstract void deleteForum(DiscussionForum forum) throws NoPermissionException, NoSuchTargetException;\r\n\r\n    public abstract void editForum(DiscussionForum forum, String topic) throws NoPermissionException, NoSuchTargetException;\r\n\r\n    public String toString() {\r\n        String sb = getClass().toString() + '\\n' +\r\n                \"Username: \" + username + '\\n' +\r\n                \"Password: \" + password + '\\n';\r\n        return sb;\r\n    }\r\n\r\n\r\n    public static void initForum() {\r\n        if (!isForumInitialized) {\r\n            ArrayList<DiscussionForum> forums = new ArrayList<>();\r\n            //TODO: implement method to read forum from local file\r\n            User.forums = forums;\r\n        }\r\n    }\r\n\r\n    public static void saveForum() {\r\n        //TODO: implement method to save forums to local file\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/User.java b/src/User.java
+--- a/src/User.java	(revision 0a51e9aae13e30ec66db66c9e5b40bdec6994b15)
++++ b/src/User.java	(date 1649562025374)
+@@ -4,7 +4,18 @@
+ import java.io.IOException;
+ import java.util.ArrayList;
+ import java.util.Objects;
+-
++/**
++ * Project 4 -- Learning Management System
++ *
++ * This class contains methods for User Object which is
++ * the superclass for Teacher and Student Objects. This class
++ * contains methods to initialize teacher and student objects.
++ *
++ * @author Nandana, Shreyash, Jason, Garv , lab sec L14
++ *
++ * @version April 9, 2022
++ *
++ */
+ public abstract class User {
+     public static ArrayList<DiscussionForum> forums;
+     public static String forumFileName = "";
+Index: src/main.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import javax.swing.*;\r\n\r\n\r\npublic class main {\r\n    public static void main(String[] args) {\r\n        User.initForum();\r\n        SwingUtilities.invokeLater(new UserActivities());\r\n        User.saveForum();\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main.java b/src/main.java
+--- a/src/main.java	(revision 0a51e9aae13e30ec66db66c9e5b40bdec6994b15)
++++ b/src/main.java	(date 1649556571487)
+@@ -1,5 +1,14 @@
+ import javax.swing.*;
+-
++/**
++ * Project 4 -- Learning Management System
++ *
++ * This is the main class of the project.
++ *
++ * @author Nandana, Shreyash, Jason, Garv , lab sec L14
++ *
++ * @version April 9, 2022
++ *
++ */
+ 
+ public class main {
+     public static void main(String[] args) {
+Index: src/Teacher.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import java.util.ArrayList;\r\n\r\npublic class Teacher extends User {\r\n\r\n\r\n    public Teacher(String username, String password) {\r\n        super(username, password);\r\n    }\r\n\r\n    public Teacher(String username, String password, ArrayList<DiscussionForum> forums) {\r\n        super(username, password, forums);\r\n    }\r\n\r\n    @Override\r\n    public void addPost(DiscussionForum forum, DiscussionPost post) {\r\n        forum.addPost(post);\r\n    }\r\n\r\n    @Override\r\n    public void addReply(DiscussionPost post, DiscussionPost reply) {\r\n        post.addReply(reply);\r\n    }\r\n\r\n    @Override\r\n    public void createForum(String topic) {\r\n        synchronized (o) {\r\n            User.forums.add(new DiscussionForum(topic));\r\n        }\r\n    }\r\n\r\n    @Override\r\n    public void deleteForum(DiscussionForum forum) throws NoSuchTargetException {\r\n        synchronized (o) {\r\n            if (!User.forums.remove(forum)) throw new NoSuchTargetException();\r\n        }\r\n    }\r\n\r\n    @Override\r\n    public void editForum(DiscussionForum forum, String topic) throws NoSuchTargetException {\r\n        synchronized (o) {\r\n            int i = User.forums.indexOf(forum);\r\n            if (i == -1) throw new NoSuchTargetException();\r\n        }\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Teacher.java b/src/Teacher.java
+--- a/src/Teacher.java	(revision 0a51e9aae13e30ec66db66c9e5b40bdec6994b15)
++++ b/src/Teacher.java	(date 1649556571472)
+@@ -1,5 +1,16 @@
+ import java.util.ArrayList;
+-
++/**
++ * Project 4 -- Learning Management System
++ *
++ * This class contains methods for Teacher Object which is
++ * a subclass of User Class. The Teacher class can add Discussion
++ * posts and forums.
++ *
++ * @author Nandana, Shreyash, Jason, Garv , lab sec L14
++ *
++ * @version April 9, 2022
++ *
++ */
+ public class Teacher extends User {
+ 
+ 
+Index: src/AccountManager.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import java.io.*;\r\nimport java.util.ArrayList;\r\n\r\n/**\r\n * A class that helps to read and store the user information in a format of\r\n *\r\n * ************************************\r\n * username\r\n * password\r\n * User Type(T for Teacher, S for Student)\r\n * ************************************\r\n *\r\n */\r\n\r\npublic class AccountManager {\r\n\r\n    public static ArrayList<User> users;\r\n\r\n    public static String userInfoFileName = \"UserInfo.txt\";\r\n\r\n    public static void updateUsers() {\r\n        try {\r\n            AccountManager.users = getUsers(userInfoFileName);\r\n        } catch (FileNotFoundException e) {\r\n            e.printStackTrace();\r\n        }\r\n    }\r\n\r\n    private static ArrayList<User> getUsers(String filename) throws FileNotFoundException {\r\n\r\n        BufferedReader bf = new BufferedReader(new FileReader(filename));\r\n        ArrayList<String> lines = new ArrayList<>();\r\n        ArrayList<User> users = new ArrayList<>();\r\n\r\n        try {\r\n            String line = bf.readLine();\r\n            while (line != null) {\r\n                lines.add(line);\r\n                line = bf.readLine();\r\n            }\r\n            bf.close();\r\n\r\n            for (int i = 0; i < lines.size(); i += 3) {\r\n                String username = lines.get(i);\r\n                String password = lines.get(i + 1);\r\n                String userType = lines.get(i + 2);\r\n                Class<? extends User> t = userType.equals(\"T\") ? Teacher.class : Student.class;\r\n                if (t == Teacher.class) {\r\n                    users.add(new Teacher(username, password));\r\n                } else {\r\n                    users.add(new Student(username, password));\r\n                }\r\n\r\n            }\r\n\r\n        } catch (IOException e) {\r\n            e.printStackTrace();\r\n        }\r\n        return users;\r\n    }\r\n\r\n    public synchronized static void saveUserInfo(String fileName) {\r\n\r\n        StringBuilder sb = new StringBuilder();\r\n        for (User user: users) {\r\n            sb.append(user.getUsername()).append('\\n');\r\n            sb.append(user.getPassword()).append('\\n');\r\n            sb.append(user.getClass() == Teacher.class ? \"T\" : \"S\").append('\\n');\r\n        }\r\n        try {\r\n            BufferedWriter bw = new BufferedWriter(new FileWriter(fileName));\r\n            bw.write(sb.toString());\r\n            bw.close();\r\n        } catch (IOException e) {\r\n            e.printStackTrace();\r\n        }\r\n\r\n    }\r\n\r\n    public synchronized static void login(String username, String password) throws LoginUnsuccessfulException {\r\n\r\n        int i = users.indexOf(new Student(username, password));\r\n        try {\r\n            if(users.get(i).getPassword().equals(password)) {\r\n                UserActivities.currentUser = users.get(i);\r\n            }  else {\r\n                throw new LoginUnsuccessfulException();\r\n            }\r\n        } catch (ArrayIndexOutOfBoundsException e) {\r\n            throw new LoginUnsuccessfulException();\r\n        }\r\n\r\n\r\n    }\r\n\r\n    public static synchronized void createAccount(Class<? extends User> c, String username, String password)\r\n            throws UsernameAlreadyTakenException {\r\n        if (users.contains(new Student(username, password))) {\r\n            throw new UsernameAlreadyTakenException();\r\n        } else {\r\n            if (c == Teacher.class) {\r\n                users.add(new Teacher(username, password));\r\n            } else {\r\n                users.add(new Student(username, password));\r\n            }\r\n            saveUserInfo(userInfoFileName);\r\n        }\r\n    }\r\n\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/AccountManager.java b/src/AccountManager.java
+--- a/src/AccountManager.java	(revision 0a51e9aae13e30ec66db66c9e5b40bdec6994b15)
++++ b/src/AccountManager.java	(date 1649556571507)
+@@ -2,14 +2,21 @@
+ import java.util.ArrayList;
+ 
+ /**
+- * A class that helps to read and store the user information in a format of
++ * Project 4 -- Learning Management System
+  *
++ * This class allows user information to be stored in the
++ * following format:
+  * ************************************
+  * username
+  * password
+  * User Type(T for Teacher, S for Student)
+  * ************************************
+  *
++ *
++ * @author Nandana, Shreyash, Jason, Garv , lab sec L14
++ *
++ * @version April 9, 2022
++ *
+  */
+ 
+ public class AccountManager {
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"d28170b6-672d-4479-8927-b4c27361f032\" name=\"Changes\" comment=\"\" />\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"27aAvWwBqVwqjzSwGcRte2sDjpW\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">\r\n    <property name=\"RunOnceActivity.OpenProjectViewOnStart\" value=\"true\" />\r\n    <property name=\"RunOnceActivity.ShowReadmeOnStart\" value=\"true\" />\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"d28170b6-672d-4479-8927-b4c27361f032\" name=\"Changes\" comment=\"\" />\r\n      <created>1649548055923</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1649548055923</updated>\r\n    </task>\r\n    <servers />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 0a51e9aae13e30ec66db66c9e5b40bdec6994b15)
++++ b/.idea/workspace.xml	(date 1649557580259)
+@@ -1,11 +1,26 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ChangeListManager">
+-    <list default="true" id="d28170b6-672d-4479-8927-b4c27361f032" name="Changes" comment="" />
++    <list default="true" id="d28170b6-672d-4479-8927-b4c27361f032" name="Changes" comment="Implemented ToString methods">
++      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/AccountManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AccountManager.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Student.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/Teacher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Teacher.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/User.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/UserActivities.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserActivities.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.java" afterDir="false" />
++    </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+     <option name="LAST_RESOLUTION" value="IGNORE" />
++  </component>
++  <component name="FileTemplateManagerImpl">
++    <option name="RECENT_TEMPLATES">
++      <list>
++        <option value="Class" />
++      </list>
++    </option>
+   </component>
+   <component name="Git.Settings">
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+@@ -22,6 +37,34 @@
+     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+   </component>
++  <component name="RunManager" selected="Application.checker">
++    <configuration name="checker" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
++      <option name="ALTERNATIVE_JRE_PATH" value="17" />
++      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
++      <option name="MAIN_CLASS_NAME" value="checker" />
++      <module name="Learning_Management_System_059" />
++      <method v="2">
++        <option name="Make" enabled="true" />
++      </method>
++    </configuration>
++    <configuration name="main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
++      <option name="MAIN_CLASS_NAME" value="main" />
++      <module name="Learning_Management_System_059" />
++      <method v="2">
++        <option name="Make" enabled="true" />
++      </method>
++    </configuration>
++    <list>
++      <item itemvalue="Application.checker" />
++      <item itemvalue="Application.main" />
++    </list>
++    <recent_temporary>
++      <list>
++        <item itemvalue="Application.checker" />
++        <item itemvalue="Application.main" />
++      </list>
++    </recent_temporary>
++  </component>
+   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+   <component name="TaskManager">
+     <task active="true" id="Default" summary="Default task">
+@@ -31,6 +74,75 @@
+       <option name="presentableId" value="Default" />
+       <updated>1649548055923</updated>
+     </task>
++    <task id="LOCAL-00001" summary="checking">
++      <created>1649548170024</created>
++      <option name="number" value="00001" />
++      <option name="presentableId" value="LOCAL-00001" />
++      <option name="project" value="LOCAL" />
++      <updated>1649548170024</updated>
++    </task>
++    <task id="LOCAL-00002" summary="checking">
++      <created>1649548311826</created>
++      <option name="number" value="00002" />
++      <option name="presentableId" value="LOCAL-00002" />
++      <option name="project" value="LOCAL" />
++      <updated>1649548311826</updated>
++    </task>
++    <task id="LOCAL-00003" summary="Implemented Serializable">
++      <created>1649553091492</created>
++      <option name="number" value="00003" />
++      <option name="presentableId" value="LOCAL-00003" />
++      <option name="project" value="LOCAL" />
++      <updated>1649553091492</updated>
++    </task>
++    <task id="LOCAL-00004" summary="Fatal bug fixes">
++      <created>1649553975193</created>
++      <option name="number" value="00004" />
++      <option name="presentableId" value="LOCAL-00004" />
++      <option name="project" value="LOCAL" />
++      <updated>1649553975193</updated>
++    </task>
++    <task id="LOCAL-00005" summary="Testing document">
++      <created>1649554359535</created>
++      <option name="number" value="00005" />
++      <option name="presentableId" value="LOCAL-00005" />
++      <option name="project" value="LOCAL" />
++      <updated>1649554359535</updated>
++    </task>
++    <task id="LOCAL-00006" summary="Testing document">
++      <created>1649554480416</created>
++      <option name="number" value="00006" />
++      <option name="presentableId" value="LOCAL-00006" />
++      <option name="project" value="LOCAL" />
++      <updated>1649554480416</updated>
++    </task>
++    <task id="LOCAL-00007" summary="Implemented ToString methods">
++      <created>1649557059044</created>
++      <option name="number" value="00007" />
++      <option name="presentableId" value="LOCAL-00007" />
++      <option name="project" value="LOCAL" />
++      <updated>1649557059044</updated>
++    </task>
++    <option name="localTasksCounter" value="8" />
+     <servers />
+   </component>
++  <component name="Vcs.Log.Tabs.Properties">
++    <option name="TAB_STATES">
++      <map>
++        <entry key="MAIN">
++          <value>
++            <State />
++          </value>
++        </entry>
++      </map>
++    </option>
++  </component>
++  <component name="VcsManagerConfiguration">
++    <MESSAGE value="checking" />
++    <MESSAGE value="Implemented Serializable" />
++    <MESSAGE value="Fatal bug fixes" />
++    <MESSAGE value="Testing document" />
++    <MESSAGE value="Implemented ToString methods" />
++    <option name="LAST_COMMIT_MESSAGE" value="Implemented ToString methods" />
++  </component>
+ </project>
+\ No newline at end of file
