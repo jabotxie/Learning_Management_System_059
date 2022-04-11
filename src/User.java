@@ -1,13 +1,10 @@
 import com.sun.org.apache.bcel.internal.generic.CPInstruction;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public abstract class User {
+public abstract class User implements Serializable {
 
     public final Object o = new Object();
     private String username;
