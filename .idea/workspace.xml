@@ -4,22 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d28170b6-672d-4479-8927-b4c27361f032" name="Changes" comment="Finalized Project">
-      <change beforePath="$PROJECT_DIR$/src/AccountInfoNotMatchException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AccountInfoNotMatchException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AlreadyVotedException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AlreadyVotedException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Course.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Course.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CourseList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CourseList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/NoPermissionException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/NoPermissionException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/NoSuchTargetException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/NoSuchTargetException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Student.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Teacher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Teacher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TeacherCannotVote.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TeacherCannotVote.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserActivities.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserActivities.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UsernameAlreadyTakenException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UsernameAlreadyTakenException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Vote.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Vote.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.java" beforeDir="false" />
+    <list default="true" id="d28170b6-672d-4479-8927-b4c27361f032" name="Changes" comment="javadoc implemented">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RunLocalTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RunLocalTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,7 +47,7 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.RunLocalTest$TestCase.testExpectedOutput">
+  <component name="RunManager" selected="Application.UserActivities">
     <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="1.8" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
@@ -77,11 +64,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RunLocalTest$TestCase.testExpectedOutput" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="RunLocalTest$TestCase.testExpectedOutputOne" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Learning_Management_System_059" />
       <option name="PACKAGE_NAME" value="RunLocalTest" />
       <option name="MAIN_CLASS_NAME" value="RunLocalTest$TestCase" />
-      <option name="METHOD_NAME" value="testExpectedOutput" />
+      <option name="METHOD_NAME" value="testExpectedOutputOne" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -90,12 +77,12 @@
     <list>
       <item itemvalue="Application.Test" />
       <item itemvalue="Application.UserActivities" />
-      <item itemvalue="JUnit.RunLocalTest$TestCase.testExpectedOutput" />
+      <item itemvalue="JUnit.RunLocalTest$TestCase.testExpectedOutputOne" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.RunLocalTest$TestCase.testExpectedOutput" />
         <item itemvalue="Application.UserActivities" />
+        <item itemvalue="JUnit.RunLocalTest$TestCase.testExpectedOutputOne" />
         <item itemvalue="Application.Test" />
       </list>
     </recent_temporary>
@@ -389,7 +376,14 @@
       <option name="project" value="LOCAL" />
       <updated>1649695531614</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="javadoc implemented">
+      <created>1649696245786</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1649696245786</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -413,7 +407,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Competed forumActivities()" />
     <MESSAGE value="Bug Fixed&#10;wrong body function called. Course.editForum" />
     <MESSAGE value="Vote implemented" />
     <MESSAGE value="Function Logic Improved" />
@@ -438,7 +431,8 @@
     <MESSAGE value="Improved format menu for UserActivities" />
     <MESSAGE value="Improved display of votes" />
     <MESSAGE value="Finalized Project" />
-    <option name="LAST_COMMIT_MESSAGE" value="Finalized Project" />
+    <MESSAGE value="javadoc implemented" />
+    <option name="LAST_COMMIT_MESSAGE" value="javadoc implemented" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
