@@ -150,16 +150,19 @@ public class UserActivities {
                         do {
                             DiscussionForum selectedForum = selectedCourse.forums.get(forumSelection - 1);
                             postSelection = postActivities(selectedForum);
-                            if (postSelection > 0) {
-                                DiscussionPost post = selectedForum.getPosts(false).get(postSelection);
-                                replyActivities(post);
+                            if (postSelection == -2) {
+                                forumSelection = -2;
+                                courseSelection = -1;
+                                break;
                             }
                         } while (postSelection != -1);
+                        if (forumSelection == -2) break;
+                    } else if (forumSelection == -2) {
+                        courseSelection = -1;
+                        break;
                     }
-
                 } while (forumSelection != -1);
             }
-
         } while (courseSelection != -1);
         logOut();
     }
@@ -329,7 +332,7 @@ public class UserActivities {
     private int forumActivities(Course course) {
         int forumSelection = 0;
         final String MENU = "Do you want to\n1. Create a forum\n2. Delete a forum\n3. Edit a forum\n4. Enter a forum" +
-                "\n5. Back to last menu";
+                "\n5. Back to last menu\n6. Log out";
         final String ENTER_METHOD = "How do you like to enter the title:\n1. Command line\n" +
                 "2. Import through text file";
         final String FILE_NAME = "Please enter the files name: ";
@@ -343,7 +346,7 @@ public class UserActivities {
         final String NO_FORUMS = "No forum under this course. Please create one and try again.";
 
         System.out.println(MENU);
-        int menuChoice = getValidInt(5);
+        int menuChoice = getValidInt(6);
         switch (menuChoice) {
             case 1:
                 try {
@@ -442,6 +445,9 @@ public class UserActivities {
             case 5:
                 forumSelection = -1;
                 break;
+            case 6:
+                forumSelection = -2;
+                break;
         }
 
         return forumSelection;
@@ -450,7 +456,7 @@ public class UserActivities {
     private int postActivities(DiscussionForum forum) {
         int postSelection = 0;
         final String MENU = "Do you want to\n1. Create a post\n2. Delete a post\n3. reply a post\n4. Sort the posts\n" +
-                "5. Enter a post\n6. Back to last menu";
+                "5. Vote a post\n6. Back to last menu\n7. Log out";
         final String ENTER_METHOD = "How do you like to enter the title:\n1. Command line\n" +
                 "2. Import through text file";
         final String POST_CONTENT = "Please enter the content of your post:";
@@ -464,7 +470,7 @@ public class UserActivities {
         final String RETRY = "Do you want to try again?\n1. Yes\n2. No";
 
         System.out.println(MENU);
-        int menuChoice = getValidInt(6);
+        int menuChoice = getValidInt(7);
         switch (menuChoice) {
             case 1:
                 try {
@@ -518,7 +524,6 @@ public class UserActivities {
                 break;
             case 3:
                 try {
-                    verifyPermission(Teacher.class);
                     if (forum.getPostsNum() == 0) {
                         System.out.println(NO_POSTS);
                         break;
@@ -549,27 +554,80 @@ public class UserActivities {
                 }
                 break;
             case 5:
-                if (forum.getPostsNum() == 0) {
-                    System.out.println(NO_POSTS);
-                    break;
+                try {
+                    if (forum.isUserVoted(currentUser)) throw new AlreadyVotedException();
+                    if (currentUser.getClass() == Teacher.class) throw new TeacherCannotVote();
+                    if (forum.getPostsNum() == 0) {
+                        System.out.println(NO_POSTS);
+                        break;
+                    }
+                    System.out.println(SELECT_POST);
+                    displayPost(forum, false);
+                    postSelection = getValidInt(forum.getPostsNum());
+                    currentUser.vote(forum, forum.getPosts(false).get(postSelection - 1));
+                } catch (AlreadyVotedException | TeacherCannotVote e) {
+                    e.printStackTrace();
                 }
-                System.out.println(SELECT_POST);
-                displayPost(forum, false);
-                postSelection = getValidInt(forum.getPostsNum());
-
                 break;
             case 6:
                 postSelection = -1;
+                break;
+            case 7:
+                postSelection = -2;
                 break;
         }
         return postSelection;
     }
 
-    private int replyActivities(DiscussionPost post) {
-
-        final String MENU = "Do you want to\n1. Add a reply\n2. Vote for this post\n3. ";
-        return -1;
-    }
+//    private int replyActivities(DiscussionPost post) {
+//
+//        final String MENU = "Do you want to\n1. Add a reply\n2. Vote for this post\n3.Back to last menu";
+//        final String ENTER_METHOD = "How do you like to enter the title:\n1. Command line\n" +
+//                "2. Import through text file";
+//        final String REPLY_CONTENT = "Please enter the content of your reply:";
+//        final String FILE_NAME = "Please enter the files name: ";
+//
+//        final String NO_PERMISSION = "You don't have permission to proceed the action.";
+//        final String IMPORT_UNSUCCESSFUL = "The import process is not successful!";
+//        final String RETRY = "Do you want to try again?\n1. Yes\n2. No";
+//
+//
+//        int returnIndex = 0;
+//
+//        System.out.println(MENU);
+//        int menuChoice = getValidInt(3);
+//        switch (menuChoice) {
+//            case 1:
+//                System.out.println(ENTER_METHOD);
+//                int methodChoice = getValidInt(2);
+//                String replyContent;
+//                if (methodChoice == 1) {
+//                    System.out.println(REPLY_CONTENT);
+//                    replyContent = getStringInput();
+//                    currentUser.addReply(post,
+//                            new DiscussionPost(currentUser, replyContent, System.currentTimeMillis()));
+//
+//                } else {
+//                    boolean isProcessFinished = false;
+//                    do {
+//                        try {
+//                            System.out.println(FILE_NAME);
+//                            String fileName = getStringInput();
+//                            replyContent = User.getImportedFile(fileName);
+//                            currentUser.addReply(post,
+//                                    new DiscussionPost(currentUser, replyContent, System.currentTimeMillis()));
+//                            isProcessFinished = true;
+//                        } catch (FileNotFoundException e) {
+//                            System.out.println(IMPORT_UNSUCCESSFUL);
+//                            System.out.println(RETRY);
+//                            int retryChoice = getValidInt(2);
+//                            if (retryChoice == 2) break;
+//                        }
+//                    } while (!isProcessFinished);
+//                }
+//        }
+//        return -1;
+//    }
 
     private void displayCoursesTitles() {
         for (int i = 0; i < DataManager.courses.size(); i++) {
