@@ -1,11 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="d28170b6-672d-4479-8927-b4c27361f032" name="Changes" comment="" />
+    <list default="true" id="d28170b6-672d-4479-8927-b4c27361f032" name="Changes" comment="Finalized Project">
+      <change beforePath="$PROJECT_DIR$/src/AccountInfoNotMatchException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AccountInfoNotMatchException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AlreadyVotedException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AlreadyVotedException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Course.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Course.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CourseList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CourseList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/NoPermissionException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/NoPermissionException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/NoSuchTargetException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/NoSuchTargetException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Student.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Teacher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Teacher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TeacherCannotVote.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TeacherCannotVote.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UserActivities.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserActivities.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UsernameAlreadyTakenException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UsernameAlreadyTakenException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Vote.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Vote.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.java" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -14,13 +40,65 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="27aAvWwBqVwqjzSwGcRte2sDjpW" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="settings.editor.selected.configurable" value="build.tools" />
+  </component>
+  <component name="RecentsManager">
+    <key name="ExtractSuperBase.RECENT_KEYS">
+      <recent name="" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.RunLocalTest$TestCase.testExpectedOutput">
+    <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="1.8" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="Test" />
+      <module name="Learning_Management_System_059" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserActivities" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="UserActivities" />
+      <module name="Learning_Management_System_059" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RunLocalTest$TestCase.testExpectedOutput" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Learning_Management_System_059" />
+      <option name="PACKAGE_NAME" value="RunLocalTest" />
+      <option name="MAIN_CLASS_NAME" value="RunLocalTest$TestCase" />
+      <option name="METHOD_NAME" value="testExpectedOutput" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.Test" />
+      <item itemvalue="Application.UserActivities" />
+      <item itemvalue="JUnit.RunLocalTest$TestCase.testExpectedOutput" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.RunLocalTest$TestCase.testExpectedOutput" />
+        <item itemvalue="Application.UserActivities" />
+        <item itemvalue="Application.Test" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -31,6 +109,358 @@
       <option name="presentableId" value="Default" />
       <updated>1649548055923</updated>
     </task>
+    <task id="LOCAL-00001" summary="Course class completed">
+      <created>1649571409571</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1649571409571</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Renamed and create local data functions">
+      <created>1649571443149</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1649571443149</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Added synchronized reference object for potentially multiple users">
+      <created>1649571515817</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1649571515817</updated>
+    </task>
+    <task id="LOCAL-00004" summary="update the exception description">
+      <created>1649571535753</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1649571535753</updated>
+    </task>
+    <task id="LOCAL-00005" summary="implemented login() and courseActivities()&#10;Created procedure text description&#10;created structure of run()">
+      <created>1649571649668</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1649571649668</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Created class to help store courses into file&#10;Specifically, it is a class holding an ArrayList of Course. Each time we log out, we are trying to store an object of CourseList so that we can import it back when initializing the program. Subsequently, we can assign the instance imported from file to DataManager as a static instance">
+      <created>1649618685537</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1649618685537</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Updated method to save local files">
+      <created>1649618723332</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1649618723332</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Bug fixed&#10;As the Object used to synchronized does not have Serializable implemented, ObjectOutputStream.writeObject() will throw exception. Consequently, another type of Object is used to synchronize all functions.">
+      <created>1649619001425</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1649619001425</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Created forumActivities() and improved structure for run()">
+      <created>1649619091781</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1649619091781</updated>
+    </task>
+    <task id="LOCAL-00010" summary="abstract vote() method modified">
+      <created>1649624659516</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1649624659516</updated>
+    </task>
+    <task id="LOCAL-00011" summary="TeacherCannotVote Exception created">
+      <created>1649624674786</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1649624674786</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Completed courseActivities()">
+      <created>1649626277061</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1649626277061</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Implement vote()">
+      <created>1649628322262</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1649628322262</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Competed forumActivities()">
+      <created>1649628365180</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1649628365180</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Bug Fixed&#10;wrong body function called. Course.editForum">
+      <created>1649631024838</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1649631024838</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Vote implemented">
+      <created>1649631047313</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1649631047313</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Function Logic Improved, Rewrite equals function">
+      <created>1649631173725</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1649631173725</updated>
+    </task>
+    <task id="LOCAL-00018" summary="toString() added">
+      <created>1649631309677</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1649631309677</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Vote feature added">
+      <created>1649631336893</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1649631336893</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Vote class created">
+      <created>1649631372315</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1649631372315</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Exception added to vote()">
+      <created>1649631407786</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1649631407786</updated>
+    </task>
+    <task id="LOCAL-00022" summary="New Exception created&#10;throw when the student already voted in this forum">
+      <created>1649645443594</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1649645443594</updated>
+    </task>
+    <task id="LOCAL-00023" summary="New feature created&#10;Add owner instance to DiscussionPost&#10;Add function to verify if the user already voted in this forum">
+      <created>1649645520401</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1649645520401</updated>
+    </task>
+    <task id="LOCAL-00024" summary="New function added&#10;Add function to delete and edit the post">
+      <created>1649645566023</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1649645566023</updated>
+    </task>
+    <task id="LOCAL-00025" summary="New function added&#10;Add function to delete and edit the post">
+      <created>1649645594108</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1649645594108</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Implement postActivities">
+      <created>1649645677328</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1649645677328</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Implement to Serializable&#10;As we want to save the owner of the votes, users has to implement Serializable to let ObjectOutputStream save the instance">
+      <created>1649647697005</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1649647697005</updated>
+    </task>
+    <task id="LOCAL-00028" summary="Complete class&#10;Deleted replyActivities&#10;Improved structure of run() function&#10;Improved postActivities() function">
+      <created>1649647770653</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1649647770653</updated>
+    </task>
+    <task id="LOCAL-00029" summary="Unused test class deleted">
+      <created>1649647808837</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1649647808837</updated>
+    </task>
+    <task id="LOCAL-00030" summary="Unused test class deleted">
+      <created>1649647817923</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1649647817923</updated>
+    </task>
+    <task id="LOCAL-00031" summary="Bug fixed">
+      <created>1649649571887</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1649649571887</updated>
+    </task>
+    <task id="LOCAL-00032" summary="Updated forum, post, course display method">
+      <created>1649651088180</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1649651088180</updated>
+    </task>
+    <task id="LOCAL-00033" summary="Bug Fixed">
+      <created>1649651114781</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1649651114781</updated>
+    </task>
+    <task id="LOCAL-00034" summary="Reverse the compareTo() method so with respect to sort the post">
+      <created>1649651151005</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1649651151005</updated>
+    </task>
+    <task id="LOCAL-00035" summary="Project completed">
+      <created>1649654548172</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1649654548172</updated>
+    </task>
+    <task id="LOCAL-00036" summary="Test Data updated">
+      <created>1649686615477</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1649686615477</updated>
+    </task>
+    <task id="LOCAL-00037" summary="Update toString method">
+      <created>1649686639340</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1649686639340</updated>
+    </task>
+    <task id="LOCAL-00038" summary="Update toString method">
+      <created>1649686646497</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1649686646497</updated>
+    </task>
+    <task id="LOCAL-00039" summary="Improved display of votes">
+      <created>1649687586825</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1649687586825</updated>
+    </task>
+    <task id="LOCAL-00040" summary="Finalized Project">
+      <created>1649695531614</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1649695531614</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ID_WIDTH">
+                <map>
+                  <entry key="Table.Default.Author.ColumnIdWidth" value="95" />
+                  <entry key="Table.Default.Date.ColumnIdWidth" value="108" />
+                  <entry key="Table.Space.CommitStatus.ColumnIdWidth" value="85" />
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Competed forumActivities()" />
+    <MESSAGE value="Bug Fixed&#10;wrong body function called. Course.editForum" />
+    <MESSAGE value="Vote implemented" />
+    <MESSAGE value="Function Logic Improved" />
+    <MESSAGE value="Function Logic Improved, Rewrite equals function" />
+    <MESSAGE value="toString() added" />
+    <MESSAGE value="Vote feature added" />
+    <MESSAGE value="Vote class created" />
+    <MESSAGE value="Exception added to vote()" />
+    <MESSAGE value="New Exception created&#10;throw when the student already voted in this forum" />
+    <MESSAGE value="New feature created&#10;Add owner instance to DiscussionPost&#10;Add function to verify if the user already voted in this forum" />
+    <MESSAGE value="New function added&#10;Add function to delete and edit the post" />
+    <MESSAGE value="Implement postActivities" />
+    <MESSAGE value="Implement to Serializable&#10;As we want to save the owner of the votes, users has to implement Serializable to let ObjectOutputStream save the instance" />
+    <MESSAGE value="Complete class&#10;Deleted replyActivities&#10;Improved structure of run() function&#10;Improved postActivities() function" />
+    <MESSAGE value="Unused test class deleted" />
+    <MESSAGE value="Bug fixed" />
+    <MESSAGE value="Updated forum, post, course display method" />
+    <MESSAGE value="Bug Fixed" />
+    <MESSAGE value="Reverse the compareTo() method so with respect to sort the post" />
+    <MESSAGE value="Project completed" />
+    <MESSAGE value="Test Data updated" />
+    <MESSAGE value="Improved format menu for UserActivities" />
+    <MESSAGE value="Improved display of votes" />
+    <MESSAGE value="Finalized Project" />
+    <option name="LAST_COMMIT_MESSAGE" value="Finalized Project" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NullPointerException" package="java.lang" />
+          <option name="timeStamp" value="5" />
+        </breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/UserActivities.java</url>
+          <line>173</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="DataManager.courses" language="JAVA" />
+      </configuration>
+    </watches-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Learning_Management_System_059$UserActivities.ic" NAME="UserActivities Coverage Results" MODIFIED="1649609720649" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

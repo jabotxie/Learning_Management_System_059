@@ -1,7 +1,7 @@
 /**
  * Project 4 -- Learning Management System
  *
- * Thrown when the username is already taken
+ * Thrown when a teacher tries to vote
  *
  * <p>Purdue University -- CS18000 -- Spring 2021</p>
  *
@@ -9,9 +9,9 @@
  *
  * @version April 11, 2022
  */
-public class UsernameAlreadyTakenException extends Exception {
+public class TeacherCannotVote extends Exception {
     @Override
     public String toString() {
-        return "The username is already taken. Please try another one.";
+        return "Only students can vote. You, as a teacher, can sort the posts based on students' votes";
     }
 }

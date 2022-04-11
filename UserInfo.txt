@@ -1,6 +1,0 @@
-username
-password
-T
-username1
-passwor
-S

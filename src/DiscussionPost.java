@@ -17,38 +17,41 @@ import java.util.Objects;
  */
 public class DiscussionPost implements Comparable<DiscussionPost>, Serializable {
 
-    private ArrayList<DiscussionPost> replies;
+    public final Date repliesSync = new Date(System.currentTimeMillis());
+    private User owner;
+    ArrayList<DiscussionPost> replies;
+    ArrayList<Vote> votes;
     private String postContent;
     Date postTime;
 
-    public DiscussionPost(String postContent, long postTime) {
+    public DiscussionPost(User owner, String postContent, long postTime) {
+        this.owner = owner;
         replies = new ArrayList<>();
         this.postContent = postContent;
         this.postTime = new Date(postTime);
+        this.votes = new ArrayList<>();
     }
 
-    public DiscussionPost(String postContent, Date postTime) {
+    public DiscussionPost(User owner, String postContent, Date postTime) {
+        this.owner = owner;
         replies = new ArrayList<>();
         this.postContent = postContent;
         this.postTime = postTime;
+        this.votes = new ArrayList<>();
     }
 
-    public DiscussionPost(String postContent, long postTime, ArrayList<DiscussionPost> replies) {
-        this.replies = replies;
-        this.postContent = postContent;
-        this.postTime = new Date(postTime);
-    }
+    public DiscussionPost() {
 
-    public DiscussionPost(String postContent, Date postTime, ArrayList<DiscussionPost> replies) {
-        this.replies = replies;
-        this.postContent = postContent;
-        this.postTime = postTime;
     }
 
 
     public ArrayList<DiscussionPost> getReplies(boolean isSorted) {
         if (isSorted) Collections.sort(replies);
         return replies;
+    }
+
+    public User getOwner() {
+        return owner;
     }
 
     public String getPostContent() {
@@ -63,20 +66,31 @@ public class DiscussionPost implements Comparable<DiscussionPost>, Serializable 
         replies.add(reply);
     }
 
-    public void deleteReply(DiscussionPost deletingReply) throws NoPermissionException, NoSuchTargetException {
-        if (Teacher.class == UserActivities.currentUser.getClass()) {
+    public void deleteReply(UserActivities userActivities, DiscussionPost deletingReply) throws NoPermissionException, NoSuchTargetException {
+        if (Teacher.class == userActivities.currentUser.getClass()) {
             if (!replies.remove(deletingReply)) throw new NoSuchTargetException();
         } else {
             throw new NoPermissionException();
         }
     }
 
+    public void addVote(Vote vote) {
+        votes.add(vote);
+    }
+
+    public int getVotesNum() {
+        return votes.size();
+    }
+
+    public ArrayList<Vote> getVotes() {
+        return votes;
+    }
 
     @Override
     public int compareTo(DiscussionPost o) {
-        Long thisPostTime = postTime.getTime();
-        Long anotherPostTime = o.postTime.getTime();
-        return thisPostTime.compareTo(anotherPostTime);
+        Integer voteNum = getVotesNum();
+        Integer anotherVoteNum = o.getVotesNum();
+        return voteNum.compareTo(anotherVoteNum) * (-1);
     }
 
     @Override
@@ -96,17 +110,27 @@ public class DiscussionPost implements Comparable<DiscussionPost>, Serializable 
 
         StringBuilder sb = new StringBuilder();
 
-        sb.append("Post Time: ").append(postTime).append('\n');
-        sb.append("Content: ").append(postContent);
+        sb.append("Post Time: ").append(postTime);
+        if (votes.size() != 0) {
+            sb.append('\n').append("Votes: ").append(getVotesNum());
+        }
+        sb.append('\n').append(owner).append(": ").append(postContent);
+
+
 
         if (replies.size() != 0) {
-            sb.append('\n').append("Replies: ");
-            for (int i = 0; i < replies.size(); i++) {
-                sb.append('\n').append(i + 1).append(". \n").append(replies.get(i));
+            sb.append('\n').append("    Replies: ");
+            for (DiscussionPost reply : replies) {
+                sb.append('\n').append("    ").append(reply.getOwner()).
+                        append(": ").append(reply.getPostContent());
             }
         }
 
         return sb.toString();
 
+    }
+
+    public void setPostContent(String postContent) {
+        this.postContent = postContent;
     }
 }

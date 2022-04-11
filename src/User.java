@@ -1,29 +1,30 @@
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
+import java.io.*;
+import java.util.Date;
 import java.util.Objects;
 
-public abstract class User {
-    public static ArrayList<DiscussionForum> forums;
-    public static String forumFileName = "";
-    private static boolean isForumInitialized = false;
-    public final Object o = new Object();
+/**
+ * Project 4 -- Learning Management System
+ *
+ * This class represents a user
+ *
+ * <p>Purdue University -- CS18000 -- Spring 2021</p>
+ *
+ * @author Jia Xie, Shreyash, Kundana, Garv
+ *
+ * @version April 11, 2022
+ */
+public abstract class User implements Serializable {
+
+    public final Date o = new Date();
     private String username;
     private String password;
 
     public User(String username, String password) {
-        forums = new ArrayList<>();
+
         this.username = username;
         this.password = password;
     }
 
-    public User(String username, String password,ArrayList<DiscussionForum> forums) {
-        this.username = username;
-        this.password = password;
-        User.forums = forums;
-    }
 
     public String getUsername() {
         return username;
@@ -41,19 +42,22 @@ public abstract class User {
         this.password = password;
     }
 
-    public static ArrayList<String> getImportedFile(String fileName) throws FileNotFoundException {
+    public static String getImportedFile(String fileName) throws FileNotFoundException {
         BufferedReader bf = new BufferedReader(new FileReader(fileName));
-        ArrayList<String> lines = new ArrayList<>();
+        StringBuilder sb = new StringBuilder();
         try {
             String line = bf.readLine();
             while (line != null) {
-                lines.add(line);
+                sb.append(line);
                 line = bf.readLine();
+                if (line != null) {
+                    sb.append('\n');
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return lines;
+        return sb.toString();
     }
 
     @Override
@@ -71,31 +75,27 @@ public abstract class User {
 
     public abstract void addPost(DiscussionForum forum, DiscussionPost post);
 
-    public abstract void addReply(DiscussionPost post, DiscussionPost reply) throws NoSuchTargetException;
+    public abstract void deletePost(DiscussionForum forum, DiscussionPost post) throws NoPermissionException;
 
-    public abstract void createForum(String topic) throws NoPermissionException;
+    public abstract void editPost(DiscussionPost post, String content) throws NoPermissionException;
 
-    public abstract void deleteForum(DiscussionForum forum) throws NoPermissionException, NoSuchTargetException;
+    public abstract void addReply(DiscussionPost post, DiscussionPost reply);
 
-    public abstract void editForum(DiscussionForum forum, String topic) throws NoPermissionException, NoSuchTargetException;
+    public abstract void createForum(Course course, String topic) throws NoPermissionException;
+
+    public abstract void deleteForum(Course course, DiscussionForum forum) throws NoPermissionException;
+
+    public abstract void editForum(Course course, DiscussionForum forum, String topic) throws NoPermissionException;
+
+    public abstract void createCourse(String courseTitle) throws NoPermissionException;
+
+    public abstract void deleteCourse(Course course) throws NoPermissionException;
+
+    public abstract void editCourse(Course course, String courseTitle) throws NoPermissionException;
 
     public String toString() {
-        String sb = getClass().toString() + '\n' +
-                "Username: " + username + '\n' +
-                "Password: " + password + '\n';
-        return sb;
+        return getClass() == Teacher.class ? "Teacher " : "Student " + username;
     }
-
-
-    public static void initForum() {
-        if (!isForumInitialized) {
-            ArrayList<DiscussionForum> forums = new ArrayList<>();
-            //TODO: implement method to read forum from local file
-            User.forums = forums;
-        }
-    }
-
-    public static void saveForum() {
-        //TODO: implement method to save forums to local file
-    }
+    
+    public abstract void vote(DiscussionForum forum, DiscussionPost post) throws TeacherCannotVote, AlreadyVotedException;
 }

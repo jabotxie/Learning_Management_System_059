@@ -1,6 +1,9 @@
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
+import java.util.Objects;
+
 /**
  * Project 4 -- Learning Management System
  *
@@ -8,7 +11,7 @@ import java.util.Collections;
  * that can be created and edited by the users i.e Teachers
  * and Students
  *
- * @author Nandana, Shreyash, Jason, Garv , lab sec L14
+ * @author Kundana, Shreyash, Jia Xie, Garv , lab sec L14
  *
  * @version April 9, 2022
  *
@@ -16,7 +19,10 @@ import java.util.Collections;
 public class DiscussionForum implements Serializable {
 
     private String topic;
-    private ArrayList<DiscussionPost> posts;
+    ArrayList<DiscussionPost> posts;
+    public final Date postsSync = new Date(System.currentTimeMillis());
+
+    public DiscussionForum() {}
 
     public DiscussionForum(String topic, ArrayList<DiscussionPost> posts) {
         this.topic = topic;
@@ -36,20 +42,39 @@ public class DiscussionForum implements Serializable {
         this.topic = topic;
     }
 
-    public ArrayList<DiscussionPost> getPosts(boolean isSorted) {
-        if (isSorted) Collections.sort(posts);
+    public void displayContentList() {
+        for (int i = 0; i < posts.size(); i++) {
+            DiscussionPost post = posts.get(i);
+            System.out.println((i + 1) + ". " + post.getPostContent());
+            if (i != posts.size() - 1) System.out.println();
+        }
+    }
+
+    public ArrayList<DiscussionPost> getPosts() {
+        Collections.sort(posts);
         return posts;
 
     }
-
+    public int getPostsNum() {
+        return posts.size();
+    }
     public void addPost(DiscussionPost post) {
         posts.add(post);
     }
 
-    public void deletePost(DiscussionPost post) throws NoSuchTargetException {
-        if (!posts.remove(post)) throw new NoSuchTargetException();
+    public void deletePost(DiscussionPost post){
+        posts.remove(post);
     }
 
+    public boolean isUserVoted(User user) {
+        for (DiscussionPost post: posts) {
+            ArrayList<Vote> votes = post.getVotes();
+            for (Vote vote : votes) {
+                if (vote.getStudent().equals(user)) return true;
+            }
+        }
+        return false;
+    }
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Topic: ").append(topic);
@@ -59,5 +84,18 @@ public class DiscussionForum implements Serializable {
             }
         }
         return sb.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        DiscussionForum forum = (DiscussionForum) o;
+        return Objects.equals(topic, forum.topic);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(topic);
     }
 }
