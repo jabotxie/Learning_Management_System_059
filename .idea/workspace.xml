@@ -4,19 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d28170b6-672d-4479-8927-b4c27361f032" name="Changes" comment="Improved display of votes">
-      <change afterPath="$PROJECT_DIR$/src/RunLocalTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CoursesInfo.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CoursesInfo.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Learning_Management_System_059.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Learning_Management_System_059.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserInfo.txt" beforeDir="false" afterPath="$PROJECT_DIR$/UserInfo.txt" afterDir="false" />
+    <list default="true" id="d28170b6-672d-4479-8927-b4c27361f032" name="Changes" comment="Finalized Project">
+      <change beforePath="$PROJECT_DIR$/src/AccountInfoNotMatchException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AccountInfoNotMatchException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AlreadyVotedException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AlreadyVotedException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Course.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Course.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CourseList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CourseList.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DataManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DiscussionForum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DiscussionForum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DiscussionPost.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DiscussionPost.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/LoginUnsuccessfulException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AccountInfoNotMatchException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TestCase.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/NoPermissionException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/NoPermissionException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/NoSuchTargetException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/NoSuchTargetException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Student.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Teacher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Teacher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TeacherCannotVote.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TeacherCannotVote.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/UserActivities.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserActivities.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UsernameAlreadyTakenException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UsernameAlreadyTakenException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Vote.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Vote.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -379,7 +382,14 @@
       <option name="project" value="LOCAL" />
       <updated>1649687586825</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="Finalized Project">
+      <created>1649695531614</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1649695531614</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -403,7 +413,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Implement vote()" />
     <MESSAGE value="Competed forumActivities()" />
     <MESSAGE value="Bug Fixed&#10;wrong body function called. Course.editForum" />
     <MESSAGE value="Vote implemented" />
@@ -428,7 +437,8 @@
     <MESSAGE value="Test Data updated" />
     <MESSAGE value="Improved format menu for UserActivities" />
     <MESSAGE value="Improved display of votes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Improved display of votes" />
+    <MESSAGE value="Finalized Project" />
+    <option name="LAST_COMMIT_MESSAGE" value="Finalized Project" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -439,7 +449,7 @@
         </breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/UserActivities.java</url>
-          <line>165</line>
+          <line>173</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
       </breakpoints>

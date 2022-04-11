@@ -1,10 +1,18 @@
-import com.sun.org.apache.bcel.internal.generic.CPInstruction;
-
 import java.io.*;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
 
+/**
+ * Project 4 -- Learning Management System
+ *
+ * This class represents a user
+ *
+ * <p>Purdue University -- CS18000 -- Spring 2021</p>
+ *
+ * @author Jia Xie, Shreyash, Kundana, Garv
+ *
+ * @version April 11, 2022
+ */
 public abstract class User implements Serializable {
 
     public final Date o = new Date();

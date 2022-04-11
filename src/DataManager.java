@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /**
+ * Project 4 -- Learning Management System
+ *
  * A class that helps to read and store the user information in a format of
  * <p>
  * ************************************
@@ -12,6 +14,12 @@ import java.util.Date;
  * password
  * User Type(T for Teacher, S for Student)
  * ************************************
+ *
+ * <p>Purdue University -- CS18000 -- Spring 2021</p>
+ *
+ * @author Jia Xie, Shreyash, Kundana, Garv
+ *
+ * @version April 11, 2022
  */
 
 public class DataManager implements Serializable {
