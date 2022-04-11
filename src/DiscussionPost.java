@@ -1,20 +1,21 @@
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.Objects;
+
 /**
  * Project 4 -- Learning Management System
- *
+ * <p>
  * This class contains methods for the Discussion Posts
  * that can be created and edited by the users i.e Teachers
  * and Students
  *
+ * <p>Purdue University -- CS18000 -- Spring 2022</p>
+ *
  * @author Nandana, Shreyash, Jason, Garv , lab sec L14
- *
  * @version April 9, 2022
- *
  */
+
 public class DiscussionPost implements Comparable<DiscussionPost>, Serializable {
 
     public final Date repliesSync = new Date(System.currentTimeMillis());
@@ -45,11 +46,6 @@ public class DiscussionPost implements Comparable<DiscussionPost>, Serializable 
     }
 
 
-    public ArrayList<DiscussionPost> getReplies(boolean isSorted) {
-        if (isSorted) Collections.sort(replies);
-        return replies;
-    }
-
     public User getOwner() {
         return owner;
     }
@@ -58,20 +54,8 @@ public class DiscussionPost implements Comparable<DiscussionPost>, Serializable 
         return postContent;
     }
 
-    public Date getPostTime() {
-        return postTime;
-    }
-
     public void addReply(DiscussionPost reply) {
         replies.add(reply);
-    }
-
-    public void deleteReply(UserActivities userActivities, DiscussionPost deletingReply) throws NoPermissionException, NoSuchTargetException {
-        if (Teacher.class == userActivities.currentUser.getClass()) {
-            if (!replies.remove(deletingReply)) throw new NoSuchTargetException();
-        } else {
-            throw new NoPermissionException();
-        }
     }
 
     public void addVote(Vote vote) {
@@ -117,7 +101,6 @@ public class DiscussionPost implements Comparable<DiscussionPost>, Serializable 
         sb.append('\n').append(owner).append(": ").append(postContent);
 
 
-
         if (replies.size() != 0) {
             sb.append('\n').append("    Replies: ");
             for (DiscussionPost reply : replies) {
@@ -130,7 +113,4 @@ public class DiscussionPost implements Comparable<DiscussionPost>, Serializable 
 
     }
 
-    public void setPostContent(String postContent) {
-        this.postContent = postContent;
-    }
 }

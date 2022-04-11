@@ -5,10 +5,10 @@ import java.util.Scanner;
 
 /**
  * Project 4 -- Learning Management System
- *
+ * <p>
  * This is the major class that holds all the operations and menus
  *
- * <p>Purdue University -- CS18000 -- Spring 2021</p>
+ * <p>Purdue University -- CS18000 -- Spring 2022</p>
  *
  * @author Jia Xie, Shreyash, Kundana, Garv
  *
@@ -106,38 +106,7 @@ public class UserActivities {
      */
 
     public void run() {
-        //TODO: implement user behavior
 
-//        JFrame frame = new JFrame("Learning Management System");
-//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        frame.setSize(300,300);
-//
-//        // Adds Button to content pane of frame
-//
-//
-//        JTextField userNameTF = new JTextField("Username",10);
-//        JTextField passwordTF = new JTextField("password", 10);
-//        JButton loginButton = new JButton("Log In");
-//
-//        JPanel panel = new JPanel();
-//        panel.add(userNameTF);
-//        panel.add(passwordTF);
-//        panel.add(loginButton);
-//        frame.getContentPane().add(panel);
-//        frame.setVisible(true);
-//
-//        loginButton.addActionListener(new AbstractAction() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//
-//                String username = userNameTF.getText();
-//                String password = passwordTF.getText();
-//
-//                System.out.println(username);
-//                System.out.println(password);
-//
-//            }
-//        });
         String WELCOME = "Welcome to the Learning Management System";
         System.out.println(WELCOME);
         if (login()) {
@@ -176,7 +145,7 @@ public class UserActivities {
 
     private boolean login() {
         final String MENU = LINE + "Selection an option\n1. Log in\n2. Create an account\n3. Delete an account" +
-                 "\n4. Quit the system";
+                "\n4. Quit the system";
         final String ACCOUNT_TYPE = LINE + "What type of account would you like to create?\n1. Teacher\n2. Student";
         final String ENTER_USERNAME = LINE + "Please enter the username: ";
         final String ENTER_USERNAME_DELETE = LINE + "Please enter the username you want to delete: ";
@@ -284,7 +253,6 @@ public class UserActivities {
         final String TO_EDIT = " to edit:";
         final String TO_ENTER = " to enter:";
 
-        final String NO_PERMISSION = "You don't have permission to proceed the action.";
         final String UPDATING_TITLE = "Please enter the updating course title: ";
         final String IMPORT_UNSUCCESSFUL = "The import process is not successful!";
         final String RETRY = "Do you want to try again?\n1. Yes\n2. No";
@@ -523,7 +491,12 @@ public class UserActivities {
 
         return forumSelection;
     }
-
+    
+    /* 
+    * posActivities() is the method that dislpays the menu to the user(teacher/student) to
+    * perform activities on the post.
+    */
+    
     private int postActivities(DiscussionForum forum) {
 
         StringBuilder header = new StringBuilder();
@@ -662,55 +635,6 @@ public class UserActivities {
         return postSelection;
     }
 
-//    private int replyActivities(DiscussionPost post) {
-//
-//        final String MENU = "Do you want to\n1. Add a reply\n2. Vote for this post\n3.Back to last menu";
-//        final String ENTER_METHOD = "How do you like to enter the title:\n1. Command line\n" +
-//                "2. Import through text file";
-//        final String REPLY_CONTENT = "Please enter the content of your reply:";
-//        final String FILE_NAME = "Please enter the files name: ";
-//
-//        final String NO_PERMISSION = "You don't have permission to proceed the action.";
-//        final String IMPORT_UNSUCCESSFUL = "The import process is not successful!";
-//        final String RETRY = "Do you want to try again?\n1. Yes\n2. No";
-//
-//
-//        int returnIndex = 0;
-//
-//        System.out.println(MENU);
-//        int menuChoice = getValidInt(3);
-//        switch (menuChoice) {
-//            case 1:
-//                System.out.println(ENTER_METHOD);
-//                int methodChoice = getValidInt(2);
-//                String replyContent;
-//                if (methodChoice == 1) {
-//                    System.out.println(REPLY_CONTENT);
-//                    replyContent = getStringInput();
-//                    currentUser.addReply(post,
-//                            new DiscussionPost(currentUser, replyContent, System.currentTimeMillis()));
-//
-//                } else {
-//                    boolean isProcessFinished = false;
-//                    do {
-//                        try {
-//                            System.out.println(FILE_NAME);
-//                            String fileName = getStringInput();
-//                            replyContent = User.getImportedFile(fileName);
-//                            currentUser.addReply(post,
-//                                    new DiscussionPost(currentUser, replyContent, System.currentTimeMillis()));
-//                            isProcessFinished = true;
-//                        } catch (FileNotFoundException e) {
-//                            System.out.println(IMPORT_UNSUCCESSFUL);
-//                            System.out.println(RETRY);
-//                            int retryChoice = getValidInt(2);
-//                            if (retryChoice == 2) break;
-//                        }
-//                    } while (!isProcessFinished);
-//                }
-//        }
-//        return -1;
-//    }
 
     private void displayCoursesTitles() {
         for (int i = 0; i < DataManager.courses.size(); i++) {

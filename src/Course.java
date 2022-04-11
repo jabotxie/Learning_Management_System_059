@@ -5,12 +5,12 @@ import java.util.Objects;
 
 /**
  * Project 4 -- Learning Management System
- *
+ * <p>
  * A class that represents a course.
  * A course is identified by its title
  * There are forums in a course
  *
- * <p>Purdue University -- CS18000 -- Spring 2021</p>
+ * <p>Purdue University -- CS18000 -- Spring 2022</p>
  *
  * @author Jia Xie, Shreyash, Kundana, Garv
  *

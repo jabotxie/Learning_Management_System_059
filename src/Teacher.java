@@ -1,9 +1,9 @@
 /**
  * Project 4 -- Learning Management System
- *
+ * <p>
  * This class represents a teacher. It is extended from User
  *
- * <p>Purdue University -- CS18000 -- Spring 2021</p>
+ * <p>Purdue University -- CS18000 -- Spring 2022</p>
  *
  * @author Jia Xie, Shreyash, Kundana, Garv
  *
@@ -25,11 +25,6 @@ public class Teacher extends User {
     @Override
     public void deletePost(DiscussionForum forum, DiscussionPost post) {
         forum.deletePost(post);
-    }
-
-    @Override
-    public void editPost(DiscussionPost post, String content) {
-        post.setPostContent(content);
     }
 
     @Override

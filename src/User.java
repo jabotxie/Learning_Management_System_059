@@ -1,13 +1,12 @@
 import java.io.*;
-import java.util.Date;
 import java.util.Objects;
 
 /**
  * Project 4 -- Learning Management System
- *
+ * <p>
  * This class represents a user
  *
- * <p>Purdue University -- CS18000 -- Spring 2021</p>
+ * <p>Purdue University -- CS18000 -- Spring 2022</p>
  *
  * @author Jia Xie, Shreyash, Kundana, Garv
  *
@@ -15,9 +14,8 @@ import java.util.Objects;
  */
 public abstract class User implements Serializable {
 
-    public final Date o = new Date();
-    private String username;
-    private String password;
+    private final String username;
+    private final String password;
 
     public User(String username, String password) {
 
@@ -30,16 +28,8 @@ public abstract class User implements Serializable {
         return username;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     public String getPassword() {
         return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public static String getImportedFile(String fileName) throws FileNotFoundException {
@@ -77,8 +67,6 @@ public abstract class User implements Serializable {
 
     public abstract void deletePost(DiscussionForum forum, DiscussionPost post) throws NoPermissionException;
 
-    public abstract void editPost(DiscussionPost post, String content) throws NoPermissionException;
-
     public abstract void addReply(DiscussionPost post, DiscussionPost reply);
 
     public abstract void createForum(Course course, String topic) throws NoPermissionException;
@@ -96,6 +84,6 @@ public abstract class User implements Serializable {
     public String toString() {
         return getClass() == Teacher.class ? "Teacher " : "Student " + username;
     }
-    
+
     public abstract void vote(DiscussionForum forum, DiscussionPost post) throws TeacherCannotVote, AlreadyVotedException;
 }
