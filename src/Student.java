@@ -1,12 +1,11 @@
 /**
  * Project 4 -- Learning Management System
- *
+ * <p>
  * A student class that represents a student. It is extended from User
  *
  * <p>Purdue University -- CS18000 -- Spring 2021</p>
  *
  * @author Jia Xie, Shreyash, Kundana, Garv
- *
  * @version April 11, 2022
  */
 public class Student extends User {
@@ -70,7 +69,7 @@ public class Student extends User {
     }
 
     @Override
-    public void vote(DiscussionForum forum, DiscussionPost post) throws AlreadyVotedException{
+    public void vote(DiscussionForum forum, DiscussionPost post) throws AlreadyVotedException {
         if (forum.isUserVoted(this)) throw new AlreadyVotedException();
         post.addVote(new Vote(this));
     }

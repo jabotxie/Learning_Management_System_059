@@ -33,15 +33,15 @@ public class DiscussionForum implements Serializable {
         this.topic = topic;
         this.posts = new ArrayList<>();
     }
-
+    //getter method to return topic string
     public String getTopic() {
         return topic;
     }
-
+    //setter method to return topic string
     public void setTopic(String topic) {
         this.topic = topic;
     }
-
+    //method to display list of discussion posts
     public void displayContentList() {
         for (int i = 0; i < posts.size(); i++) {
             DiscussionPost post = posts.get(i);
@@ -49,15 +49,17 @@ public class DiscussionForum implements Serializable {
             if (i != posts.size() - 1) System.out.println();
         }
     }
-
+    //getter method for discussion posts
     public ArrayList<DiscussionPost> getPosts() {
         Collections.sort(posts);
         return posts;
 
     }
+    //getter method for number of posts
     public int getPostsNum() {
         return posts.size();
     }
+    //getter method
     public void addPost(DiscussionPost post) {
         posts.add(post);
     }

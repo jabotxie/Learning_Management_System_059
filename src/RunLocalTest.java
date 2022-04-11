@@ -18,7 +18,6 @@ import static org.junit.Assert.*;
  * <p>Purdue University -- CS18000 -- Spring 2021</p>
  *
  * @author Jia Xie, Shreyash, Kundana, Garv
- *
  * @version April 11, 2022
  */
 public class RunLocalTest {
@@ -133,7 +132,6 @@ public class RunLocalTest {
             }
             return command.toString();
         }
-
 
 
     }

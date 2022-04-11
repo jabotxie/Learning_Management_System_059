@@ -5,13 +5,12 @@ import java.util.Scanner;
 
 /**
  * Project 4 -- Learning Management System
- *
+ * <p>
  * This is the major class that holds all the operations and menus
  *
  * <p>Purdue University -- CS18000 -- Spring 2021</p>
  *
  * @author Jia Xie, Shreyash, Kundana, Garv
- *
  * @version April 11, 2022
  */
 public class UserActivities {
@@ -176,7 +175,7 @@ public class UserActivities {
 
     private boolean login() {
         final String MENU = LINE + "Selection an option\n1. Log in\n2. Create an account\n3. Delete an account" +
-                 "\n4. Quit the system";
+                "\n4. Quit the system";
         final String ACCOUNT_TYPE = LINE + "What type of account would you like to create?\n1. Teacher\n2. Student";
         final String ENTER_USERNAME = LINE + "Please enter the username: ";
         final String ENTER_USERNAME_DELETE = LINE + "Please enter the username you want to delete: ";

@@ -4,13 +4,12 @@ import java.util.Objects;
 
 /**
  * Project 4 -- Learning Management System
- *
+ * <p>
  * This class represents a user
  *
  * <p>Purdue University -- CS18000 -- Spring 2021</p>
  *
  * @author Jia Xie, Shreyash, Kundana, Garv
- *
  * @version April 11, 2022
  */
 public abstract class User implements Serializable {
@@ -96,6 +95,6 @@ public abstract class User implements Serializable {
     public String toString() {
         return getClass() == Teacher.class ? "Teacher " : "Student " + username;
     }
-    
+
     public abstract void vote(DiscussionForum forum, DiscussionPost post) throws TeacherCannotVote, AlreadyVotedException;
 }

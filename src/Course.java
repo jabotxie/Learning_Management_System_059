@@ -5,7 +5,7 @@ import java.util.Objects;
 
 /**
  * Project 4 -- Learning Management System
- *
+ * <p>
  * A class that represents a course.
  * A course is identified by its title
  * There are forums in a course
@@ -13,7 +13,6 @@ import java.util.Objects;
  * <p>Purdue University -- CS18000 -- Spring 2021</p>
  *
  * @author Jia Xie, Shreyash, Kundana, Garv
- *
  * @version April 11, 2022
  */
 public class Course implements Serializable {

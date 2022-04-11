@@ -1,4 +1,3 @@
-import javafx.geometry.VPos;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -6,7 +5,7 @@ import java.util.Date;
 
 /**
  * Project 4 -- Learning Management System
- *
+ * <p>
  * A class that helps to read and store the user information in a format of
  * <p>
  * ************************************
@@ -18,7 +17,6 @@ import java.util.Date;
  * <p>Purdue University -- CS18000 -- Spring 2021</p>
  *
  * @author Jia Xie, Shreyash, Kundana, Garv
- *
  * @version April 11, 2022
  */
 
@@ -77,7 +75,7 @@ public class DataManager implements Serializable {
         return courseList.getCourses();
     }
 
-    private static void saveCoursesToFile(){
+    private static void saveCoursesToFile() {
         try {
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(coursesInfoFileName));
             DataManager.isDataInitializedFromFile = false;

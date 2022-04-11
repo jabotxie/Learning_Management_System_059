@@ -3,18 +3,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.Objects;
+
 /**
  * Project 4 -- Learning Management System
- *
+ * <p>
  * This class contains methods for the Discussion Posts
  * that can be created and edited by the users i.e Teachers
  * and Students
  *
  * @author Nandana, Shreyash, Jason, Garv , lab sec L14
- *
  * @version April 9, 2022
- *
  */
+
 public class DiscussionPost implements Comparable<DiscussionPost>, Serializable {
 
     public final Date repliesSync = new Date(System.currentTimeMillis());
@@ -115,7 +115,6 @@ public class DiscussionPost implements Comparable<DiscussionPost>, Serializable 
             sb.append('\n').append("Votes: ").append(getVotesNum());
         }
         sb.append('\n').append(owner).append(": ").append(postContent);
-
 
 
         if (replies.size() != 0) {
