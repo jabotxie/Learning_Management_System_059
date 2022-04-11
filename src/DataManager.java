@@ -30,6 +30,7 @@ public class DataManager implements Serializable {
     public static String usersInfoFileName = "UserInfo.txt";
     public static String coursesInfoFileName = "CoursesInfo.txt";
 
+    //method that initializes data upon first run
     public static void initData() {
         synchronized (coursesSync) {
             synchronized (usersSync) {
@@ -54,18 +55,21 @@ public class DataManager implements Serializable {
         }
     }
 
+    //method to save user info and course info to file
     public static void saveData() {
         saveUserInfo();
         saveCoursesToFile();
 
     }
 
+    //method that retrieves course info from file
     private static ArrayList<Course> getCoursesFromFile() throws IOException, ClassNotFoundException {
         ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(coursesInfoFileName));
         CourseList courseList = (CourseList) objectInputStream.readObject();
         return courseList.getCourses();
     }
 
+    //method that saves course info to file
     private static void saveCoursesToFile() {
         try {
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(coursesInfoFileName));
@@ -77,6 +81,7 @@ public class DataManager implements Serializable {
 
     }
 
+    //method that retrieves user info from file
     private static ArrayList<User> getUsersFromFile() throws FileNotFoundException {
 
         BufferedReader bf = new BufferedReader(new FileReader(usersInfoFileName));
@@ -110,6 +115,7 @@ public class DataManager implements Serializable {
         return users;
     }
 
+    //method to save user info to file
     private static void saveUserInfo() {
         synchronized (usersSync) {
 
@@ -130,6 +136,7 @@ public class DataManager implements Serializable {
 
     }
 
+    //method to allow user login
     public static void login(UserActivities userActivities, String username, String password) throws AccountInfoNotMatchException {
         synchronized (usersSync) {
             int i = users.indexOf(new Student(username, password));
@@ -146,6 +153,7 @@ public class DataManager implements Serializable {
 
     }
 
+    //method to create account
     public static void createAccount(UserActivities userActivities, Class<? extends User> c, String username, String password)
             throws UsernameAlreadyTakenException {
         synchronized (usersSync) {
@@ -165,6 +173,7 @@ public class DataManager implements Serializable {
 
     }
 
+    //method to remove account
     public static void deleteAccount(UserActivities userActivities, String username, String password)
             throws AccountInfoNotMatchException {
         synchronized (usersSync) {

@@ -25,22 +25,27 @@ public class Course implements Serializable {
         this.courseTitle = courseTitle;
     }
 
+    //method allows adding post to forum
     public void addForum(DiscussionForum forum) {
         forums.add(forum);
     }
 
+    //method allows editing post in forum
     public void editForum(DiscussionForum discussionForum, String topic) {
         discussionForum.setTopic(topic);
     }
 
+    //method allows deleting a post in the forum
     public void deleteForum(DiscussionForum discussionForum) {
         forums.remove(discussionForum);
     }
 
+    //getter method for course title
     public String getCourseTitle() {
         return courseTitle;
     }
 
+    //setter method for course title
     public void setCourseTitle(String courseTitle) {
         this.courseTitle = courseTitle;
     }
@@ -59,6 +64,7 @@ public class Course implements Serializable {
         return Objects.hash(courseTitle);
     }
 
+    //toString method for course class
     public String toString() {
         StringBuilder sb = new StringBuilder("Course: ").append(courseTitle);
         if (forums != null && forums.size() != 0) {

@@ -23,6 +23,7 @@ public class DiscussionPost implements Comparable<DiscussionPost>, Serializable 
     private String postContent;
     Date postTime;
 
+    //Constructor for DiscussionPost object
     public DiscussionPost(User owner, String postContent, long postTime) {
         this.owner = owner;
         replies = new ArrayList<>();
@@ -31,6 +32,7 @@ public class DiscussionPost implements Comparable<DiscussionPost>, Serializable 
         this.votes = new ArrayList<>();
     }
 
+    //Constructor for DiscussionPost object
     public DiscussionPost(User owner, String postContent, Date postTime) {
         this.owner = owner;
         replies = new ArrayList<>();
@@ -39,31 +41,37 @@ public class DiscussionPost implements Comparable<DiscussionPost>, Serializable 
         this.votes = new ArrayList<>();
     }
 
+    //Constructor for DiscussionPost object
     public DiscussionPost() {
 
     }
 
-
+    //method to retrieve owner of post
     public User getOwner() {
         return owner;
     }
 
+    //getter method for post content
     public String getPostContent() {
         return postContent;
     }
 
+    //method that allows user to add reply to discussion posts
     public void addReply(DiscussionPost reply) {
         replies.add(reply);
     }
 
+    //method that allows users to vote
     public void addVote(Vote vote) {
         votes.add(vote);
     }
 
+    //method to retrieve voting results
     public int getVotesNum() {
         return votes.size();
     }
 
+    //method to retrieve voting results
     public ArrayList<Vote> getVotes() {
         return votes;
     }
@@ -88,6 +96,7 @@ public class DiscussionPost implements Comparable<DiscussionPost>, Serializable 
         return Objects.hash(replies, postContent, postTime);
     }
 
+    //toString method for DiscussionPost class
     public String toString() {
 
         StringBuilder sb = new StringBuilder();

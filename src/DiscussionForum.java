@@ -6,15 +6,13 @@ import java.util.Objects;
 
 /**
  * Project 4 -- Learning Management System
- *
+ * <p>
  * This class contains methods for the Discussion Forum
  * that can be created and edited by the users i.e Teachers
  * and Students
  *
  * @author Kundana, Shreyash, Jia Xie, Garv , lab sec L14
- *
  * @version April 9, 2022
- *
  */
 public class DiscussionForum implements Serializable {
 
@@ -22,7 +20,8 @@ public class DiscussionForum implements Serializable {
     ArrayList<DiscussionPost> posts;
     public final Date postsSync = new Date(System.currentTimeMillis());
 
-    public DiscussionForum() {}
+    public DiscussionForum() {
+    }
 
     public DiscussionForum(String topic, ArrayList<DiscussionPost> posts) {
         this.topic = topic;
@@ -33,14 +32,17 @@ public class DiscussionForum implements Serializable {
         this.topic = topic;
         this.posts = new ArrayList<>();
     }
+
     //getter method to return topic string
     public String getTopic() {
         return topic;
     }
+
     //setter method to return topic string
     public void setTopic(String topic) {
         this.topic = topic;
     }
+
     //method to display list of discussion posts
     public void displayContentList() {
         for (int i = 0; i < posts.size(); i++) {
@@ -49,27 +51,30 @@ public class DiscussionForum implements Serializable {
             if (i != posts.size() - 1) System.out.println();
         }
     }
+
     //getter method for discussion posts
     public ArrayList<DiscussionPost> getPosts() {
         Collections.sort(posts);
         return posts;
 
     }
+
     //getter method for number of posts
     public int getPostsNum() {
         return posts.size();
     }
+
     //getter method
     public void addPost(DiscussionPost post) {
         posts.add(post);
     }
 
-    public void deletePost(DiscussionPost post){
+    public void deletePost(DiscussionPost post) {
         posts.remove(post);
     }
 
     public boolean isUserVoted(User user) {
-        for (DiscussionPost post: posts) {
+        for (DiscussionPost post : posts) {
             ArrayList<Vote> votes = post.getVotes();
             for (Vote vote : votes) {
                 if (vote.getStudent().equals(user)) return true;
@@ -77,12 +82,14 @@ public class DiscussionForum implements Serializable {
         }
         return false;
     }
+
+    //toString method for DiscussionForum class
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Topic: ").append(topic);
         if (posts.size() != 0) {
             for (int i = 0; i < posts.size(); i++) {
-                sb.append("\nPost ").append(i +1).append(". \n").append(posts.get(i));
+                sb.append("\nPost ").append(i + 1).append(". \n").append(posts.get(i));
             }
         }
         return sb.toString();

@@ -611,7 +611,7 @@ public class UserActivities {
             case 5:
                 try {
                     if (forum.isUserVoted(currentUser)) throw new AlreadyVotedException();
-                    if (currentUser.getClass() == Teacher.class) throw new TeacherCannotVote();
+                    if (currentUser.getClass() == Teacher.class) throw new TeacherCannotVoteException();
                     if (forum.getPostsNum() == 0) {
                         System.out.println(NO_POSTS);
                         break;
@@ -620,7 +620,7 @@ public class UserActivities {
                     forum.displayContentList();
                     postSelection = getValidInt(forum.getPostsNum());
                     currentUser.vote(forum, forum.posts.get(postSelection - 1));
-                } catch (AlreadyVotedException | TeacherCannotVote e) {
+                } catch (AlreadyVotedException | TeacherCannotVoteException e) {
                     e.printStackTrace();
                 }
                 break;

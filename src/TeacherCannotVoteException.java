@@ -8,7 +8,7 @@
  * @author Jia Xie, Shreyash, Kundana, Garv
  * @version April 11, 2022
  */
-public class TeacherCannotVote extends Exception {
+public class TeacherCannotVoteException extends Exception {
     @Override
     public String toString() {
         return "Only students can vote. You, as a teacher, can sort the posts based on students' votes";

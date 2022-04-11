@@ -62,27 +62,37 @@ public abstract class User implements Serializable {
         return Objects.hash(username, password);
     }
 
+    //method allows user to add posts
     public abstract void addPost(DiscussionForum forum, DiscussionPost post);
 
+    //method allows user to delete posts
     public abstract void deletePost(DiscussionForum forum, DiscussionPost post) throws NoPermissionException;
 
+    //method allows user to add replies
     public abstract void addReply(DiscussionPost post, DiscussionPost reply);
 
+    //method allows user to create forum
     public abstract void createForum(Course course, String topic) throws NoPermissionException;
 
+    //method allows user to delete forum
     public abstract void deleteForum(Course course, DiscussionForum forum) throws NoPermissionException;
 
+    //method allows user to edit forum
     public abstract void editForum(Course course, DiscussionForum forum, String topic) throws NoPermissionException;
 
+    //method allows user to create course
     public abstract void createCourse(String courseTitle) throws NoPermissionException;
 
+    //method allows user to delete course
     public abstract void deleteCourse(Course course) throws NoPermissionException;
 
+    //method allows user to edit course
     public abstract void editCourse(Course course, String courseTitle) throws NoPermissionException;
 
+    //toString method for user class
     public String toString() {
         return getClass() == Teacher.class ? "Teacher " : "Student " + username;
     }
 
-    public abstract void vote(DiscussionForum forum, DiscussionPost post) throws TeacherCannotVote, AlreadyVotedException;
+    public abstract void vote(DiscussionForum forum, DiscussionPost post) throws TeacherCannotVoteException, AlreadyVotedException;
 }
