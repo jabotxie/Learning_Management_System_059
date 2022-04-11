@@ -10,9 +10,10 @@ import java.util.Objects;
  * A course is identified by its title
  * There are forums in a course
  *
- * <p>Purdue University -- CS18000 -- Spring 2021</p>
+ * <p>Purdue University -- CS18000 -- Spring 2022</p>
  *
  * @author Jia Xie, Shreyash, Kundana, Garv
+ *
  * @version April 11, 2022
  */
 public class Course implements Serializable {
