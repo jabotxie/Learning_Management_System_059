@@ -190,42 +190,6 @@ public class RunLocalTest {
                     "Thanks for using Learning Management System!";
 
 
-
-//                    "Welcome to the Learning Management System\n" +
-//                            "_____________________________________\n" +
-//                            "Selection an option\n" +
-//                            "1. Log in\n" +
-//                            "2. Create an account\n" +
-//                            "3. Delete an account\n" +
-//                            "4. Quit the system" +
-//                            System.lineSeparator() +
-//                            "_____________________________________\n" +
-//                            "Please enter the username: \n" +
-//                            System.lineSeparator() +
-//                            "Please enter the password: \n" +
-//                            System.lineSeparator() +
-//                            "Successfully logged in!\n" +
-//                            "_____________________________________\n" +
-//                            "Please choose an operation\n" +
-//                            "    1. Create a course\n" +
-//                            "    2. Delete a course\n" +
-//                            "    3. Edit a course\n" +
-//                            "    4. Enter a course\n" +
-//                            "    5. Log out\n" +
-//                            System.lineSeparator() +
-//                            "The course list is empty. You have to create a course first." +
-//                            System.lineSeparator() +
-//                            "_____________________________________\n" +
-//                            "Please choose an operation\n" +
-//                            "    1. Create a course\n" +
-//                            "    2. Delete a course\n" +
-//                            "    3. Edit a course\n" +
-//                            "    4. Enter a course\n" +
-//                            "    5. Log out\n" +
-//                            System.lineSeparator() +
-//                            "Thanks for using Learning Management System!";
-
-
             // Runs the program with the input values
             receiveInput(input);
             UserActivities.main(new String[0]);
