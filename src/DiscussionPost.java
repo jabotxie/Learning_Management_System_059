@@ -110,17 +110,18 @@ public class DiscussionPost implements Comparable<DiscussionPost>, Serializable 
 
         StringBuilder sb = new StringBuilder();
 
-        sb.append("Post Time: ").append(postTime).append('\n');
-        sb.append("Content: ").append(postContent);
-
+        sb.append("Post Time: ").append(postTime);
         if (votes.size() != 0) {
             sb.append('\n').append("Votes: ").append(getVotesNum());
         }
+        sb.append('\n').append(postContent);
+
+
 
         if (replies.size() != 0) {
-            sb.append('\n').append("Replies: ");
-            for (int i = 0; i < replies.size(); i++) {
-                sb.append('\n').append(i + 1).append(". \n").append(replies.get(i));
+            sb.append('\n').append("    Replies: ");
+            for (DiscussionPost reply : replies) {
+                sb.append('\n').append("    ").append("- ").append(reply.getPostContent());
             }
         }
 
