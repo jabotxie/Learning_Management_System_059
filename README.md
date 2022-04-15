@@ -4,6 +4,11 @@
 
 In order to compile the project
 
+Our application start at the main() function in UserActivities class, so first of all run main()
+If it’s the first time running this application, namely, there is no data stored in a local file, the application will initialize the instances required for the application. If there are local files storing the data, the program will extract data from the local text file and import it into static instances and store them in DataManager class (A class we created to store and deal with all the data under to earth)
+The menu application begins from now on. By any time during the application, users can choose to quit (or log out if they already logged in). We accomplished this by implementing a 4-level loop in the program.
+
+
 ## Submissions
 
 Project 4 Report - Kundana Nittala
