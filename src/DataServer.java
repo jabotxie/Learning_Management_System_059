@@ -20,7 +20,7 @@ import java.util.Date;
  * @version April 11, 2022
  */
 
-public class DataManager implements Serializable {
+public class DataServer implements Serializable {
 
     public static ArrayList<User> users;
     public static final Date usersSync = new Date(System.currentTimeMillis());
@@ -29,6 +29,10 @@ public class DataManager implements Serializable {
     private static boolean isDataInitializedFromFile = false;
     public static String usersInfoFileName = "UserInfo.txt";
     public static String coursesInfoFileName = "CoursesInfo.txt";
+
+    public static void main(String[] args) {
+        //TODO: Initialize the server
+    }
 
     //method that initializes data upon first run
     public static void initData() {
@@ -73,8 +77,8 @@ public class DataManager implements Serializable {
     private static void saveCoursesToFile() {
         try {
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(coursesInfoFileName));
-            DataManager.isDataInitializedFromFile = false;
-            objectOutputStream.writeObject(new CourseList(DataManager.courses));
+            DataServer.isDataInitializedFromFile = false;
+            objectOutputStream.writeObject(new CourseList(DataServer.courses));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -202,5 +206,7 @@ public class DataManager implements Serializable {
         }
         saveData();
     }
+
+    //TODO: Add data function methods
 
 }

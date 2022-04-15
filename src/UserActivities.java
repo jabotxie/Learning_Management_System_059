@@ -22,7 +22,7 @@ public class UserActivities {
 
     public static void main(String[] args) {
 
-        DataManager.initData();
+        DataServer.initData();
         scanner = new Scanner(System.in);
         UserActivities activityOne = new UserActivities();
         try {
@@ -31,7 +31,7 @@ public class UserActivities {
             e.printStackTrace();
         }
 
-        DataManager.saveData();
+        DataServer.saveData();
     }
 
     /**
@@ -116,7 +116,7 @@ public class UserActivities {
                 if (courseSelection > 0) {
                     int forumSelection;
                     do {
-                        Course selectedCourse = DataManager.courses.get(courseSelection - 1);
+                        Course selectedCourse = DataServer.courses.get(courseSelection - 1);
                         forumSelection = forumActivities(selectedCourse);
 
                         if (forumSelection > 0) {
@@ -171,7 +171,7 @@ public class UserActivities {
                 System.out.println(ENTER_PASSWORD);
                 String password = getStringInput();
                 try {
-                    DataManager.login(this, username, password);
+                    DataServer.login(this, username, password);
                     loggedIn = true;
                     System.out.println(LOGIN_SUCCESSFUL);
                 } catch (AccountInfoNotMatchException e) {
@@ -186,7 +186,7 @@ public class UserActivities {
                     System.out.println(ENTER_PASSWORD);
                     String password = getStringInput();
                     try {
-                        DataManager.createAccount(this, accountTypeChoice == 1 ?
+                        DataServer.createAccount(this, accountTypeChoice == 1 ?
                                 Teacher.class : Student.class, username, password);
                         loggedIn = true;
                     } catch (UsernameAlreadyTakenException e) {
@@ -204,7 +204,7 @@ public class UserActivities {
                 int confirmChoice = getValidInt(2);
                 if (confirmChoice == 1) {
                     try {
-                        DataManager.deleteAccount(this, username, password);
+                        DataServer.deleteAccount(this, username, password);
                         System.out.println(DELETE_SUCCESSFUL);
                     } catch (AccountInfoNotMatchException e) {
                         e.printStackTrace();
@@ -232,10 +232,10 @@ public class UserActivities {
      */
     private int courseActivities() {
         StringBuilder header = new StringBuilder();
-        if (DataManager.courses.size() != 0) {
+        if (DataServer.courses.size() != 0) {
             header.append("Course List:\n");
-            for (int i = 0; i < DataManager.courses.size(); i++) {
-                Course course = DataManager.courses.get(i);
+            for (int i = 0; i < DataServer.courses.size(); i++) {
+                Course course = DataServer.courses.get(i);
                 header.append("-").append(course.getCourseTitle()).append("\n");
             }
         }
@@ -300,15 +300,15 @@ public class UserActivities {
             case 2: //delete a course
                 try {
                     verifyPermission(Teacher.class);
-                    if (DataManager.courses.size() == 0) {
+                    if (DataServer.courses.size() == 0) {
                         System.out.println(EMPTY_COURSE_LIST);
                         break;
                     }
 
                     System.out.println(SELECT_COURSE + TO_DELETE);
                     displayCoursesTitles();
-                    int courseIndex = getValidInt(DataManager.courses.size()) - 1;
-                    String deletingCourseTitle = DataManager.courses.get(courseIndex).getCourseTitle();
+                    int courseIndex = getValidInt(DataServer.courses.size()) - 1;
+                    String deletingCourseTitle = DataServer.courses.get(courseIndex).getCourseTitle();
                     currentUser.deleteCourse(new Course(deletingCourseTitle));
                 } catch (NoPermissionException e) {
                     e.printStackTrace();
@@ -319,29 +319,29 @@ public class UserActivities {
             case 3: //Edit a course
                 try {
                     verifyPermission(Teacher.class);
-                    if (DataManager.courses.size() == 0) {
+                    if (DataServer.courses.size() == 0) {
                         System.out.println(EMPTY_COURSE_LIST);
                         break;
                     }
                     System.out.println(SELECT_COURSE + TO_EDIT);
                     displayCoursesTitles();
-                    int i = getValidInt(DataManager.courses.size()) - 1;
+                    int i = getValidInt(DataServer.courses.size()) - 1;
                     System.out.println(UPDATING_TITLE);
                     String updatingTopic = getStringInput();
 
-                    currentUser.editCourse(DataManager.courses.get(i), updatingTopic);
+                    currentUser.editCourse(DataServer.courses.get(i), updatingTopic);
                 } catch (NoPermissionException e) {
                     e.printStackTrace();
                 }
                 break;
             case 4:
-                if (DataManager.courses.size() == 0) {
+                if (DataServer.courses.size() == 0) {
                     System.out.println(EMPTY_COURSE_LIST);
                     break;
                 }
                 System.out.println(SELECT_COURSE + TO_ENTER);
                 displayCoursesTitles();
-                courseChoice = getValidInt(DataManager.courses.size());
+                courseChoice = getValidInt(DataServer.courses.size());
                 break;
             case 5:
                 courseChoice = -1;
@@ -636,8 +636,8 @@ public class UserActivities {
 
 
     private void displayCoursesTitles() {
-        for (int i = 0; i < DataManager.courses.size(); i++) {
-            System.out.print((i + 1) + ". " + DataManager.courses.get(i).getCourseTitle() + '\n');
+        for (int i = 0; i < DataServer.courses.size(); i++) {
+            System.out.print((i + 1) + ". " + DataServer.courses.get(i).getCourseTitle() + '\n');
 
         }
     }

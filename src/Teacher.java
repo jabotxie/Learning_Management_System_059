@@ -63,23 +63,23 @@ public class Teacher extends User {
     @Override
     //overridden method allows teacher user to create courses
     public void createCourse(String courseTitle) {
-        synchronized (DataManager.coursesSync) {
-            DataManager.courses.add(new Course(courseTitle));
+        synchronized (DataServer.coursesSync) {
+            DataServer.courses.add(new Course(courseTitle));
         }
     }
 
     @Override
     //overridden method allows teacher user delete courses
     public void deleteCourse(Course course) {
-        synchronized (DataManager.coursesSync) {
-            DataManager.courses.remove(course);
+        synchronized (DataServer.coursesSync) {
+            DataServer.courses.remove(course);
         }
     }
 
     @Override
     //overridden method allows teacher user edit courses
     public void editCourse(Course course, String courseTitle) {
-        synchronized (DataManager.coursesSync) {
+        synchronized (DataServer.coursesSync) {
             course.setCourseTitle(courseTitle);
         }
     }
