@@ -1,4 +1,6 @@
-import java.io.FileNotFoundException;
+import javax.swing.*;
+import java.io.*;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -13,7 +15,7 @@ import java.util.Scanner;
  * @author Jia Xie, Shreyash, Kundana, Garv
  * @version April 11, 2022
  */
-public class UserActivities {
+public class UserClient implements Runnable {
     private static Scanner scanner;
 
     public User currentUser;
@@ -22,16 +24,20 @@ public class UserActivities {
 
     public static void main(String[] args) {
 
-        DataServer.initData();
-        scanner = new Scanner(System.in);
-        UserActivities activityOne = new UserActivities();
-        try {
-            activityOne.run();
-        } catch (Throwable e) {
-            e.printStackTrace();
-        }
+//        DataServer.initData();
+//        scanner = new Scanner(System.in);
+//        UserClient activityOne = new UserClient();
+//        try {
+//            activityOne.run();
+//        } catch (Throwable e) {
+//            e.printStackTrace();
+//        }
+//
+//        DataServer.saveData();
 
-        DataServer.saveData();
+        new Thread(new UserClient()).start();
+
+        new Thread(new UserClient()).start();
     }
 
     /**
@@ -106,6 +112,13 @@ public class UserActivities {
 
     public void run() {
 
+        try {
+            Socket socket = new Socket("localhost", 4242);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            PrintWriter writer = new PrintWriter(socket.getOutputStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         String WELCOME = "Welcome to the Learning Management System";
         System.out.println(WELCOME);
         if (login()) {
@@ -351,6 +364,14 @@ public class UserActivities {
     }
 
     private int forumActivities(Course course) {
+        ArrayList<DiscussionForum> forums = course.forums;
+        //Initiate JButton for Forums
+        ArrayList<JButton> forumButtons = new ArrayList<>();
+        for (DiscussionForum forum: forums) {
+            forumButtons.add(new JButton(forum.getTopic()));
+        }
+        //Create JFrame
+        JFrame frame = new JFrame("Simple Paint Walkthrough");
         StringBuilder header = new StringBuilder();
         if (course.forums.size() != 0) {
             header.append("Topic List:\n");

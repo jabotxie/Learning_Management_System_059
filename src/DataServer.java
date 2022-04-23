@@ -1,5 +1,7 @@
 
 import java.io.*;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -20,7 +22,7 @@ import java.util.Date;
  * @version April 11, 2022
  */
 
-public class DataServer implements Serializable {
+public class DataServer implements Serializable, Runnable {
 
     public static ArrayList<User> users;
     public static final Date usersSync = new Date(System.currentTimeMillis());
@@ -30,8 +32,15 @@ public class DataServer implements Serializable {
     public static String usersInfoFileName = "UserInfo.txt";
     public static String coursesInfoFileName = "CoursesInfo.txt";
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         //TODO: Initialize the server
+        ServerSocket serverSocket = new ServerSocket(4242);
+
+        System.out.println("Waiting for the client to connect...");
+        Socket socket = serverSocket.accept();
+        System.out.println("Client connected!");
+
+        BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
     }
 
     //method that initializes data upon first run
@@ -141,12 +150,12 @@ public class DataServer implements Serializable {
     }
 
     //method to allow user login
-    public static void login(UserActivities userActivities, String username, String password) throws AccountInfoNotMatchException {
+    public static void login(UserClient userClient, String username, String password) throws AccountInfoNotMatchException {
         synchronized (usersSync) {
             int i = users.indexOf(new Student(username, password));
             try {
                 if (users.get(i).getPassword().equals(password)) {
-                    userActivities.currentUser = users.get(i);
+                    userClient.currentUser = users.get(i);
                 } else {
                     throw new AccountInfoNotMatchException();
                 }
@@ -158,7 +167,7 @@ public class DataServer implements Serializable {
     }
 
     //method to create account
-    public static void createAccount(UserActivities userActivities, Class<? extends User> c, String username, String password)
+    public static void createAccount(UserClient userClient, Class<? extends User> c, String username, String password)
             throws UsernameAlreadyTakenException {
         synchronized (usersSync) {
             if (users.contains(new Student(username, password))) {
@@ -166,10 +175,10 @@ public class DataServer implements Serializable {
             } else {
                 if (c == Teacher.class) {
                     users.add(new Teacher(username, password));
-                    userActivities.currentUser = new Teacher(username, password);
+                    userClient.currentUser = new Teacher(username, password);
                 } else {
                     users.add(new Student(username, password));
-                    userActivities.currentUser = new Student(username, password);
+                    userClient.currentUser = new Student(username, password);
                 }
                 saveUserInfo();
             }
@@ -178,21 +187,21 @@ public class DataServer implements Serializable {
     }
 
     //method to remove account
-    public static void deleteAccount(UserActivities userActivities, String username, String password)
+    public static void deleteAccount(UserClient userClient, String username, String password)
             throws AccountInfoNotMatchException {
         synchronized (usersSync) {
             synchronized (coursesSync) {
-                login(userActivities, username, password);
+                login(userClient, username, password);
                 for (Course course : courses) {
                     for (DiscussionForum forum : course.forums) {
                         ArrayList<Integer> removingPostsIndex = new ArrayList<>();
                         for (int i = 0; i < forum.posts.size(); i++) {
                             DiscussionPost post = forum.posts.get(i);
-                            post.votes.removeIf(vote -> vote.getStudent().equals(userActivities.currentUser));
+                            post.votes.removeIf(vote -> vote.getStudent().equals(userClient.currentUser));
 
 
-                            post.replies.removeIf(reply -> reply.getOwner().equals(userActivities.currentUser));
-                            if (post.getOwner().equals(userActivities.currentUser))
+                            post.replies.removeIf(reply -> reply.getOwner().equals(userClient.currentUser));
+                            if (post.getOwner().equals(userClient.currentUser))
                                 removingPostsIndex.add(i);
                         }
                         for (int i = removingPostsIndex.size() - 1; i >= 0; i--) {
@@ -200,13 +209,37 @@ public class DataServer implements Serializable {
                         }
                     }
                 }
-                users.remove(userActivities.currentUser);
-                userActivities.currentUser = null;
+                users.remove(userClient.currentUser);
+                userClient.currentUser = null;
             }
         }
         saveData();
     }
 
+    public static ArrayList<Course> getCourses() {
+        synchronized (coursesSync) {
+            return courses;
+        }
+    }
+
+    public static ArrayList<User> getUsers() {
+        synchronized (usersSync) {
+            return users;
+        }
+    }
+
+    @Override
+    public void run() {
+        try {
+            initData();
+            ServerSocket serverSocket = new ServerSocket(4242);
+            Socket socket = serverSocket.accept();
+            System.out.println(socket.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
     //TODO: Add data function methods
 
 }
