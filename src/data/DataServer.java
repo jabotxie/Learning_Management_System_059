@@ -1,3 +1,4 @@
+package data;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -33,6 +34,7 @@ public class DataServer implements Serializable, Runnable {
     public static String coursesInfoFileName = "CoursesInfo.txt";
 
     public static void main(String[] args) throws IOException {
+        initData();
         //TODO: Initialize the server
         ServerSocket serverSocket = new ServerSocket(4242);
 

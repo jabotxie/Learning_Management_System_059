@@ -1,3 +1,5 @@
+package data;
+
 import org.junit.Test;
 import org.junit.After;
 import org.junit.Before;
@@ -113,7 +115,7 @@ public class RunLocalTest {
 
             // Runs the program with the input values
             receiveInput(input);
-            UserActivities.main(new String[0]);
+            UserClient.main(new String[0]);
 
             // Retrieves the output from the program
             String output = getOutput();
@@ -192,7 +194,7 @@ public class RunLocalTest {
 
             // Runs the program with the input values
             receiveInput(input);
-            UserActivities.main(new String[0]);
+            UserClient.main(new String[0]);
 
             // Retrieves the output from the program
             String output = getOutput();
