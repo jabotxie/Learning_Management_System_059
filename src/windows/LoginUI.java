@@ -2,6 +2,7 @@ package windows;
 
 import data.AccountInfoNotMatchException;
 import data.DataServer;
+import data.User;
 
 
 import javax.swing.*;
@@ -55,17 +56,20 @@ public class LoginUI implements ActionListener {
             String password = passwordText.getText();
             String username = usernameText.getText();
             System.out.println(username + "," + password);
-            try {
-                DataServer.login(username, password);
-                frame.dispose();
-                CourseUI courseUI = new CourseUI();
 
-            } catch (AccountInfoNotMatchException aE) {
-                aE.printStackTrace();
+            User currentUser = DataServer.login(username, password);
+            if (currentUser == null) {
+                JOptionPane.showMessageDialog(null, "Username doesn't exist " +
+                        "or the password is incorrect", "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                frame.dispose();
+                new CourseUI(currentUser);
             }
+
         }
         if (e.getSource() == createButton) {
-            
+            frame.dispose();
+            new CreateUI();
         }
     }
 }

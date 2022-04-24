@@ -1,18 +1,21 @@
 package windows;
 
+import data.User;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class CourseUI implements ActionListener {
+    User currentUser;
     JFrame frame = new JFrame("Learning Management System");
     JButton editButton = new JButton("edit");
     JButton createButton = new JButton("create");
     JButton deleteButton = new JButton("delete");
     ArrayList<JButton> courseButtons;
-    
-    public CourseUI() {
+
+    public CourseUI(User CurrentUser) {
 
         editButton.setFocusable(false);
         editButton.addActionListener(this);

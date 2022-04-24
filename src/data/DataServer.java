@@ -152,40 +152,40 @@ public class DataServer implements Serializable, Runnable {
     }
 
     //method to allow user login
-    public static User login(String username, String password) throws AccountInfoNotMatchException {
+    public static User login(String username, String password) {
         synchronized (usersSync) {
             int i = users.indexOf(new Student(username, password));
             try {
                 if (users.get(i).getPassword().equals(password)) {
                     return users.get(i);
                 } else {
-                    throw new AccountInfoNotMatchException();
+                    return null;
                 }
             } catch (ArrayIndexOutOfBoundsException e) {
-                throw new AccountInfoNotMatchException();
+                return null;
             }
         }
-
     }
 
     //method to create account
-    public static void createAccount(UserClient userClient, Class<? extends User> c, String username, String password)
-            throws UsernameAlreadyTakenException {
+    public static User createAccount(Class<? extends User> c, String username, String password) {
         synchronized (usersSync) {
             if (users.contains(new Student(username, password))) {
-                throw new UsernameAlreadyTakenException();
+                return null;
             } else {
                 if (c == Teacher.class) {
-                    users.add(new Teacher(username, password));
-                    userClient.currentUser = new Teacher(username, password);
+                    Teacher newTeacher = new Teacher(username, password);
+                    users.add(newTeacher);
+                    return users.get(users.indexOf(newTeacher));
                 } else {
                     users.add(new Student(username, password));
-                    userClient.currentUser = new Student(username, password);
+                    Student newStudent = new Student(username, password);
+                    users.add(newStudent);
+                    return users.get(users.indexOf(newStudent));
                 }
-                saveUserInfo();
+
             }
         }
-
     }
 
     //method to remove account
