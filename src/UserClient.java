@@ -184,7 +184,7 @@ public class UserClient implements Runnable {
                 System.out.println(ENTER_PASSWORD);
                 String password = getStringInput();
                 try {
-                    DataServer.login(this, username, password);
+                    currentUser = DataServer.login(username, password);
                     loggedIn = true;
                     System.out.println(LOGIN_SUCCESSFUL);
                 } catch (AccountInfoNotMatchException e) {
@@ -217,7 +217,7 @@ public class UserClient implements Runnable {
                 int confirmChoice = getValidInt(2);
                 if (confirmChoice == 1) {
                     try {
-                        DataServer.deleteAccount(this, username, password);
+                        DataServer.deleteAccount(currentUser, username, password);
                         System.out.println(DELETE_SUCCESSFUL);
                     } catch (AccountInfoNotMatchException e) {
                         e.printStackTrace();

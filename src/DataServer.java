@@ -150,12 +150,12 @@ public class DataServer implements Serializable, Runnable {
     }
 
     //method to allow user login
-    public static void login(UserClient userClient, String username, String password) throws AccountInfoNotMatchException {
+    public static User login(String username, String password) throws AccountInfoNotMatchException {
         synchronized (usersSync) {
             int i = users.indexOf(new Student(username, password));
             try {
                 if (users.get(i).getPassword().equals(password)) {
-                    userClient.currentUser = users.get(i);
+                    return users.get(i);
                 } else {
                     throw new AccountInfoNotMatchException();
                 }
@@ -187,21 +187,21 @@ public class DataServer implements Serializable, Runnable {
     }
 
     //method to remove account
-    public static void deleteAccount(UserClient userClient, String username, String password)
+    public static void deleteAccount(User currentUser, String username, String password)
             throws AccountInfoNotMatchException {
         synchronized (usersSync) {
             synchronized (coursesSync) {
-                login(userClient, username, password);
+                login(username, password);
                 for (Course course : courses) {
                     for (DiscussionForum forum : course.forums) {
                         ArrayList<Integer> removingPostsIndex = new ArrayList<>();
                         for (int i = 0; i < forum.posts.size(); i++) {
                             DiscussionPost post = forum.posts.get(i);
-                            post.votes.removeIf(vote -> vote.getStudent().equals(userClient.currentUser));
+                            User finalCurrentUser = currentUser;
+                            post.votes.removeIf(vote -> vote.getStudent().equals(finalCurrentUser));
 
-
-                            post.replies.removeIf(reply -> reply.getOwner().equals(userClient.currentUser));
-                            if (post.getOwner().equals(userClient.currentUser))
+                            post.replies.removeIf(reply -> reply.getOwner().equals(finalCurrentUser));
+                            if (post.getOwner().equals(currentUser))
                                 removingPostsIndex.add(i);
                         }
                         for (int i = removingPostsIndex.size() - 1; i >= 0; i--) {
@@ -209,8 +209,8 @@ public class DataServer implements Serializable, Runnable {
                         }
                     }
                 }
-                users.remove(userClient.currentUser);
-                userClient.currentUser = null;
+                users.remove(currentUser);
+                currentUser = null;
             }
         }
         saveData();
