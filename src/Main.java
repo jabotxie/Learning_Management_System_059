@@ -1,5 +1,5 @@
 import data.DataServer;
-import windows.LoginUI;
+import client.LoginUI;
 
 public class Main {
     public static void main(String[] args) {

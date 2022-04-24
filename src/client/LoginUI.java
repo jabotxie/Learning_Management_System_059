@@ -1,6 +1,5 @@
-package windows;
+package client;
 
-import data.AccountInfoNotMatchException;
 import data.DataServer;
 import data.User;
 
@@ -42,12 +41,6 @@ public class LoginUI implements ActionListener {
         loginPanel.add(createButton);
         frame.add(loginPanel);
 
-//        frame.add(usernameLabel);
-//        frame.add(usernameText);
-//        frame.add(passwordLabel);
-//        frame.add(passwordText);
-//        frame.add(loginButton);
-
     }
 
     @Override
@@ -63,6 +56,8 @@ public class LoginUI implements ActionListener {
                         "or the password is incorrect", "Error", JOptionPane.ERROR_MESSAGE);
             } else {
                 frame.dispose();
+                JOptionPane.showMessageDialog(null, "You have successfully logged in.",
+                        "Login Succeed", JOptionPane.INFORMATION_MESSAGE);
                 new CourseUI(currentUser);
             }
 
