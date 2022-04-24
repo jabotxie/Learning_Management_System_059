@@ -4,9 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d28170b6-672d-4479-8927-b4c27361f032" name="Changes" comment="javadoc implemented">
+    <list default="true" id="d28170b6-672d-4479-8927-b4c27361f032" name="Changes" comment="Implement ClientHandler to deal with multiple client using multi thread">
+      <change afterPath="$PROJECT_DIR$/src/data/ClientThread.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/data/SystemServer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/data/TargetNotFoundException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_11_2022_2_11_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_11_2022_2_11_PM__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RunLocalTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RunLocalTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/CourseUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/CourseUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/DataServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/DataServer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,6 +28,14 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -40,50 +54,36 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../01. Sample Swing Application" />
     <property name="settings.editor.selected.configurable" value="build.tools" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Jason Xie\Documents\Purdue\CS180\Learning_Management_System_059\src\data" />
+    </key>
     <key name="ExtractSuperBase.RECENT_KEYS">
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.UserActivities">
-    <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="ALTERNATIVE_JRE_PATH" value="1.8" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-      <option name="MAIN_CLASS_NAME" value="Test" />
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="Learning_Management_System_059" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UserActivities" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="UserActivities" />
+    <configuration name="RadioButtonExample" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="RadioButtonExample" />
       <module name="Learning_Management_System_059" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RunLocalTest$TestCase.testExpectedOutputOne" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Learning_Management_System_059" />
-      <option name="PACKAGE_NAME" value="RunLocalTest" />
-      <option name="MAIN_CLASS_NAME" value="RunLocalTest$TestCase" />
-      <option name="METHOD_NAME" value="testExpectedOutputOne" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <list>
-      <item itemvalue="Application.Test" />
-      <item itemvalue="Application.UserActivities" />
-      <item itemvalue="JUnit.RunLocalTest$TestCase.testExpectedOutputOne" />
-    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.UserActivities" />
-        <item itemvalue="JUnit.RunLocalTest$TestCase.testExpectedOutputOne" />
-        <item itemvalue="Application.Test" />
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.RadioButtonExample" />
       </list>
     </recent_temporary>
   </component>
@@ -95,34 +95,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1649548055923</updated>
-    </task>
-    <task id="LOCAL-00001" summary="Course class completed">
-      <created>1649571409571</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1649571409571</updated>
-    </task>
-    <task id="LOCAL-00002" summary="Renamed and create local data functions">
-      <created>1649571443149</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1649571443149</updated>
-    </task>
-    <task id="LOCAL-00003" summary="Added synchronized reference object for potentially multiple users">
-      <created>1649571515817</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1649571515817</updated>
-    </task>
-    <task id="LOCAL-00004" summary="update the exception description">
-      <created>1649571535753</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1649571535753</updated>
     </task>
     <task id="LOCAL-00005" summary="implemented login() and courseActivities()&#10;Created procedure text description&#10;created structure of run()">
       <created>1649571649668</created>
@@ -383,7 +355,91 @@
       <option name="project" value="LOCAL" />
       <updated>1649696245786</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="Test case created">
+      <created>1649708207603</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1649708207603</updated>
+    </task>
+    <task id="LOCAL-00043" summary="readme updated">
+      <created>1649713448984</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1649713448984</updated>
+    </task>
+    <task id="LOCAL-00044" summary="Updated coding convention">
+      <created>1649713538148</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1649713538148</updated>
+    </task>
+    <task id="LOCAL-00045" summary="Updated coding convention">
+      <created>1649713622786</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1649713622786</updated>
+    </task>
+    <task id="LOCAL-00046" summary="Add improvements class">
+      <created>1650061030087</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1650061030087</updated>
+    </task>
+    <task id="LOCAL-00047" summary="Update client and server">
+      <created>1650730807757</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1650730807757</updated>
+    </task>
+    <task id="LOCAL-00048" summary="Create new client class and new seperate UI classes">
+      <created>1650768477888</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1650768477888</updated>
+    </task>
+    <task id="LOCAL-00049" summary="Create new package">
+      <created>1650772331087</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1650772331087</updated>
+    </task>
+    <task id="LOCAL-00050" summary="Create new class for UI">
+      <created>1650772350386</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1650772350386</updated>
+    </task>
+    <task id="LOCAL-00051" summary="Implement client and course GUI">
+      <created>1650774562765</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1650774562765</updated>
+    </task>
+    <task id="LOCAL-00052" summary="Create createUI">
+      <created>1650774576657</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1650774576657</updated>
+    </task>
+    <task id="LOCAL-00053" summary="Separate client and server into different packages">
+      <created>1650783227918</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1650783227918</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -407,18 +463,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Bug Fixed&#10;wrong body function called. Course.editForum" />
-    <MESSAGE value="Vote implemented" />
-    <MESSAGE value="Function Logic Improved" />
-    <MESSAGE value="Function Logic Improved, Rewrite equals function" />
-    <MESSAGE value="toString() added" />
-    <MESSAGE value="Vote feature added" />
-    <MESSAGE value="Vote class created" />
-    <MESSAGE value="Exception added to vote()" />
-    <MESSAGE value="New Exception created&#10;throw when the student already voted in this forum" />
-    <MESSAGE value="New feature created&#10;Add owner instance to DiscussionPost&#10;Add function to verify if the user already voted in this forum" />
-    <MESSAGE value="New function added&#10;Add function to delete and edit the post" />
-    <MESSAGE value="Implement postActivities" />
     <MESSAGE value="Implement to Serializable&#10;As we want to save the owner of the votes, users has to implement Serializable to let ObjectOutputStream save the instance" />
     <MESSAGE value="Complete class&#10;Deleted replyActivities&#10;Improved structure of run() function&#10;Improved postActivities() function" />
     <MESSAGE value="Unused test class deleted" />
@@ -432,7 +476,19 @@
     <MESSAGE value="Improved display of votes" />
     <MESSAGE value="Finalized Project" />
     <MESSAGE value="javadoc implemented" />
-    <option name="LAST_COMMIT_MESSAGE" value="javadoc implemented" />
+    <MESSAGE value="Test case created" />
+    <MESSAGE value="readme updated" />
+    <MESSAGE value="Updated coding convention" />
+    <MESSAGE value="Add improvements class" />
+    <MESSAGE value="Update client and server" />
+    <MESSAGE value="Create new client class and new seperate UI classes" />
+    <MESSAGE value="Create new package" />
+    <MESSAGE value="Create new class for UI" />
+    <MESSAGE value="Implement client and course GUI" />
+    <MESSAGE value="Create createUI" />
+    <MESSAGE value="Separate client and server into different packages" />
+    <MESSAGE value="Implement ClientHandler to deal with multiple client using multi thread" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implement ClientHandler to deal with multiple client using multi thread" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -442,8 +498,8 @@
           <option name="timeStamp" value="5" />
         </breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/UserActivities.java</url>
-          <line>173</line>
+          <url>file://$PROJECT_DIR$/src/data/UserClient.java</url>
+          <line>142</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
       </breakpoints>

@@ -1,8 +1,10 @@
 package client;
 
+import data.DataServer;
 import data.User;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -27,17 +29,30 @@ public class CourseUI implements ActionListener {
         logoutButton.setFocusable(false);
         logoutButton.addActionListener(this);
 
+        ArrayList<String> courseTitles = DataServer.getCourseTitles();
+        for (String title: courseTitles) {
+            courseButtons.add(new JButton(title));
+        }
+
+
 
         frame.setSize(600, 400);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
         JPanel panel = new JPanel();
+        panel.setBackground(Color.PINK);
         panel.add(editButton);
         panel.add(createButton);
         panel.add(deleteButton);
         panel.add(logoutButton);
         frame.add(panel);
+
+        JPanel courseDisplay = new JPanel();
+        courseDisplay.setBackground(Color.RED);
+        for (JButton course: courseButtons) {
+
+        }
     }
 
     @Override

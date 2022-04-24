@@ -189,8 +189,7 @@ public class DataServer implements Serializable, Runnable {
     }
 
     //method to remove account
-    public static void deleteAccount(User currentUser, String username, String password)
-            throws AccountInfoNotMatchException {
+    public static void deleteAccount(User currentUser, String username, String password) {
         synchronized (usersSync) {
             synchronized (coursesSync) {
                 login(username, password);
@@ -241,6 +240,30 @@ public class DataServer implements Serializable, Runnable {
             e.printStackTrace();
         }
 
+    }
+
+    public static ArrayList<String> getCourseTitles() {
+        ArrayList<String> courseTitles = new ArrayList<>();
+        for (Course course: courses) {
+            courseTitles.add(course.getCourseTitle());
+        }
+        return courseTitles;
+    }
+
+    public ArrayList<String> getForumTopics(String courseTitle) throws TargetNotFoundException {
+        synchronized (coursesSync) {
+            ArrayList<String> forumTopics = new ArrayList<>();
+            if (courses.contains(new Course(courseTitle))) {
+                int courseIndex = courses.indexOf(new Course(courseTitle));
+                Course course = courses.get(courseIndex);
+                for (DiscussionForum forum: course.forums) {
+                    forumTopics.add(forum.getTopic());
+                }
+                return forumTopics;
+            } else {
+                throw new TargetNotFoundException();
+            }
+        }
     }
     //TODO: Add data function methods
 
