@@ -57,8 +57,22 @@ This is the major class that holds all the operations and menus
 #### util.Course.java
 A class that represents a course. A course is identified by its title. There are forums in a course
 
+#### CourseUI.java
+
+A class that includes the GUI for the Course dashboard GUI. Here students and teachers will be able to view courses and forums they are in and have an option to create, edit, or delete a course or forum (depending on their status as either a Student or a Teacher).
+
+#### CreateUI.java
+
+A class that includes the GUI for the Create account page. Here students and teachers will be able create a new username and password to create a new accout and access their course dashboard.
+
+#### LoginUI.java
+
+A class that includes the GUI for the Login to account page. Here students and teachers will be able to enter their existing username and password to access their course dashboard.
+
 #### Courselist.java
 This class helps to store the data to local file
+
+#### Client.java
 
 #### DataServer.java
 A class that helps to read and store the user information in a format of
