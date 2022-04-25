@@ -1,3 +1,7 @@
+package server;
+
+import util.DataManager;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -12,6 +16,7 @@ public class SystemServer {
     private static ExecutorService pool = Executors.newFixedThreadPool(10);
 
     public static void main(String[] args) throws IOException {
+        DataManager.initData();
         ServerSocket socket = new ServerSocket(PORT);
         while (true) {
             System.out.println("[SERVER] Waiting for client connection...");

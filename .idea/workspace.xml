@@ -4,26 +4,32 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d28170b6-672d-4479-8927-b4c27361f032" name="Changes" comment="Create runnable class for executing a user thread">
+    <list default="true" id="d28170b6-672d-4479-8927-b4c27361f032" name="Changes" comment="Separate Client and Server">
+      <change afterPath="$PROJECT_DIR$/src/client/Client.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/client/CourseUI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/client/CreateUI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/client/LoginUI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/server/ClientThread.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/util/Packet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/Client.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/CourseUI.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/CreateUI.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/LoginUI.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/AccountInfoNotMatchException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/ClientThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/ClientThread.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/CourseList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/CourseList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/DataServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/DataServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/Improvements.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/LoginSuccessful.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/NoSuchTargetException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/RunLocalTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/archive/RunLocalTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/StudentGUI.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/SystemServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/SystemServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/UserClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/archive/UserClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/UsernameAlreadyTakenException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/getCourse" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/getPost" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AlreadyVotedException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/AlreadyVotedException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ClientThread.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Course.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/Course.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CourseList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/CourseList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/DataManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DiscussionForum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/DiscussionForum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DiscussionPost.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/DiscussionPost.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/NoPermissionException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/NoPermissionException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/Student.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SystemServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/SystemServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TargetNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/TargetNotFoundException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Teacher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/Teacher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TeacherCannotVoteException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/TeacherCannotVoteException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Vote.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/Vote.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/archive/RunLocalTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/archive/RunLocalTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/archive/UserClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/archive/UserClient.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,26 +86,50 @@
     <key name="ExtractSuperBase.RECENT_KEYS">
       <recent name="" />
     </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="" />
+    </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Main" />
+  <component name="RunManager" selected="Application.Client">
+    <configuration name="Client" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="client.Client" />
       <module name="Learning_Management_System_059" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="client.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RadioButtonExample" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="archive.RadioButtonExample" />
+    <configuration name="SystemServer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="server.SystemServer" />
       <module name="Learning_Management_System_059" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="server.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="CompoundRunConfigurationType">
+      <toRun name="SystemServer" type="Application" />
+      <toRun name="Client" type="Application" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Application.SystemServer" />
+      <item itemvalue="Application.Client" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
-        <item itemvalue="Application.RadioButtonExample" />
+        <item itemvalue="Application.Client" />
+        <item itemvalue="Application.SystemServer" />
       </list>
     </recent_temporary>
   </component>
@@ -111,13 +141,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1649548055923</updated>
-    </task>
-    <task id="LOCAL-00007" summary="Updated method to save local files">
-      <created>1649618723332</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1649618723332</updated>
     </task>
     <task id="LOCAL-00008" summary="Bug fixed&#10;As the Object used to synchronized does not have Serializable implemented, ObjectOutputStream.writeObject() will throw exception. Consequently, another type of Object is used to synchronize all functions.">
       <created>1649619001425</created>
@@ -455,7 +478,14 @@
       <option name="project" value="LOCAL" />
       <updated>1650830150231</updated>
     </task>
-    <option name="localTasksCounter" value="56" />
+    <task id="LOCAL-00056" summary="Separate Client and Server">
+      <created>1650851167222</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1650851167222</updated>
+    </task>
+    <option name="localTasksCounter" value="57" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -479,7 +509,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Complete class&#10;Deleted replyActivities&#10;Improved structure of run() function&#10;Improved postActivities() function" />
     <MESSAGE value="Unused test class deleted" />
     <MESSAGE value="Bug fixed" />
     <MESSAGE value="Updated forum, post, course display method" />
@@ -504,7 +533,8 @@
     <MESSAGE value="Separate client and server into different packages" />
     <MESSAGE value="Implement ClientHandler to deal with multiple client using multi thread" />
     <MESSAGE value="Create runnable class for executing a user thread" />
-    <option name="LAST_COMMIT_MESSAGE" value="Create runnable class for executing a user thread" />
+    <MESSAGE value="Separate Client and Server" />
+    <option name="LAST_COMMIT_MESSAGE" value="Separate Client and Server" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -518,6 +548,16 @@
           <line>142</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/server/SystemServer.java</url>
+          <line>17</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/server/ClientThread.java</url>
+          <line>26</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <watches-manager>
@@ -528,5 +568,8 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Learning_Management_System_059$UserActivities.ic" NAME="UserActivities Coverage Results" MODIFIED="1649609720649" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/Learning_Management_System_059$Client.ic" NAME="Client Coverage Results" MODIFIED="1650861006882" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>client.*</FILTER>
+    </SUITE>
   </component>
 </project>

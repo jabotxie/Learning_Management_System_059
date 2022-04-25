@@ -1,3 +1,5 @@
+package util;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -25,7 +27,7 @@ public class DiscussionPost implements Comparable<DiscussionPost>, Serializable 
     private String postContent;
     Date postTime;
 
-    //Constructor for DiscussionPost object
+    //Constructor for util.DiscussionPost object
     public DiscussionPost(User owner, String postContent, long postTime) {
         this.owner = owner;
         replies = new ArrayList<>();
@@ -34,7 +36,7 @@ public class DiscussionPost implements Comparable<DiscussionPost>, Serializable 
         this.votes = new ArrayList<>();
     }
 
-    //Constructor for DiscussionPost object
+    //Constructor for util.DiscussionPost object
     public DiscussionPost(User owner, String postContent, Date postTime) {
         this.owner = owner;
         replies = new ArrayList<>();
@@ -43,7 +45,7 @@ public class DiscussionPost implements Comparable<DiscussionPost>, Serializable 
         this.votes = new ArrayList<>();
     }
 
-    //Constructor for DiscussionPost object
+    //Constructor for util.DiscussionPost object
     public DiscussionPost() {
 
     }
@@ -98,7 +100,7 @@ public class DiscussionPost implements Comparable<DiscussionPost>, Serializable 
         return Objects.hash(replies, postContent, postTime);
     }
 
-    //toString method for DiscussionPost class
+    //toString method for util.DiscussionPost class
     public String toString() {
 
         StringBuilder sb = new StringBuilder();

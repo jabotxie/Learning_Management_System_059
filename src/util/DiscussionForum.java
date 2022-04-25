@@ -1,3 +1,5 @@
+package util;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -85,7 +87,7 @@ public class DiscussionForum implements Serializable {
         return false;
     }
 
-    //toString method for DiscussionForum class
+    //toString method for util.DiscussionForum class
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Topic: ").append(topic);

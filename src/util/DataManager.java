@@ -1,3 +1,5 @@
+package util;
+
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -12,7 +14,7 @@ import java.util.Date;
  * ************************************
  * username
  * password
- * User Type(T for Teacher, S for Student)
+ * util.User Type(T for util.Teacher, S for util.Student)
  * ************************************
  *
  * <p>Purdue University -- CS18000 -- Spring 2022</p>
@@ -51,10 +53,10 @@ public class DataManager implements Serializable, Runnable {
                     try {
                         courses = getCoursesFromFile();
                         if (courses == null) {
-                            courses = new ArrayList<Course>();
+                            courses = new ArrayList<>();
                         }
                     } catch (IOException | ClassNotFoundException e) {
-                        courses = new ArrayList<Course>();
+                        courses = new ArrayList<>();
                     }
                     try {
                         users = getUsersFromFile();
@@ -150,12 +152,12 @@ public class DataManager implements Serializable, Runnable {
     }
 
     //method to allow user login
-    public static User login(String username, String password) {
+    public static Class<? extends User> checkToken(String username, String password) {
         synchronized (usersSync) {
             int i = users.indexOf(new Student(username, password));
             try {
                 if (users.get(i).getPassword().equals(password)) {
-                    return users.get(i);
+                    return users.get(i).getClass();
                 } else {
                     return null;
                 }
@@ -166,20 +168,20 @@ public class DataManager implements Serializable, Runnable {
     }
 
     //method to create account
-    public static User createAccount(Class<? extends User> c, String username, String password) {
+    public static boolean createAccount(Class<? extends User> c, String username, String password) {
         synchronized (usersSync) {
             if (users.contains(new Student(username, password))) {
-                return null;
+                return false;
             } else {
                 if (c == Teacher.class) {
                     Teacher newTeacher = new Teacher(username, password);
                     users.add(newTeacher);
-                    return users.get(users.indexOf(newTeacher));
+                    return true;
                 } else {
                     users.add(new Student(username, password));
                     Student newStudent = new Student(username, password);
                     users.add(newStudent);
-                    return users.get(users.indexOf(newStudent));
+                    return true;
                 }
 
             }
@@ -190,16 +192,15 @@ public class DataManager implements Serializable, Runnable {
     public static void deleteAccount(User currentUser, String username, String password) {
         synchronized (usersSync) {
             synchronized (coursesSync) {
-                login(username, password);
+                checkToken(username, password);
                 for (Course course : courses) {
                     for (DiscussionForum forum : course.forums) {
                         ArrayList<Integer> removingPostsIndex = new ArrayList<>();
                         for (int i = 0; i < forum.posts.size(); i++) {
                             DiscussionPost post = forum.posts.get(i);
-                            User finalCurrentUser = currentUser;
-                            post.votes.removeIf(vote -> vote.getStudent().equals(finalCurrentUser));
+                            post.votes.removeIf(vote -> vote.getStudent().equals(currentUser));
 
-                            post.replies.removeIf(reply -> reply.getOwner().equals(finalCurrentUser));
+                            post.replies.removeIf(reply -> reply.getOwner().equals(currentUser));
                             if (post.getOwner().equals(currentUser))
                                 removingPostsIndex.add(i);
                         }
@@ -209,7 +210,6 @@ public class DataManager implements Serializable, Runnable {
                     }
                 }
                 users.remove(currentUser);
-                currentUser = null;
             }
         }
         saveData();
@@ -240,10 +240,10 @@ public class DataManager implements Serializable, Runnable {
 
     }
 
-    public static ArrayList<String> getCourseTitles() {
-        ArrayList<String> courseTitles = new ArrayList<>();
-        for (Course course: courses) {
-            courseTitles.add(course.getCourseTitle());
+    public static String[] getCourseTitles() {
+        String[] courseTitles = new String[courses.size()];
+        for (int i = 0; i < courseTitles.length; i++) {
+            courseTitles[i] = courses.get(i).getCourseTitle();
         }
         return courseTitles;
     }

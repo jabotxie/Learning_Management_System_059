@@ -5,7 +5,7 @@
 In order to compile the project
 
 Our application start at the main() function in UserClient class, so first of all run main()
-If it’s the first time running this application, namely, there is no data stored in a local file, the application will initialize the instances required for the application. If there are local files storing the data, the program will extract data from the local text file and import it into static instances and store them in DataManager class (A class we created to store and deal with all the data under to earth)
+If it’s the first time running this application, namely, there is no data stored in a local file, the application will initialize the instances required for the application. If there are local files storing the data, the program will extract data from the local text file and import it into static instances and store them in util.DataManager class (A class we created to store and deal with all the data under to earth)
 The menu application begins from now on. By any time during the application, users can choose to quit (or log out if they already logged in). We accomplished this by implementing a 4-level loop in the program.
 
 
@@ -25,7 +25,7 @@ The text file that includes all the user data
 In the format showing below:
 Username
 Password
-User Type (T for Teacher, S for Student)
+util.User Type (T for util.Teacher, S for util.Student)
 
 
 #### CoursesInfo.txt
@@ -35,26 +35,26 @@ The application is storing the data through ObjectOutputStream, and the applicat
 
 ### Class Descriptions
 
-#### User.java:
-An abstract class that holds a static ArrayList of DiscussionForum instances.
-It has two subclass, Student.java and Teacher.java
-A static ArrayList of forum is stored in User class, which can be access be multiple users.
-#### Teacher.java extends User.class
+#### util.User.java:
+An abstract class that holds a static ArrayList of util.DiscussionForum instances.
+It has two subclass, util.Student.java and util.Teacher.java
+A static ArrayList of forum is stored in util.User class, which can be access be multiple users.
+#### util.Teacher.java extends util.User.class
 A class that represents a teacher
 
-#### Student.java extends User.class
+#### util.Student.java extends util.User.class
 A class that represents a student and takes care of the functions students can perform in the discussion board. Specifically, students are able to view the courses on their dashboard, create their own replies to discussions, and upvote other students' posts.
 
-#### DiscussionForum.java
+#### util.DiscussionForum.java
 A class that represents a discussion forum
 
-#### DiscussionPost.java:
+#### util.DiscussionPost.java:
 A class that represents posts in a discussion forum. This class includes the functionality for teachers and students through their ability to edit, create, and reply to posts.
 
 #### userActivites.java
 This is the major class that holds all the operations and menus
 
-#### Course.java
+#### util.Course.java
 A class that represents a course. A course is identified by its title. There are forums in a course
 
 #### Courselist.java
@@ -65,10 +65,10 @@ A class that helps to read and store the user information in a format of
  * ************************************
  * username
  * password
- * User Type(T for Teacher, S for Student)
+ * util.User Type(T for util.Teacher, S for util.Student)
  * ************************************
 
-#### Vote.java
+#### util.Vote.java
 This class represents a vote.
 
 ### Exceptions Descriptions
@@ -76,16 +76,16 @@ This class represents a vote.
 #### AcountInfoNotMatchException.java
 Exception is thrown when the username entered doesn't exist or the password is incorrect.
 
-#### AlreadyVotedException.java
+#### util.AlreadyVotedException.java
 Exception is thrown when a student has already voted and is attempting to vote again
 
-#### NoPermissionException.java
+#### util.NoPermissionException.java
 Exception is thrown when a user of a type does not have permission to do the intended operation. For example, a user of type teacher cannot vote and a user of type student cannot create or edit courses. This exception is thrown when an attempt is made.
 
 #### NoSuchTargetException.java
 Ecxception is thrown when a specified course, forum, post or reply does not exist.
 
-#### TeacherCannotVoteException.java
+#### util.TeacherCannotVoteException.java
 Exception is thrown when a teacher user attemps to vote.
 
 #### UsernameAlreadyTakenException.java

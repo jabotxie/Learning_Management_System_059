@@ -20,7 +20,7 @@
 //public class UserClient implements Runnable {
 //    private static Scanner scanner;
 //
-//    public User currentUser;
+//    public util.User currentUser;
 //
 //    private final String LINE = "_____________________________________\n";
 //
@@ -59,7 +59,7 @@
 //     * ii. not match, handle exception, return to beginning of 2.
 //     * 3. select from menu
 //     * a.  Create forum
-//     * Add a DiscussionForum instance in User.forums
+//     * Add a util.DiscussionForum instance in util.User.forums
 //     * Then repeat 3
 //     * P.S. Handle the exception if the user does not have permission
 //     * b.  Edit forum
@@ -131,13 +131,13 @@
 //                if (courseSelection > 0) {
 //                    int forumSelection;
 //                    do {
-//                        Course selectedCourse = DataServer.courses.get(courseSelection - 1);
+//                        util.Course selectedCourse = DataServer.courses.get(courseSelection - 1);
 //                        forumSelection = forumActivities(selectedCourse);
 //
 //                        if (forumSelection > 0) {
 //                            int postSelection;
 //                            do {
-//                                DiscussionForum selectedForum = selectedCourse.forums.get(forumSelection - 1);
+//                                util.DiscussionForum selectedForum = selectedCourse.forums.get(forumSelection - 1);
 //                                postSelection = postActivities(selectedForum);
 //                                if (postSelection == -2) {
 //                                    forumSelection = -2;
@@ -160,7 +160,7 @@
 //    private boolean login() {
 //        final String MENU = LINE + "Selection an option\n1. Log in\n2. Create an account\n3. Delete an account" +
 //                "\n4. Quit the system";
-//        final String ACCOUNT_TYPE = LINE + "What type of account would you like to create?\n1. Teacher\n2. Student";
+//        final String ACCOUNT_TYPE = LINE + "What type of account would you like to create?\n1. util.Teacher\n2. util.Student";
 //        final String ENTER_USERNAME = LINE + "Please enter the username: ";
 //        final String ENTER_USERNAME_DELETE = LINE + "Please enter the username you want to delete: ";
 //        final String ENTER_PASSWORD = "Please enter the password: ";
@@ -202,7 +202,7 @@
 //                    String password = getStringInput();
 //                    try {
 //                        DataServer.createAccount(this, accountTypeChoice == 1 ?
-//                                Teacher.class : Student.class, username, password);
+//                                util.Teacher.class : util.Student.class, username, password);
 //                        loggedIn = true;
 //                    } catch (UsernameAlreadyTakenException e) {
 //                        System.out.println(USERNAME_TAKEN);
@@ -248,9 +248,9 @@
 //    private int courseActivities() {
 //        StringBuilder header = new StringBuilder();
 //        if (DataServer.courses.size() != 0) {
-//            header.append("Course List:\n");
+//            header.append("util.Course List:\n");
 //            for (int i = 0; i < DataServer.courses.size(); i++) {
-//                Course course = DataServer.courses.get(i);
+//                util.Course course = DataServer.courses.get(i);
 //                header.append("-").append(course.getCourseTitle()).append("\n");
 //            }
 //        }
@@ -279,7 +279,7 @@
 //        switch (menuChoice) {
 //            case 1: //add a course
 //                try {
-//                    verifyPermission(Teacher.class);
+//                    verifyPermission(util.Teacher.class);
 //                    System.out.println(ENTER_METHOD);
 //                    int methodChoice = getValidInt(2);
 //                    String courseTitle;
@@ -294,7 +294,7 @@
 //                            try {
 //                                System.out.println(FILE_NAME);
 //                                String fileName = getStringInput();
-//                                courseTitle = User.getImportedFile(fileName);
+//                                courseTitle = util.User.getImportedFile(fileName);
 //                                currentUser.createCourse(courseTitle);
 //                                isProcessFinished = true;
 //                            } catch (FileNotFoundException e) {
@@ -306,7 +306,7 @@
 //                        } while (!isProcessFinished);
 //                    }
 //
-//                } catch (NoPermissionException e) {
+//                } catch (util.NoPermissionException e) {
 //                    e.printStackTrace();
 //                }
 //
@@ -314,7 +314,7 @@
 //
 //            case 2: //delete a course
 //                try {
-//                    verifyPermission(Teacher.class);
+//                    verifyPermission(util.Teacher.class);
 //                    if (DataServer.courses.size() == 0) {
 //                        System.out.println(EMPTY_COURSE_LIST);
 //                        break;
@@ -324,8 +324,8 @@
 //                    displayCoursesTitles();
 //                    int courseIndex = getValidInt(DataServer.courses.size()) - 1;
 //                    String deletingCourseTitle = DataServer.courses.get(courseIndex).getCourseTitle();
-//                    currentUser.deleteCourse(new Course(deletingCourseTitle));
-//                } catch (NoPermissionException e) {
+//                    currentUser.deleteCourse(new util.Course(deletingCourseTitle));
+//                } catch (util.NoPermissionException e) {
 //                    e.printStackTrace();
 //                }
 //
@@ -333,7 +333,7 @@
 //
 //            case 3: //Edit a course
 //                try {
-//                    verifyPermission(Teacher.class);
+//                    verifyPermission(util.Teacher.class);
 //                    if (DataServer.courses.size() == 0) {
 //                        System.out.println(EMPTY_COURSE_LIST);
 //                        break;
@@ -345,7 +345,7 @@
 //                    String updatingTopic = getStringInput();
 //
 //                    currentUser.editCourse(DataServer.courses.get(i), updatingTopic);
-//                } catch (NoPermissionException e) {
+//                } catch (util.NoPermissionException e) {
 //                    e.printStackTrace();
 //                }
 //                break;
@@ -365,11 +365,11 @@
 //        return courseChoice;
 //    }
 //
-//    private int forumActivities(Course course) {
-//        ArrayList<DiscussionForum> forums = course.forums;
+//    private int forumActivities(util.Course course) {
+//        ArrayList<util.DiscussionForum> forums = course.forums;
 //        //Initiate JButton for Forums
 //        ArrayList<JButton> forumButtons = new ArrayList<>();
-//        for (DiscussionForum forum: forums) {
+//        for (util.DiscussionForum forum: forums) {
 //            forumButtons.add(new JButton(forum.getTopic()));
 //        }
 //        //Create JFrame
@@ -378,7 +378,7 @@
 //        if (course.forums.size() != 0) {
 //            header.append("Topic List:\n");
 //            for (int i = 0; i < course.forums.size(); i++) {
-//                DiscussionForum forum = course.forums.get(i);
+//                util.DiscussionForum forum = course.forums.get(i);
 //                header.append("-").append(forum.getTopic()).append("\n");
 //            }
 //        }
@@ -406,7 +406,7 @@
 //        switch (menuChoice) {
 //            case 1:
 //                try {
-//                    verifyPermission(Teacher.class);
+//                    verifyPermission(util.Teacher.class);
 //                    System.out.println(ENTER_METHOD);
 //                    int methodChoice = getValidInt(2);
 //                    String forumTopic;
@@ -421,7 +421,7 @@
 //                            try {
 //                                System.out.println(FILE_NAME);
 //                                String fileName = getStringInput();
-//                                forumTopic = User.getImportedFile(fileName);
+//                                forumTopic = util.User.getImportedFile(fileName);
 //                                currentUser.createCourse(forumTopic);
 //                                isProcessFinished = true;
 //                            } catch (FileNotFoundException e) {
@@ -433,13 +433,13 @@
 //                        } while (!isProcessFinished);
 //                    }
 //
-//                } catch (NoPermissionException e) {
+//                } catch (util.NoPermissionException e) {
 //                    e.printStackTrace();
 //                }
 //                break;
 //            case 2:
 //                try {
-//                    verifyPermission(Teacher.class);
+//                    verifyPermission(util.Teacher.class);
 //                    if (course.forums.size() == 0) {
 //                        System.out.println(NO_FORUMS);
 //                        break;
@@ -449,13 +449,13 @@
 //                    int forumIndex = getValidInt(course.forums.size()) - 1;
 //                    currentUser.deleteForum(course, course.forums.get(forumIndex));
 //
-//                } catch (NoPermissionException e) {
+//                } catch (util.NoPermissionException e) {
 //                    e.printStackTrace();
 //                }
 //                break;
 //            case 3:
 //                try {
-//                    verifyPermission(Teacher.class);
+//                    verifyPermission(util.Teacher.class);
 //                    if (course.forums.size() == 0) {
 //                        System.out.println(NO_FORUMS);
 //                        break;
@@ -463,7 +463,7 @@
 //                    System.out.println(SELECT_FORUM + TO_EDIT);
 //                    displayForumTopics(course);
 //                    int forumIndex = getValidInt(course.forums.size()) - 1;
-//                    DiscussionForum forum = course.forums.get(forumIndex);
+//                    util.DiscussionForum forum = course.forums.get(forumIndex);
 //                    System.out.println(ENTER_METHOD);
 //                    int methodChoice = getValidInt(2);
 //                    String forumTopic;
@@ -478,7 +478,7 @@
 //                            try {
 //                                System.out.println(FILE_NAME);
 //                                String fileName = getStringInput();
-//                                forumTopic = User.getImportedFile(fileName);
+//                                forumTopic = util.User.getImportedFile(fileName);
 //                                currentUser.editForum(course, forum, forumTopic);
 //                                isProcessFinished = true;
 //                            } catch (FileNotFoundException e) {
@@ -489,7 +489,7 @@
 //                            }
 //                        } while (!isProcessFinished);
 //                    }
-//                } catch (NoPermissionException e) {
+//                } catch (util.NoPermissionException e) {
 //                    e.printStackTrace();
 //                }
 //                break;
@@ -519,13 +519,13 @@
 //     * perform activities on the post.
 //     */
 //
-//    private int postActivities(DiscussionForum forum) {
+//    private int postActivities(util.DiscussionForum forum) {
 //
 //        StringBuilder header = new StringBuilder();
 //        if (forum.posts.size() != 0) {
 //            header.append("Post List:\n");
 //            for (int i = 0; i < forum.posts.size(); i++) {
-//                DiscussionPost post = forum.posts.get(i);
+//                util.DiscussionPost post = forum.posts.get(i);
 //                header.append('\n').append("-").append(post).append("\n");
 //            }
 //            header.append('\n');
@@ -534,7 +534,7 @@
 //        int postSelection = 0;
 //        final String MENU = LINE + HEADER + "Please choose an operation\n    1. Create a post\n    2. Delete a post" +
 //                "\n    3. reply a post\n    4. Sort the posts\n    " +
-//                "5. Vote a post\n    6. Back to last menu\n    7. Log out";
+//                "5. util.Vote a post\n    6. Back to last menu\n    7. Log out";
 //        final String ENTER_METHOD = "How do you like to enter the title:\n1. Command line\n" +
 //                "2. Import through text file";
 //        final String POST_CONTENT = "Please enter the content of your post:";
@@ -555,7 +555,7 @@
 //        switch (menuChoice) {
 //            case 1:
 //                try {
-//                    verifyPermission(Student.class);
+//                    verifyPermission(util.Student.class);
 //                    System.out.println(ENTER_METHOD);
 //                    int methodChoice = getValidInt(2);
 //                    String postContent;
@@ -563,7 +563,7 @@
 //                        System.out.println(POST_CONTENT);
 //                        postContent = getStringInput();
 //                        currentUser.addPost(forum,
-//                                new DiscussionPost(currentUser, postContent, System.currentTimeMillis()));
+//                                new util.DiscussionPost(currentUser, postContent, System.currentTimeMillis()));
 //
 //                    } else {
 //                        boolean isProcessFinished = false;
@@ -571,9 +571,9 @@
 //                            try {
 //                                System.out.println(FILE_NAME);
 //                                String fileName = getStringInput();
-//                                postContent = User.getImportedFile(fileName);
+//                                postContent = util.User.getImportedFile(fileName);
 //                                currentUser.addPost(forum,
-//                                        new DiscussionPost(currentUser, postContent, System.currentTimeMillis()));
+//                                        new util.DiscussionPost(currentUser, postContent, System.currentTimeMillis()));
 //                                isProcessFinished = true;
 //                            } catch (FileNotFoundException e) {
 //                                System.out.println(IMPORT_UNSUCCESSFUL);
@@ -583,13 +583,13 @@
 //                            }
 //                        } while (!isProcessFinished);
 //                    }
-//                } catch (NoPermissionException e) {
+//                } catch (util.NoPermissionException e) {
 //                    e.printStackTrace();
 //                }
 //                break;
 //            case 2:
 //                try {
-//                    verifyPermission(Teacher.class);
+//                    verifyPermission(util.Teacher.class);
 //                    if (forum.getPostsNum() == 0) {
 //                        System.out.println(NO_POSTS);
 //                        break;
@@ -597,9 +597,9 @@
 //                    System.out.println(SELECT_POST + TO_DELETE);
 //                    displayPost(forum);
 //                    int postIndex = getValidInt(forum.getPostsNum()) - 1;
-//                    DiscussionPost selectedPost = forum.posts.get(postIndex);
+//                    util.DiscussionPost selectedPost = forum.posts.get(postIndex);
 //                    currentUser.deletePost(forum, selectedPost);
-//                } catch (NoPermissionException e) {
+//                } catch (util.NoPermissionException e) {
 //                    e.printStackTrace();
 //                }
 //                break;
@@ -611,15 +611,15 @@
 //                System.out.println(SELECT_POST + TO_REPLY);
 //                displayPost(forum);
 //                int postIndex = getValidInt(forum.getPostsNum()) - 1;
-//                DiscussionPost selectedPost = forum.posts.get(postIndex);
+//                util.DiscussionPost selectedPost = forum.posts.get(postIndex);
 //                System.out.println(ENTER_CONTENT);
 //                String updatingContent = getStringInput();
 //                currentUser.addReply(selectedPost,
-//                        new DiscussionPost(currentUser, updatingContent, System.currentTimeMillis()));
+//                        new util.DiscussionPost(currentUser, updatingContent, System.currentTimeMillis()));
 //                break;
 //            case 4:
 //                try {
-//                    verifyPermission(Teacher.class);
+//                    verifyPermission(util.Teacher.class);
 //                    if (forum.getPostsNum() == 0) {
 //                        System.out.println(NO_POSTS);
 //                        break;
@@ -627,14 +627,14 @@
 //                    disPlayVotes(forum);
 //                    System.out.println("Hit enter to proceed...");
 //                    getStringInput();
-//                } catch (NoPermissionException e) {
+//                } catch (util.NoPermissionException e) {
 //                    e.printStackTrace();
 //                }
 //                break;
 //            case 5:
 //                try {
-//                    if (forum.isUserVoted(currentUser)) throw new AlreadyVotedException();
-//                    if (currentUser.getClass() == Teacher.class) throw new TeacherCannotVoteException();
+//                    if (forum.isUserVoted(currentUser)) throw new util.AlreadyVotedException();
+//                    if (currentUser.getClass() == util.Teacher.class) throw new util.TeacherCannotVoteException();
 //                    if (forum.getPostsNum() == 0) {
 //                        System.out.println(NO_POSTS);
 //                        break;
@@ -643,7 +643,7 @@
 //                    forum.displayContentList();
 //                    postSelection = getValidInt(forum.getPostsNum());
 //                    currentUser.vote(forum, forum.posts.get(postSelection - 1));
-//                } catch (AlreadyVotedException | TeacherCannotVoteException e) {
+//                } catch (util.AlreadyVotedException | util.TeacherCannotVoteException e) {
 //                    e.printStackTrace();
 //                }
 //                break;
@@ -665,24 +665,24 @@
 //        }
 //    }
 //
-//    private void displayForumTopics(Course course) {
+//    private void displayForumTopics(util.Course course) {
 //        for (int i = 0; i < course.forums.size(); i++) {
 //            System.out.print((i + 1) + ". " + course.forums.get(i).getTopic() + '\n');
 //        }
 //    }
 //
-//    private void disPlayVotes(DiscussionForum forum) {
-//        ArrayList<DiscussionPost> posts = forum.getPosts();
+//    private void disPlayVotes(util.DiscussionForum forum) {
+//        ArrayList<util.DiscussionPost> posts = forum.getPosts();
 //        for (int i = 0; i < posts.size(); i++) {
-//            DiscussionPost post = posts.get(i);
-//            User user = post.getOwner();
+//            util.DiscussionPost post = posts.get(i);
+//            util.User user = post.getOwner();
 //            System.out.println((i + 1) + ". " + user.getUsername() + "'s post");
 //            System.out.println("Votes: " + post.getVotesNum() + '\n');
 //        }
 //    }
 //
-//    private void displayPost(DiscussionForum forum) {
-//        ArrayList<DiscussionPost> posts = forum.posts;
+//    private void displayPost(util.DiscussionForum forum) {
+//        ArrayList<util.DiscussionPost> posts = forum.posts;
 //        for (int i = 0; i < posts.size(); i++) {
 //            System.out.print((i + 1) + ". " + posts.get(i) + '\n');
 //        }
@@ -718,7 +718,7 @@
 //        return scanner.nextLine();
 //    }
 //
-//    private void verifyPermission(Class<? extends User> permittedUserType) throws NoPermissionException {
-//        if (currentUser.getClass() != permittedUserType) throw new NoPermissionException();
+//    private void verifyPermission(Class<? extends util.User> permittedUserType) throws util.NoPermissionException {
+//        if (currentUser.getClass() != permittedUserType) throw new util.NoPermissionException();
 //    }
 //}

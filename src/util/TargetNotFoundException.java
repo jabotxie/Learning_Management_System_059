@@ -1,3 +1,5 @@
+package util;
+
 public class TargetNotFoundException extends Exception {
     @Override
     public String toString() {

@@ -1,3 +1,5 @@
+package util;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -26,7 +28,7 @@ public class CourseList implements Serializable {
 
     @Override
     public String toString() {
-        return "CourseList{" + "courses=" + courses +
+        return "util.CourseList{" + "courses=" + courses +
                 '}';
     }
 }

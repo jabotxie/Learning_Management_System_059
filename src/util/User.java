@@ -1,3 +1,5 @@
+package util;
+
 import java.io.*;
 import java.util.Objects;
 
@@ -91,7 +93,7 @@ public abstract class User implements Serializable {
 
     //toString method for user class
     public String toString() {
-        return getClass() == Teacher.class ? "Teacher " : "Student " + username;
+        return getClass() == Teacher.class ? "util.Teacher " : "util.Student " + username;
     }
 
     public abstract void vote(DiscussionForum forum, DiscussionPost post) throws TeacherCannotVoteException, AlreadyVotedException;

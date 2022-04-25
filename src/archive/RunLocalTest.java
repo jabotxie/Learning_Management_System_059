@@ -93,8 +93,8 @@
 //                            System.lineSeparator() +
 //                            "_____________________________________\n" +
 //                            "What type of account would you like to create?\n" +
-//                            "1. Teacher\n" +
-//                            "2. Student" +
+//                            "1. util.Teacher\n" +
+//                            "2. util.Student" +
 //                            System.lineSeparator() +
 //                            "_____________________________________\n" +
 //                            "Please enter the username: " +

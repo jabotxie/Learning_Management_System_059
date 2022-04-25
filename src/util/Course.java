@@ -1,3 +1,5 @@
+package util;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -66,7 +68,7 @@ public class Course implements Serializable {
 
     //toString method for course class
     public String toString() {
-        StringBuilder sb = new StringBuilder("Course: ").append(courseTitle);
+        StringBuilder sb = new StringBuilder("util.Course: ").append(courseTitle);
         if (forums != null && forums.size() != 0) {
             sb.append('\n').append("Forums:");
             for (DiscussionForum forum : forums) {
