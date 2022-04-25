@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d28170b6-672d-4479-8927-b4c27361f032" name="Changes" comment="New UI">
+    <list default="true" id="d28170b6-672d-4479-8927-b4c27361f032" name="Changes" comment="implement create course">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/TeacherCourseUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/TeacherCourseUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/ClientThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/ClientThread.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/PacketHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/PacketHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/DataManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/DataManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/StudentCourseUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/StudentCourseUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -139,13 +136,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1649548055923</updated>
-    </task>
-    <task id="LOCAL-00010" summary="abstract vote() method modified">
-      <created>1649624659516</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1649624659516</updated>
     </task>
     <task id="LOCAL-00011" summary="TeacherCannotVote Exception created">
       <created>1649624674786</created>
@@ -483,7 +473,14 @@
       <option name="project" value="LOCAL" />
       <updated>1650917454787</updated>
     </task>
-    <option name="localTasksCounter" value="59" />
+    <task id="LOCAL-00059" summary="implement create course">
+      <created>1650920479758</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1650920479758</updated>
+    </task>
+    <option name="localTasksCounter" value="60" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -507,7 +504,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Updated forum, post, course display method" />
     <MESSAGE value="Bug Fixed" />
     <MESSAGE value="Reverse the compareTo() method so with respect to sort the post" />
     <MESSAGE value="Project completed" />
@@ -532,7 +528,8 @@
     <MESSAGE value="Separate Client and Server" />
     <MESSAGE value="Finish LoginUI and CreateUI" />
     <MESSAGE value="New UI" />
-    <option name="LAST_COMMIT_MESSAGE" value="New UI" />
+    <MESSAGE value="implement create course" />
+    <option name="LAST_COMMIT_MESSAGE" value="implement create course" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
