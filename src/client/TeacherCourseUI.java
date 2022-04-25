@@ -8,10 +8,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.net.Socket;
 import java.util.ArrayList;
 
 public class TeacherCourseUI implements ActionListener {
@@ -125,7 +121,9 @@ public class TeacherCourseUI implements ActionListener {
                     frame.dispose();
                     new TeacherCourseUI();
                 } else {
+                    frame.dispose();
                     WindowGenerator.error("Course already exist.");
+                    new TeacherCourseUI();
                 }
 
         }
@@ -140,5 +138,20 @@ public class TeacherCourseUI implements ActionListener {
             }
         }
 
+        for (int i = 0; i < deleteButtons.size(); i++) {
+            JButton deleteButton = deleteButtons.get(i);
+            if (e.getSource() == deleteButton) {
+                Packet request = new Packet(DELETE_COURSE, new String[]{courseTitles[i]});
+                Packet response = Client.getResponse(request);
+                if (response.isOperationSuccess()) {
+                    frame.dispose();
+                    new TeacherCourseUI();
+                } else {
+                    frame.dispose();
+                    WindowGenerator.error("There is no such course");
+                    new TeacherCourseUI();
+                }
+            }
+        }
     }
 }

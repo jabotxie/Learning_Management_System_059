@@ -4,20 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d28170b6-672d-4479-8927-b4c27361f032" name="Changes" comment="Finish LoginUI and CreateUI">
-      <change afterPath="$PROJECT_DIR$/src/client/Design.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/client/StudentCourseUI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/client/WindowGenerator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/server/PacketHandler.java" afterDir="false" />
+    <list default="true" id="d28170b6-672d-4479-8927-b4c27361f032" name="Changes" comment="New UI">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/CourseUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/TeacherCourseUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/CreateUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/CreateAccountUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/LoginUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/LoginUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/TeacherCourseUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/TeacherCourseUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/server/ClientThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/ClientThread.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/SystemServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/SystemServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/PacketHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/PacketHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/util/DataManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/DataManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/Packet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/Packet.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -147,13 +139,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1649548055923</updated>
-    </task>
-    <task id="LOCAL-00009" summary="Created forumActivities() and improved structure for run()">
-      <created>1649619091781</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1649619091781</updated>
     </task>
     <task id="LOCAL-00010" summary="abstract vote() method modified">
       <created>1649624659516</created>
@@ -491,7 +476,14 @@
       <option name="project" value="LOCAL" />
       <updated>1650863754511</updated>
     </task>
-    <option name="localTasksCounter" value="58" />
+    <task id="LOCAL-00058" summary="New UI">
+      <created>1650917454787</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1650917454787</updated>
+    </task>
+    <option name="localTasksCounter" value="59" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -515,7 +507,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Bug fixed" />
     <MESSAGE value="Updated forum, post, course display method" />
     <MESSAGE value="Bug Fixed" />
     <MESSAGE value="Reverse the compareTo() method so with respect to sort the post" />
@@ -540,7 +531,8 @@
     <MESSAGE value="Create runnable class for executing a user thread" />
     <MESSAGE value="Separate Client and Server" />
     <MESSAGE value="Finish LoginUI and CreateUI" />
-    <option name="LAST_COMMIT_MESSAGE" value="Finish LoginUI and CreateUI" />
+    <MESSAGE value="New UI" />
+    <option name="LAST_COMMIT_MESSAGE" value="New UI" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -553,16 +545,6 @@
           <url>file://$PROJECT_DIR$/src/archive/UserClient.java</url>
           <line>142</line>
           <option name="timeStamp" value="11" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/server/SystemServer.java</url>
-          <line>17</line>
-          <option name="timeStamp" value="12" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/server/ClientThread.java</url>
-          <line>26</line>
-          <option name="timeStamp" value="13" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

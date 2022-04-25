@@ -60,8 +60,9 @@ public class PacketHandler {
     }
 
     static Packet deleteCourse(Packet request) {
-        //TODO:
-        return request;
+        String courseTitle = request.getMsg()[0];
+        boolean operationSuccess = DataManager.deleteCourse(courseTitle);
+        return new Packet(operationSuccess);
     }
 
     static Packet enterCourse(Packet request) {

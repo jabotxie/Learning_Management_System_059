@@ -224,6 +224,14 @@ public class DataManager implements Serializable, Runnable {
         }
     }
 
+    public static boolean deleteCourse(String courseTitle) {
+        synchronized (coursesSync) {
+            if (!courses.contains(new Course(courseTitle))) return false;
+            courses.remove(new Course(courseTitle));
+            return true;
+        }
+    }
+
     @Override
     public void run() {
         try {

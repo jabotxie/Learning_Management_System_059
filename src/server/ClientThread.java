@@ -63,10 +63,10 @@ public class ClientThread implements Runnable {
                 return login(request);
             case CREATE:
                 return create(request);
-
             case CREATE_COURSE:
                 return createCourse(request);
-
+            case DELETE_COURSE:
+                return deleteCourse(request);
             case REQUEST_COURSE_TITLES:
                 return requestCourseTitle();
 
