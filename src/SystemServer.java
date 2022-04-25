@@ -1,5 +1,3 @@
-package data;
-
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -9,8 +7,10 @@ import java.util.concurrent.Executors;
 
 public class SystemServer {
     private static final int PORT = 4242;
+
     private static ArrayList<ClientThread> clientThreads = new ArrayList<>();
     private static ExecutorService pool = Executors.newFixedThreadPool(10);
+
     public static void main(String[] args) throws IOException {
         ServerSocket socket = new ServerSocket(PORT);
         while (true) {

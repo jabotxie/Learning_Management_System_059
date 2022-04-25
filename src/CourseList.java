@@ -1,5 +1,3 @@
-package data;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -14,9 +12,11 @@ import java.util.ArrayList;
  * @version April 11, 2022
  */
 public class CourseList implements Serializable {
-    private final ArrayList<Course> courses;
+    private final ArrayList<
+            Course> courses;
 
-    public CourseList(ArrayList<Course> courses) {
+    public CourseList(ArrayList<
+            Course> courses) {
         this.courses = courses;
     }
 

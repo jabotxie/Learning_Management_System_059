@@ -1,8 +1,3 @@
-package data;
-
-import client.LoginUI;
-
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -21,8 +16,9 @@ public class ClientThread implements Runnable {
     @Override
     public void run() {
         try {
-            //TODO: implement execution
-            new LoginUI();
+            while (true) {
+
+            }
         } finally {
             try {
                 is.close();

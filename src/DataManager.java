@@ -1,5 +1,3 @@
-package data;
-
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -23,7 +21,7 @@ import java.util.Date;
  * @version April 11, 2022
  */
 
-public class DataServer implements Serializable, Runnable {
+public class DataManager implements Serializable, Runnable {
 
     public static ArrayList<User> users;
     public static final Date usersSync = new Date(System.currentTimeMillis());
@@ -53,10 +51,10 @@ public class DataServer implements Serializable, Runnable {
                     try {
                         courses = getCoursesFromFile();
                         if (courses == null) {
-                            courses = new ArrayList<>();
+                            courses = new ArrayList<Course>();
                         }
                     } catch (IOException | ClassNotFoundException e) {
-                        courses = new ArrayList<>();
+                        courses = new ArrayList<Course>();
                     }
                     try {
                         users = getUsersFromFile();
@@ -88,8 +86,8 @@ public class DataServer implements Serializable, Runnable {
     private static void saveCoursesToFile() {
         try {
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(coursesInfoFileName));
-            DataServer.isDataInitializedFromFile = false;
-            objectOutputStream.writeObject(new CourseList(DataServer.courses));
+            DataManager.isDataInitializedFromFile = false;
+            objectOutputStream.writeObject(new CourseList(DataManager.courses));
         } catch (IOException e) {
             e.printStackTrace();
         }

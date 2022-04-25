@@ -4,15 +4,26 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d28170b6-672d-4479-8927-b4c27361f032" name="Changes" comment="Implement ClientHandler to deal with multiple client using multi thread">
-      <change afterPath="$PROJECT_DIR$/src/data/ClientThread.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/data/SystemServer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/data/TargetNotFoundException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_11_2022_2_11_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_11_2022_2_11_PM__Changes_.xml" afterDir="false" />
+    <list default="true" id="d28170b6-672d-4479-8927-b4c27361f032" name="Changes" comment="Create runnable class for executing a user thread">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/CourseUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/CourseUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/Client.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/CourseUI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/CreateUI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/LoginUI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/AccountInfoNotMatchException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/ClientThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/ClientThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/CourseList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/CourseList.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/data/DataServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/DataServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/Improvements.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/LoginSuccessful.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/NoSuchTargetException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/RunLocalTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/archive/RunLocalTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/StudentGUI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/SystemServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/SystemServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/UserClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/archive/UserClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/UsernameAlreadyTakenException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/getCourse" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/getPost" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,11 +65,16 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../01. Sample Swing Application" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/client" />
     <property name="settings.editor.selected.configurable" value="build.tools" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Jason Xie\Documents\Purdue\CS180\Learning_Management_System_059\src\client" />
+      <recent name="C:\Users\Jason Xie\Documents\Purdue\CS180\Learning_Management_System_059\src\data" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Jason Xie\Documents\Purdue\CS180\Learning_Management_System_059\src\archive" />
       <recent name="C:\Users\Jason Xie\Documents\Purdue\CS180\Learning_Management_System_059\src\data" />
     </key>
     <key name="ExtractSuperBase.RECENT_KEYS">
@@ -74,7 +90,7 @@
       </method>
     </configuration>
     <configuration name="RadioButtonExample" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="RadioButtonExample" />
+      <option name="MAIN_CLASS_NAME" value="archive.RadioButtonExample" />
       <module name="Learning_Management_System_059" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -95,20 +111,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1649548055923</updated>
-    </task>
-    <task id="LOCAL-00005" summary="implemented login() and courseActivities()&#10;Created procedure text description&#10;created structure of run()">
-      <created>1649571649668</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1649571649668</updated>
-    </task>
-    <task id="LOCAL-00006" summary="Created class to help store courses into file&#10;Specifically, it is a class holding an ArrayList of Course. Each time we log out, we are trying to store an object of CourseList so that we can import it back when initializing the program. Subsequently, we can assign the instance imported from file to DataManager as a static instance">
-      <created>1649618685537</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1649618685537</updated>
     </task>
     <task id="LOCAL-00007" summary="Updated method to save local files">
       <created>1649618723332</created>
@@ -439,7 +441,21 @@
       <option name="project" value="LOCAL" />
       <updated>1650783227918</updated>
     </task>
-    <option name="localTasksCounter" value="54" />
+    <task id="LOCAL-00054" summary="Implement ClientHandler to deal with multiple client using multi thread">
+      <created>1650830116969</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1650830116969</updated>
+    </task>
+    <task id="LOCAL-00055" summary="Create runnable class for executing a user thread">
+      <created>1650830150231</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1650830150231</updated>
+    </task>
+    <option name="localTasksCounter" value="56" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -463,7 +479,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Implement to Serializable&#10;As we want to save the owner of the votes, users has to implement Serializable to let ObjectOutputStream save the instance" />
     <MESSAGE value="Complete class&#10;Deleted replyActivities&#10;Improved structure of run() function&#10;Improved postActivities() function" />
     <MESSAGE value="Unused test class deleted" />
     <MESSAGE value="Bug fixed" />
@@ -488,7 +503,8 @@
     <MESSAGE value="Create createUI" />
     <MESSAGE value="Separate client and server into different packages" />
     <MESSAGE value="Implement ClientHandler to deal with multiple client using multi thread" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implement ClientHandler to deal with multiple client using multi thread" />
+    <MESSAGE value="Create runnable class for executing a user thread" />
+    <option name="LAST_COMMIT_MESSAGE" value="Create runnable class for executing a user thread" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -498,7 +514,7 @@
           <option name="timeStamp" value="5" />
         </breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/data/UserClient.java</url>
+          <url>file://$PROJECT_DIR$/src/archive/UserClient.java</url>
           <line>142</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
