@@ -94,8 +94,8 @@ Exception is thrown when a user enters a username that is already on file while 
 ## Project 4 Bug and Implementation Improvements
 In order to improve the score we recieved for Project 4, we have implemented the following changes:
 
-Allow teachers to create and edit posts.
+- Allow teachers to create and edit posts.
 
-Changes to implementation and creation of courses and forums.
+- Changes to implementation and creation of courses and forums.
 
 
