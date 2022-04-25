@@ -91,7 +91,7 @@ Exception is thrown when a teacher user attemps to vote.
 #### UsernameAlreadyTakenException.java
 Exception is thrown when a user enters a username that is already on file while creating an account.
 
-## Project 4 Bug and Implementation Fixes
+## Project 4 Bug and Implementation Improvements
 In order to improve the score we recieved for Project 4, we have implemented the following changes:
 
 Allow teachers to create and edit posts.
