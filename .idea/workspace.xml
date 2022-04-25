@@ -4,32 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d28170b6-672d-4479-8927-b4c27361f032" name="Changes" comment="Separate Client and Server">
-      <change afterPath="$PROJECT_DIR$/src/client/Client.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/client/CourseUI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/client/CreateUI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/client/LoginUI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/server/ClientThread.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/util/Packet.java" afterDir="false" />
+    <list default="true" id="d28170b6-672d-4479-8927-b4c27361f032" name="Changes" comment="Finish LoginUI and CreateUI">
+      <change afterPath="$PROJECT_DIR$/src/client/Design.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/client/StudentCourseUI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/client/WindowGenerator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/server/PacketHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AlreadyVotedException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/AlreadyVotedException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ClientThread.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Course.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/Course.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CourseList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/CourseList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/DataManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DiscussionForum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/DiscussionForum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DiscussionPost.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/DiscussionPost.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/NoPermissionException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/NoPermissionException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/Student.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SystemServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/SystemServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TargetNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/TargetNotFoundException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Teacher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/Teacher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TeacherCannotVoteException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/TeacherCannotVoteException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Vote.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/Vote.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/archive/RunLocalTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/archive/RunLocalTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/archive/UserClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/archive/UserClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/CourseUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/TeacherCourseUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/CreateUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/CreateAccountUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/LoginUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/LoginUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/ClientThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/ClientThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/SystemServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/SystemServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/DataManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/DataManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/Packet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/Packet.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,6 +82,22 @@
     <configuration name="Client" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="client.Client" />
       <module name="Learning_Management_System_059" />
+      <selectedOptions>
+        <option name="environmentVariables" visible="false" />
+      </selectedOptions>
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="client.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Design" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="client.Design" />
+      <module name="Learning_Management_System_059" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="client.*" />
@@ -125,11 +129,13 @@
     <list>
       <item itemvalue="Application.SystemServer" />
       <item itemvalue="Application.Client" />
+      <item itemvalue="Application.Design" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Client" />
         <item itemvalue="Application.SystemServer" />
+        <item itemvalue="Application.Design" />
       </list>
     </recent_temporary>
   </component>
@@ -141,13 +147,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1649548055923</updated>
-    </task>
-    <task id="LOCAL-00008" summary="Bug fixed&#10;As the Object used to synchronized does not have Serializable implemented, ObjectOutputStream.writeObject() will throw exception. Consequently, another type of Object is used to synchronize all functions.">
-      <created>1649619001425</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1649619001425</updated>
     </task>
     <task id="LOCAL-00009" summary="Created forumActivities() and improved structure for run()">
       <created>1649619091781</created>
@@ -485,7 +484,14 @@
       <option name="project" value="LOCAL" />
       <updated>1650851167222</updated>
     </task>
-    <option name="localTasksCounter" value="57" />
+    <task id="LOCAL-00057" summary="Finish LoginUI and CreateUI">
+      <created>1650863754511</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1650863754511</updated>
+    </task>
+    <option name="localTasksCounter" value="58" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -509,7 +515,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Unused test class deleted" />
     <MESSAGE value="Bug fixed" />
     <MESSAGE value="Updated forum, post, course display method" />
     <MESSAGE value="Bug Fixed" />
@@ -534,7 +539,8 @@
     <MESSAGE value="Implement ClientHandler to deal with multiple client using multi thread" />
     <MESSAGE value="Create runnable class for executing a user thread" />
     <MESSAGE value="Separate Client and Server" />
-    <option name="LAST_COMMIT_MESSAGE" value="Separate Client and Server" />
+    <MESSAGE value="Finish LoginUI and CreateUI" />
+    <option name="LAST_COMMIT_MESSAGE" value="Finish LoginUI and CreateUI" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

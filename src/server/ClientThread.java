@@ -2,6 +2,8 @@ package server;
 
 import com.sun.istack.internal.NotNull;
 import util.*;
+import static server.PacketHandler.*;
+import static util.Packet.*;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -30,7 +32,8 @@ public class ClientThread implements Runnable {
                     os.writeObject(getResponse(o));
 
                 } catch (IOException | ClassNotFoundException e) {
-                    e.printStackTrace();
+                    System.out.println("[SERVER] Client Disconnected");
+                    break;
                 }
             }
         } finally {
@@ -53,59 +56,21 @@ public class ClientThread implements Runnable {
         }
     }
 
-    private Packet processPacket(@NotNull Packet packet) {
-        int requestType = packet.getRequestType();
+    private Packet processPacket(@NotNull Packet request) {
+        int requestType = request.getRequestType();
         switch (requestType) {
-            case Packet.LOGIN:
-                return login(packet);
-            case Packet.CREATE:
-                return create(packet);
-            case Packet.REQUEST_COURSE_TITLES:
+            case LOGIN:
+                return login(request);
+            case CREATE:
+                return create(request);
+
+            case CREATE_COURSE:
+                return createCourse(request);
+
+            case REQUEST_COURSE_TITLES:
                 return requestCourseTitle();
 
         }
         return new Packet(false);
-    }
-
-    /**
-     * @param packet the packet sent by client
-     * @return login in successful: operationSuccess = true
-     * util.User is msgOne
-     */
-    private Packet login(Packet packet) {
-        try {
-
-            String username = packet.getMsg()[0];
-            String password = packet.getMsg()[1];
-            Class<? extends User> c = DataManager.checkToken(username, password);
-            if (c == null) {
-                return new Packet(false);
-            } else {
-                return new Packet(new String[]{c == Teacher.class ? "T" : "S"}, true);
-            }
-        } catch (ClassCastException | IndexOutOfBoundsException e) {
-            e.printStackTrace();
-            return new Packet(false);
-        }
-    }
-
-
-    private Packet create(Packet packet) {
-        try {
-            String userType = packet.getMsg()[0];
-            String username = packet.getMsg()[1];
-            String password = packet.getMsg()[2];
-
-            boolean operationSuccess = DataManager.createAccount(userType.equals("T") ? Teacher.class : Student.class,
-                    username, password);
-            return new Packet(operationSuccess);
-        } catch (ClassCastException e) {
-            e.printStackTrace();
-            return new Packet(false);
-        }
-    }
-
-    private Packet requestCourseTitle() {
-        return new Packet(DataManager.getCourseTitles());
     }
 }

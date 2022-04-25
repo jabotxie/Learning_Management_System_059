@@ -13,7 +13,7 @@ public class Packet implements Serializable {
     public static final int DELETE = 2;
 
     public static final int CREATE_COURSE = 10;
-    public static final int EDIT_COURSE = 11;
+    public static final int RENAME_COURSE = 11;
     public static final int DELETE_COURSE = 12;
     public static final int ENTER_COURSE = 13;
 
@@ -30,6 +30,8 @@ public class Packet implements Serializable {
     public static final int SORT_POST = 35;
 
     public static final int REQUEST_COURSE_TITLES = 40;
+    public static final int REQUEST_FORUM_TOPICS = 41;
+    public static final int REQUEST_POST_LIST = 42;
 
     public Packet(int requestType) {
         this.requestType = requestType;

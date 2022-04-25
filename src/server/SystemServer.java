@@ -21,7 +21,7 @@ public class SystemServer {
         while (true) {
             System.out.println("[SERVER] Waiting for client connection...");
             Socket client = socket.accept();
-            System.out.println("[Server] Connected to client!");
+            System.out.println("[SERVER] Connected to client!");
             ClientThread clientThread = new ClientThread(client);
             clientThreads.add(clientThread);
 

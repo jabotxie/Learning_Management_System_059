@@ -215,15 +215,12 @@ public class DataManager implements Serializable, Runnable {
         saveData();
     }
 
-    public static ArrayList<Course> getCourses() {
-        synchronized (coursesSync) {
-            return courses;
-        }
-    }
 
-    public static ArrayList<User> getUsers() {
-        synchronized (usersSync) {
-            return users;
+    public static boolean createCourse(String courseTitle) {
+        synchronized (coursesSync) {
+            if (courses.contains(new Course(courseTitle))) return false;
+            courses.add(new Course(courseTitle));
+            return true;
         }
     }
 

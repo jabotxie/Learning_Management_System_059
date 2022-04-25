@@ -1,9 +1,6 @@
 package client;
 
 import util.Packet;
-import util.Student;
-import util.Teacher;
-import util.User;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -12,13 +9,9 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.Objects;
 
-public class CreateUI implements ActionListener {
+public class CreateAccountUI implements ActionListener {
 
-    Socket socket;
-    ObjectInputStream is;
-    ObjectOutputStream os;
 
     JFrame frame = new JFrame("Learning Management System");
 
@@ -33,10 +26,8 @@ public class CreateUI implements ActionListener {
     JRadioButton studentRB = new JRadioButton("Student");
     ButtonGroup group = new ButtonGroup();
 
-    public CreateUI(Socket socket, ObjectInputStream is, ObjectOutputStream os) {
-        this.socket = socket;
-        this.is = is;
-        this.os = os;
+    public CreateAccountUI() {
+
 
         teacherRB.setActionCommand("T");
         teacherRB.setSelected(true);
@@ -62,7 +53,6 @@ public class CreateUI implements ActionListener {
 
         JPanel infoPanel = new JPanel();
         infoPanel.setBounds(115, 30, 200, 150);
-//        infoPanel.setBackground(Color.BLUE);
         infoPanel.setLayout(null);
         infoPanel.add(userTypeLabel);
         infoPanel.add(teacherRB);
@@ -85,33 +75,26 @@ public class CreateUI implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (socket != null) {
-            if (e.getSource() == backToLoginButton) {
+
+        if (e.getSource() == backToLoginButton) {
+            frame.dispose();
+            new LoginUI();
+        }
+        if (e.getSource() == createButton) {
+            String userType = group.getSelection().getActionCommand();
+            String password = passwordText.getText();
+            String username = usernameText.getText();
+
+            Packet response = Client.getResponse(new Packet(Packet.CREATE, new String[]{userType, username, password}));
+
+            if (response.isOperationSuccess()) {
+                WindowGenerator.showMsg("You have successfully created an account and logged in!");
                 frame.dispose();
-                new LoginUI(socket, is, os);
-
-            }
-            if (e.getSource() == createButton) {
-                String userType = group.getSelection().getActionCommand();
-                String password = passwordText.getText();
-                String username = usernameText.getText();
-
-                try {
-                    os.writeObject(new Packet(Packet.CREATE, new String[]{userType, username, password}));
-                    Packet response = (Packet) is.readObject();
-
-                    if (response.isOperationSuccess()) {
-                        JOptionPane.showMessageDialog(null, "You have successfully created an account " +
-                                "and logged in.", "Login Succeed", JOptionPane.INFORMATION_MESSAGE);
-                        new CourseUI(socket,is, os,
-                                userType.equals("T") ? new Teacher(username) : new Student(username));
-                    } else {
-                        JOptionPane.showMessageDialog(null, "The username has already been taken. " +
-                                "Please enter another username", "Error", JOptionPane.ERROR_MESSAGE);
-                    }
-                } catch (IOException | ClassNotFoundException | ClassCastException ioException) {
-                    ioException.printStackTrace();
-                }
+                if (userType.equals("T")) new TeacherCourseUI();
+                else new StudentCourseUI();
+            } else {
+                WindowGenerator.error("The username has been taken. Please change try again");
+                frame.dispose();
             }
         }
     }
