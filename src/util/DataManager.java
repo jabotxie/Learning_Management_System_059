@@ -232,6 +232,15 @@ public class DataManager implements Serializable, Runnable {
         }
     }
 
+    public static boolean renameCourse(String courseName, String newTitle) {
+        synchronized (coursesSync) {
+            int courseIndex = courses.indexOf(new Course(courseName));
+            if (courseIndex == -1) return false;
+            courses.get(courseIndex).setCourseTitle(newTitle);
+            return true;
+        }
+    }
+
     @Override
     public void run() {
         try {
@@ -268,6 +277,5 @@ public class DataManager implements Serializable, Runnable {
             }
         }
     }
-    //TODO: Add data function methods
 
 }

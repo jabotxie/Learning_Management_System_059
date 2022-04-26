@@ -15,4 +15,9 @@ public class WindowGenerator {
     static String requestClientInput(String prompt) {
         return JOptionPane.showInputDialog(prompt);
     }
+
+    static boolean confirm(String warning, String title) {
+        return JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null,
+                warning, title, JOptionPane.YES_NO_OPTION);
+    }
 }

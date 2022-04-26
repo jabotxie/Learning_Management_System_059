@@ -15,8 +15,8 @@ public class TeacherCourseUI implements ActionListener {
 
     JFrame frame = new JFrame("Learning Management System");
 
-    JButton createButton = new JButton("create");
-
+    JButton createButton = new JButton("Create");
+    JButton refreshButton = new JButton("Refresh");
     JButton logoutButton = new JButton("Log out");
     ArrayList<JButton> courseButtons = new ArrayList<>();
     ArrayList<JButton> renameButtons = new ArrayList<>();
@@ -79,22 +79,25 @@ public class TeacherCourseUI implements ActionListener {
             }
 
 
-            JPanel logoutPanel = new JPanel();
-            logoutPanel.setBackground(Color.BLUE);
-            logoutPanel.setBounds(relativeX, relativeY + createPanel.getHeight() + coursePanel.getHeight() + 20,
-                    80, 20);
-            logoutPanel.setLayout(null);
+            JPanel functionPanel = new JPanel();
+            functionPanel.setBounds(relativeX, relativeY + createPanel.getHeight() + coursePanel.getHeight() + 20,
+                    80, 50);
+            functionPanel.setLayout(null);
 
             logoutButton.addActionListener(this);
             logoutButton.setFocusable(false);
             logoutButton.setBounds(0, 0, 80, 20);
 
-            logoutPanel.add(logoutButton);
+            refreshButton.addActionListener(this);
+            refreshButton.setFocusable(false);
+            refreshButton.setBounds(0, 30, 80, 20);
 
+            functionPanel.add(logoutButton);
+            functionPanel.add(refreshButton);
 
             frame.add(createPanel);
             frame.add(coursePanel);
-            frame.add(logoutPanel);
+            frame.add(functionPanel);
 
         } catch (ClassCastException e) {
             e.printStackTrace();
@@ -105,11 +108,15 @@ public class TeacherCourseUI implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() == logoutButton) {
-            if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null,
-                    "Do you want to sign out?", "Log Out Confirmation", JOptionPane.YES_NO_OPTION)) {
+            if (WindowGenerator.confirm("Are you sure you want to log out?", "Confirmation")) {
                 frame.dispose();
                 new LoginUI();
             }
+        }
+
+        if (e.getSource() == refreshButton) {
+            frame.dispose();
+            new TeacherCourseUI();
         }
 
         if (e.getSource() == createButton) {
@@ -134,21 +141,53 @@ public class TeacherCourseUI implements ActionListener {
                         + courseTitles[i]);
                 Packet request = new Packet(RENAME_COURSE, new String[]{courseTitles[i], newTitle});
                 Packet response = Client.getResponse(request);
-                //TODO
+                if (response.isOperationSuccess()) {
+                    frame.dispose();
+                    WindowGenerator.showMsg("The name of the course " + courseTitles[i] + " has been changed to "
+                            + newTitle + "!");
+                    new TeacherCourseUI();
+                } else {
+                    frame.dispose();
+                    WindowGenerator.error("Course doesn't exist. It may be deleted or modified other users. " +
+                            "Please refresh and try again.");
+                    new TeacherCourseUI();
+                }
             }
         }
 
         for (int i = 0; i < deleteButtons.size(); i++) {
             JButton deleteButton = deleteButtons.get(i);
             if (e.getSource() == deleteButton) {
-                Packet request = new Packet(DELETE_COURSE, new String[]{courseTitles[i]});
+                if (WindowGenerator.confirm(
+                        "Deleting the course will lose all the forums and post in this course. " +
+                                "Are you sure you want to delete this course?", "Warning")) {
+                    Packet request = new Packet(DELETE_COURSE, new String[]{courseTitles[i]});
+                    Packet response = Client.getResponse(request);
+                    if (response.isOperationSuccess()) {
+                        frame.dispose();
+                        new TeacherCourseUI();
+                    } else {
+                        frame.dispose();
+                        WindowGenerator.error("Course doesn't exist. It may be deleted or modified other users. " +
+                                "Please refresh and try again.");
+                        new TeacherCourseUI();
+                    }
+                }
+            }
+        }
+
+        for (int i = 0; i < courseButtons.size(); i++) {
+            JButton courseButton = courseButtons.get(i);
+            if (e.getSource() == courseButton) {
+                Packet request = new Packet(ENTER_COURSE, new String[]{courseTitles[i]});
                 Packet response = Client.getResponse(request);
                 if (response.isOperationSuccess()) {
                     frame.dispose();
-                    new TeacherCourseUI();
+                    new TeacherForumUI();
                 } else {
                     frame.dispose();
-                    WindowGenerator.error("There is no such course");
+                    WindowGenerator.error("Course doesn't exist. It may be deleted or modified other users. " +
+                    "Please refresh and try again.");
                     new TeacherCourseUI();
                 }
             }

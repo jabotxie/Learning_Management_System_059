@@ -54,9 +54,10 @@ public class PacketHandler {
         return new Packet(operationSuccess);
     }
 
-    static Packet editCourse(Packet request) {
-        //TODO:
-        return request;
+    static Packet renameCourse(Packet request) {
+        String oldTitle = request.getMsg()[0];
+        String updatingTitle = request.getMsg()[1];
+        return new Packet(DataManager.renameCourse(oldTitle, updatingTitle));
     }
 
     static Packet deleteCourse(Packet request) {
@@ -66,8 +67,9 @@ public class PacketHandler {
     }
 
     static Packet enterCourse(Packet request) {
-        //TODO:
-        return request;
+        synchronized (DataManager.coursesSync) {
+            return new Packet(DataManager.courses.contains(new Course(request.getMsg()[0])));
+        }
     }
 
     //////////////////////////////////////////////////////////////////////
@@ -132,8 +134,11 @@ public class PacketHandler {
     }
 
     static Packet requestForumTopics(Packet request) {
-        //TODO:
-        return request;
+        String courseTitle = request.getMsg()[0];
+        int courseIndex = DataManager.courses.indexOf(new Course(courseTitle));
+        if (courseIndex == -1) return new Packet(false);
+        else return new Packet(DataManager.courses.get(courseIndex).getForumTopics(), true);
+
     }
 
     static Packet requestPostList(Packet request) {

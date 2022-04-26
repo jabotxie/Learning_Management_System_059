@@ -52,6 +52,14 @@ public class Course implements Serializable {
         this.courseTitle = courseTitle;
     }
 
+    public String[] getForumTopics() {
+        String[] topics = new String[forums.size()];
+        for (int i = 0; i < forums.size(); i++) {
+            DiscussionForum forum = forums.get(i);
+            topics[i] = forum.getTopic();
+        }
+        return topics;
+    }
 
     @Override
     public boolean equals(Object o) {
