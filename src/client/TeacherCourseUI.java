@@ -23,7 +23,7 @@ public class TeacherCourseUI implements ActionListener {
     ArrayList<JButton> deleteButtons = new ArrayList<>();
     String[] courseTitles;
 
-    public TeacherCourseUI() {
+    public TeacherCourseUI(Point location) {
         try {
             Packet request = new Packet(Packet.REQUEST_COURSE_TITLES);
             Packet response = Client.getResponse(request);
@@ -34,7 +34,8 @@ public class TeacherCourseUI implements ActionListener {
             int relativeY = 0;
 
             frame.setSize(600, 400);
-            frame.setLocationRelativeTo(null);
+            frame.setLocation(location);
+            frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
             frame.setLayout(null);
             frame.setVisible(true);
 
@@ -108,7 +109,7 @@ public class TeacherCourseUI implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() == logoutButton) {
-            if (WindowGenerator.confirm("Are you sure you want to log out?", "Confirmation")) {
+            if (WindowGenerator.confirm(frame, "Are you sure you want to log out?", "Confirmation")) {
                 frame.dispose();
                 new LoginUI();
             }
@@ -116,41 +117,41 @@ public class TeacherCourseUI implements ActionListener {
 
         if (e.getSource() == refreshButton) {
             frame.dispose();
-            new TeacherCourseUI();
+            new TeacherCourseUI(frame.getLocation());
         }
 
         if (e.getSource() == createButton) {
 
-                String courseTitle = WindowGenerator.requestClientInput("Enter the course title");
+                String courseTitle = WindowGenerator.requestClientInput(frame, "Enter the course title");
 
                 Packet response = Client.getResponse(new Packet(CREATE_COURSE, new String[]{courseTitle}));
                 if (response.isOperationSuccess()) {
                     frame.dispose();
-                    new TeacherCourseUI();
+                    new TeacherCourseUI(frame.getLocation());
                 } else {
                     frame.dispose();
-                    WindowGenerator.error("Course already exist.");
-                    new TeacherCourseUI();
+                    WindowGenerator.error(frame, "Course already exist.");
+                    new TeacherCourseUI(frame.getLocation());
                 }
 
         }
         for (int i = 0; i < renameButtons.size(); i++) {
             JButton renameButton = renameButtons.get(i);
             if (e.getSource() == renameButton) {
-                String newTitle = WindowGenerator.requestClientInput("Enter the new title for "
+                String newTitle = WindowGenerator.requestClientInput(frame, "Enter the new title for "
                         + courseTitles[i]);
                 Packet request = new Packet(RENAME_COURSE, new String[]{courseTitles[i], newTitle});
                 Packet response = Client.getResponse(request);
                 if (response.isOperationSuccess()) {
                     frame.dispose();
-                    WindowGenerator.showMsg("The name of the course " + courseTitles[i] + " has been changed to "
+                    WindowGenerator.showMsg(frame, "The name of the course " + courseTitles[i] + " has been changed to "
                             + newTitle + "!");
-                    new TeacherCourseUI();
+                    new TeacherCourseUI(frame.getLocation());
                 } else {
                     frame.dispose();
-                    WindowGenerator.error("Course doesn't exist. It may be deleted or modified other users. " +
+                    WindowGenerator.error(frame, "Course doesn't exist. It may be deleted or modified other users. " +
                             "Please refresh and try again.");
-                    new TeacherCourseUI();
+                    new TeacherCourseUI(frame.getLocation());
                 }
             }
         }
@@ -158,19 +159,19 @@ public class TeacherCourseUI implements ActionListener {
         for (int i = 0; i < deleteButtons.size(); i++) {
             JButton deleteButton = deleteButtons.get(i);
             if (e.getSource() == deleteButton) {
-                if (WindowGenerator.confirm(
+                if (WindowGenerator.confirm(frame,
                         "Deleting the course will lose all the forums and post in this course. " +
                                 "Are you sure you want to delete this course?", "Warning")) {
                     Packet request = new Packet(DELETE_COURSE, new String[]{courseTitles[i]});
                     Packet response = Client.getResponse(request);
                     if (response.isOperationSuccess()) {
                         frame.dispose();
-                        new TeacherCourseUI();
+                        new TeacherCourseUI(frame.getLocation());
                     } else {
                         frame.dispose();
-                        WindowGenerator.error("Course doesn't exist. It may be deleted or modified other users. " +
+                        WindowGenerator.error(frame, "Course doesn't exist. It may be deleted or modified other users. " +
                                 "Please refresh and try again.");
-                        new TeacherCourseUI();
+                        new TeacherCourseUI(frame.getLocation());
                     }
                 }
             }
@@ -186,9 +187,9 @@ public class TeacherCourseUI implements ActionListener {
                     new TeacherForumUI();
                 } else {
                     frame.dispose();
-                    WindowGenerator.error("Course doesn't exist. It may be deleted or modified other users. " +
+                    WindowGenerator.error(frame, "Course doesn't exist. It may be deleted or modified other users. " +
                     "Please refresh and try again.");
-                    new TeacherCourseUI();
+                    new TeacherCourseUI(frame.getLocation());
                 }
             }
         }

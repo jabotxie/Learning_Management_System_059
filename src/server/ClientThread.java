@@ -11,6 +11,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 public class ClientThread implements Runnable {
+    String username;
     Socket socket;
     ObjectInputStream is;
     ObjectOutputStream os;
@@ -30,9 +31,11 @@ public class ClientThread implements Runnable {
 
                     Object o = is.readObject();
                     os.writeObject(getResponse(o));
+                    DataManager.saveData();
 
                 } catch (IOException | ClassNotFoundException e) {
                     System.out.println("[SERVER] Client Disconnected");
+                    SystemServer.onlineUsers.remove(username);
                     break;
                 }
             }
@@ -60,7 +63,9 @@ public class ClientThread implements Runnable {
         int requestType = request.getRequestType();
         switch (requestType) {
             case LOGIN:
-                return login(request);
+                Packet response = login(request);
+                if (response.isOperationSuccess()) username = request.getMsg()[0];
+                return response;
             case CREATE:
                 return create(request);
             case CREATE_COURSE:

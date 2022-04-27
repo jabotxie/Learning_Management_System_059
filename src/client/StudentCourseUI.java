@@ -13,34 +13,39 @@ public class StudentCourseUI implements ActionListener {
     JFrame frame = new JFrame("Learning Management System");
     JButton logoutButton = new JButton("Log out");
     ArrayList<JButton> courseButtons = new ArrayList<>();
+    String[] courseTitles;
 
-    public StudentCourseUI() {
-        try {
+    public StudentCourseUI(Point location) {
 
-            logoutButton.setFocusable(false);
-            logoutButton.addActionListener(this);
+        Packet request = new Packet(Packet.REQUEST_COURSE_TITLES);
+        Packet response = Client.getResponse(request);
 
-            Packet response = Client.getResponse(new Packet(Packet.REQUEST_COURSE_TITLES));
-            String[] courseTitles = response.getMsg();
+        courseTitles = response.getMsg();
 
-            for (String title : courseTitles) {
-                courseButtons.add(new JButton(title));
-            }
+        JFrame frame = new JFrame("Learning Management System");
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setLayout(null);
+        frame.setVisible(true);
+        frame.setLocation(location);
+        frame.setSize(600, 400);
 
-            frame.setSize(600, 400);
-            frame.setLocationRelativeTo(null);
-            frame.setVisible(true);
+        int relativeX = 0;
+        int relativeY = 0;
+        JPanel coursePanel = new JPanel();
+        coursePanel.setBounds(relativeX, relativeY + 10,
+                265, courseTitles.length * 30 - 10);
+        coursePanel.setLayout(null);
 
-            JPanel panel = new JPanel();
-            panel.setBackground(Color.PINK);
-            panel.add(logoutButton);
-            for (JButton course : courseButtons) {
-                panel.add(course);
-            }
-            frame.add(panel);
-        } catch (ClassCastException e) {
-            e.printStackTrace();
+        for (int i = 0; i < courseTitles.length; i++) {
+            JButton courseButton = new JButton(courseTitles[i]);
+            courseButton.addActionListener(this);
+            courseButton.setFocusable(false);
+            courseButton.setBounds(0, i * 30, 80, 20);
+            courseButtons.add(courseButton);
+
+            coursePanel.add(courseButton);
         }
+        frame.add(coursePanel);
     }
 
     @Override

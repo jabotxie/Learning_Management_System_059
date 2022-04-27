@@ -3,6 +3,7 @@ package client;
 import util.Packet;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -31,7 +32,31 @@ public class LoginUI implements ActionListener {
 
         frame.setSize(600, 400);
         frame.setLocationRelativeTo(null);
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+
+
+        JPanel loginPanel = new JPanel();
+        loginPanel.add(usernameLabel);
+        loginPanel.add(usernameText);
+        loginPanel.add(passwordLabel);
+        loginPanel.add(passwordText);
+        loginPanel.add(loginButton);
+        loginPanel.add(createButton);
+        frame.add(loginPanel);
+
+    }
+
+    public LoginUI(Point location) {
+
+        loginButton.setFocusable(false);
+        loginButton.addActionListener(this);
+        createButton.setFocusable(false);
+        createButton.addActionListener(this);
+
+        frame.setSize(600, 400);
+        frame.setLocation(location);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
 
 
@@ -63,18 +88,19 @@ public class LoginUI implements ActionListener {
                         "Login Succeed", JOptionPane.INFORMATION_MESSAGE);
                 Client.username = username;
                 String userType = response.getMsg()[0];
-                if (userType.equals("T")) new TeacherCourseUI();
-                else new StudentCourseUI();
+                if (userType.equals("T")) new TeacherCourseUI(frame.getLocation());
+                else new StudentCourseUI(frame.getLocation());
 
             } else {
-                JOptionPane.showMessageDialog(null, "Username doesn't exist " +
-                        "or the password is incorrect", "Error", JOptionPane.ERROR_MESSAGE);
+                WindowGenerator.error(frame, response.getMsg()[0]);
+                frame.dispose();
+                new LoginUI(frame.getLocation());
             }
 
         }
         if (e.getSource() == createButton) {
             frame.dispose();
-            new CreateAccountUI();
+            new CreateAccountUI(frame.getLocation());
         }
 
     }

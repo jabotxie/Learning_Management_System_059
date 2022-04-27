@@ -29,42 +29,21 @@ public class DataManager implements Serializable, Runnable {
     public static final Date usersSync = new Date(System.currentTimeMillis());
     public static ArrayList<Course> courses;
     public static final Date coursesSync = new Date(System.currentTimeMillis());
-    private static boolean isDataInitializedFromFile = false;
     public static String usersInfoFileName = "UserInfo.txt";
     public static String coursesInfoFileName = "CoursesInfo.txt";
 
-    public static void main(String[] args) throws IOException {
-        initData();
-        //TODO: Initialize the server
-        ServerSocket serverSocket = new ServerSocket(4242);
-
-        System.out.println("Waiting for the client to connect...");
-        Socket socket = serverSocket.accept();
-        System.out.println("Client connected!");
-
-        BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-    }
 
     //method that initializes data upon first run
     public static void initData() {
         synchronized (coursesSync) {
             synchronized (usersSync) {
-                if (!isDataInitializedFromFile) {
-                    try {
-                        courses = getCoursesFromFile();
-                        if (courses == null) {
-                            courses = new ArrayList<>();
-                        }
-                    } catch (IOException | ClassNotFoundException e) {
-                        courses = new ArrayList<>();
-                    }
-                    try {
-                        users = getUsersFromFile();
-
-                    } catch (FileNotFoundException e) {//No users in database
-                        users = new ArrayList<>();
-                    }
-                    isDataInitializedFromFile = true;
+                courses = getCoursesFromFile();
+                if (courses == null) {
+                    courses = new ArrayList<>();
+                }
+                users = getUsersFromFile();
+                if (users == null) {
+                    users = new ArrayList<>();
                 }
             }
         }
@@ -74,66 +53,68 @@ public class DataManager implements Serializable, Runnable {
     public static void saveData() {
         saveUserInfo();
         saveCoursesToFile();
-
     }
 
     //method that retrieves course info from file
-    private static ArrayList<Course> getCoursesFromFile() throws IOException, ClassNotFoundException {
-        ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(coursesInfoFileName));
-        CourseList courseList = (CourseList) objectInputStream.readObject();
-        return courseList.getCourses();
+    @SuppressWarnings("unchecked")
+    private static ArrayList<Course> getCoursesFromFile() {
+        try {
+            ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(coursesInfoFileName));
+            return (ArrayList<Course>) objectInputStream.readObject();
+        } catch (ClassCastException | IOException | ClassNotFoundException e) {
+            return null;
+        }
     }
 
     //method that saves course info to file
     private static void saveCoursesToFile() {
         try {
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(coursesInfoFileName));
-            DataManager.isDataInitializedFromFile = false;
-            objectOutputStream.writeObject(new CourseList(DataManager.courses));
+            objectOutputStream.writeObject(DataManager.courses);
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     //method that retrieves user info from file
-    private static ArrayList<User> getUsersFromFile() throws FileNotFoundException {
-
-        BufferedReader bf = new BufferedReader(new FileReader(usersInfoFileName));
-        ArrayList<String> lines = new ArrayList<>();
-        ArrayList<User> users = new ArrayList<>();
-
+    private static ArrayList<User> getUsersFromFile() {
         try {
-            String line = bf.readLine();
-            while (line != null) {
-                lines.add(line);
-                line = bf.readLine();
-            }
-            bf.close();
+            BufferedReader bf = new BufferedReader(new FileReader(usersInfoFileName));
+            ArrayList<String> lines = new ArrayList<>();
+            ArrayList<User> users = new ArrayList<>();
+            try {
+                String line = bf.readLine();
+                while (line != null) {
+                    lines.add(line);
+                    line = bf.readLine();
+                }
+                bf.close();
 
-            for (int i = 0; i < lines.size(); i += 3) {
-                String username = lines.get(i);
-                String password = lines.get(i + 1);
-                String userType = lines.get(i + 2);
-                Class<? extends User> t = userType.equals("T") ? Teacher.class : Student.class;
-                if (t == Teacher.class) {
-                    users.add(new Teacher(username, password));
-                } else {
-                    users.add(new Student(username, password));
+                for (int i = 0; i < lines.size(); i += 3) {
+                    String username = lines.get(i);
+                    String password = lines.get(i + 1);
+                    String userType = lines.get(i + 2);
+                    Class<? extends User> t = userType.equals("T") ? Teacher.class : Student.class;
+                    if (t == Teacher.class) {
+                        users.add(new Teacher(username, password));
+                    } else {
+                        users.add(new Student(username, password));
+                    }
+
                 }
 
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-
-        } catch (IOException e) {
-            e.printStackTrace();
+            return users;
+        } catch (FileNotFoundException e) {
+            return null;
         }
-        return users;
     }
 
     //method to save user info to file
     private static void saveUserInfo() {
         synchronized (usersSync) {
-
             StringBuilder sb = new StringBuilder();
             for (User user : users) {
                 sb.append(user.getUsername()).append('\n');
@@ -174,16 +155,11 @@ public class DataManager implements Serializable, Runnable {
                 return false;
             } else {
                 if (c == Teacher.class) {
-                    Teacher newTeacher = new Teacher(username, password);
-                    users.add(newTeacher);
-                    return true;
+                    users.add(new Teacher(username, password));
                 } else {
                     users.add(new Student(username, password));
-                    Student newStudent = new Student(username, password);
-                    users.add(newStudent);
-                    return true;
                 }
-
+                return true;
             }
         }
     }
@@ -268,7 +244,7 @@ public class DataManager implements Serializable, Runnable {
             if (courses.contains(new Course(courseTitle))) {
                 int courseIndex = courses.indexOf(new Course(courseTitle));
                 Course course = courses.get(courseIndex);
-                for (DiscussionForum forum: course.forums) {
+                for (DiscussionForum forum : course.forums) {
                     forumTopics.add(forum.getTopic());
                 }
                 return forumTopics;

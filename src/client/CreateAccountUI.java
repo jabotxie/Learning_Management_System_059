@@ -3,6 +3,7 @@ package client;
 import util.Packet;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -26,7 +27,7 @@ public class CreateAccountUI implements ActionListener {
     JRadioButton studentRB = new JRadioButton("Student");
     ButtonGroup group = new ButtonGroup();
 
-    public CreateAccountUI() {
+    public CreateAccountUI(Point point) {
 
 
         teacherRB.setActionCommand("T");
@@ -66,8 +67,8 @@ public class CreateAccountUI implements ActionListener {
 
         frame.setSize(400, 250);
         frame.setLayout(null);
-        frame.setLocationRelativeTo(null);
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setLocation(point);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
         frame.add(infoPanel);
 
@@ -88,13 +89,14 @@ public class CreateAccountUI implements ActionListener {
             Packet response = Client.getResponse(new Packet(Packet.CREATE, new String[]{userType, username, password}));
 
             if (response.isOperationSuccess()) {
-                WindowGenerator.showMsg("You have successfully created an account and logged in!");
+                WindowGenerator.showMsg(frame, "You have successfully created an account and logged in!");
                 frame.dispose();
-                if (userType.equals("T")) new TeacherCourseUI();
-                else new StudentCourseUI();
+                if (userType.equals("T")) new TeacherCourseUI(frame.getLocation());
+                else new StudentCourseUI(frame.getLocation());
             } else {
-                WindowGenerator.error("The username has been taken. Please change try again");
+                WindowGenerator.error(frame, "The username has been taken. Please change try again");
                 frame.dispose();
+                new CreateAccountUI(frame.getLocation());
             }
         }
     }

@@ -61,6 +61,11 @@ public class Packet implements Serializable {
         this.operationSuccess = operationSuccess;
     }
 
+    public Packet(String msg, boolean operationSuccess) {
+        this.msg = new String[]{msg};
+        this.operationSuccess = operationSuccess;
+    }
+
     public int getRequestType() {
         return requestType;
     }

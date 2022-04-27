@@ -4,15 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d28170b6-672d-4479-8927-b4c27361f032" name="Changes" comment="delete redundant import">
-      <change afterPath="$PROJECT_DIR$/src/client/TeacherForumUI.java" afterDir="false" />
+    <list default="true" id="d28170b6-672d-4479-8927-b4c27361f032" name="Changes" comment="finished teacherCourseUI">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/CreateAccountUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/CreateAccountUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/LoginUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/LoginUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/StudentCourseUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/StudentCourseUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/client/TeacherCourseUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/TeacherCourseUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/client/WindowGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/WindowGenerator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/server/ClientThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/ClientThread.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/server/PacketHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/PacketHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/Course.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/Course.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/SystemServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/SystemServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/CourseList.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/util/DataManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/DataManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/Packet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/Packet.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -142,13 +146,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1649548055923</updated>
-    </task>
-    <task id="LOCAL-00012" summary="Completed courseActivities()">
-      <created>1649626277061</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1649626277061</updated>
     </task>
     <task id="LOCAL-00013" summary="Implement vote()">
       <created>1649628322262</created>
@@ -486,7 +483,14 @@
       <option name="project" value="LOCAL" />
       <updated>1650921600366</updated>
     </task>
-    <option name="localTasksCounter" value="61" />
+    <task id="LOCAL-00061" summary="finished teacherCourseUI">
+      <created>1650945049941</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1650945049941</updated>
+    </task>
+    <option name="localTasksCounter" value="62" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -510,7 +514,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Reverse the compareTo() method so with respect to sort the post" />
     <MESSAGE value="Project completed" />
     <MESSAGE value="Test Data updated" />
     <MESSAGE value="Improved format menu for UserActivities" />
@@ -535,7 +538,8 @@
     <MESSAGE value="New UI" />
     <MESSAGE value="implement create course" />
     <MESSAGE value="delete redundant import" />
-    <option name="LAST_COMMIT_MESSAGE" value="delete redundant import" />
+    <MESSAGE value="finished teacherCourseUI" />
+    <option name="LAST_COMMIT_MESSAGE" value="finished teacherCourseUI" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

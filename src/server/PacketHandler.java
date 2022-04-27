@@ -12,20 +12,19 @@ public class PacketHandler {
      * util.User is msgOne
      */
     static Packet login(Packet packet) {
-        try {
 
-            String username = packet.getMsg()[0];
-            String password = packet.getMsg()[1];
-            Class<? extends User> c = DataManager.checkToken(username, password);
-            if (c == null) {
-                return new Packet(false);
-            } else {
-                return new Packet(new String[]{c == Teacher.class ? "T" : "S"}, true);
-            }
-        } catch (IndexOutOfBoundsException e) {
-            e.printStackTrace();
+        String username = packet.getMsg()[0];
+        String password = packet.getMsg()[1];
+        Class<? extends User> c = DataManager.checkToken(username, password);
+        if (c == null) {
             return new Packet(false);
+        } else {
+            if (SystemServer.onlineUsers.contains(username)) return new Packet("User is already logged in another client. Please log out and try again.", false);
+            SystemServer.onlineUsers.add(username);
+            return new Packet(new String[]{c == Teacher.class ? "T" : "S"}, true);
+
         }
+
     }
 
 
