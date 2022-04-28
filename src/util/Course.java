@@ -28,8 +28,8 @@ public class Course implements Serializable {
     }
 
     //method allows adding post to forum
-    public void addForum(DiscussionForum forum) {
-        forums.add(forum);
+    public void addForum(String topic) {
+        forums.add(new DiscussionForum(topic));
     }
 
     //method allows editing post in forum

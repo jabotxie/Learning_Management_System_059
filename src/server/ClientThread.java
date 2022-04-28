@@ -82,6 +82,15 @@ public class ClientThread implements Runnable {
             case ENTER_COURSE:
                 return enterCourse(request);
             //////////////////////////////
+            case CREATE_FORUM:
+                return createForum(request);
+            case EDIT_TOPIC:
+                return editForum(request);
+            case DELETE_FORUM:
+                return deleteForum(request);
+            case ENTER_FORUM:
+                return enterForum(request);
+            //////////////////////////////
             case REQUEST_COURSE_TITLES:
                 return requestCourseTitle();
             case REQUEST_FORUM_TOPICS:

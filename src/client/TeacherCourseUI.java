@@ -27,33 +27,34 @@ public class TeacherCourseUI implements ActionListener {
     String[] courseTitles;
 
     public TeacherCourseUI(Point location) {
-        try {
-            Packet request = new Packet(Packet.REQUEST_COURSE_TITLES);
-            Packet response = Client.getResponse(request);
 
-            courseTitles = response.getMsg();
+        Packet request = new Packet(Packet.REQUEST_COURSE_TITLES);
+        Packet response = Client.getResponse(request);
 
-            int relativeX = 0;
-            int relativeY = 0;
+        courseTitles = response.getMsg();
 
-            frame.setSize(600, 400);
-            frame.setLocation(location);
-            frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-            frame.setLayout(null);
-            frame.setVisible(true);
+        int relativeX = 0;
+        int relativeY = 0;
 
-            JPanel createPanel = new JPanel();
-            createPanel.setBounds(relativeX, relativeY, 80, 20);
-            createPanel.setLayout(null);
+        frame.setSize(600, 400);
+        frame.setLocation(location);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setLayout(null);
+        frame.setVisible(true);
 
-            createButton.addActionListener(this);
-            createButton.setFocusable(false);
-            createButton.setBounds(0, 0, 80, 20);
+        JPanel createPanel = new JPanel();
+        createPanel.setBounds(relativeX, relativeY, 80, 20);
+        createPanel.setLayout(null);
 
-            createPanel.add(createButton);
+        createButton.addActionListener(this);
+        createButton.setFocusable(false);
+        createButton.setBounds(0, 0, 80, 20);
 
-            JPanel coursePanel = new JPanel();
+        createPanel.add(createButton);
 
+        JPanel coursePanel = new JPanel();
+
+        if (courseTitles.length != 0) {
             List<Integer> lengths = new ArrayList<>();
             for (String courseTitle : courseTitles) {
                 lengths.add(courseTitle.length());
@@ -68,7 +69,6 @@ public class TeacherCourseUI implements ActionListener {
                     courseButtonWidth + renameButtonWidth + deleteButtonWidth + buttonGap,
                     courseTitles.length * 30 - 10);
             coursePanel.setLayout(null);
-
 
 
             for (int i = 0; i < courseTitles.length; i++) {
@@ -96,31 +96,29 @@ public class TeacherCourseUI implements ActionListener {
                 coursePanel.add(renameButton);
                 coursePanel.add(deleteButton);
             }
-
-
-            JPanel functionPanel = new JPanel();
-            functionPanel.setBounds(relativeX, relativeY + createPanel.getHeight() + coursePanel.getHeight() + 20,
-                    80, 50);
-            functionPanel.setLayout(null);
-
-            logoutButton.addActionListener(this);
-            logoutButton.setFocusable(false);
-            logoutButton.setBounds(0, 0, 80, 20);
-
-            refreshButton.addActionListener(this);
-            refreshButton.setFocusable(false);
-            refreshButton.setBounds(0, 30, 80, 20);
-
-            functionPanel.add(logoutButton);
-            functionPanel.add(refreshButton);
-
-            frame.add(createPanel);
-            frame.add(coursePanel);
-            frame.add(functionPanel);
-
-        } catch (ClassCastException e) {
-            e.printStackTrace();
         }
+
+        JPanel functionPanel = new JPanel();
+        functionPanel.setBounds(relativeX, relativeY + createPanel.getHeight() + coursePanel.getHeight() + 20,
+                80, 50);
+        functionPanel.setLayout(null);
+
+        logoutButton.addActionListener(this);
+        logoutButton.setFocusable(false);
+        logoutButton.setBounds(0, 0, 80, 20);
+
+        refreshButton.addActionListener(this);
+        refreshButton.setFocusable(false);
+        refreshButton.setBounds(0, 30, 80, 20);
+
+        functionPanel.add(logoutButton);
+        functionPanel.add(refreshButton);
+
+        frame.add(createPanel);
+        frame.add(coursePanel);
+        frame.add(functionPanel);
+
+
     }
 
     @Override
@@ -142,17 +140,18 @@ public class TeacherCourseUI implements ActionListener {
 
         if (e.getSource() == createButton) {
 
-                String courseTitle = WindowGenerator.requestClientInput(frame, "Enter the course title");
+            String courseTitle = WindowGenerator.requestClientInput(frame, "Enter the course title");
 
-                Packet response = Client.getResponse(new Packet(CREATE_COURSE, new String[]{courseTitle}));
-                if (response.isOperationSuccess()) {
-                    frame.dispose();
-                    new TeacherCourseUI(frame.getLocation());
-                } else {
-                    frame.dispose();
-                    WindowGenerator.error(frame, "Course already exist.");
-                    new TeacherCourseUI(frame.getLocation());
-                }
+            Packet response = Client.getResponse(new Packet(CREATE_COURSE, new String[]{courseTitle}));
+            if (response.isOperationSuccess()) {
+                frame.dispose();
+                new TeacherCourseUI(frame.getLocation());
+            } else {
+
+                WindowGenerator.error(frame, "Course already exist.");
+                frame.dispose();
+                new TeacherCourseUI(frame.getLocation());
+            }
 
         }
         for (int i = 0; i < renameButtons.size(); i++) {
@@ -204,11 +203,11 @@ public class TeacherCourseUI implements ActionListener {
                 Packet response = Client.getResponse(request);
                 if (response.isOperationSuccess()) {
                     frame.dispose();
-                    new TeacherForumUI(frame.getLocation());
+                    new TeacherForumUI(courseTitles[i], frame.getLocation());
                 } else {
                     frame.dispose();
                     WindowGenerator.error(frame, "Course doesn't exist. It may be deleted or modified other users. " +
-                    "Please refresh and try again.");
+                            "Please refresh and try again.");
                     new TeacherCourseUI(frame.getLocation());
                 }
             }

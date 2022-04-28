@@ -5,6 +5,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Project 4 -- Learning Management System
@@ -171,7 +172,7 @@ public class DataManager implements Serializable, Runnable {
                 checkToken(username, password);
                 for (Course course : courses) {
                     for (DiscussionForum forum : course.forums) {
-                        ArrayList<Integer> removingPostsIndex = new ArrayList<>();
+                        List<Integer> removingPostsIndex = new ArrayList<>();
                         for (int i = 0; i < forum.posts.size(); i++) {
                             DiscussionPost post = forum.posts.get(i);
                             post.votes.removeIf(vote -> vote.getStudent().equals(currentUser));
@@ -214,6 +215,63 @@ public class DataManager implements Serializable, Runnable {
             if (courseIndex == -1) return false;
             courses.get(courseIndex).setCourseTitle(newTitle);
             return true;
+        }
+    }
+
+
+    public static int createForum(String courseTitle, String topic) {
+        synchronized (coursesSync) {
+            int courseIndex = courses.indexOf(new Course(courseTitle));
+            if (courseIndex == -1) {
+                return -2;
+            }
+            Course course = courses.get(courseIndex);
+            if (course.forums.contains(new DiscussionForum(topic))) return -1;
+            course.forums.add(new DiscussionForum(topic));
+            return 1;
+        }
+    }
+
+    public static int editForum(String courseTitle, String oldTopic, String newTopic) {
+        synchronized (coursesSync) {
+            int courseIndex = courses.indexOf(new Course(courseTitle));
+            if (courseIndex == -1) return -1;
+
+            Course course = courses.get(courseIndex);
+            if (course.forums.contains(new DiscussionForum(newTopic))) return -3;
+            int forumIndex = course.forums.indexOf(new DiscussionForum(oldTopic));
+            if (forumIndex == -1) return -2;
+
+            DiscussionForum forum = course.forums.get(forumIndex);
+            forum.setTopic(newTopic);
+            return 1;
+
+        }
+    }
+
+    public static int deleteForum(String courseTitle, String topic) {
+        synchronized (coursesSync) {
+            int courseIndex = courses.indexOf(new Course(courseTitle));
+            if (courseIndex == -1) return -1;
+
+            Course course = courses.get(courseIndex);
+            int forumIndex = course.forums.indexOf(new DiscussionForum(topic));
+            if (forumIndex == -1) return -2;
+
+            course.forums.remove(forumIndex);
+            return 1;
+        }
+    }
+
+    public static int checkForumExistence(String courseTitle, String topic) {
+        synchronized (coursesSync) {
+            int courseIndex = courses.indexOf(new Course(courseTitle));
+            if (courseIndex == -1) return -1;
+
+            Course course = courses.get(courseIndex);
+            if (!course.forums.contains(new DiscussionForum(topic))) return -2;
+
+            return 1;
         }
     }
 

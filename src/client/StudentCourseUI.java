@@ -17,7 +17,7 @@ import static util.Packet.LOGOUT;
 
 public class StudentCourseUI implements ActionListener {
 
-    JFrame frame = new JFrame("Learning Management System");
+    JFrame frame;
     JButton logoutButton = new JButton("Log out");
     JButton refreshButton = new JButton("Refresh");
     ArrayList<JButton> courseButtons = new ArrayList<>();
@@ -100,7 +100,7 @@ public class StudentCourseUI implements ActionListener {
                 Packet response = Client.getResponse(request);
                 if (response.isOperationSuccess()) {
                     frame.dispose();
-                    new StudentForumUI(frame.getLocation());
+                    new StudentForumUI(courseTitles[i], frame.getLocation());
                 } else {
                     frame.dispose();
                     WindowGenerator.error(frame, "Course doesn't exist. It may be deleted or modified other users. " +

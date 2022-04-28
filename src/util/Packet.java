@@ -19,7 +19,7 @@ public class Packet implements Serializable {
     public static final int ENTER_COURSE = 13;
 
     public static final int CREATE_FORUM = 20;
-    public static final int EDIT_FORUM = 21;
+    public static final int EDIT_TOPIC = 21;
     public static final int DELETE_FORUM = 22;
     public static final int ENTER_FORUM = 23;
 

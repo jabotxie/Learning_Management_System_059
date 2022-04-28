@@ -51,6 +51,7 @@ public class PacketHandler {
         SystemServer.onlineUsers.remove(request.getMsg()[0]);
         return new Packet(true);
     }
+
     ////////////////////////////////////////////////////////////////////////////////////
     //Course Handlers
     static Packet createCourse(Packet request) {
@@ -81,23 +82,63 @@ public class PacketHandler {
     //Forum Handlers
 
     static Packet createForum(Packet request) {
-        //TODO:
-        return request;
+        String course = request.getMsg()[0];
+        String topic = request.getMsg()[1];
+        int returnCaseNum = DataManager.createForum(course, topic);
+        switch (returnCaseNum) {
+            case -2:
+                return new Packet("Course", false);
+            case -1:
+                return new Packet("Forum", false);
+            default:
+                return new Packet(true);
+        }
     }
 
     static Packet editForum(Packet request) {
-        //TODO:
-        return request;
+        String course = request.getMsg()[0];
+        String oldTopic = request.getMsg()[1];
+        String newTopic = request.getMsg()[2];
+        int returnCaseNum = DataManager.editForum(course, oldTopic, newTopic);
+        switch (returnCaseNum) {
+            case -3:
+                return new Packet("Overlap", false);
+            case -2:
+                return new Packet("Course", false);
+            case -1:
+                return new Packet("Forum", false);
+            default:
+                return new Packet(true);
+        }
     }
 
     static Packet deleteForum(Packet request) {
-        //TODO:
-        return request;
+        String course = request.getMsg()[0];
+        String deletingTopic = request.getMsg()[1];
+        int returnCaseNum = DataManager.deleteForum(course, deletingTopic);
+        switch (returnCaseNum) {
+            case -2:
+                return new Packet("Course", false);
+            case -1:
+                return new Packet("Forum", false);
+            default:
+                return new Packet(true);
+        }
     }
 
     static Packet enterForum(Packet request) {
-        //TODO:
-        return request;
+        String course = request.getMsg()[0];
+        String topic = request.getMsg()[1];
+        int returnCaseNum = DataManager.checkForumExistence(course, topic);
+        switch (returnCaseNum) {
+            case -2:
+                return new Packet("Course", false);
+            case -1:
+                return new Packet("Forum", false);
+            default:
+                return new Packet(true);
+        }
+
     }
 
     ////////////////////////////////////////////////////////////////////////////////
