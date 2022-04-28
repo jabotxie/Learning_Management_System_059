@@ -26,9 +26,9 @@ import java.util.List;
 
 public class DataManager implements Serializable, Runnable {
 
-    public static ArrayList<User> users;
+    public static List<User> users;
     public static final Date usersSync = new Date(System.currentTimeMillis());
-    public static ArrayList<Course> courses;
+    public static List<Course> courses;
     public static final Date coursesSync = new Date(System.currentTimeMillis());
     public static String usersInfoFileName = "UserInfo.txt";
     public static String coursesInfoFileName = "CoursesInfo.txt";
@@ -58,10 +58,10 @@ public class DataManager implements Serializable, Runnable {
 
     //method that retrieves course info from file
     @SuppressWarnings("unchecked")
-    private static ArrayList<Course> getCoursesFromFile() {
+    private static List<Course> getCoursesFromFile() {
         try {
             ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(coursesInfoFileName));
-            return (ArrayList<Course>) objectInputStream.readObject();
+            return (List<Course>) objectInputStream.readObject();
         } catch (ClassCastException | IOException | ClassNotFoundException e) {
             return null;
         }
@@ -78,11 +78,11 @@ public class DataManager implements Serializable, Runnable {
     }
 
     //method that retrieves user info from file
-    private static ArrayList<User> getUsersFromFile() {
+    private static List<User> getUsersFromFile() {
         try {
             BufferedReader bf = new BufferedReader(new FileReader(usersInfoFileName));
-            ArrayList<String> lines = new ArrayList<>();
-            ArrayList<User> users = new ArrayList<>();
+            List<String> lines = new ArrayList<>();
+            List<User> users = new ArrayList<>();
             try {
                 String line = bf.readLine();
                 while (line != null) {
@@ -269,11 +269,27 @@ public class DataManager implements Serializable, Runnable {
             if (courseIndex == -1) return -1;
 
             Course course = courses.get(courseIndex);
-            if (!course.forums.contains(new DiscussionForum(topic))) return -2;
+            int forumIndex = course.forums.indexOf(new DiscussionForum(topic));
+            if (forumIndex == -1) return -2;
+
+            DiscussionForum forum = course.forums.get(forumIndex);
+            forum.addPost(new DiscussionPost());
 
             return 1;
         }
     }
+
+//    public static int createPost(String courseTitle, String topic, String userType, String user, String post) {
+//        synchronized (coursesSync) {
+//            int courseIndex = courses.indexOf(new Course(courseTitle));
+//            if (courseIndex == -1) return -1;
+//
+//            Course course = courses.get(courseIndex);
+//            if (!course.forums.contains(new DiscussionForum(topic, ))) return -2;
+//
+//            return 1;
+//        }
+//    }
 
     @Override
     public void run() {

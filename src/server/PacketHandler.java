@@ -17,7 +17,7 @@ public class PacketHandler {
         String password = packet.getMsg()[1];
         Class<? extends User> c = DataManager.checkToken(username, password);
         if (c == null) {
-            return new Packet(false);
+            return new Packet("Password incorrect or user doesn't exist. Please try again.", false);
         } else {
             if (SystemServer.onlineUsers.contains(username))
                 return new Packet("User is already logged in another client. Please log out and try again.",
@@ -103,9 +103,9 @@ public class PacketHandler {
         switch (returnCaseNum) {
             case -3:
                 return new Packet("Overlap", false);
-            case -2:
-                return new Packet("Course", false);
             case -1:
+                return new Packet("Course", false);
+            case -2:
                 return new Packet("Forum", false);
             default:
                 return new Packet(true);
@@ -117,9 +117,9 @@ public class PacketHandler {
         String deletingTopic = request.getMsg()[1];
         int returnCaseNum = DataManager.deleteForum(course, deletingTopic);
         switch (returnCaseNum) {
-            case -2:
-                return new Packet("Course", false);
             case -1:
+                return new Packet("Course", false);
+            case -2:
                 return new Packet("Forum", false);
             default:
                 return new Packet(true);
@@ -131,9 +131,9 @@ public class PacketHandler {
         String topic = request.getMsg()[1];
         int returnCaseNum = DataManager.checkForumExistence(course, topic);
         switch (returnCaseNum) {
-            case -2:
-                return new Packet("Course", false);
             case -1:
+                return new Packet("Course", false);
+            case -2:
                 return new Packet("Forum", false);
             default:
                 return new Packet(true);
@@ -143,20 +143,58 @@ public class PacketHandler {
 
     ////////////////////////////////////////////////////////////////////////////////
     //Post Handlers
-    static Packet createPost(Packet request) {
-        //TODO:
-        return request;
-    }
+//    static Packet createPost(Packet request) {
+//        String course = request.getMsg()[0];
+//        String topic = request.getMsg()[1];
+//        String userType = request.getMsg()[2];
+//        String username = request.getMsg()[3];
+//        String post = request.getMsg()[3];
+//        int returnCaseNum = DataManager.createPost(course, topic, userType, username, post);
+//        switch (returnCaseNum) {
+//            case -1:
+//                return new Packet("Course", false);
+//            case -2:
+//                return new Packet("Forum", false);
+//            default:
+//                return new Packet(true);
+//        }
+//    }
 
-    static Packet deletePost(Packet request) {
-        //TODO:
-        return request;
-    }
-
-    static Packet editPost(Packet request) {
-        //TODO:
-        return request;
-    }
+//    static Packet deletePost(Packet request) {
+//        String course = request.getMsg()[0];
+//        String topic = request.getMsg()[1];
+//        String deletingPost = request.getMsg()[2];
+//        int returnCaseNum = DataManager.deletePost(course, topic, post);
+//        switch (returnCaseNum) {
+//            case -1:
+//                return new Packet("Course", false);
+//            case -2:
+//                return new Packet("Forum", false);
+//            case -3:
+//                return new Packet("Post", false);
+//            default:
+//                return new Packet(true);
+//        }
+//    }
+//
+//    static Packet editPost(Packet request) {
+//        String course = request.getMsg()[0];
+//        String topic = request.getMsg()[1];
+//        String oldPost = request.getMsg()[2];
+//        String newPost = request.getMsg()[3];
+//
+//        int returnCaseNum = DataManager.deletePost(course, topic, oldPost, newPost);
+//        switch (returnCaseNum) {
+//            case -1:
+//                return new Packet("Course", false);
+//            case -2:
+//                return new Packet("Forum", false);
+//            case -3:
+//                return new Packet("Post", false);
+//            default:
+//                return new Packet(true);
+//        }
+//    }
 
     static Packet replyPost(Packet request) {
         //TODO:

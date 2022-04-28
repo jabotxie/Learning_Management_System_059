@@ -4,22 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d28170b6-672d-4479-8927-b4c27361f032" name="Changes" comment="Complete course level UI">
-      <change afterPath="$PROJECT_DIR$/src/client/StudentPostUI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/client/TeacherPostUI.java" afterDir="false" />
+    <list default="true" id="d28170b6-672d-4479-8927-b4c27361f032" name="Changes" comment="Complete Forum level">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/StudentCourseUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/StudentCourseUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/StudentForumUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/StudentForumUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/TeacherCourseUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/TeacherCourseUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/TeacherForumUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/TeacherForumUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/TeacherPostUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/TeacherPostUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/server/ClientThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/ClientThread.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/server/PacketHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/PacketHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/Course.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/Course.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/util/DataManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/DataManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/Packet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/Packet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/Student.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/Teacher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/Teacher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/User.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -149,13 +139,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1649548055923</updated>
-    </task>
-    <task id="LOCAL-00015" summary="Bug Fixed&#10;wrong body function called. Course.editForum">
-      <created>1649631024838</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1649631024838</updated>
     </task>
     <task id="LOCAL-00016" summary="Vote implemented">
       <created>1649631047313</created>
@@ -493,7 +476,14 @@
       <option name="project" value="LOCAL" />
       <updated>1651120145895</updated>
     </task>
-    <option name="localTasksCounter" value="64" />
+    <task id="LOCAL-00064" summary="Complete Forum level">
+      <created>1651165104479</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1651165104479</updated>
+    </task>
+    <option name="localTasksCounter" value="65" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -517,7 +507,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Improved format menu for UserActivities" />
     <MESSAGE value="Improved display of votes" />
     <MESSAGE value="Finalized Project" />
     <MESSAGE value="javadoc implemented" />
@@ -542,7 +531,8 @@
     <MESSAGE value="finished teacherCourseUI" />
     <MESSAGE value="update work" />
     <MESSAGE value="Complete course level UI" />
-    <option name="LAST_COMMIT_MESSAGE" value="Complete course level UI" />
+    <MESSAGE value="Complete Forum level" />
+    <option name="LAST_COMMIT_MESSAGE" value="Complete Forum level" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
