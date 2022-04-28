@@ -6,12 +6,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.net.Socket;
 
-public class LoginUI implements ActionListener {
+public class AccountLogin implements ActionListener {
 
     JFrame frame = new JFrame("Learning Management System");
 
@@ -23,7 +19,7 @@ public class LoginUI implements ActionListener {
     JTextField passwordText = new JTextField(10);
 
 
-    public LoginUI() {
+    public AccountLogin() {
 
         loginButton.setFocusable(false);
         loginButton.addActionListener(this);
@@ -47,7 +43,7 @@ public class LoginUI implements ActionListener {
 
     }
 
-    public LoginUI(Point location) {
+    public AccountLogin(Point location) {
 
         loginButton.setFocusable(false);
         loginButton.addActionListener(this);
@@ -75,32 +71,37 @@ public class LoginUI implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() == loginButton) {
+
             String password = passwordText.getText();
             String username = usernameText.getText();
-            System.out.println(username + "," + password);
-
-            Packet request = new Packet(Packet.LOGIN, new String[]{username, password});
-
-            Packet response = Client.getResponse(request);
-            if (response.isOperationSuccess()) {
+            if (username == null || password == null || username.equals("") || password.equals("")) {
+                WindowGenerator.error(frame, "Please enter valid username and password");
                 frame.dispose();
-                JOptionPane.showMessageDialog(null, "You have successfully logged in.",
-                        "Login Succeed", JOptionPane.INFORMATION_MESSAGE);
-                Client.username = username;
-                String userType = response.getMsg()[0];
-                if (userType.equals("T")) new TeacherCourseUI(frame.getLocation());
-                else new StudentCourseUI(frame.getLocation());
-
+                new AccountCreateUI(frame.getLocation());
             } else {
-                WindowGenerator.error(frame, response.getMsg()[0]);
-                frame.dispose();
-                new LoginUI(frame.getLocation());
+
+                Packet request = new Packet(Packet.LOGIN, new String[]{username, password});
+
+                Packet response = Client.getResponse(request);
+                if (response.isOperationSuccess()) {
+                    WindowGenerator.showMsg(frame, "You have successfully logged in!");
+                    frame.dispose();
+                    Client.username = username;
+                    String userType = response.getMsg()[0];
+                    if (userType.equals("T")) new TeacherCourseUI(frame.getLocation());
+                    else new StudentCourseUI(frame.getLocation());
+
+                } else {
+                    WindowGenerator.error(frame, response.getMsg()[0]);
+                    frame.dispose();
+                    new AccountLogin(frame.getLocation());
+                }
             }
 
         }
         if (e.getSource() == createButton) {
             frame.dispose();
-            new CreateAccountUI(frame.getLocation());
+            new AccountCreateUI(frame.getLocation());
         }
 
     }

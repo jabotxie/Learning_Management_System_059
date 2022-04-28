@@ -6,12 +6,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.net.Socket;
 
-public class CreateAccountUI implements ActionListener {
+public class AccountCreateUI implements ActionListener {
 
 
     JFrame frame = new JFrame("Learning Management System");
@@ -27,7 +23,7 @@ public class CreateAccountUI implements ActionListener {
     JRadioButton studentRB = new JRadioButton("Student");
     ButtonGroup group = new ButtonGroup();
 
-    public CreateAccountUI(Point point) {
+    public AccountCreateUI(Point point) {
 
 
         teacherRB.setActionCommand("T");
@@ -79,7 +75,7 @@ public class CreateAccountUI implements ActionListener {
 
         if (e.getSource() == backToLoginButton) {
             frame.dispose();
-            new LoginUI();
+            new AccountLogin();
         }
         if (e.getSource() == createButton) {
             String userType = group.getSelection().getActionCommand();
@@ -96,7 +92,7 @@ public class CreateAccountUI implements ActionListener {
             } else {
                 WindowGenerator.error(frame, "The username has been taken. Please change try again");
                 frame.dispose();
-                new CreateAccountUI(frame.getLocation());
+                new AccountCreateUI(frame.getLocation());
             }
         }
     }

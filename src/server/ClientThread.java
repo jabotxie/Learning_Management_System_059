@@ -62,12 +62,17 @@ public class ClientThread implements Runnable {
     private Packet processPacket(@NotNull Packet request) {
         int requestType = request.getRequestType();
         switch (requestType) {
+            ////////////////////////////
             case LOGIN:
                 Packet response = login(request);
                 if (response.isOperationSuccess()) username = request.getMsg()[0];
                 return response;
             case CREATE:
                 return create(request);
+
+            case LOGOUT:
+                return logout(request);
+            /////////////////////////////
             case CREATE_COURSE:
                 return createCourse(request);
             case RENAME_COURSE:
@@ -76,6 +81,7 @@ public class ClientThread implements Runnable {
                 return deleteCourse(request);
             case ENTER_COURSE:
                 return enterCourse(request);
+            //////////////////////////////
             case REQUEST_COURSE_TITLES:
                 return requestCourseTitle();
             case REQUEST_FORUM_TOPICS:

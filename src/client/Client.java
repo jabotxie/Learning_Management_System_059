@@ -19,7 +19,7 @@ public class Client {
             socket = new Socket("localhost", 4242);
             is = new ObjectInputStream(socket.getInputStream());
             os = new ObjectOutputStream(socket.getOutputStream());
-            new LoginUI();
+            new AccountLogin();
         } catch (IOException e) {
             e.printStackTrace();
         }

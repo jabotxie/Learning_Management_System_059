@@ -2,6 +2,7 @@ package client;
 
 import util.Packet;
 
+import static client.Client.username;
 import static util.Packet.*;
 
 import javax.swing.*;
@@ -9,6 +10,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class TeacherCourseUI implements ActionListener {
 
@@ -50,28 +53,43 @@ public class TeacherCourseUI implements ActionListener {
             createPanel.add(createButton);
 
             JPanel coursePanel = new JPanel();
+
+            List<Integer> lengths = new ArrayList<>();
+            for (String courseTitle : courseTitles) {
+                lengths.add(courseTitle.length());
+            }
+
+            int courseButtonWidth = Collections.max(lengths) * 16;
+            int renameButtonWidth = 85;
+            int deleteButtonWidth = 80;
+            int buttonGap = 20;
+
             coursePanel.setBounds(relativeX, relativeY + createPanel.getHeight() + 10,
-                    265, courseTitles.length * 30 - 10);
+                    courseButtonWidth + renameButtonWidth + deleteButtonWidth + buttonGap,
+                    courseTitles.length * 30 - 10);
             coursePanel.setLayout(null);
+
+
 
             for (int i = 0; i < courseTitles.length; i++) {
                 JButton courseButton = new JButton(courseTitles[i]);
                 courseButton.addActionListener(this);
                 courseButton.setFocusable(false);
-                courseButton.setBounds(0, i * 30, 80, 20);
+                courseButton.setBounds(0, i * 30, courseButtonWidth, 20);
                 courseButtons.add(courseButton);
 
 
                 JButton renameButton = new JButton("Rename");
                 renameButton.addActionListener(this);
                 renameButton.setFocusable(false);
-                renameButton.setBounds(100, i * 30, 85, 20);
+                renameButton.setBounds(courseButtonWidth + 20, i * 30, renameButtonWidth, 20);
                 renameButtons.add(renameButton);
 
                 JButton deleteButton = new JButton("Delete");
                 deleteButton.addActionListener(this);
                 deleteButton.setFocusable(false);
-                deleteButton.setBounds(185, i * 30, 80, 20);
+                deleteButton.setBounds(courseButtonWidth + renameButtonWidth + 20,
+                        i * 30, deleteButtonWidth, 20);
                 deleteButtons.add(deleteButton);
 
                 coursePanel.add(courseButton);
@@ -109,9 +127,11 @@ public class TeacherCourseUI implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() == logoutButton) {
-            if (WindowGenerator.confirm(frame, "Are you sure you want to log out?", "Confirmation")) {
+            if (WindowGenerator.confirm(frame,
+                    "Are you sure you want to log out?", "Log Out Confirmation")) {
+                Client.getResponse(new Packet(LOGOUT, new String[]{username}));
                 frame.dispose();
-                new LoginUI();
+                new AccountLogin(frame.getLocation());
             }
         }
 
@@ -184,7 +204,7 @@ public class TeacherCourseUI implements ActionListener {
                 Packet response = Client.getResponse(request);
                 if (response.isOperationSuccess()) {
                     frame.dispose();
-                    new TeacherForumUI();
+                    new TeacherForumUI(frame.getLocation());
                 } else {
                     frame.dispose();
                     WindowGenerator.error(frame, "Course doesn't exist. It may be deleted or modified other users. " +

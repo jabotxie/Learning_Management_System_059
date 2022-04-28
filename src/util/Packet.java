@@ -11,6 +11,7 @@ public class Packet implements Serializable {
     public static final int LOGIN = 0;
     public static final int CREATE = 1;
     public static final int DELETE = 2;
+    public static final int LOGOUT = 3;
 
     public static final int CREATE_COURSE = 10;
     public static final int RENAME_COURSE = 11;

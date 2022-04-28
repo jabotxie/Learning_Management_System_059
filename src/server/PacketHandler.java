@@ -19,7 +19,9 @@ public class PacketHandler {
         if (c == null) {
             return new Packet(false);
         } else {
-            if (SystemServer.onlineUsers.contains(username)) return new Packet("User is already logged in another client. Please log out and try again.", false);
+            if (SystemServer.onlineUsers.contains(username))
+                return new Packet("User is already logged in another client. Please log out and try again.",
+                        false);
             SystemServer.onlineUsers.add(username);
             return new Packet(new String[]{c == Teacher.class ? "T" : "S"}, true);
 
@@ -45,6 +47,10 @@ public class PacketHandler {
         return request;
     }
 
+    static Packet logout(Packet request) {
+        SystemServer.onlineUsers.remove(request.getMsg()[0]);
+        return new Packet(true);
+    }
     ////////////////////////////////////////////////////////////////////////////////////
     //Course Handlers
     static Packet createCourse(Packet request) {
