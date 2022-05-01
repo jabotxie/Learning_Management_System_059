@@ -144,7 +144,7 @@ public class TeacherPostUI implements ActionListener {
                     voteNum = 0;
                 }
                 String postContent = postDisplay[3];
-
+                int areaHeight = (postContent.length() / 140) * 17 + 17;
                 //start creating a single post
 
                 JLabel postLabel = new JLabel("Post" + (i + 1));
@@ -164,7 +164,7 @@ public class TeacherPostUI implements ActionListener {
                 postContentTextArea.setWrapStyleWord(true);
                 postContentTextArea.setEditable(false);
 
-                postContentTextArea.setBounds(xPos, yPos + 50, 800, 40);
+                postContentTextArea.setBounds(xPos, yPos + 50, 850, areaHeight);
                 postContentTextArea.setLineWrap(true);
                 postContentTextArea.setColumns(65);
                 postContentTextArea.setRows(postContent.length() / 100);
@@ -172,20 +172,20 @@ public class TeacherPostUI implements ActionListener {
 
                 editButton.addActionListener(this);
                 editButton.setFocusable(false);
-                editButton.setBounds(xPos, yPos + 90, 60, 20);
+                editButton.setBounds(xPos, yPos + 50 + postContentTextArea.getHeight(), 60, 20);
 
                 deleteButton.addActionListener(this);
                 deleteButton.setFocusable(false);
-                deleteButton.setBounds(xPos + 60, yPos + 90, 80, 20);
+                deleteButton.setBounds(xPos + 60, yPos + 50 + postContentTextArea.getHeight(), 80, 20);
 
                 addReplyButton.addActionListener(this);
                 addReplyButton.setFocusable(false);
-                addReplyButton.setBounds(xPos + 140, yPos + 90, 120, 20);
+                addReplyButton.setBounds(xPos + 140, yPos + 50 + postContentTextArea.getHeight(), 120, 20);
 
                 addComponent(postPanel, postLabel, timeLabel, posterLabel, postContentTextArea, editButton, deleteButton, addReplyButton);
 
                 int xReplyPos = 100;
-                int yReplyPos = yPos + 90 + 20;
+                int yReplyPos = yPos + 50 + postContentTextArea.getHeight() + 20;
 
                 String[] replyDisplay = repliesDisplay.get(i);
                 if (replyDisplay != null) {
@@ -210,7 +210,7 @@ public class TeacherPostUI implements ActionListener {
                         replyTextArea.setLineWrap(true);
                         replyTextArea.setWrapStyleWord(true);
                         replyTextArea.setEditable(false);
-                        replyTextArea.setBounds(xReplyPos, yReplyPos + 40, 700, 20);
+                        replyTextArea.setBounds(xReplyPos, yReplyPos + 40, 800, 20);
 
                         yReplyPos += 40 + replyTextArea.getHeight();
 
@@ -219,7 +219,7 @@ public class TeacherPostUI implements ActionListener {
                 }
 
 
-                yPos = yReplyPos + 10;
+                yPos = yReplyPos;
             }
 
 
@@ -306,6 +306,27 @@ public class TeacherPostUI implements ActionListener {
                 String replyContent = WindowGenerator.requestClientInput(frame, "Enter the reply");
                 Packet request = new Packet(REPLY_POST, new String[]{course, topic, postsDisplay.get(i)[0].substring(8),
                         postsDisplay.get(i)[1], postsDisplay.get(i)[0].charAt(0) == 'T' ? "T" : "S", username, replyContent});
+                Packet response = Client.getResponse(request);
+                if (response.isOperationSuccess()) {
+                    frame.dispose();
+                    new TeacherPostUI(course, topic, frame.getLocation());
+                } else {
+                    frame.dispose();
+                    WindowGenerator.error(frame, response.getMsg()[1]);
+                    new TeacherForumUI(course, frame.getLocation());
+                    if (response.getMsg()[0].equals("Course")) new TeacherCourseUI(frame.getLocation());
+                    else if (response.getMsg()[0].equals("Forum")) new TeacherForumUI(course, frame.getLocation());
+                    else new TeacherPostUI(course, topic, frame.getLocation());
+                }
+            }
+        }
+
+        for (int i = 0; i < editButtons.size(); i++) {
+            JButton editButton = editButtons.get(i);
+            if (e.getSource() == editButton) {
+                String newContent = WindowGenerator.requestClientInput(frame, "Enter the new post");
+                Packet request = new Packet(EDIT_POST, new String[]{course, topic, postsDisplay.get(i)[0].substring(8),
+                        postsDisplay.get(i)[1], newContent});
                 Packet response = Client.getResponse(request);
                 if (response.isOperationSuccess()) {
                     frame.dispose();

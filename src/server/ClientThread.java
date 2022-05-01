@@ -1,6 +1,6 @@
 package server;
 
-import com.sun.istack.internal.NotNull;
+
 import util.*;
 import static server.PacketHandler.*;
 import static util.Packet.*;
@@ -59,7 +59,7 @@ public class ClientThread implements Runnable {
         }
     }
 
-    private Packet processPacket(@NotNull Packet request) {
+    private Packet processPacket(Packet request) {
         int requestType = request.getRequestType();
         switch (requestType) {
             ////////////////////////////

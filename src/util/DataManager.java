@@ -319,7 +319,7 @@ public class DataManager implements Serializable, Runnable {
         String topic = request.getMsg()[1];
         String poster = request.getMsg()[2];
         String postTime = request.getMsg()[3];
-        String newContent = request.getMsg()[6];
+        String newContent = request.getMsg()[4];
         synchronized (coursesSync) {
             int courseIndex = courses.indexOf(new Course(courseTitle));
             if (courseIndex == -1) return new Packet(new String[]{"Course", "Course doesn't exist, please try again."});
