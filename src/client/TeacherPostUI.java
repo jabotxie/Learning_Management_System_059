@@ -118,7 +118,7 @@ public class TeacherPostUI implements ActionListener {
             frame.add(header);
 
 
-            int xPos = 0;
+            int xPos = 50;
             int yPos = 0;
 
 
@@ -164,7 +164,7 @@ public class TeacherPostUI implements ActionListener {
                 postContentTextArea.setWrapStyleWord(true);
                 postContentTextArea.setEditable(false);
 
-                postContentTextArea.setBounds(xPos, yPos + 50, 600, 40);
+                postContentTextArea.setBounds(xPos, yPos + 50, 800, 40);
                 postContentTextArea.setLineWrap(true);
                 postContentTextArea.setColumns(65);
                 postContentTextArea.setRows(postContent.length() / 100);
@@ -194,29 +194,32 @@ public class TeacherPostUI implements ActionListener {
                         String replier = replyDisplay[j];
                         String replyTime = replyDisplay[j + 1];
                         String replyContent = replyDisplay[j + 2];
-                        JLabel replyLabel = new JLabel("reply" + (j + 1));
-                        replyLabel.setBounds(xReplyPos, yReplyPos + 10, 5 * 16 + ((j + 1) / 10) * 16, 20);
+                        JLabel replyLabel = new JLabel("reply" + (j/3 + 1));
+                        replyLabel.setBounds(xReplyPos, yReplyPos, 5 * 16 + ((j + 1) / 10) * 16, 20);
 
-                        JLabel replyTimeLabel = new JLabel(replyTime);
-                        replyTimeLabel.setBounds(xReplyPos + 730, yReplyPos + 10, 170, 20);
+
+                        Date replyDate = new Date(Long.parseLong(replyTime));
+                        JLabel replyTimeLabel = new JLabel("Reply Time Time: " + replyDate);
+                        replyTimeLabel.setBounds(xReplyPos + 200, yReplyPos, 300, 20);
 
                         JLabel replierLabel = new JLabel(replier);
-                        replierLabel.setBounds(xReplyPos, yReplyPos + 30, 800, 20);
+                        replierLabel.setBounds(xReplyPos, yReplyPos + 20, 800, 20);
 
                         JTextArea replyTextArea = new JTextArea();
                         replyTextArea.setText(replyContent);
                         replyTextArea.setLineWrap(true);
                         replyTextArea.setWrapStyleWord(true);
-                        replyTextArea.setBounds(xReplyPos, yReplyPos + 90, 700, 20);
+                        replyTextArea.setEditable(false);
+                        replyTextArea.setBounds(xReplyPos, yReplyPos + 40, 700, 20);
 
-                        yReplyPos += 60 + replyTextArea.getHeight();
+                        yReplyPos += 40 + replyTextArea.getHeight();
 
                         addComponent(postPanel, replyLabel, replyTimeLabel, replierLabel, replyTextArea);
                     }
                 }
 
 
-                yPos = yReplyPos + 20;
+                yPos = yReplyPos + 10;
             }
 
 

@@ -11,7 +11,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class SystemServer {
-    private static final int PORT = 4242;
+    private static final int PORT = 4040;
 
     static ArrayList<String> onlineUsers = new ArrayList<>();
     private static final ExecutorService pool = Executors.newFixedThreadPool(10);
