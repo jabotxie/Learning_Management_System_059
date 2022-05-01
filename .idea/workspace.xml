@@ -4,12 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d28170b6-672d-4479-8927-b4c27361f032" name="Changes" comment="Complete Forum level">
+    <list default="true" id="d28170b6-672d-4479-8927-b4c27361f032" name="Changes" comment="Comment Post level for test">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestBranchCreation.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/forum.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/getForum" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/AccountCreateUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/AccountCreateUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/Design.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/Design.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/client/TeacherPostUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/TeacherPostUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/WindowGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/WindowGenerator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/server/ClientThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/ClientThread.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/server/PacketHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/PacketHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/util/DataManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/DataManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/DiscussionForum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/DiscussionForum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/DiscussionPost.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/DiscussionPost.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/Packet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/Packet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/User.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +44,13 @@
       <filtered-out-file-type name="TAG" />
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="jar://$PROJECT_DIR$/../../../../../../Program Files/Java/jdk1.8.0_301/src.zip!/com/sun/java/swing/plaf/windows/WindowsScrollBarUI.java" root0="SKIP_INSPECTION" />
+    <setting file="jar://$PROJECT_DIR$/../../../../../../Program Files/Java/jdk1.8.0_301/src.zip!/javax/swing/ScrollPaneLayout.java" root0="SKIP_INSPECTION" />
+    <setting file="jar://$PROJECT_DIR$/../../../../../../Program Files/Java/jdk1.8.0_301/src.zip!/java/awt/BorderLayout.java" root0="SKIP_INSPECTION" />
+    <setting file="jar://$PROJECT_DIR$/../../../../../../Program Files/Java/jdk1.8.0_301/src.zip!/java/awt/LayoutManager.java" root0="SKIP_INSPECTION" />
+    <setting file="jar://$PROJECT_DIR$/../../../../../../Program Files/Java/jdk1.8.0_301/src.zip!/javax/swing/plaf/basic/BasicScrollBarUI.java" root0="SKIP_INSPECTION" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -113,6 +131,19 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="archive.main" />
+      <module name="Learning_Management_System_059" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="archive.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="CompoundRunConfigurationType">
       <toRun name="SystemServer" type="Application" />
       <toRun name="Client" type="Application" />
@@ -122,11 +153,13 @@
       <item itemvalue="Application.SystemServer" />
       <item itemvalue="Application.Client" />
       <item itemvalue="Application.Design" />
+      <item itemvalue="Application.main" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Client" />
         <item itemvalue="Application.SystemServer" />
+        <item itemvalue="Application.main" />
         <item itemvalue="Application.Design" />
       </list>
     </recent_temporary>
@@ -139,13 +172,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1649548055923</updated>
-    </task>
-    <task id="LOCAL-00016" summary="Vote implemented">
-      <created>1649631047313</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1649631047313</updated>
     </task>
     <task id="LOCAL-00017" summary="Function Logic Improved, Rewrite equals function">
       <created>1649631173725</created>
@@ -483,7 +509,14 @@
       <option name="project" value="LOCAL" />
       <updated>1651165104479</updated>
     </task>
-    <option name="localTasksCounter" value="65" />
+    <task id="LOCAL-00065" summary="Comment Post level for test">
+      <created>1651178847076</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1651178847076</updated>
+    </task>
+    <option name="localTasksCounter" value="66" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -494,7 +527,7 @@
             <State>
               <option name="COLUMN_ID_WIDTH">
                 <map>
-                  <entry key="Table.Default.Author.ColumnIdWidth" value="95" />
+                  <entry key="Table.Default.Author.ColumnIdWidth" value="-1" />
                   <entry key="Table.Default.Date.ColumnIdWidth" value="108" />
                   <entry key="Table.Space.CommitStatus.ColumnIdWidth" value="85" />
                 </map>
@@ -507,7 +540,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Improved display of votes" />
     <MESSAGE value="Finalized Project" />
     <MESSAGE value="javadoc implemented" />
     <MESSAGE value="Test case created" />
@@ -532,7 +564,8 @@
     <MESSAGE value="update work" />
     <MESSAGE value="Complete course level UI" />
     <MESSAGE value="Complete Forum level" />
-    <option name="LAST_COMMIT_MESSAGE" value="Complete Forum level" />
+    <MESSAGE value="Comment Post level for test" />
+    <option name="LAST_COMMIT_MESSAGE" value="Comment Post level for test" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -546,6 +579,41 @@
           <line>142</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/client/TeacherPostUI.java</url>
+          <line>195</line>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/archive/main.java</url>
+          <line>22</line>
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/archive/main.java</url>
+          <line>24</line>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/client/TeacherPostUI.java</url>
+          <line>190</line>
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/util/DataManager.java</url>
+          <line>421</line>
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/client/TeacherPostUI.java</url>
+          <line>42</line>
+          <option name="timeStamp" value="21" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/util/DataManager.java</url>
+          <line>396</line>
+          <option name="timeStamp" value="22" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <watches-manager>
@@ -556,7 +624,7 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Learning_Management_System_059$UserActivities.ic" NAME="UserActivities Coverage Results" MODIFIED="1649609720649" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/Learning_Management_System_059$Client.ic" NAME="Client Coverage Results" MODIFIED="1650861006882" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/Learning_Management_System_059$Client.ic" NAME="Client Coverage Results" MODIFIED="1651387661134" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>client.*</FILTER>
     </SUITE>
   </component>

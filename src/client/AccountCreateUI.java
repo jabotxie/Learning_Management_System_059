@@ -87,6 +87,7 @@ public class AccountCreateUI implements ActionListener {
             if (response.isOperationSuccess()) {
                 WindowGenerator.showMsg(frame, "You have successfully created an account and logged in!");
                 frame.dispose();
+                Client.username = username;
                 if (userType.equals("T")) new TeacherCourseUI(frame.getLocation());
                 else new StudentCourseUI(frame.getLocation());
             } else {

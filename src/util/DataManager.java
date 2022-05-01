@@ -272,24 +272,104 @@ public class DataManager implements Serializable, Runnable {
             int forumIndex = course.forums.indexOf(new DiscussionForum(topic));
             if (forumIndex == -1) return -2;
 
-            DiscussionForum forum = course.forums.get(forumIndex);
-            forum.addPost(new DiscussionPost());
-
             return 1;
         }
     }
 
-//    public static int createPost(String courseTitle, String topic, String userType, String user, String post) {
-//        synchronized (coursesSync) {
-//            int courseIndex = courses.indexOf(new Course(courseTitle));
-//            if (courseIndex == -1) return -1;
-//
-//            Course course = courses.get(courseIndex);
-//            if (!course.forums.contains(new DiscussionForum(topic, ))) return -2;
-//
-//            return 1;
-//        }
-//    }
+    public static int createPost(String courseTitle, String topic, String userType, String username, String post) {
+        synchronized (coursesSync) {
+            int courseIndex = courses.indexOf(new Course(courseTitle));
+            if (courseIndex == -1) return -1;
+
+            Course course = courses.get(courseIndex);
+
+            int forumIndex = course.forums.indexOf(new DiscussionForum(topic));
+
+            if (forumIndex == -1) return -2;
+
+            DiscussionForum forum = course.forums.get(forumIndex);
+            User user = userType.equals("T") ? new Teacher(username) : new Student(username);
+            forum.addPost(new DiscussionPost(user, post, System.currentTimeMillis()));
+            return 1;
+        }
+    }
+
+    public static int deletePost(String courseTitle, String topic, String username, Date postTime) {
+        synchronized (coursesSync) {
+            int courseIndex = courses.indexOf(new Course(courseTitle));
+            if (courseIndex == -1) return -1;
+
+            Course course = courses.get(courseIndex);
+
+            int forumIndex = course.forums.indexOf(new DiscussionForum(topic));
+            if (forumIndex == -1) return -2;
+
+            DiscussionForum forum = course.forums.get(forumIndex);
+
+            int postIndex = forum.posts.indexOf(new DiscussionPost(username, postTime));
+            if (postIndex == -1) return -3;
+
+            forum.posts.remove(postIndex);
+            return 1;
+        }
+    }
+
+    public static Packet editPost(Packet request) {
+        String courseTitle = request.getMsg()[0];
+        String topic = request.getMsg()[1];
+        String poster = request.getMsg()[2];
+        String postTime = request.getMsg()[3];
+        String newContent = request.getMsg()[6];
+        synchronized (coursesSync) {
+            int courseIndex = courses.indexOf(new Course(courseTitle));
+            if (courseIndex == -1) return new Packet(new String[]{"Course", "Course doesn't exist, please try again."});
+
+            Course course = courses.get(courseIndex);
+
+            int forumIndex = course.forums.indexOf(new DiscussionForum(topic));
+            if (forumIndex == -1) new Packet(new String[]{"Forum", "Forum doesn't exist, please try again."});
+
+            DiscussionForum forum = course.forums.get(forumIndex);
+
+
+            int postIndex = forum.posts.indexOf(new DiscussionPost(poster, new Date(Long.parseLong(postTime))));
+            if (postIndex == -1) return new Packet(new String[]{"Post", "Post doesn't exist, please try again."});
+
+            DiscussionPost post = forum.posts.get(postIndex);
+            post.setPostContent(newContent);
+            return new Packet(true);
+        }
+    }
+
+    public static Packet replyPost(Packet request) {
+        String courseTitle = request.getMsg()[0];
+        String topic = request.getMsg()[1];
+        String poster = request.getMsg()[2];
+        String postTime = request.getMsg()[3];
+        String userType = request.getMsg()[4];
+        String username = request.getMsg()[5];
+        String replyContent = request.getMsg()[6];
+        synchronized (coursesSync) {
+            int courseIndex = courses.indexOf(new Course(courseTitle));
+            if (courseIndex == -1) return new Packet(new String[]{"Course", "Course doesn't exist, please try again."});
+
+            Course course = courses.get(courseIndex);
+
+            int forumIndex = course.forums.indexOf(new DiscussionForum(topic));
+            if (forumIndex == -1) new Packet(new String[]{"Forum", "Forum doesn't exist, please try again."});
+
+            DiscussionForum forum = course.forums.get(forumIndex);
+
+
+            int postIndex = forum.posts.indexOf(new DiscussionPost(poster, new Date(Long.parseLong(postTime))));
+            if (postIndex == -1) return new Packet(new String[]{"Post", "Post doesn't exist, please try again."});
+
+            DiscussionPost post = forum.posts.get(postIndex);
+            User user = userType.equals("T") ? new Teacher(username) : new Student(username);
+            post.addReply(new DiscussionPost(user, replyContent, System.currentTimeMillis()));
+            return new Packet(true);
+        }
+    }
 
     @Override
     public void run() {
@@ -312,19 +392,50 @@ public class DataManager implements Serializable, Runnable {
         return courseTitles;
     }
 
-    public ArrayList<String> getForumTopics(String courseTitle) throws TargetNotFoundException {
+    public static Packet getPostDisplayStrings(String courseTitle, String topic) {
         synchronized (coursesSync) {
-            ArrayList<String> forumTopics = new ArrayList<>();
-            if (courses.contains(new Course(courseTitle))) {
-                int courseIndex = courses.indexOf(new Course(courseTitle));
-                Course course = courses.get(courseIndex);
-                for (DiscussionForum forum : course.forums) {
-                    forumTopics.add(forum.getTopic());
+            int courseIndex = courses.indexOf(new Course(courseTitle));
+            if (courseIndex == -1) return new Packet(new String[]{"Course", "Course doesn't exist. " +
+                    "It may be modified or deleted by other users. You will be delivered to course selection page."},
+                    false);
+
+            Course course = courses.get(courseIndex);
+            int forumIndex = course.forums.indexOf(new DiscussionForum(topic));
+
+            if (forumIndex == -1) return new Packet("Forum doesn't exist. " +
+                    "It may be modified or deleted by other users. You will be delivered to forum selection page.",
+                    false);
+
+            List<DiscussionForum> forums = course.forums;
+            DiscussionForum forum = forums.get(forumIndex);
+            List<DiscussionPost> posts = forum.posts;
+            List<String[]> postDisplays = new ArrayList<>();
+            List<String[]> replyDisplay = new ArrayList<>();
+            for (DiscussionPost post : posts) {
+                String[] postDisplayStrings = new String[4];
+
+                postDisplayStrings[0] = post.getOwner().toString();
+                postDisplayStrings[1] = String.valueOf(post.getPostTime());
+                postDisplayStrings[2] = String.valueOf(post.getVotesNum());
+                postDisplayStrings[3] = post.getPostContent();
+                postDisplays.add(postDisplayStrings);
+                List<DiscussionPost> replies = post.replies;
+
+
+                String[] replyDisplayStrings = new String[replies.size() * 3];
+                for (int i = 0; i < replies.size(); i++) {
+                    DiscussionPost reply = replies.get(i);
+                    replyDisplayStrings[i * 3] = reply.getOwner().toString();
+                    replyDisplayStrings[i * 3 + 1] = String.valueOf(reply.getPostTime());
+                    replyDisplayStrings[i * 3 + 2] = reply.getPostContent();
                 }
-                return forumTopics;
-            } else {
-                throw new TargetNotFoundException();
+
+                replyDisplay.add(replyDisplayStrings);
+
             }
+
+
+            return new Packet(postDisplays, replyDisplay, true);
         }
     }
 

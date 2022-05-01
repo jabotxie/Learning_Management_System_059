@@ -9,7 +9,7 @@ import java.net.Socket;
 
 public class Client {
 
-    static String username;
+    public static String username;
     static Socket socket;
     static ObjectInputStream is;
     static ObjectOutputStream os;
@@ -25,7 +25,7 @@ public class Client {
         }
     }
 
-    static Packet getResponse(Packet request) {
+    public static Packet getResponse(Packet request) {
         try {
             os.writeObject(request);
             return (Packet) is.readObject();

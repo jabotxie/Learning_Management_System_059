@@ -1,10 +1,7 @@
 package util;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * Project 4 -- Learning Management System
@@ -79,7 +76,7 @@ public class DiscussionForum implements Serializable {
 
     public boolean isUserVoted(User user) {
         for (DiscussionPost post : posts) {
-            ArrayList<Vote> votes = post.getVotes();
+            List<Vote> votes = post.getVotes();
             for (Vote vote : votes) {
                 if (vote.getStudent().equals(user)) return true;
             }

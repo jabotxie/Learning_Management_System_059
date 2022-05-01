@@ -3,6 +3,7 @@ package util;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -22,8 +23,8 @@ public class DiscussionPost implements Comparable<DiscussionPost>, Serializable 
 
     public final Date repliesSync = new Date(System.currentTimeMillis());
     private User owner;
-    ArrayList<DiscussionPost> replies;
-    ArrayList<Vote> votes;
+    List<DiscussionPost> replies = new ArrayList<>();
+    List<Vote> votes;
     private String postContent;
     Date postTime;
 
@@ -35,6 +36,10 @@ public class DiscussionPost implements Comparable<DiscussionPost>, Serializable 
         this.postTime = new Date(postTime);
         this.votes = new ArrayList<>();
     }
+    public DiscussionPost(String username, Date date) {
+        owner = new Teacher(username);
+        postTime = date;
+    }
 
     //Constructor for util.DiscussionPost object
     public DiscussionPost(User owner, String postContent, Date postTime) {
@@ -43,11 +48,6 @@ public class DiscussionPost implements Comparable<DiscussionPost>, Serializable 
         this.postContent = postContent;
         this.postTime = postTime;
         this.votes = new ArrayList<>();
-    }
-
-    //Constructor for util.DiscussionPost object
-    public DiscussionPost() {
-
     }
 
     //method to retrieve owner of post
@@ -76,8 +76,16 @@ public class DiscussionPost implements Comparable<DiscussionPost>, Serializable 
     }
 
     //method to retrieve voting results
-    public ArrayList<Vote> getVotes() {
+    public List<Vote> getVotes() {
         return votes;
+    }
+
+    public long getPostTime() {
+        return postTime.getTime();
+    }
+
+    public void setPostContent(String postContent) {
+        this.postContent = postContent;
     }
 
     @Override
@@ -92,7 +100,7 @@ public class DiscussionPost implements Comparable<DiscussionPost>, Serializable 
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         DiscussionPost post = (DiscussionPost) o;
-        return Objects.equals(replies, post.replies) && Objects.equals(postContent, post.postContent) && Objects.equals(postTime, post.postTime);
+        return Objects.equals(post.owner.getUsername(), owner.getUsername()) && Objects.equals(postTime, post.postTime);
     }
 
     @Override

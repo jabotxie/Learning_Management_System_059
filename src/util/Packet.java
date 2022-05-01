@@ -1,12 +1,19 @@
 package util;
 
 import java.io.Serializable;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
 
 public class Packet implements Serializable {
 
     private int requestType;
     private String[] msg;
+    private List<String[]> posts;
+    private List<String[]> replies;
+    private Date date;
     private boolean operationSuccess;
+
 
     public static final int LOGIN = 0;
     public static final int CREATE = 1;
@@ -36,6 +43,18 @@ public class Packet implements Serializable {
 
     public Packet(int requestType) {
         this.requestType = requestType;
+    }
+
+    public Packet(List<String[]> posts, List<String[]> replies, boolean operationSuccess) {
+        this.posts = posts;
+        this.replies = replies;
+        this.operationSuccess = operationSuccess;
+    }
+
+    public Packet(int requestType, String[] msg, Date date) {
+        this.requestType = requestType;
+        this.msg = msg;
+        this.date = date;
     }
 
     public Packet(int requestType, String[] msg) {
@@ -79,6 +98,14 @@ public class Packet implements Serializable {
         return msg;
     }
 
+    public List<String[]> getPosts() {
+        return posts;
+    }
+
+    public List<String[]> getReplies() {
+        return replies;
+    }
+
     public void setMsg(String[] msg) {
         this.msg = msg;
     }
@@ -87,7 +114,22 @@ public class Packet implements Serializable {
         return operationSuccess;
     }
 
+    public Date getDate() {
+        return date;
+    }
+
     public void setOperationSuccess(boolean operationSuccess) {
         this.operationSuccess = operationSuccess;
+    }
+
+    @Override
+    public String toString() {
+        String sb = "Packet{" + "requestType=" + requestType +
+                ", msg=" + Arrays.toString(msg) +
+                ", posts=" + posts +
+                ", replies=" + replies +
+                ", operationSuccess=" + operationSuccess +
+                '}';
+        return sb;
     }
 }

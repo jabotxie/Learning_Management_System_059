@@ -13,7 +13,15 @@ public class WindowGenerator {
     }
 
     static String requestClientInput(JFrame frame, String prompt) {
-        return JOptionPane.showInputDialog(frame, prompt);
+        String input;
+
+        input = JOptionPane.showInputDialog(frame, prompt);
+        while (input == null || input.equals("")) {
+            JOptionPane.showMessageDialog(frame, "Please enter a valid input.", "Error",
+                    JOptionPane.ERROR_MESSAGE);
+            input = JOptionPane.showInputDialog(frame, prompt);
+        }
+        return input;
     }
 
     static boolean confirm(JFrame frame, String warning, String title) {

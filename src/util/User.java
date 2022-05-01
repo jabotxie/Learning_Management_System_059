@@ -13,7 +13,7 @@ import java.util.Objects;
  * @author Jia Xie, Shreyash, Kundana, Garv
  * @version April 11, 2022
  */
-public abstract class User implements Serializable {
+public class User implements Serializable {
 
     private final String username;
     private final String password;
@@ -24,6 +24,10 @@ public abstract class User implements Serializable {
         this.password = password;
     }
 
+    public User(String username) {
+        this.username = username;
+        this.password = "";
+    }
 
     public String getUsername() {
         return username;
@@ -93,7 +97,7 @@ public abstract class User implements Serializable {
 
     //toString method for user class
     public String toString() {
-        return getClass() == Teacher.class ? "util.Teacher " : "util.Student " + username;
+        return getClass() == Teacher.class ? "Teacher " + username : "Student " + username;
     }
 
 //    public abstract void vote(DiscussionForum forum, DiscussionPost post) throws TeacherCannotVoteException, AlreadyVotedException;

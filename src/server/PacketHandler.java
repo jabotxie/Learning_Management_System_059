@@ -2,6 +2,8 @@ package server;
 
 import util.*;
 
+import java.util.Date;
+
 public class PacketHandler {
     //////////////////////////////////////////////////////////////////////////////////////
     //Login handlers
@@ -143,62 +145,47 @@ public class PacketHandler {
 
     ////////////////////////////////////////////////////////////////////////////////
     //Post Handlers
-//    static Packet createPost(Packet request) {
-//        String course = request.getMsg()[0];
-//        String topic = request.getMsg()[1];
-//        String userType = request.getMsg()[2];
-//        String username = request.getMsg()[3];
-//        String post = request.getMsg()[3];
-//        int returnCaseNum = DataManager.createPost(course, topic, userType, username, post);
-//        switch (returnCaseNum) {
-//            case -1:
-//                return new Packet("Course", false);
-//            case -2:
-//                return new Packet("Forum", false);
-//            default:
-//                return new Packet(true);
-//        }
-//    }
+    static Packet createPost(Packet request) {
+        String course = request.getMsg()[0];
+        String topic = request.getMsg()[1];
+        String userType = request.getMsg()[2];
+        String username = request.getMsg()[3];
+        String post = request.getMsg()[4];
+        int returnCaseNum = DataManager.createPost(course, topic, userType, username, post);
+        switch (returnCaseNum) {
+            case -1:
+                return new Packet(new String[]{"Course", "Course doesn't exist, please try again."});
+            case -2:
+                return new Packet(new String[]{"Forum", "Forum doesn't exist, please try again."});
+            default:
+                return new Packet(true);
+        }
+    }
 
-//    static Packet deletePost(Packet request) {
-//        String course = request.getMsg()[0];
-//        String topic = request.getMsg()[1];
-//        String deletingPost = request.getMsg()[2];
-//        int returnCaseNum = DataManager.deletePost(course, topic, post);
-//        switch (returnCaseNum) {
-//            case -1:
-//                return new Packet("Course", false);
-//            case -2:
-//                return new Packet("Forum", false);
-//            case -3:
-//                return new Packet("Post", false);
-//            default:
-//                return new Packet(true);
-//        }
-//    }
-//
-//    static Packet editPost(Packet request) {
-//        String course = request.getMsg()[0];
-//        String topic = request.getMsg()[1];
-//        String oldPost = request.getMsg()[2];
-//        String newPost = request.getMsg()[3];
-//
-//        int returnCaseNum = DataManager.deletePost(course, topic, oldPost, newPost);
-//        switch (returnCaseNum) {
-//            case -1:
-//                return new Packet("Course", false);
-//            case -2:
-//                return new Packet("Forum", false);
-//            case -3:
-//                return new Packet("Post", false);
-//            default:
-//                return new Packet(true);
-//        }
-//    }
+    public static Packet deletePost(Packet request) {
+        String course = request.getMsg()[0];
+        String topic = request.getMsg()[1];
+        String username = request.getMsg()[2];
+        Date postTime = new Date(Long.parseLong(request.getMsg()[3]));
+        int returnCaseNum = DataManager.deletePost(course, topic, username, postTime);
+        switch (returnCaseNum) {
+            case -1:
+                return new Packet("Course", false);
+            case -2:
+                return new Packet("Forum", false);
+            case -3:
+                return new Packet("Post", false);
+            default:
+                return new Packet(true);
+        }
+    }
+
+    static Packet editPost(Packet request) {
+        return DataManager.editPost(request);
+    }
 
     static Packet replyPost(Packet request) {
-        //TODO:
-        return request;
+        return DataManager.replyPost(request);
     }
 
     static Packet votePost(Packet request) {
@@ -225,8 +212,9 @@ public class PacketHandler {
 
     }
 
-    static Packet requestPostList(Packet request) {
-        //TODO:
-        return request;
+    public static Packet requestPostList(Packet request) {
+        String courseTitle = request.getMsg()[0];
+        String topic = request.getMsg()[1];
+        return DataManager.getPostDisplayStrings(courseTitle, topic);
     }
 }
