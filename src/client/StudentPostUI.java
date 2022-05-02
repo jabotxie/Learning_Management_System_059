@@ -1,6 +1,5 @@
 package client;
 
-import com.sun.java.swing.plaf.windows.WindowsScrollBarUI;
 import util.Packet;
 
 import static client.Client.getResponse;
@@ -325,6 +324,7 @@ public class StudentPostUI implements ActionListener {
                         } else {
                             frame.dispose();
                             WindowGenerator.error(frame, response.getMsg()[1]);
+                            new StudentForumUI(course, frame.getLocation());
                             if (response.getMsg()[0].equals("Course")) new StudentCourseUI(frame.getLocation());
                             else if (response.getMsg()[0].equals("Forum"))
                                 new StudentForumUI(course, frame.getLocation());
