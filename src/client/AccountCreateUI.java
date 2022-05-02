@@ -7,9 +7,20 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Project 5 -- Learning Management System
+ * <p>
+ * A class that includes the GUI for users to create their account. They can select the account type and create the
+ * account using their own token
+ *
+ * <p>Purdue University -- CS18000 -- Spring 2022</p>
+ *
+ * @author Jia Xie, Shreyash, Kundana, Garv
+ * @version May 2nd, 2022
+ */
 public class AccountCreateUI implements ActionListener {
 
-//Here the JFrames, buttons, labels, etc. are created
+    //Here the JFrames, buttons, labels, etc. are created
     JFrame frame = new JFrame("Learning Management System");
 
     JButton backToLoginButton = new JButton("Back to login");
@@ -94,7 +105,8 @@ public class AccountCreateUI implements ActionListener {
 
             //Here, messages are shown based on success or failure of the user choosing a new username and password
             if (response == null) {
-                frame.dispose();} else {
+                frame.dispose();
+            } else {
                 if (response.isOperationSuccess()) {
                     WindowGenerator.showMsg(frame, "You have successfully created an account and logged in!");
                     frame.dispose();

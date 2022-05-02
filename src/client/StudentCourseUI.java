@@ -14,6 +14,18 @@ import static client.Client.username;
 import static util.Packet.ENTER_COURSE;
 import static util.Packet.LOGOUT;
 
+/**
+ * Project 5 -- Learning Management System
+ * <p>
+ *
+ * A class that includes the GUI for the Course dashboard.
+ * Here students will be able to view courses and have option enter a course.
+ *
+ * <p>Purdue University -- CS18000 -- Spring 2022</p>
+ *
+ * @author Jia Xie, Shreyash, Kundana, Garv
+ * @version May 2nd, 2022
+ */
 public class StudentCourseUI implements ActionListener {
 
     JFrame frame;
@@ -60,8 +72,7 @@ public class StudentCourseUI implements ActionListener {
 
             if (courseTitles != null && courseTitles.length != 0) {
 
-                coursePanel.setBounds(relativeX, relativeY,
-                        265, courseTitles.length * 30);
+                coursePanel.setBounds(relativeX, relativeY, 265, courseTitles.length * 30);
                 coursePanel.setLayout(null);
 
                 List<Integer> lengths = new ArrayList<>();
@@ -81,19 +92,15 @@ public class StudentCourseUI implements ActionListener {
                     coursePanel.add(courseButton);
 
                 }
-                functionPanel.setBounds(relativeX, relativeY + coursePanel.getHeight(),
-                        80, 50);
+                functionPanel.setBounds(relativeX, relativeY + coursePanel.getHeight(), 80, 50);
             } else {
                 coursePanel = new JPanel();
                 coursePanel.setLayout(null);
-                JLabel noCourseLabel = new JLabel("There is no course yet. " +
-                        "Please wait for a teacher to create a course.");
+                JLabel noCourseLabel = new JLabel("There is no course yet. " + "Please wait for a teacher to create a course.");
                 noCourseLabel.setBounds(0, 10, 600, 20);
                 coursePanel.add(noCourseLabel);
-                coursePanel.setBounds(relativeX, relativeY,
-                        600, 30);
-                functionPanel.setBounds(relativeX, relativeY + coursePanel.getHeight() + 20,
-                        80, 50);
+                coursePanel.setBounds(relativeX, relativeY, 600, 30);
+                functionPanel.setBounds(relativeX, relativeY + coursePanel.getHeight() + 20, 80, 50);
             }
 
             functionPanel.setLayout(null);
@@ -119,8 +126,7 @@ public class StudentCourseUI implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() == logoutButton) {
-            if (WindowGenerator.confirm(frame,
-                    "Are you sure you want to log out?", "Log Out Confirmation")) {
+            if (WindowGenerator.confirm(frame, "Are you sure you want to log out?", "Log Out Confirmation")) {
                 Packet response = Client.getResponse(new Packet(LOGOUT, new String[]{username}));
                 frame.dispose();
                 if (response != null) {
@@ -142,8 +148,7 @@ public class StudentCourseUI implements ActionListener {
                         new StudentForumUI(courseTitles[i], frame.getLocation());
                     } else {
                         frame.dispose();
-                        WindowGenerator.error(frame, "Course doesn't exist. It may be deleted or modified other users. " +
-                                "Please refresh and try again.");
+                        WindowGenerator.error(frame, "Course doesn't exist. It may be deleted or modified other users. " + "Please refresh and try again.");
                         new StudentCourseUI(frame.getLocation());
                     }
                 }

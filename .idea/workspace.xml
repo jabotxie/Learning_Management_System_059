@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d28170b6-672d-4479-8927-b4c27361f032" name="Changes" comment="Added helpful comments to AccountCreateUI.java">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-    </list>
+    <list default="true" id="d28170b6-672d-4479-8927-b4c27361f032" name="Changes" comment="reformatted code, edited Javadocs" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -32,14 +29,14 @@
     </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/src/client/Client.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/util/DataManager.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/util/DiscussionForum.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/util/Teacher.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/util/DiscussionPost.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/util/Packet.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/util/Student.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/util/DiscussionPost.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/util/DiscussionForum.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/util/User.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/util/Teacher.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/util/DataManager.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/client/Client.java" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -78,7 +75,7 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Client">
+  <component name="RunManager" selected="Application.SystemServer">
     <configuration name="Client" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="client.Client" />
       <module name="Learning_Management_System_059" />
@@ -147,8 +144,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Client" />
         <item itemvalue="Application.SystemServer" />
+        <item itemvalue="Application.Client" />
         <item itemvalue="Application.main" />
         <item itemvalue="Application.Design" />
       </list>
@@ -162,6 +159,20 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1649548055923</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Implement to Serializable&#10;As we want to save the owner of the votes, users has to implement Serializable to let ObjectOutputStream save the instance">
+      <created>1649647697005</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1649647697005</updated>
+    </task>
+    <task id="LOCAL-00028" summary="Complete class&#10;Deleted replyActivities&#10;Improved structure of run() function&#10;Improved postActivities() function">
+      <created>1649647770653</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1649647770653</updated>
     </task>
     <task id="LOCAL-00029" summary="Unused test class deleted">
       <created>1649647808837</created>
@@ -492,21 +503,7 @@
       <option name="project" value="LOCAL" />
       <updated>1651522715479</updated>
     </task>
-    <task id="LOCAL-00076" summary="Added helpful comments to AccountCreateUI.java">
-      <created>1651523231475</created>
-      <option name="number" value="00076" />
-      <option name="presentableId" value="LOCAL-00076" />
-      <option name="project" value="LOCAL" />
-      <updated>1651523231475</updated>
-    </task>
-    <task id="LOCAL-00077" summary="Added helpful comments to AccountCreateUI.java">
-      <created>1651523535468</created>
-      <option name="number" value="00077" />
-      <option name="presentableId" value="LOCAL-00077" />
-      <option name="project" value="LOCAL" />
-      <updated>1651523535468</updated>
-    </task>
-    <option name="localTasksCounter" value="78" />
+    <option name="localTasksCounter" value="76" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -527,7 +524,6 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Create createUI" />
@@ -554,8 +550,8 @@
     <MESSAGE value="Change variable name" />
     <MESSAGE value="Create .md file" />
     <MESSAGE value="Added additional info to the README.md" />
-    <MESSAGE value="Added helpful comments to AccountCreateUI.java" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added helpful comments to AccountCreateUI.java" />
+    <MESSAGE value="reformatted code, edited Javadocs" />
+    <option name="LAST_COMMIT_MESSAGE" value="reformatted code, edited Javadocs" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -588,9 +584,9 @@
     </watches-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Learning_Management_System_059$UserActivities.ic" NAME="UserActivities Coverage Results" MODIFIED="1649609720649" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/Learning_Management_System_059$Client.ic" NAME="Client Coverage Results" MODIFIED="1651439640133" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/Learning_Management_System_059$Client.ic" NAME="Client Coverage Results" MODIFIED="1651387661134" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>client.*</FILTER>
     </SUITE>
+    <SUITE FILE_PATH="coverage/Learning_Management_System_059$UserActivities.ic" NAME="UserActivities Coverage Results" MODIFIED="1649609720649" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

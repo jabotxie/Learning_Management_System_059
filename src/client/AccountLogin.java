@@ -7,6 +7,18 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Project 5 -- Learning Management System
+ * <p>
+ *
+ * A class that includes the GUI for the Login to account page. Here students and teachers will be able to enter their
+ * existing username and password to access their course dashboard. They can also delete their account in this window.
+ *
+ * <p>Purdue University -- CS18000 -- Spring 2022</p>
+ *
+ * @author Jia Xie, Shreyash, Kundana, Garv
+ * @version May 2nd, 2022
+ */
 public class AccountLogin implements ActionListener {
 
     JFrame frame = new JFrame("Learning Management System");

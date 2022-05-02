@@ -13,6 +13,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Project 5 -- Learning Management System
+ * <p>
+ *
+ * A class that includes the GUI for the Course dashboard.
+ * Here teachers will be able to view courses and have option to create, edit, or delete a course.
+ *
+ * <p>Purdue University -- CS18000 -- Spring 2022</p>
+ *
+ * @author Jia Xie, Shreyash, Kundana, Garv
+ * @version May 2nd, 2022
+ */
 public class TeacherCourseUI implements ActionListener {
 
 
@@ -76,7 +88,7 @@ public class TeacherCourseUI implements ActionListener {
                     lengths.add(courseTitle.length());
                 }
 
-                int courseButtonWidth = Collections.max(lengths) * 16;
+                int courseButtonWidth = Math.max(Collections.max(lengths) * 16, 60);
                 int renameButtonWidth = 85;
                 int deleteButtonWidth = 80;
                 int buttonGap = 20;

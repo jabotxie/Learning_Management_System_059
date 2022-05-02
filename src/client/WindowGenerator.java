@@ -7,6 +7,17 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
+/**
+ * Project 5 -- Learning Management System
+ * <p>
+ *
+ * A class that generates windows and is JPanel manager
+ *
+ * <p>Purdue University -- CS18000 -- Spring 2022</p>
+ *
+ * @author Jia Xie, Shreyash, Kundana, Garv
+ * @version May 2nd, 2022
+ */
 public class WindowGenerator {
     static void error(JFrame frame, String msg) {
         JOptionPane.showMessageDialog(frame, msg, "Error", JOptionPane.ERROR_MESSAGE);

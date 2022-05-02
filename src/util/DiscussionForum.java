@@ -4,8 +4,9 @@ import java.io.Serializable;
 import java.util.*;
 
 /**
- * Project 4 -- Learning Management System
+ * Project 5 -- Learning Management System
  * <p>
+ *
  * This class contains methods for the Discussion Forum
  * that can be created and edited by the users i.e Teachers
  * and Students
@@ -13,7 +14,8 @@ import java.util.*;
  * <p>Purdue University -- CS18000 -- Spring 2022</p>
  *
  * @author Kundana, Shreyash, Jia Xie, Garv , lab sec L14
- * @version April 9, 2022
+ *
+ * @version May 2nd, 2022
  */
 public class DiscussionForum implements Serializable {
 

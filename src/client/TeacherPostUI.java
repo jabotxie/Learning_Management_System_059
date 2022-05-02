@@ -1,11 +1,9 @@
 package client;
 
-//import com.sun.java.swing.plaf.windows.WindowsScrollBarUI;
 import util.Packet;
 
 import static client.Client.getResponse;
 import static client.Client.username;
-import static java.awt.Color.PINK;
 import static util.Packet.*;
 
 import javax.swing.*;
@@ -16,6 +14,18 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Project 5 -- Learning Management System
+ * <p>
+ *
+ * A class that included the GUI for discussion board. Teachers can create post and reply to others' posts.
+ * They can also choose the display method as either sorting by vote numbers or post date
+ *
+ * <p>Purdue University -- CS18000 -- Spring 2022</p>
+ *
+ * @author Jia Xie, Shreyash, Kundana, Garv
+ * @version May 2nd, 2022
+ */
 
 public class TeacherPostUI implements ActionListener {
     JFrame frame = new JFrame("Learning Management System");

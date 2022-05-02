@@ -14,6 +14,18 @@ import java.util.List;
 import static client.Client.username;
 import static util.Packet.*;
 
+/**
+ * Project 5 -- Learning Management System
+ * <p>
+ *
+ * A class that included the GUI for Forum dashboard for students.
+ * Student can select forums that they want to enter, in this window.
+ *
+ * <p>Purdue University -- CS18000 -- Spring 2022</p>
+ *
+ * @author Jia Xie, Shreyash, Kundana, Garv
+ * @version May 2nd, 2022
+ */
 public class TeacherForumUI implements ActionListener {
 
     JFrame frame = new JFrame("Learning Management System");

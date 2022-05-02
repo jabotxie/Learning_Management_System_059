@@ -9,6 +9,18 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.SocketException;
 
+/**
+ * Project 5 -- Learning Management System
+ * <p>
+ *
+ * A class that initialized the client using sockets and helps to communicate with the server.
+ *
+ * <p>Purdue University -- CS18000 -- Spring 2022</p>
+ *
+ * @author Jia Xie, Shreyash, Kundana, Garv
+ * @version May 2nd, 2022
+ */
+
 public class Client {
 
     public static String username;
@@ -18,7 +30,7 @@ public class Client {
 
     public static void main(String[] args) {
         try {
-            socket = new Socket("172.20.10.3", 4040);
+            socket = new Socket("localhost", 4040);
             is = new ObjectInputStream(socket.getInputStream());
             os = new ObjectOutputStream(socket.getOutputStream());
             new AccountLogin();

@@ -14,6 +14,18 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Project 5 -- Learning Management System
+ * <p>
+ *
+ * A class that included the GUI for discussion board. Student can create post and reply to others' posts.
+ * They can also vote for posts they like
+ *
+ * <p>Purdue University -- CS18000 -- Spring 2022</p>
+ *
+ * @author Jia Xie, Shreyash, Kundana, Garv
+ * @version May 2nd, 2022
+ */
 
 public class StudentPostUI implements ActionListener {
     JFrame frame = new JFrame("Learning Management System");
