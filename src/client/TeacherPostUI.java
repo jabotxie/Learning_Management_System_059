@@ -386,7 +386,6 @@ public class TeacherPostUI implements ActionListener {
                         } else {
                             frame.dispose();
                             WindowGenerator.error(frame, response.getMsg()[1]);
-                            new TeacherForumUI(course, frame.getLocation());
                             if (response.getMsg()[0].equals("Course")) new TeacherCourseUI(frame.getLocation());
                             else if (response.getMsg()[0].equals("Forum"))
                                 new TeacherForumUI(course, frame.getLocation());
