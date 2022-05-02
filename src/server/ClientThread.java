@@ -14,7 +14,6 @@ import java.net.Socket;
 /**
  * Project 5 -- Learning Management System
  * <p>
- *
  * A class that represents a thread responding to each client.
  *
  * <p>Purdue University -- CS18000 -- Spring 2022</p>

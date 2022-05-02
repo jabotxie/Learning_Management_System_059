@@ -6,10 +6,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 /**
  * Project 5 -- Learning Management System
  * <p>
- *
  * A class that includes the GUI for users to create their account. They can select the account type and create the
  * account using their own token
  *
@@ -95,7 +95,8 @@ public class AccountCreateUI implements ActionListener {
 
             Packet response = Client.getResponse(new Packet(Packet.CREATE_ACCOUNT, new String[]{userType, username, password}));
             if (response == null) {
-                frame.dispose();} else {
+                frame.dispose();
+            } else {
                 if (response.isOperationSuccess()) {
                     WindowGenerator.showMsg(frame, "You have successfully created an account and logged in!");
                     frame.dispose();

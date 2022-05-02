@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Project 5 -- Learning Management System
  * <p>
- *
+ * <p>
  * A class that represents a packet.
  * ************************************
  * requestType: an integer that tells the server which kind of request is this.

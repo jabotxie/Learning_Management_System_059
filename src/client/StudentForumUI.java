@@ -13,10 +13,10 @@ import java.util.List;
 import static client.Client.username;
 import static util.Packet.*;
 import static util.Packet.ENTER_FORUM;
+
 /**
  * Project 5 -- Learning Management System
  * <p>
- *
  * A class that included the GUI for Forum dashboard for students.
  * Student can select forums that they want to enter, in this window.
  *

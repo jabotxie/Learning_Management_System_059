@@ -12,10 +12,10 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
 /**
  * Project 5 -- Learning Management System
  * <p>
- *
  * A class that includes the GUI for the Course dashboard.
  * Here teachers will be able to view courses and have option to create, edit, or delete a course.
  *

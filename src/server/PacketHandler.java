@@ -3,17 +3,17 @@ package server;
 import util.*;
 
 import java.util.Date;
+
 /**
  * Project 5 -- Learning Management System
  * <p>
- *
  * A class that process the packet receiving from the client and return a response packet to the client
- * @return login in successful: operationSuccess = true
- * util.User is msgOne
- * <p>Purdue University -- CS18000 -- Spring 2022</p>
  *
  * @author Jia Xie, Shreyash, Kundana, Garv
  * @version May 2nd, 2022
+ * @return login in successful: operationSuccess = true
+ * util.User is msgOne
+ * <p>Purdue University -- CS18000 -- Spring 2022</p>
  */
 
 public class PacketHandler {
