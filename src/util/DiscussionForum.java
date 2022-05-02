@@ -67,18 +67,18 @@ public class DiscussionForum implements Serializable {
 
     //getter method
     public void addPost(DiscussionPost post) {
-        posts.add(post);
+        posts.add(0, post);
     }
 
     public void deletePost(DiscussionPost post) {
         posts.remove(post);
     }
 
-    public boolean isUserVoted(User user) {
+    public boolean isUserVoted(String username) {
         for (DiscussionPost post : posts) {
             List<Vote> votes = post.getVotes();
             for (Vote vote : votes) {
-                if (vote.getStudent().equals(user)) return true;
+                if (vote.getStudent().getUsername().equals(username)) return true;
             }
         }
         return false;

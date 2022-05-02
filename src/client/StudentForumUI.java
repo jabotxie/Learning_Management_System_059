@@ -28,19 +28,33 @@ public class StudentForumUI implements ActionListener {
 
     public StudentForumUI(String course, Point location) {
         this.course = course;
-        Packet request = new Packet(Packet.REQUEST_FORUM_TOPICS, new String[]{course});
+        Packet request = new Packet(REQUEST_FORUM_TOPICS, new String[]{course});
         Packet response = Client.getResponse(request);
 
         topics = response.getMsg();
 
-        int relativeX = 0;
-        int relativeY = 0;
+        int relativeX = 10;
+        int relativeY = 10;
 
         frame.setSize(600, 400);
         frame.setLocation(location);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setLayout(null);
         frame.setVisible(true);
+
+        JPanel header = new JPanel();
+        header.setLayout(null);
+        JLabel userType = new JLabel("User Type: Student");
+        userType.setBounds(0, 0, 200, 20);
+
+        JLabel username = new JLabel("Username: " + Client.username);
+        username.setBounds(0, 20, 100 + Client.username.length() * 16, 20);
+
+        header.add(userType);
+        header.add(username);
+        header.setBounds(relativeX, relativeY, 600, 40);
+
+        relativeY += 40;
 
         JPanel topicPanel = new JPanel();
         if (topics.length != 0) {
@@ -69,6 +83,15 @@ public class StudentForumUI implements ActionListener {
 
                 topicPanel.add(topicButton);
             }
+        } else {
+            topicPanel = new JPanel();
+            topicPanel.setLayout(null);
+            JLabel noCourseLabel = new JLabel("There is no forum in " + course + " yet. " +
+                    "Please wait for a teacher to create one.");
+            noCourseLabel.setBounds(0, 10, 600, 20);
+            topicPanel.add(noCourseLabel);
+            topicPanel.setBounds(relativeX, relativeY,
+                    600, 30);
         }
 
 
@@ -93,6 +116,7 @@ public class StudentForumUI implements ActionListener {
         functionPanel.add(refreshButton);
         functionPanel.add(backButton);
 
+        frame.add(header);
         frame.add(topicPanel);
         frame.add(functionPanel);
     }

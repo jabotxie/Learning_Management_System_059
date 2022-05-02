@@ -7,7 +7,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -37,33 +36,64 @@ public class StudentCourseUI implements ActionListener {
         frame.setLocation(location);
         frame.setSize(600, 400);
 
-        int relativeX = 0;
-        int relativeY = 0;
+        int relativeX = 10;
+        int relativeY = 10;
+
+        JPanel header = new JPanel();
+        header.setLayout(null);
+        JLabel userType = new JLabel("User Type: Student");
+        userType.setBounds(0, 0, 200, 20);
+
+        JLabel username = new JLabel("Username: " + Client.username);
+        username.setBounds(0, 20, 100 + Client.username.length() * 16, 20);
+
+        header.add(userType);
+        header.add(username);
+        header.setBounds(relativeX, relativeY, 600, 40);
+
+        relativeY += 40;
+
         JPanel coursePanel = new JPanel();
-        coursePanel.setBounds(relativeX, relativeY,
-                265, courseTitles.length * 30 - 10);
-        coursePanel.setLayout(null);
-
-        List<Integer> lengths = new ArrayList<>();
-        for (String courseTitle : courseTitles) {
-            lengths.add(courseTitle.length());
-        }
-
-        int buttonWidth = Collections.max(lengths) * 16;
-
-        for (int i = 0; i < courseTitles.length; i++) {
-            JButton courseButton = new JButton(courseTitles[i]);
-            courseButton.addActionListener(this);
-            courseButton.setFocusable(false);
-            courseButton.setBounds(0, i * 30, buttonWidth, 20);
-            courseButtons.add(courseButton);
-
-            coursePanel.add(courseButton);
-        }
-
         JPanel functionPanel = new JPanel();
-        functionPanel.setBounds(relativeX, relativeY + coursePanel.getHeight() + 20,
-                80, 50);
+
+        if (courseTitles != null && courseTitles.length != 0) {
+
+            coursePanel.setBounds(relativeX, relativeY,
+                    265, courseTitles.length * 30);
+            coursePanel.setLayout(null);
+
+            List<Integer> lengths = new ArrayList<>();
+            for (String courseTitle : courseTitles) {
+                lengths.add(courseTitle.length());
+            }
+
+            int buttonWidth = Collections.max(lengths) * 16;
+
+            for (int i = 0; i < courseTitles.length; i++) {
+                JButton courseButton = new JButton(courseTitles[i]);
+                courseButton.addActionListener(this);
+                courseButton.setFocusable(false);
+                courseButton.setBounds(0, i * 30, buttonWidth, 20);
+                courseButtons.add(courseButton);
+
+                coursePanel.add(courseButton);
+
+            }
+            functionPanel.setBounds(relativeX, relativeY + coursePanel.getHeight(),
+                    80, 50);
+        } else {
+            coursePanel = new JPanel();
+            coursePanel.setLayout(null);
+            JLabel noCourseLabel = new JLabel("There is no course yet. " +
+                    "Please wait for a teacher to create a course.");
+            noCourseLabel.setBounds(0, 10, 600, 20);
+            coursePanel.add(noCourseLabel);
+            coursePanel.setBounds(relativeX, relativeY,
+                    600, 30);
+            functionPanel.setBounds(relativeX, relativeY + coursePanel.getHeight() + 20,
+                    80, 50);
+        }
+
         functionPanel.setLayout(null);
 
         logoutButton.addActionListener(this);
@@ -77,6 +107,7 @@ public class StudentCourseUI implements ActionListener {
         functionPanel.add(logoutButton);
         functionPanel.add(refreshButton);
 
+        frame.add(header);
         frame.add(coursePanel);
         frame.add(functionPanel);
     }
@@ -105,14 +136,14 @@ public class StudentCourseUI implements ActionListener {
                     frame.dispose();
                     WindowGenerator.error(frame, "Course doesn't exist. It may be deleted or modified other users. " +
                             "Please refresh and try again.");
-                    new TeacherCourseUI(frame.getLocation());
+                    new StudentCourseUI(frame.getLocation());
                 }
             }
         }
 
         if (e.getSource() == refreshButton) {
             frame.dispose();
-            new TeacherCourseUI(frame.getLocation());
+            new StudentCourseUI(frame.getLocation());
         }
     }
 }

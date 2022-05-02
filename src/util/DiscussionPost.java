@@ -66,8 +66,8 @@ public class DiscussionPost implements Comparable<DiscussionPost>, Serializable 
     }
 
     //method that allows users to vote
-    public void addVote(Vote vote) {
-        votes.add(vote);
+    public void addVote(String username) {
+        votes.add(new Vote(new Student(username)));
     }
 
     //method to retrieve voting results

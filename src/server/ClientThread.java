@@ -99,6 +99,8 @@ public class ClientThread implements Runnable {
                 return editPost(request);
             case REPLY_POST:
                 return replyPost(request);
+            case VOTE_POST:
+                return votePost(request);
             //////////////////////////////
 
             case REQUEST_COURSE_TITLES:
@@ -107,6 +109,8 @@ public class ClientThread implements Runnable {
                 return requestForumTopics(request);
             case REQUEST_POST_LIST:
                 return requestPostList(request);
+            case REQUEST_POST_LIST_BY_VOTE:
+                return requestPostListByVote(request);
         }
         return new Packet(false);
     }

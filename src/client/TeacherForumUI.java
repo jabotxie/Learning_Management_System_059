@@ -36,14 +36,28 @@ public class TeacherForumUI implements ActionListener {
 
         topics = response.getMsg();
 
-        int relativeX = 0;
-        int relativeY = 0;
+        int relativeX = 10;
+        int relativeY = 10;
 
         frame.setSize(600, 400);
         frame.setLocation(location);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setLayout(null);
         frame.setVisible(true);
+
+        JPanel header = new JPanel();
+        header.setLayout(null);
+        JLabel userType = new JLabel("User Type: Teacher");
+        userType.setBounds(0, 0, 200, 20);
+
+        JLabel username = new JLabel("Username: " + Client.username);
+        username.setBounds(0, 20, 100 + Client.username.length() * 16, 20);
+
+        header.add(userType);
+        header.add(username);
+        header.setBounds(relativeX, relativeY, 600, 40);
+
+        relativeY += 40;
 
         JPanel createPanel = new JPanel();
         createPanel.setBounds(relativeX, relativeY, 80, 20);
@@ -98,6 +112,15 @@ public class TeacherForumUI implements ActionListener {
                 topicPanel.add(renameButton);
                 topicPanel.add(deleteButton);
             }
+        } else {
+            topicPanel = new JPanel();
+            topicPanel.setLayout(null);
+            JLabel noCourseLabel = new JLabel("There is no forum in " + course + " yet. " +
+                    "You can create one.");
+            noCourseLabel.setBounds(0, 10, 600, 20);
+            topicPanel.add(noCourseLabel);
+            topicPanel.setBounds(relativeX, relativeY + createPanel.getHeight(),
+                    600, 30);
         }
 
 
@@ -122,6 +145,7 @@ public class TeacherForumUI implements ActionListener {
         functionPanel.add(refreshButton);
         functionPanel.add(backButton);
 
+        frame.add(header);
         frame.add(createPanel);
         frame.add(topicPanel);
         frame.add(functionPanel);
@@ -159,38 +183,12 @@ public class TeacherForumUI implements ActionListener {
 
         if (e.getSource() == createButton) {
 
-            String topic = WindowGenerator.requestClientInput(frame, "Enter the forum topic");
-
-            Packet response = Client.getResponse(new Packet(CREATE_FORUM, new String[]{course, topic}));
-            if (response.isOperationSuccess()) {
-                frame.dispose();
-                new TeacherForumUI(course, frame.getLocation());
-            } else {
-                if (response.getMsg()[0].equals("Course")) {
-                    frame.dispose();
-                    WindowGenerator.error(frame, "Course doesn't exist. It may be deleted or modified other users. " +
-                            "Please refresh and try again.");
-                    new TeacherCourseUI(frame.getLocation());
-                } else {
-                    frame.dispose();
-                    WindowGenerator.error(frame, "Forum already exists.");
-                    new TeacherForumUI(course, frame.getLocation());
-                }
-            }
-
-        }
-        for (int i = 0; i < editButtons.size(); i++) {
-            JButton renameButton = editButtons.get(i);
-            if (e.getSource() == renameButton) {
-                String newTitle = WindowGenerator.requestClientInput(frame, "Enter the new topic for forum "
-                        + topics[i]);
-                Packet request = new Packet(EDIT_TOPIC, new String[]{course, topics[i], newTitle});
-                Packet response = Client.getResponse(request);
-
+            String topic;
+            topic = WindowGenerator.requestClientInput(frame, "Enter the forum topic");
+            if (topic != null) {
+                Packet response = Client.getResponse(new Packet(CREATE_FORUM, new String[]{course, topic}));
                 if (response.isOperationSuccess()) {
                     frame.dispose();
-                    WindowGenerator.showMsg(frame, "The topic of the forum " + topics[i] + " has been changed to "
-                            + newTitle + "!");
                     new TeacherForumUI(course, frame.getLocation());
                 } else {
                     if (response.getMsg()[0].equals("Course")) {
@@ -198,15 +196,45 @@ public class TeacherForumUI implements ActionListener {
                         WindowGenerator.error(frame, "Course doesn't exist. It may be deleted or modified other users. " +
                                 "Please refresh and try again.");
                         new TeacherCourseUI(frame.getLocation());
-                    } else if (response.getMsg()[0].equals("Forum")){
-                        frame.dispose();
-                        WindowGenerator.error(frame, "Forum doesn't exists. " +
-                                "It may be deleted or modified other users. Please refresh and try again.");
-                        new TeacherForumUI(course, frame.getLocation());
                     } else {
                         frame.dispose();
-                        WindowGenerator.error(frame, "Forum already exists. Please refresh and try again.");
+                        WindowGenerator.error(frame, "Forum already exists.");
                         new TeacherForumUI(course, frame.getLocation());
+                    }
+                }
+            }
+        }
+        for (int i = 0; i < editButtons.size(); i++) {
+            JButton renameButton = editButtons.get(i);
+            if (e.getSource() == renameButton) {
+                String newTitle;
+                newTitle = WindowGenerator.requestClientInput(frame, "Enter the new topic for forum "
+                        + topics[i]);
+                if (newTitle != null) {
+                    Packet request = new Packet(EDIT_TOPIC, new String[]{course, topics[i], newTitle});
+                    Packet response = Client.getResponse(request);
+
+                    if (response.isOperationSuccess()) {
+                        frame.dispose();
+                        WindowGenerator.showMsg(frame, "The topic of the forum " + topics[i] + " has been changed to "
+                                + newTitle + "!");
+                        new TeacherForumUI(course, frame.getLocation());
+                    } else {
+                        if (response.getMsg()[0].equals("Course")) {
+                            frame.dispose();
+                            WindowGenerator.error(frame, "Course doesn't exist. It may be deleted or modified other users. " +
+                                    "Please refresh and try again.");
+                            new TeacherCourseUI(frame.getLocation());
+                        } else if (response.getMsg()[0].equals("Forum")) {
+                            frame.dispose();
+                            WindowGenerator.error(frame, "Forum doesn't exists. " +
+                                    "It may be deleted or modified other users. Please refresh and try again.");
+                            new TeacherForumUI(course, frame.getLocation());
+                        } else {
+                            frame.dispose();
+                            WindowGenerator.error(frame, "Forum already exists. Please refresh and try again.");
+                            new TeacherForumUI(course, frame.getLocation());
+                        }
                     }
                 }
             }
@@ -241,7 +269,7 @@ public class TeacherForumUI implements ActionListener {
                 Packet response = Client.getResponse(request);
                 if (response.isOperationSuccess()) {
                     frame.dispose();
-                    new TeacherPostUI(course, topics[i], frame.getLocation());
+                    new TeacherPostUI(course, topics[i], false, frame.getLocation());
                 } else {
                     frame.dispose();
                     WindowGenerator.error(frame, "Forum doesn't exist. It may be deleted or modified other users. " +

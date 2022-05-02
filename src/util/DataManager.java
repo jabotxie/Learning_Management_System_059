@@ -4,6 +4,7 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -196,7 +197,7 @@ public class DataManager implements Serializable, Runnable {
     public static boolean createCourse(String courseTitle) {
         synchronized (coursesSync) {
             if (courses.contains(new Course(courseTitle))) return false;
-            courses.add(new Course(courseTitle));
+            courses.add(0, new Course(courseTitle));
             return true;
         }
     }
@@ -227,7 +228,7 @@ public class DataManager implements Serializable, Runnable {
             }
             Course course = courses.get(courseIndex);
             if (course.forums.contains(new DiscussionForum(topic))) return -1;
-            course.forums.add(new DiscussionForum(topic));
+            course.forums.add(0, new DiscussionForum(topic));
             return 1;
         }
     }
@@ -294,7 +295,7 @@ public class DataManager implements Serializable, Runnable {
         }
     }
 
-    public static int deletePost(String courseTitle, String topic, String username, Date postTime) {
+    public static int deletePost(String courseTitle, String topic, String poster, Date postTime) {
         synchronized (coursesSync) {
             int courseIndex = courses.indexOf(new Course(courseTitle));
             if (courseIndex == -1) return -1;
@@ -306,7 +307,7 @@ public class DataManager implements Serializable, Runnable {
 
             DiscussionForum forum = course.forums.get(forumIndex);
 
-            int postIndex = forum.posts.indexOf(new DiscussionPost(username, postTime));
+            int postIndex = forum.posts.indexOf(new DiscussionPost(poster, postTime));
             if (postIndex == -1) return -3;
 
             forum.posts.remove(postIndex);
@@ -371,6 +372,39 @@ public class DataManager implements Serializable, Runnable {
         }
     }
 
+    public static Packet votePost(Packet request) {
+        String courseTitle = request.getMsg()[0];
+        String topic = request.getMsg()[1];
+        String poster = request.getMsg()[2];
+        String postTime = request.getMsg()[3];
+        String voter = request.getMsg()[4];
+        synchronized (coursesSync) {
+            int courseIndex = courses.indexOf(new Course(courseTitle));
+            if (courseIndex == -1) return new Packet(new String[]{"Course", "Course doesn't exist, please try again."});
+
+            Course course = courses.get(courseIndex);
+
+            int forumIndex = course.forums.indexOf(new DiscussionForum(topic));
+            if (forumIndex == -1) new Packet(new String[]{"Forum", "Forum doesn't exist, please try again."});
+
+            DiscussionForum forum = course.forums.get(forumIndex);
+
+
+            int postIndex = forum.posts.indexOf(new DiscussionPost(poster, new Date(Long.parseLong(postTime))));
+            if (postIndex == -1) return new Packet(new String[]{"Post", "Post doesn't exist, please try again."});
+
+            DiscussionPost post = forum.posts.get(postIndex);
+
+            if (forum.isUserVoted(voter)) return new Packet(new String[]{"Vote", "You have already voted for once."});
+            post.addVote(voter);
+            return new Packet(true);
+
+
+        }
+    }
+
+
+
     @Override
     public void run() {
         try {
@@ -409,6 +443,58 @@ public class DataManager implements Serializable, Runnable {
             List<DiscussionForum> forums = course.forums;
             DiscussionForum forum = forums.get(forumIndex);
             List<DiscussionPost> posts = forum.posts;
+            List<String[]> postDisplays = new ArrayList<>();
+            List<String[]> replyDisplay = new ArrayList<>();
+            for (DiscussionPost post : posts) {
+                String[] postDisplayStrings = new String[4];
+
+                postDisplayStrings[0] = post.getOwner().toString();
+                postDisplayStrings[1] = String.valueOf(post.getPostTime());
+                postDisplayStrings[2] = String.valueOf(post.getVotesNum());
+                postDisplayStrings[3] = post.getPostContent();
+                postDisplays.add(postDisplayStrings);
+                List<DiscussionPost> replies = post.replies;
+
+
+                String[] replyDisplayStrings = new String[replies.size() * 3];
+                for (int i = 0; i < replies.size(); i++) {
+                    DiscussionPost reply = replies.get(i);
+                    replyDisplayStrings[i * 3] = reply.getOwner().toString();
+                    replyDisplayStrings[i * 3 + 1] = String.valueOf(reply.getPostTime());
+                    replyDisplayStrings[i * 3 + 2] = reply.getPostContent();
+                }
+
+                replyDisplay.add(replyDisplayStrings);
+
+            }
+
+
+            return new Packet(postDisplays, replyDisplay, true);
+        }
+    }
+
+    public static Packet getPostDisplayStringsByVote(String courseTitle, String topic) {
+        synchronized (coursesSync) {
+            int courseIndex = courses.indexOf(new Course(courseTitle));
+            if (courseIndex == -1) return new Packet(new String[]{"Course", "Course doesn't exist. " +
+                    "It may be modified or deleted by other users. You will be delivered to course selection page."},
+                    false);
+
+            Course course = courses.get(courseIndex);
+            int forumIndex = course.forums.indexOf(new DiscussionForum(topic));
+
+            if (forumIndex == -1) return new Packet("Forum doesn't exist. " +
+                    "It may be modified or deleted by other users. You will be delivered to forum selection page.",
+                    false);
+
+            List<DiscussionForum> forums = course.forums;
+            DiscussionForum forum = forums.get(forumIndex);
+            List<DiscussionPost> posts = forum.posts;
+
+            List<DiscussionPost> anotherPostList = new ArrayList<>(posts);
+            Collections.sort(anotherPostList);
+            posts = anotherPostList;
+
             List<String[]> postDisplays = new ArrayList<>();
             List<String[]> replyDisplay = new ArrayList<>();
             for (DiscussionPost post : posts) {

@@ -170,11 +170,11 @@ public class PacketHandler {
         int returnCaseNum = DataManager.deletePost(course, topic, username, postTime);
         switch (returnCaseNum) {
             case -1:
-                return new Packet("Course", false);
+                return new Packet(new String[]{"Course", "Course doesn't exist, please try again."});
             case -2:
-                return new Packet("Forum", false);
+                return new Packet(new String[]{"Forum", "Forum doesn't exist, please try again."});
             case -3:
-                return new Packet("Post", false);
+                return new Packet(new String[]{"Post", "Post doesn't exist, please try again."});
             default:
                 return new Packet(true);
         }
@@ -189,14 +189,10 @@ public class PacketHandler {
     }
 
     static Packet votePost(Packet request) {
-        //TODO:
-        return request;
+        return DataManager.votePost(request);
+
     }
 
-    static Packet sortPost(Packet request) {
-        //TODO:
-        return request;
-    }
     ////////////////////////////////////////////////////////////////////
     //String List Handlers
 
@@ -216,5 +212,11 @@ public class PacketHandler {
         String courseTitle = request.getMsg()[0];
         String topic = request.getMsg()[1];
         return DataManager.getPostDisplayStrings(courseTitle, topic);
+    }
+
+    public static Packet requestPostListByVote(Packet request) {
+        String courseTitle = request.getMsg()[0];
+        String topic = request.getMsg()[1];
+        return DataManager.getPostDisplayStringsByVote(courseTitle, topic);
     }
 }

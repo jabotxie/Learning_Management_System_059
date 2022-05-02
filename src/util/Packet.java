@@ -40,6 +40,7 @@ public class Packet implements Serializable {
     public static final int REQUEST_COURSE_TITLES = 40;
     public static final int REQUEST_FORUM_TOPICS = 41;
     public static final int REQUEST_POST_LIST = 42;
+    public static final int REQUEST_POST_LIST_BY_VOTE = 43;
 
     public Packet(int requestType) {
         this.requestType = requestType;
@@ -124,12 +125,11 @@ public class Packet implements Serializable {
 
     @Override
     public String toString() {
-        String sb = "Packet{" + "requestType=" + requestType +
+        return "Packet{" + "requestType=" + requestType +
                 ", msg=" + Arrays.toString(msg) +
                 ", posts=" + posts +
                 ", replies=" + replies +
                 ", operationSuccess=" + operationSuccess +
                 '}';
-        return sb;
     }
 }

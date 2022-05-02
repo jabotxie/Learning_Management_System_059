@@ -4,12 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d28170b6-672d-4479-8927-b4c27361f032" name="Changes" comment="update">
+    <list default="true" id="d28170b6-672d-4479-8927-b4c27361f032" name="Changes" comment="post level edit function">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CoursesInfo.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CoursesInfo.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CoursesInfo.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserInfo.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/StudentCourseUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/StudentCourseUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/StudentForumUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/StudentForumUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/StudentPostUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/StudentPostUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/TeacherCourseUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/TeacherCourseUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/TeacherForumUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/TeacherForumUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/client/TeacherPostUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/TeacherPostUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/WindowGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/WindowGenerator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/server/ClientThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/ClientThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/PacketHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/PacketHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/util/DataManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/DataManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/DiscussionForum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/DiscussionForum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/DiscussionPost.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/DiscussionPost.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/Packet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/Packet.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -161,13 +172,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1649548055923</updated>
-    </task>
-    <task id="LOCAL-00019" summary="Vote feature added">
-      <created>1649631336893</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1649631336893</updated>
     </task>
     <task id="LOCAL-00020" summary="Vote class created">
       <created>1649631372315</created>
@@ -505,7 +509,14 @@
       <option name="project" value="LOCAL" />
       <updated>1651438646745</updated>
     </task>
-    <option name="localTasksCounter" value="68" />
+    <task id="LOCAL-00068" summary="post level edit function">
+      <created>1651440459095</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1651440459095</updated>
+    </task>
+    <option name="localTasksCounter" value="69" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -529,7 +540,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Test case created" />
     <MESSAGE value="readme updated" />
     <MESSAGE value="Updated coding convention" />
     <MESSAGE value="Add improvements class" />
@@ -554,7 +564,8 @@
     <MESSAGE value="Comment Post level for test" />
     <MESSAGE value="post level update" />
     <MESSAGE value="update" />
-    <option name="LAST_COMMIT_MESSAGE" value="update" />
+    <MESSAGE value="post level edit function" />
+    <option name="LAST_COMMIT_MESSAGE" value="post level edit function" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -577,16 +588,6 @@
           <url>file://$PROJECT_DIR$/src/archive/main.java</url>
           <line>24</line>
           <option name="timeStamp" value="17" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/util/DataManager.java</url>
-          <line>322</line>
-          <option name="timeStamp" value="23" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/client/TeacherPostUI.java</url>
-          <line>329</line>
-          <option name="timeStamp" value="24" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/server/ClientThread.java</url>

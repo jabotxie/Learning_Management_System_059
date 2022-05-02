@@ -33,14 +33,28 @@ public class TeacherCourseUI implements ActionListener {
 
         courseTitles = response.getMsg();
 
-        int relativeX = 0;
-        int relativeY = 0;
+        int relativeX = 10;
+        int relativeY = 10;
 
         frame.setSize(600, 400);
         frame.setLocation(location);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setLayout(null);
         frame.setVisible(true);
+
+        JPanel header = new JPanel();
+        header.setLayout(null);
+        JLabel userType = new JLabel("User Type: Teacher");
+        userType.setBounds(0, 0, 200, 20);
+
+        JLabel username = new JLabel("Username: " + Client.username);
+        username.setBounds(0, 20, 100 + Client.username.length() * 16, 20);
+
+        header.add(userType);
+        header.add(username);
+        header.setBounds(relativeX, relativeY, 600, 40);
+
+        relativeY += 40;
 
         JPanel createPanel = new JPanel();
         createPanel.setBounds(relativeX, relativeY, 80, 20);
@@ -96,6 +110,16 @@ public class TeacherCourseUI implements ActionListener {
                 coursePanel.add(renameButton);
                 coursePanel.add(deleteButton);
             }
+        } else {
+
+            coursePanel = new JPanel();
+            coursePanel.setLayout(null);
+            JLabel noCourseLabel = new JLabel("There is no course yet. " +
+                    "You can create a course.");
+            noCourseLabel.setBounds(0, 10, 600, 20);
+            coursePanel.add(noCourseLabel);
+            coursePanel.setBounds(relativeX, relativeY + createPanel.getHeight() + 10,
+                    600, 30);
         }
 
         JPanel functionPanel = new JPanel();
@@ -114,6 +138,7 @@ public class TeacherCourseUI implements ActionListener {
         functionPanel.add(logoutButton);
         functionPanel.add(refreshButton);
 
+        frame.add(header);
         frame.add(createPanel);
         frame.add(coursePanel);
         frame.add(functionPanel);
@@ -140,37 +165,42 @@ public class TeacherCourseUI implements ActionListener {
 
         if (e.getSource() == createButton) {
 
-            String courseTitle = WindowGenerator.requestClientInput(frame, "Enter the course title");
+            String courseTitle;
+            courseTitle = WindowGenerator.requestClientInput(frame, "Enter the course title");
+            if (courseTitle != null) {
+                Packet response = Client.getResponse(new Packet(CREATE_COURSE, new String[]{courseTitle}));
+                if (response.isOperationSuccess()) {
+                    frame.dispose();
+                    new TeacherCourseUI(frame.getLocation());
+                } else {
 
-            Packet response = Client.getResponse(new Packet(CREATE_COURSE, new String[]{courseTitle}));
-            if (response.isOperationSuccess()) {
-                frame.dispose();
-                new TeacherCourseUI(frame.getLocation());
-            } else {
-
-                WindowGenerator.error(frame, "Course already exist.");
-                frame.dispose();
-                new TeacherCourseUI(frame.getLocation());
+                    WindowGenerator.error(frame, "Course already exist.");
+                    frame.dispose();
+                    new TeacherCourseUI(frame.getLocation());
+                }
             }
 
         }
         for (int i = 0; i < renameButtons.size(); i++) {
             JButton renameButton = renameButtons.get(i);
             if (e.getSource() == renameButton) {
-                String newTitle = WindowGenerator.requestClientInput(frame, "Enter the new title for "
+                String newTitle;
+                newTitle = WindowGenerator.requestClientInput(frame, "Enter the new title for "
                         + courseTitles[i]);
-                Packet request = new Packet(RENAME_COURSE, new String[]{courseTitles[i], newTitle});
-                Packet response = Client.getResponse(request);
-                if (response.isOperationSuccess()) {
-                    frame.dispose();
-                    WindowGenerator.showMsg(frame, "The name of the course " + courseTitles[i] + " has been changed to "
-                            + newTitle + "!");
-                    new TeacherCourseUI(frame.getLocation());
-                } else {
-                    frame.dispose();
-                    WindowGenerator.error(frame, "Course doesn't exist. It may be deleted or modified other users. " +
-                            "Please refresh and try again.");
-                    new TeacherCourseUI(frame.getLocation());
+                if (newTitle != null) {
+                    Packet request = new Packet(RENAME_COURSE, new String[]{courseTitles[i], newTitle});
+                    Packet response = Client.getResponse(request);
+                    if (response.isOperationSuccess()) {
+                        frame.dispose();
+                        WindowGenerator.showMsg(frame, "The name of the course " + courseTitles[i] + " has been changed to "
+                                + newTitle + "!");
+                        new TeacherCourseUI(frame.getLocation());
+                    } else {
+                        frame.dispose();
+                        WindowGenerator.error(frame, "Course doesn't exist. It may be deleted or modified other users. " +
+                                "Please refresh and try again.");
+                        new TeacherCourseUI(frame.getLocation());
+                    }
                 }
             }
         }

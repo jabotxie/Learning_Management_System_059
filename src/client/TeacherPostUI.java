@@ -3,7 +3,9 @@ package client;
 import com.sun.java.swing.plaf.windows.WindowsScrollBarUI;
 import util.Packet;
 
+import static client.Client.getResponse;
 import static client.Client.username;
+import static java.awt.Color.PINK;
 import static util.Packet.*;
 
 import javax.swing.*;
@@ -23,24 +25,35 @@ public class TeacherPostUI implements ActionListener {
     JButton createButton = new JButton("Create");
     JButton refreshButton = new JButton("Refresh");
     JButton logoutButton = new JButton("Log out");
-
+    JRadioButton voteRadioButton = new JRadioButton("votes");
+    JRadioButton timeRadioButton = new JRadioButton("time");
+    ButtonGroup group = new ButtonGroup();
 
     List<JButton> editButtons = new ArrayList<>();
     List<JButton> deleteButtons = new ArrayList<>();
     List<JButton> addReplyButtons = new ArrayList<>();
     List<String[]> postsDisplay = new ArrayList<>();
     List<String[]> repliesDisplay = new ArrayList<>();
-    JButton addReplyButton = new JButton("Add a reply");
 
     String course;
     String topic;
+    boolean sortByVote;
 
-    TeacherPostUI(String course, String topic, Point location) {
+    public TeacherPostUI(String course, String topic, boolean sortByVote, Point location) {
         this.course = course;
         this.topic = topic;
+        this.sortByVote = sortByVote;
+        Packet request;
+        Packet response;
 
-        Packet request = new Packet(Packet.REQUEST_POST_LIST, new String[]{course, topic});
-        Packet response = Client.getResponse(request);
+        if (sortByVote) {
+            request = new Packet(REQUEST_POST_LIST_BY_VOTE, new String[]{course, topic});
+        } else {
+            request = new Packet(REQUEST_POST_LIST, new String[]{course, topic});
+        }
+
+
+        response = Client.getResponse(request);
 
         if (!response.isOperationSuccess()) {
             WindowGenerator.error(frame, response.getMsg()[1]);
@@ -96,12 +109,28 @@ public class TeacherPostUI implements ActionListener {
             refreshButton.addActionListener(this);
             refreshButton.setFocusable(false);
 
+            JLabel sortByVoteLabel = new JLabel("  Display sort by ");
+            sortByVoteLabel.setBounds(0, 40, 120, 20);
+
+            group.add(timeRadioButton);
+            timeRadioButton.setSelected(!sortByVote);
+            timeRadioButton.setFocusable(false);
+            group.add(voteRadioButton);
+            voteRadioButton.setSelected(sortByVote);
+            voteRadioButton.setFocusable(false);
+
+            timeRadioButton.addActionListener(this);
+            timeRadioButton.setBounds(120, 40, 50, 20);
+
+            voteRadioButton.addActionListener(this);
+            voteRadioButton.setBounds(170, 40, 70, 20);
+
             createButton.setBounds(0, 60, 80, 20);
             createButton.addActionListener(this);
             createButton.setFocusable(false);
 
             JPanel header = new JPanel();
-            header.setBounds(0, 0, 1000, 80);
+            header.setBounds(10, 10, 1000, 80);
             header.setLayout(null);
 
 
@@ -112,6 +141,9 @@ public class TeacherPostUI implements ActionListener {
             header.add(courseButton);
             header.add(pointerLabelOne);
             header.add(topicLabel);
+            header.add(sortByVoteLabel);
+            header.add(voteRadioButton);
+            header.add(timeRadioButton);
             header.add(createButton);
             header.add(refreshButton);
             header.add(logoutButton);
@@ -125,7 +157,11 @@ public class TeacherPostUI implements ActionListener {
             JPanel postPanel = new JPanel();
             postPanel.setLayout(null);
             postPanel.setBounds(0, 0, 1000, 600);
-            postPanel.setBackground(Color.PINK);
+            if (postsDisplay.size() == 0) {
+                JLabel noPostLabel = new JLabel("There is no post yet. You can create one.");
+                noPostLabel.setBounds(xPos, yPos + 10, 600, 20);
+                postPanel.add(noPostLabel);
+            }
             for (int i = 0; i < postsDisplay.size(); i++) {
                 JButton editButton = new JButton("Edit");
                 JButton deleteButton = new JButton("Delete");
@@ -143,6 +179,8 @@ public class TeacherPostUI implements ActionListener {
                 } catch (NumberFormatException e) {
                     voteNum = 0;
                 }
+
+
                 String postContent = postDisplay[3];
                 int areaHeight = (postContent.length() / 140) * 17 + 17;
                 //start creating a single post
@@ -150,9 +188,12 @@ public class TeacherPostUI implements ActionListener {
                 JLabel postLabel = new JLabel("Post" + (i + 1));
                 postLabel.setBounds(xPos, yPos + 10, 4 * 16 + ((i + 1) / 10) * 16, 20);
 
+                JLabel voteNumLabel = new JLabel("Votes: " + voteNum);
+                voteNumLabel.setBounds(xPos + 80, yPos + 10, 200, 20);
+
                 Date date = new Date(Long.parseLong(postDate));
                 JLabel timeLabel = new JLabel("Post Time: " + date);
-                timeLabel.setBounds(xPos + 120, yPos + 10, 500, 20);
+                timeLabel.setBounds(xPos + 200, yPos + 10, 500, 20);
 
                 JLabel posterLabel = new JLabel(poster);
                 posterLabel.setBounds(xPos, yPos + 30, 900, 20);
@@ -182,7 +223,7 @@ public class TeacherPostUI implements ActionListener {
                 addReplyButton.setFocusable(false);
                 addReplyButton.setBounds(xPos + 140, yPos + 50 + postContentTextArea.getHeight(), 120, 20);
 
-                addComponent(postPanel, postLabel, timeLabel, posterLabel, postContentTextArea, editButton, deleteButton, addReplyButton);
+                addComponent(postPanel, postLabel, voteNumLabel, timeLabel, posterLabel, postContentTextArea, editButton, deleteButton, addReplyButton);
 
                 int xReplyPos = 100;
                 int yReplyPos = yPos + 50 + postContentTextArea.getHeight() + 20;
@@ -205,12 +246,13 @@ public class TeacherPostUI implements ActionListener {
                         JLabel replierLabel = new JLabel(replier);
                         replierLabel.setBounds(xReplyPos, yReplyPos + 20, 800, 20);
 
+                        int replyHeight = (replyContent.length()/140) * 20 + 20;
                         JTextArea replyTextArea = new JTextArea();
                         replyTextArea.setText(replyContent);
                         replyTextArea.setLineWrap(true);
                         replyTextArea.setWrapStyleWord(true);
                         replyTextArea.setEditable(false);
-                        replyTextArea.setBounds(xReplyPos, yReplyPos + 40, 800, 20);
+                        replyTextArea.setBounds(xReplyPos, yReplyPos + 40, 800, replyHeight);
 
                         yReplyPos += 40 + replyTextArea.getHeight();
 
@@ -231,6 +273,7 @@ public class TeacherPostUI implements ActionListener {
 
     }
 
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == courseListButton) {
@@ -249,35 +292,46 @@ public class TeacherPostUI implements ActionListener {
             }
         }
 
+        if (e.getSource() == refreshButton) {
+            frame.dispose();
+            new TeacherPostUI(course, topic, sortByVote, frame.getLocation());
+        }
+
         if (e.getSource() == logoutButton) {
             if (WindowGenerator.confirm(frame, "Are you sure you want to log out?",
                     "Log Out Confirmation")) {
                 frame.dispose();
+                getResponse(new Packet(LOGOUT, new String[]{username}));
                 new AccountLogin(frame.getLocation());
             }
         }
 
         if (e.getSource() == createButton) {
-            String postContent = WindowGenerator.requestClientInput(frame, "Please enter the post content");
-            String[] msg = new String[]{course, topic, "T", username, postContent};
-            Packet request = new Packet(CREATE_POST, msg);
-            Packet response = Client.getResponse(request);
-            if (response.isOperationSuccess()) {
-                frame.dispose();
-                new TeacherPostUI(course, topic, frame.getLocation());
-            } else {
-                if (response.getMsg()[0].equals("Course")) {
-                    WindowGenerator.error(frame, "Course doesn't exist. " +
-                            "It may be modified or deleted by other users. " +
-                            "You will be directed to course selection page.");
+            String postContent;
+            postContent = WindowGenerator.requestClientInput(frame, "Please enter the post content");
+
+            if (postContent != null) {
+                String[] msg = new String[]{course, topic, "T", username, postContent};
+
+                Packet request = new Packet(CREATE_POST, msg);
+                Packet response = Client.getResponse(request);
+                if (response.isOperationSuccess()) {
                     frame.dispose();
-                    new TeacherCourseUI(frame.getLocation());
+                    new TeacherPostUI(course, topic, sortByVote, frame.getLocation());
                 } else {
-                    WindowGenerator.error(frame, "Forum doesn't exist. " +
-                            "It may be modified or deleted by other users. " +
-                            "You will be directed to forum selection page.");
-                    frame.dispose();
-                    new TeacherForumUI(course, frame.getLocation());
+                    if (response.getMsg()[0].equals("Course")) {
+                        WindowGenerator.error(frame, "Course doesn't exist. " +
+                                "It may be modified or deleted by other users. " +
+                                "You will be directed to course selection page.");
+                        frame.dispose();
+                        new TeacherCourseUI(frame.getLocation());
+                    } else {
+                        WindowGenerator.error(frame, "Forum doesn't exist. " +
+                                "It may be modified or deleted by other users. " +
+                                "You will be directed to forum selection page.");
+                        frame.dispose();
+                        new TeacherForumUI(course, frame.getLocation());
+                    }
                 }
             }
         }
@@ -285,11 +339,11 @@ public class TeacherPostUI implements ActionListener {
         for (int i = 0; i < deleteButtons.size(); i++) {
             JButton forumButton = deleteButtons.get(i);
             if (e.getSource() == forumButton) {
-                Packet request = new Packet(DELETE_POST, new String[]{course, topic, username, postsDisplay.get(i)[1]});
+                Packet request = new Packet(DELETE_POST, new String[]{course, topic, postsDisplay.get(i)[0].substring(8), postsDisplay.get(i)[1]});
                 Packet response = Client.getResponse(request);
                 if (response.isOperationSuccess()) {
                     frame.dispose();
-                    new TeacherPostUI(course, topic, frame.getLocation());
+                    new TeacherPostUI(course, topic, sortByVote, frame.getLocation());
                 } else {
                     frame.dispose();
                     WindowGenerator.error(frame, response.getMsg()[1]);
@@ -303,20 +357,23 @@ public class TeacherPostUI implements ActionListener {
         for (int i = 0; i < addReplyButtons.size(); i++) {
             JButton addReplyButton = addReplyButtons.get(i);
             if (e.getSource() == addReplyButton) {
-                String replyContent = WindowGenerator.requestClientInput(frame, "Enter the reply");
-                Packet request = new Packet(REPLY_POST, new String[]{course, topic, postsDisplay.get(i)[0].substring(8),
-                        postsDisplay.get(i)[1], postsDisplay.get(i)[0].charAt(0) == 'T' ? "T" : "S", username, replyContent});
-                Packet response = Client.getResponse(request);
-                if (response.isOperationSuccess()) {
-                    frame.dispose();
-                    new TeacherPostUI(course, topic, frame.getLocation());
-                } else {
-                    frame.dispose();
-                    WindowGenerator.error(frame, response.getMsg()[1]);
-                    new TeacherForumUI(course, frame.getLocation());
-                    if (response.getMsg()[0].equals("Course")) new TeacherCourseUI(frame.getLocation());
-                    else if (response.getMsg()[0].equals("Forum")) new TeacherForumUI(course, frame.getLocation());
-                    else new TeacherPostUI(course, topic, frame.getLocation());
+                String replyContent;
+                replyContent = WindowGenerator.requestClientInput(frame, "Enter the reply");
+                if (replyContent != null) {
+                    Packet request = new Packet(REPLY_POST, new String[]{course, topic, postsDisplay.get(i)[0].substring(8),
+                            postsDisplay.get(i)[1], "T", username, replyContent});
+                    Packet response = Client.getResponse(request);
+                    if (response.isOperationSuccess()) {
+                        frame.dispose();
+                        new TeacherPostUI(course, topic, sortByVote, frame.getLocation());
+                    } else {
+                        frame.dispose();
+                        WindowGenerator.error(frame, response.getMsg()[1]);
+                        new TeacherForumUI(course, frame.getLocation());
+                        if (response.getMsg()[0].equals("Course")) new TeacherCourseUI(frame.getLocation());
+                        else if (response.getMsg()[0].equals("Forum")) new TeacherForumUI(course, frame.getLocation());
+                        else new TeacherPostUI(course, topic, sortByVote, frame.getLocation());
+                    }
                 }
             }
         }
@@ -324,21 +381,38 @@ public class TeacherPostUI implements ActionListener {
         for (int i = 0; i < editButtons.size(); i++) {
             JButton editButton = editButtons.get(i);
             if (e.getSource() == editButton) {
-                String newContent = WindowGenerator.requestClientInput(frame, "Enter the new post");
-                Packet request = new Packet(EDIT_POST, new String[]{course, topic, postsDisplay.get(i)[0].substring(8),
-                        postsDisplay.get(i)[1], newContent});
-                Packet response = Client.getResponse(request);
-                if (response.isOperationSuccess()) {
-                    frame.dispose();
-                    new TeacherPostUI(course, topic, frame.getLocation());
-                } else {
-                    frame.dispose();
-                    WindowGenerator.error(frame, response.getMsg()[1]);
-                    new TeacherForumUI(course, frame.getLocation());
-                    if (response.getMsg()[0].equals("Course")) new TeacherCourseUI(frame.getLocation());
-                    else if (response.getMsg()[0].equals("Forum")) new TeacherForumUI(course, frame.getLocation());
-                    else new TeacherPostUI(course, topic, frame.getLocation());
+                String newContent;
+                newContent = WindowGenerator.requestClientInput(frame, "Enter the new post");
+                if (newContent != null) {
+                    Packet request = new Packet(EDIT_POST, new String[]{course, topic, postsDisplay.get(i)[0].substring(8),
+                            postsDisplay.get(i)[1], newContent});
+                    Packet response = Client.getResponse(request);
+                    if (response.isOperationSuccess()) {
+                        frame.dispose();
+                        new TeacherPostUI(course, topic, sortByVote, frame.getLocation());
+                    } else {
+                        frame.dispose();
+                        WindowGenerator.error(frame, response.getMsg()[1]);
+                        new TeacherForumUI(course, frame.getLocation());
+                        if (response.getMsg()[0].equals("Course")) new TeacherCourseUI(frame.getLocation());
+                        else if (response.getMsg()[0].equals("Forum")) new TeacherForumUI(course, frame.getLocation());
+                        else new TeacherPostUI(course, topic, sortByVote, frame.getLocation());
+                    }
                 }
+            }
+        }
+
+        if (e.getSource() == voteRadioButton) {
+            if (!sortByVote) {
+                frame.dispose();
+                new TeacherPostUI(course, topic, true, frame.getLocation());
+            }
+        }
+
+        if (e.getSource() == timeRadioButton) {
+            if (sortByVote) {
+                frame.dispose();
+                new TeacherPostUI(course, topic, false, frame.getLocation());
             }
         }
 
