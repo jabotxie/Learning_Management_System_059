@@ -1,6 +1,6 @@
 package client;
 
-import com.sun.java.swing.plaf.windows.WindowsScrollBarUI;
+//import com.sun.java.swing.plaf.windows.WindowsScrollBarUI;
 import util.Packet;
 
 import static client.Client.getResponse;
