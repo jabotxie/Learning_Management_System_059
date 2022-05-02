@@ -352,23 +352,27 @@ public class DataManager implements Serializable, Runnable {
         String replyContent = request.getMsg()[6];
         synchronized (coursesSync) {
             int courseIndex = courses.indexOf(new Course(courseTitle));
-            if (courseIndex == -1) return new Packet(new String[]{"Course", "Course doesn't exist, please try again."}, false);
+            if (courseIndex == -1)
+                return new Packet(new String[]{"Course", "Course doesn't exist, please try again."}, false);
 
             Course course = courses.get(courseIndex);
 
             int forumIndex = course.forums.indexOf(new DiscussionForum(topic));
-            if (forumIndex == -1) return new Packet(new String[]{"Forum", "Forum doesn't exist, please try again."}, false);
+            if (forumIndex == -1) {
+                return new Packet(new String[]{"Forum", "Forum doesn't exist, please try again."}, false);
+            } else {
 
-            DiscussionForum forum = course.forums.get(forumIndex);
+                DiscussionForum forum = course.forums.get(forumIndex);
 
 
-            int postIndex = forum.posts.indexOf(new DiscussionPost(poster, new Date(Long.parseLong(postTime))));
-            if (postIndex == -1) return new Packet(new String[]{"Post", "Post doesn't exist, please try again."});
+                int postIndex = forum.posts.indexOf(new DiscussionPost(poster, new Date(Long.parseLong(postTime))));
+                if (postIndex == -1) return new Packet(new String[]{"Post", "Post doesn't exist, please try again."});
 
-            DiscussionPost post = forum.posts.get(postIndex);
-            User user = userType.equals("T") ? new Teacher(username) : new Student(username);
-            post.addReply(new DiscussionPost(user, replyContent, System.currentTimeMillis()));
-            return new Packet(true);
+                DiscussionPost post = forum.posts.get(postIndex);
+                User user = userType.equals("T") ? new Teacher(username) : new Student(username);
+                post.addReply(new DiscussionPost(user, replyContent, System.currentTimeMillis()));
+                return new Packet(true);
+            }
         }
     }
 

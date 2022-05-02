@@ -4,12 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d28170b6-672d-4479-8927-b4c27361f032" name="Changes" comment="Create .md file">
+    <list default="true" id="d28170b6-672d-4479-8927-b4c27361f032" name="Changes" comment="Add Reply Bug Fixed">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/SystemServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/SystemServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/StudentPostUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/StudentPostUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/util/DataManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/DataManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/DiscussionPost.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/DiscussionPost.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,7 +85,7 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.SystemServer">
+  <component name="RunManager" selected="Application.Client">
     <configuration name="Client" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="client.Client" />
       <module name="Learning_Management_System_059" />
@@ -155,8 +154,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.SystemServer" />
         <item itemvalue="Application.Client" />
+        <item itemvalue="Application.SystemServer" />
         <item itemvalue="Application.main" />
         <item itemvalue="Application.Design" />
       </list>
@@ -170,13 +169,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1649548055923</updated>
-    </task>
-    <task id="LOCAL-00026" summary="Implement postActivities">
-      <created>1649645677328</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1649645677328</updated>
     </task>
     <task id="LOCAL-00027" summary="Implement to Serializable&#10;As we want to save the owner of the votes, users has to implement Serializable to let ObjectOutputStream save the instance">
       <created>1649647697005</created>
@@ -514,7 +506,14 @@
       <option name="project" value="LOCAL" />
       <updated>1651514169153</updated>
     </task>
-    <option name="localTasksCounter" value="75" />
+    <task id="LOCAL-00075" summary="Add Reply Bug Fixed">
+      <created>1651516119503</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1651516119503</updated>
+    </task>
+    <option name="localTasksCounter" value="76" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -538,8 +537,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Create new class for UI" />
-    <MESSAGE value="Implement client and course GUI" />
     <MESSAGE value="Create createUI" />
     <MESSAGE value="Separate client and server into different packages" />
     <MESSAGE value="Implement ClientHandler to deal with multiple client using multi thread" />
@@ -563,7 +560,9 @@
     <MESSAGE value="Implement server offline" />
     <MESSAGE value="Change variable name" />
     <MESSAGE value="Create .md file" />
-    <option name="LAST_COMMIT_MESSAGE" value="Create .md file" />
+    <MESSAGE value="Add Reply Bug Fiexed" />
+    <MESSAGE value="Add Reply Bug Fixed" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add Reply Bug Fixed" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -586,6 +585,11 @@
           <url>file://$PROJECT_DIR$/src/server/ClientThread.java</url>
           <line>32</line>
           <option name="timeStamp" value="26" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/client/StudentPostUI.java</url>
+          <line>328</line>
+          <option name="timeStamp" value="28" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

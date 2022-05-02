@@ -18,7 +18,7 @@ public class Client {
 
     public static void main(String[] args) {
         try {
-            socket = new Socket("localhost", 4040);
+            socket = new Socket("172.20.10.3", 4040);
             is = new ObjectInputStream(socket.getInputStream());
             os = new ObjectOutputStream(socket.getOutputStream());
             new AccountLogin();
