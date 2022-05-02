@@ -20,8 +20,6 @@ public class WindowGenerator {
     static String requestClientInput(JFrame frame, String prompt) {
         String input = null;
         try {
-
-
             String selection;
 
             do {
@@ -57,6 +55,10 @@ public class WindowGenerator {
 
                 } else {
                     input = JOptionPane.showInputDialog(frame, prompt);
+                    while (input != null && input.equals("")) {
+                        JOptionPane.showMessageDialog(frame, "Please enter a valid string");
+                        input = JOptionPane.showInputDialog(frame, prompt);
+                    }
                     if (input == null) selection = "Again";
                 }
 
