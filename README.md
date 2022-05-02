@@ -15,7 +15,7 @@ To let this application function,
 
 Project 5 Report - Kundana Nittala
 
-Project 5 Presentation - 
+Project 5 Presentation - Jia Xie
 
 Project 5 Code - Jia Xie
 
@@ -134,6 +134,11 @@ A class that process the packet receiving from the client and return a response 
 
 #### SystemServer.java
 A class thar initialized the server and creating the thread to communicate with different clients.
+
+## Project 4 & 5 Extra Credit Additions
+
+- Allow Teachers to edit or remove posts made by students.
+- Add polling features to posts. Students can select one of the options and a dashboard displays the results.
 
 ## Project 4 Bug and Implementation Improvements
 In order to improve the score we received for Project 4, we have implemented the following changes:
