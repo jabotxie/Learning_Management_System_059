@@ -41,7 +41,8 @@ public class StudentPostUI implements ActionListener {
         Packet request = new Packet(Packet.REQUEST_POST_LIST, new String[]{course, topic});
         Packet response = Client.getResponse(request);
         if (response == null) {
-            frame.dispose();} else {
+            frame.dispose();
+        } else {
             if (!response.isOperationSuccess()) {
                 WindowGenerator.error(frame, response.getMsg()[1]);
                 String failureType = response.getMsg()[0];
@@ -265,8 +266,10 @@ public class StudentPostUI implements ActionListener {
                 frame.dispose();
                 Packet response = getResponse(new Packet(LOGOUT, new String[]{username}));
                 if (response == null) {
-                    frame.dispose();} else {
-                new AccountLogin(frame.getLocation());}
+                    frame.dispose();
+                } else {
+                    new AccountLogin(frame.getLocation());
+                }
             }
         }
 
@@ -279,25 +282,27 @@ public class StudentPostUI implements ActionListener {
                 Packet request = new Packet(CREATE_POST, msg);
                 Packet response = Client.getResponse(request);
                 if (response == null) {
-                    frame.dispose();} else {
-                if (response.isOperationSuccess()) {
                     frame.dispose();
-                    new StudentPostUI(course, topic, frame.getLocation());
                 } else {
-                    if (response.getMsg()[0].equals("Course")) {
-                        WindowGenerator.error(frame, "Course doesn't exist. " +
-                                "It may be modified or deleted by other users. " +
-                                "You will be directed to course selection page.");
+                    if (response.isOperationSuccess()) {
                         frame.dispose();
-                        new StudentCourseUI(frame.getLocation());
+                        new StudentPostUI(course, topic, frame.getLocation());
                     } else {
-                        WindowGenerator.error(frame, "Forum doesn't exist. " +
-                                "It may be modified or deleted by other users. " +
-                                "You will be directed to forum selection page.");
-                        frame.dispose();
-                        new StudentForumUI(course, frame.getLocation());
+                        if (response.getMsg()[0].equals("Course")) {
+                            WindowGenerator.error(frame, "Course doesn't exist. " +
+                                    "It may be modified or deleted by other users. " +
+                                    "You will be directed to course selection page.");
+                            frame.dispose();
+                            new StudentCourseUI(frame.getLocation());
+                        } else {
+                            WindowGenerator.error(frame, "Forum doesn't exist. " +
+                                    "It may be modified or deleted by other users. " +
+                                    "You will be directed to forum selection page.");
+                            frame.dispose();
+                            new StudentForumUI(course, frame.getLocation());
+                        }
                     }
-                }}
+                }
             }
         }
 
@@ -312,7 +317,8 @@ public class StudentPostUI implements ActionListener {
                             postsDisplay.get(i)[1], "S", username, replyContent});
                     Packet response = Client.getResponse(request);
                     if (response == null) {
-                        frame.dispose();} else {
+                        frame.dispose();
+                    } else {
                         if (response.isOperationSuccess()) {
                             frame.dispose();
                             new StudentPostUI(course, topic, frame.getLocation());
@@ -337,7 +343,8 @@ public class StudentPostUI implements ActionListener {
                         postsDisplay.get(i)[1], username});
                 Packet response = Client.getResponse(request);
                 if (response == null) {
-                    frame.dispose();} else {
+                    frame.dispose();
+                } else {
                     if (response.isOperationSuccess()) {
                         frame.dispose();
                         new StudentPostUI(course, topic, frame.getLocation());

@@ -63,7 +63,7 @@ public class DiscussionPost implements Comparable<DiscussionPost>, Serializable 
 
     //method that allows user to add reply to discussion posts
     public void addReply(DiscussionPost reply) {
-        replies.add(reply);
+        replies.add(0, reply);
     }
 
     //method that allows users to vote

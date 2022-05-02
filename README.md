@@ -33,7 +33,7 @@ The application is storing the data through ObjectOutputStream, and the applicat
 
 ### Class Descriptions
 
-#### util.User.java:
+- User.java:
 An abstract class that holds a static ArrayList of util.DiscussionForum instances.
 It has two subclass, util.Student.java and util.Teacher.java
 A static ArrayList of forum is stored in util.User class, which can be access be multiple users.

@@ -144,7 +144,7 @@ public class DataManager implements Serializable, Runnable {
                 } else {
                     return null;
                 }
-            } catch (ArrayIndexOutOfBoundsException e) {
+            } catch (IndexOutOfBoundsException e) {
                 return null;
             }
         }
@@ -352,12 +352,12 @@ public class DataManager implements Serializable, Runnable {
         String replyContent = request.getMsg()[6];
         synchronized (coursesSync) {
             int courseIndex = courses.indexOf(new Course(courseTitle));
-            if (courseIndex == -1) return new Packet(new String[]{"Course", "Course doesn't exist, please try again."});
+            if (courseIndex == -1) return new Packet(new String[]{"Course", "Course doesn't exist, please try again."}, false);
 
             Course course = courses.get(courseIndex);
 
             int forumIndex = course.forums.indexOf(new DiscussionForum(topic));
-            if (forumIndex == -1) new Packet(new String[]{"Forum", "Forum doesn't exist, please try again."});
+            if (forumIndex == -1) return new Packet(new String[]{"Forum", "Forum doesn't exist, please try again."}, false);
 
             DiscussionForum forum = course.forums.get(forumIndex);
 

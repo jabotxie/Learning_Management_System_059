@@ -3,6 +3,7 @@ package server;
 import util.DataManager;
 
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ public class SystemServer {
     public static void main(String[] args) throws IOException {
         DataManager.initData();
         ServerSocket socket = new ServerSocket(PORT);
+        System.out.println(InetAddress. getLocalHost());
         try {
             while (true) {
                 System.out.println("[SERVER] Waiting for client connection...");
