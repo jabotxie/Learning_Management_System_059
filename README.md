@@ -1,4 +1,4 @@
-# CS180_Project 4_Learning_Management_System_059
+# CS180_Project 5_Learning_Management_System_059
 
 ## Instructions to compile and run the project:
 
@@ -27,11 +27,9 @@ Username
 Password
 util.User Type (T for util.Teacher, S for util.Student)
 
-
 #### CoursesInfo.txt
 The text file that included all the courses, forums, posts, replies and votes.
 The application is storing the data through ObjectOutputStream, and the application is importing by ObjectInputStream
-
 
 ### Class Descriptions
 
@@ -84,26 +82,6 @@ A class that helps to read and store the user information in a format of
 
 #### util.Vote.java
 This class represents a vote.
-
-### Exceptions Descriptions
-
-#### AcountInfoNotMatchException.java
-Exception is thrown when the username entered doesn't exist or the password is incorrect.
-
-#### util.AlreadyVotedException.java
-Exception is thrown when a student has already voted and is attempting to vote again
-
-#### util.NoPermissionException.java
-Exception is thrown when a user of a type does not have permission to do the intended operation. For example, a user of type teacher cannot vote and a user of type student cannot create or edit courses. This exception is thrown when an attempt is made.
-
-#### NoSuchTargetException.java
-Ecxception is thrown when a specified course, forum, post or reply does not exist.
-
-#### util.TeacherCannotVoteException.java
-Exception is thrown when a teacher user attemps to vote.
-
-#### UsernameAlreadyTakenException.java
-Exception is thrown when a user enters a username that is already on file while creating an account.
 
 ## Project 4 Bug and Implementation Improvements
 In order to improve the score we recieved for Project 4, we have implemented the following changes:

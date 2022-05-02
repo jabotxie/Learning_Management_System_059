@@ -83,17 +83,20 @@ public class AccountCreateUI implements ActionListener {
             String username = usernameText.getText();
 
             Packet response = Client.getResponse(new Packet(Packet.CREATE, new String[]{userType, username, password}));
+            if (response == null) {
+                frame.dispose();} else {
+                if (response.isOperationSuccess()) {
+                    WindowGenerator.showMsg(frame, "You have successfully created an account and logged in!");
+                    frame.dispose();
+                    Client.username = username;
+                    if (userType.equals("T")) new TeacherCourseUI(frame.getLocation());
+                    else new StudentCourseUI(frame.getLocation());
+                } else {
 
-            if (response.isOperationSuccess()) {
-                WindowGenerator.showMsg(frame, "You have successfully created an account and logged in!");
-                frame.dispose();
-                Client.username = username;
-                if (userType.equals("T")) new TeacherCourseUI(frame.getLocation());
-                else new StudentCourseUI(frame.getLocation());
-            } else {
-                WindowGenerator.error(frame, "The username has been taken. Please change try again");
-                frame.dispose();
-                new AccountCreateUI(frame.getLocation());
+                    WindowGenerator.error(frame, "The username has been taken. Please change try again");
+                    frame.dispose();
+                    new AccountCreateUI(frame.getLocation());
+                }
             }
         }
     }

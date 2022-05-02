@@ -24,6 +24,7 @@ public class Design implements ActionListener {
     public static void main(String[] args) {
         new Design();
     }
+
     public Design() {
 //        int relativeX = 0;
 //        int relativeY = 0;

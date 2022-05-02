@@ -35,7 +35,6 @@ public class Packet implements Serializable {
     public static final int EDIT_POST = 32;
     public static final int REPLY_POST = 33;
     public static final int VOTE_POST = 34;
-    public static final int SORT_POST = 35;
 
     public static final int REQUEST_COURSE_TITLES = 40;
     public static final int REQUEST_FORUM_TOPICS = 41;

@@ -77,24 +77,29 @@ public class AccountLogin implements ActionListener {
             if (username == null || password == null || username.equals("") || password.equals("")) {
                 WindowGenerator.error(frame, "Please enter valid username and password");
                 frame.dispose();
-                new AccountCreateUI(frame.getLocation());
+                new AccountLogin(frame.getLocation());
             } else {
 
                 Packet request = new Packet(Packet.LOGIN, new String[]{username, password});
 
                 Packet response = Client.getResponse(request);
-                if (response.isOperationSuccess()) {
-                    WindowGenerator.showMsg(frame, "You have successfully logged in!");
-                    frame.dispose();
-                    Client.username = username;
-                    String userType = response.getMsg()[0];
-                    if (userType.equals("T")) new TeacherCourseUI(frame.getLocation());
-                    else new StudentCourseUI(frame.getLocation());
+                if (response == null) {
+                    frame.dispose();} else {
+                    if (response.isOperationSuccess()) {
+                        WindowGenerator.showMsg(frame, "You have successfully logged in!");
+                        frame.dispose();
+                        Client.username = username;
+                        String userType = response.getMsg()[0];
+                        if (userType.equals("T")) new TeacherCourseUI(frame.getLocation());
+                        else new StudentCourseUI(frame.getLocation());
 
-                } else {
-                    WindowGenerator.error(frame, response.getMsg()[0]);
-                    frame.dispose();
-                    new AccountLogin(frame.getLocation());
+                    } else {
+
+                        WindowGenerator.error(frame, response.getMsg()[0]);
+                        frame.dispose();
+                        new AccountLogin(frame.getLocation());
+
+                    }
                 }
             }
 

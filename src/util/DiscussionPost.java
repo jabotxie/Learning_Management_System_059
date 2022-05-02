@@ -36,6 +36,7 @@ public class DiscussionPost implements Comparable<DiscussionPost>, Serializable 
         this.postTime = new Date(postTime);
         this.votes = new ArrayList<>();
     }
+
     public DiscussionPost(String username, Date date) {
         owner = new Teacher(username);
         postTime = date;
