@@ -4,23 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d28170b6-672d-4479-8927-b4c27361f032" name="Changes" comment="post level edit function">
+    <list default="true" id="d28170b6-672d-4479-8927-b4c27361f032" name="Changes" comment="Fixed bug&#10;Cancel throw exception">
+      <change afterPath="$PROJECT_DIR$/src/client/FileChooser.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CoursesInfo.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserInfo.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/StudentCourseUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/StudentCourseUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/StudentForumUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/StudentForumUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/StudentPostUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/StudentPostUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/TeacherCourseUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/TeacherCourseUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/TeacherForumUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/TeacherForumUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/TeacherPostUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/TeacherPostUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/client/WindowGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/WindowGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/ClientThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/ClientThread.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/PacketHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/PacketHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/DataManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/DataManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/DiscussionForum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/DiscussionForum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/DiscussionPost.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/DiscussionPost.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/Packet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/Packet.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,6 +72,7 @@
       <recent name="" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="client" />
       <recent name="" />
     </key>
   </component>
@@ -172,20 +160,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1649548055923</updated>
-    </task>
-    <task id="LOCAL-00020" summary="Vote class created">
-      <created>1649631372315</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1649631372315</updated>
-    </task>
-    <task id="LOCAL-00021" summary="Exception added to vote()">
-      <created>1649631407786</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1649631407786</updated>
     </task>
     <task id="LOCAL-00022" summary="New Exception created&#10;throw when the student already voted in this forum">
       <created>1649645443594</created>
@@ -516,7 +490,21 @@
       <option name="project" value="LOCAL" />
       <updated>1651440459095</updated>
     </task>
-    <option name="localTasksCounter" value="69" />
+    <task id="LOCAL-00069" summary="Post Level Completed">
+      <created>1651469242980</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1651469242980</updated>
+    </task>
+    <task id="LOCAL-00070" summary="Fixed bug&#10;Cancel throw exception">
+      <created>1651469260939</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1651469260939</updated>
+    </task>
+    <option name="localTasksCounter" value="71" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -540,8 +528,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="readme updated" />
-    <MESSAGE value="Updated coding convention" />
     <MESSAGE value="Add improvements class" />
     <MESSAGE value="Update client and server" />
     <MESSAGE value="Create new client class and new seperate UI classes" />
@@ -565,7 +551,9 @@
     <MESSAGE value="post level update" />
     <MESSAGE value="update" />
     <MESSAGE value="post level edit function" />
-    <option name="LAST_COMMIT_MESSAGE" value="post level edit function" />
+    <MESSAGE value="Post Level Completed" />
+    <MESSAGE value="Fixed bug&#10;Cancel throw exception" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed bug&#10;Cancel throw exception" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
