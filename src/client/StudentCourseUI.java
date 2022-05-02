@@ -69,7 +69,7 @@ public class StudentCourseUI implements ActionListener {
                     lengths.add(courseTitle.length());
                 }
 
-                int buttonWidth = Collections.max(lengths) * 16;
+                int buttonWidth = Math.max(Collections.max(lengths) * 16, 60);
 
                 for (int i = 0; i < courseTitles.length; i++) {
                     JButton courseButton = new JButton(courseTitles[i]);
