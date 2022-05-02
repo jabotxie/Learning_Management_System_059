@@ -31,63 +31,108 @@ util.User Type (T for util.Teacher, S for util.Student)
 The text file that included all the courses, forums, posts, replies and votes.
 The application is storing the data through ObjectOutputStream, and the application is importing by ObjectInputStream
 
-### Class Descriptions
+### util Class Descriptions
 
-- User.java:
+#### Packet
+A class that represents a packet. 
+ * ************************************
+* requestType: an integer that tells the server which kind of request is this.
+* msg: a String array that helps to communicate
+* posts: a List of String that helps the client to display the posts
+* replies: a List of String that helps the client to display the replies
+* isOperationSuccess: a boolean that illustrates if the action succeed
+ * ************************************
+
+#### DataManager
+A class that helps to read and store the user information in a format of
+ * ************************************
+* username
+* password
+* User Type(T for util.Teacher, S for util.Student)
+ * ************************************
+#### Vote  
+This class represents a vote.
+
+#### User
 An abstract class that holds a static ArrayList of util.DiscussionForum instances.
-It has two subclass, util.Student.java and util.Teacher.java
-A static ArrayList of forum is stored in util.User class, which can be access be multiple users.
-#### util.Teacher.java extends util.User.class
+It has two subclass, Student and Teacher
+#### Teacher extends User
 A class that represents a teacher
 
-#### util.Student.java extends util.User.class
+#### Student extends User
 A class that represents a student and takes care of the functions students can perform in the discussion board. Specifically, students are able to view the courses on their dashboard, create their own replies to discussions, and upvote other students' posts.
 
-#### util.DiscussionForum.java
+#### DiscussionForum
 A class that represents a discussion forum
 
-#### util.DiscussionPost.java:
+#### DiscussionPost
 A class that represents posts in a discussion forum. This class includes the functionality for teachers and students through their ability to edit, create, and reply to posts.
 
-#### userActivites.java
-This is the major class that holds all the operations and menus
-
-#### util.Course.java
+#### Course
 A class that represents a course. A course is identified by its title. There are forums in a course
 
-#### CourseUI.java
+### client Class Descriptions
 
-A class that includes the GUI for the Course dashboard GUI. Here students and teachers will be able to view courses and forums they are in and have an option to create, edit, or delete a course or forum (depending on their status as either a Student or a Teacher).
+#### AccountLoginUI
 
-#### CreateUI.java
+A class that includes the GUI for the Login to account page. Here students and teachers will be able to enter their
+existing username and password to access their course dashboard. They can also delete their account in this window.
 
-A class that includes the GUI for the Create account page. Here students and teachers will be able create a new username and password to create a new accout and access their course dashboard.
+#### AccountCreateUI
 
-#### LoginUI.java
+A class that includes the GUI for users to create their account. They can select the account type and create the
+account using their own token
+#### StudentCourseUI
 
-A class that includes the GUI for the Login to account page. Here students and teachers will be able to enter their existing username and password to access their course dashboard.
+A class that includes the GUI for the Course dashboard. 
+Here students will be able to view courses and have option enter a course.
 
-#### Courselist.java
-This class helps to store the data to local file
+#### TeacherCourseUI
+
+A class that includes the GUI for the Course dashboard.
+Here teachers will be able to view courses and have option to create, edit, or delete a course.
+
+#### StudentForumUI
+
+A class that included the GUI for Forum dashboard for students. 
+Student can select forums that they want to enter, in this window.
+
+#### TeacherForumUI
+
+A class that included the GUI for Forum dashboard for teachers.
+Student can select forums that they want to enter and have option to create, edit, delete
+forums, in this window.
+
+#### StudentPostUI
+A class that included the GUI for discussion board. Student can create post and reply to others' posts. 
+They can also vote for posts they like
+
+#### TeacherPostUI
+A class that included the GUI for discussion board. Teachers can create post and reply to others' posts.
+They can also choose the display method as either sorting by vote numbers or post date
+
 
 #### Client.java
 
-#### DataServer.java
-A class that helps to read and store the user information in a format of
- * ************************************
- * username
- * password
- * util.User Type(T for util.Teacher, S for util.Student)
- * ************************************
+A class that initialized the client using sockets and helps to communicate with the server.
 
-#### util.Vote.java
-This class represents a vote.
+### Server Classes Description
+
+#### ClientThread
+A class that represents a thread responding to each client.
+
+#### PacketHandle
+
+A class that process the packet receiving from the client and return a response packet to the client
+
+#### SystemServer
+A class thar initialized the server and creating the thread to communicate with different clients.
 
 ## Project 4 Bug and Implementation Improvements
-In order to improve the score we recieved for Project 4, we have implemented the following changes:
+In order to improve the score we received for Project 4, we have implemented the following changes:
 
 - Allow teachers to create and edit posts.
 
-- Changes to implementation and creation of courses and forums.
+- Denied request to create courses and forums with the same name existing
 
 
