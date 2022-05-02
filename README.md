@@ -2,12 +2,14 @@
 
 ## Instructions to compile and run the project:
 
-In order to compile the project
 
-Our application start at the main() function in UserClient class, so first of all run main()
-If it’s the first time running this application, namely, there is no data stored in a local file, the application will initialize the instances required for the application. If there are local files storing the data, the program will extract data from the local text file and import it into static instances and store them in util.DataManager class (A class we created to store and deal with all the data under to earth)
-The menu application begins from now on. By any time during the application, users can choose to quit (or log out if they already logged in). We accomplished this by implementing a 4-level loop in the program.
+To let this application function,
+* run the main() in SystemServer first
+* run the main() in Client
+* run again the main() in Client to launch different client
+* The home login menu will appear for each client connect to the server, users can use this application based on the prompts in the windows
 
+######&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if you are using two or more computers, please remember to check the hostname and port in SystemServer.java and Client.java
 
 ## Submissions
 
@@ -16,7 +18,11 @@ Project 4 Report - Kundana Nittala
 Project 4 Code - Jia Xie
 
 ### Project Description
-Our choice is option one, to implement a learning management system discussion board. The Discussion Board gives access to teachers to create discussion forums and allows students to post replies. This discussion board works similar to the discussion boards on brightspace. Teachers are allowed to add, edit and delete courses while students can access the discussion posts and forums within these courses. Our implementation also allows students to vote for the best discussion posts within the forum.
+Our choice is option one, to implement a learning management system discussion board. The Discussion Board gives access 
+to teachers to create discussion forums and allows students to post replies. This discussion board works similar to the 
+discussion boards on brightspace. Teachers are allowed to add, edit and delete courses while students can access the 
+discussion posts and forums within these courses. Our implementation also allows students to vote for the best 
+discussion posts within the forum.
 
 ### File Storage
 
