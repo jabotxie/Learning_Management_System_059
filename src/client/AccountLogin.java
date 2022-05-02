@@ -13,6 +13,7 @@ public class AccountLogin implements ActionListener {
 
     JButton loginButton = new JButton("Login");
     JButton createButton = new JButton("Create");
+    JButton deleteButton = new JButton("Delete Account");
     JLabel usernameLabel = new JLabel("Username");
     JLabel passwordLabel = new JLabel("Password");
     JTextField usernameText = new JTextField(10);
@@ -25,6 +26,8 @@ public class AccountLogin implements ActionListener {
         loginButton.addActionListener(this);
         createButton.setFocusable(false);
         createButton.addActionListener(this);
+        deleteButton.setFocusable(false);
+        deleteButton.addActionListener(this);
 
         frame.setSize(600, 400);
         frame.setLocationRelativeTo(null);
@@ -39,6 +42,7 @@ public class AccountLogin implements ActionListener {
         loginPanel.add(passwordText);
         loginPanel.add(loginButton);
         loginPanel.add(createButton);
+        loginPanel.add(deleteButton);
         frame.add(loginPanel);
 
     }
@@ -49,6 +53,8 @@ public class AccountLogin implements ActionListener {
         loginButton.addActionListener(this);
         createButton.setFocusable(false);
         createButton.addActionListener(this);
+        deleteButton.setFocusable(false);
+        deleteButton.addActionListener(this);
 
         frame.setSize(600, 400);
         frame.setLocation(location);
@@ -63,6 +69,7 @@ public class AccountLogin implements ActionListener {
         loginPanel.add(passwordText);
         loginPanel.add(loginButton);
         loginPanel.add(createButton);
+        loginPanel.add(deleteButton);
         frame.add(loginPanel);
 
     }
@@ -84,7 +91,8 @@ public class AccountLogin implements ActionListener {
 
                 Packet response = Client.getResponse(request);
                 if (response == null) {
-                    frame.dispose();} else {
+                    frame.dispose();
+                } else {
                     if (response.isOperationSuccess()) {
                         WindowGenerator.showMsg(frame, "You have successfully logged in!");
                         frame.dispose();
@@ -104,9 +112,37 @@ public class AccountLogin implements ActionListener {
             }
 
         }
+
         if (e.getSource() == createButton) {
             frame.dispose();
             new AccountCreateUI(frame.getLocation());
+        }
+
+        if (e.getSource() == deleteButton) {
+            String password = passwordText.getText();
+            String username = usernameText.getText();
+            if (username == null || password == null || username.equals("") || password.equals("")) {
+                WindowGenerator.error(frame, "Please enter valid username and password");
+                frame.dispose();
+                new AccountLogin(frame.getLocation());
+            } else {
+                if (WindowGenerator.confirm(frame, "Deleting the account will delete all the posts, replies, " +
+                        "and votes under your account. Are you sure you want to delete this account?", "Warning!!!")) {
+                    Packet request = new Packet(Packet.DELETE_ACCOUNT, new String[]{username, password});
+                    Packet response = Client.getResponse(request);
+
+                    if (response != null) {
+                        if (response.isOperationSuccess()) {
+                            WindowGenerator.showMsg(frame, "The account has been deleted. " +
+                                    "You will be directed to the home page.");
+                        } else {
+                            WindowGenerator.showMsg(frame, response.getMsg()[0]);
+                        }
+                        new AccountLogin(frame.getLocation());
+                    }
+                    frame.dispose();
+                }
+            }
         }
 
     }

@@ -32,7 +32,7 @@ public class PacketHandler {
     }
 
 
-    static Packet create(Packet packet) {
+    static Packet createAccount(Packet packet) {
 
         String userType = packet.getMsg()[0];
         String username = packet.getMsg()[1];
@@ -44,9 +44,22 @@ public class PacketHandler {
 
     }
 
-    static Packet delete(Packet request) {
-        //TODO: delete user
-        return request;
+    static Packet deleteAccount(Packet request) {
+        String username = request.getMsg()[0];
+        String password = request.getMsg()[1];
+        Class<? extends User> c = DataManager.checkToken(username, password);
+        User deletingUser = c == Teacher.class ? new Teacher(username, password) : new Student(username, password);
+        if (c == null) {
+            return new Packet("Password incorrect or user doesn't exist. Please try again.", false);
+        } else {
+            if (SystemServer.onlineUsers.contains(username))
+                return new Packet("User is already logged in another client. Please log out and try again.",
+                        false);
+            DataManager.deleteAccount(deletingUser, username, password);
+            return new Packet(true);
+
+        }
+
     }
 
     static Packet logout(Packet request) {

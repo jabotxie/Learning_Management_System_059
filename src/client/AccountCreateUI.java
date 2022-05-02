@@ -82,7 +82,7 @@ public class AccountCreateUI implements ActionListener {
             String password = passwordText.getText();
             String username = usernameText.getText();
 
-            Packet response = Client.getResponse(new Packet(Packet.CREATE, new String[]{userType, username, password}));
+            Packet response = Client.getResponse(new Packet(Packet.CREATE_ACCOUNT, new String[]{userType, username, password}));
             if (response == null) {
                 frame.dispose();} else {
                 if (response.isOperationSuccess()) {

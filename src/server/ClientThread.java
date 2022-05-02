@@ -68,9 +68,10 @@ public class ClientThread implements Runnable {
                 Packet response = login(request);
                 if (response.isOperationSuccess()) username = request.getMsg()[0];
                 return response;
-            case CREATE:
-                return create(request);
-
+            case CREATE_ACCOUNT:
+                return createAccount(request);
+            case DELETE_ACCOUNT:
+                return deleteAccount(request);
             case LOGOUT:
                 return logout(request);
             /////////////////////////////

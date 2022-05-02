@@ -167,7 +167,7 @@ public class DataManager implements Serializable, Runnable {
     }
 
     //method to remove account
-    public static void deleteAccount(User currentUser, String username, String password) {
+    public static void deleteAccount(User deletingUser, String username, String password) {
         synchronized (usersSync) {
             synchronized (coursesSync) {
                 checkToken(username, password);
@@ -176,10 +176,10 @@ public class DataManager implements Serializable, Runnable {
                         List<Integer> removingPostsIndex = new ArrayList<>();
                         for (int i = 0; i < forum.posts.size(); i++) {
                             DiscussionPost post = forum.posts.get(i);
-                            post.votes.removeIf(vote -> vote.getStudent().equals(currentUser));
+                            post.votes.removeIf(vote -> vote.getStudent().equals(deletingUser));
 
-                            post.replies.removeIf(reply -> reply.getOwner().equals(currentUser));
-                            if (post.getOwner().equals(currentUser))
+                            post.replies.removeIf(reply -> reply.getOwner().equals(deletingUser));
+                            if (post.getOwner().equals(deletingUser))
                                 removingPostsIndex.add(i);
                         }
                         for (int i = removingPostsIndex.size() - 1; i >= 0; i--) {
@@ -187,7 +187,7 @@ public class DataManager implements Serializable, Runnable {
                         }
                     }
                 }
-                users.remove(currentUser);
+                users.remove(deletingUser);
             }
         }
         saveData();
