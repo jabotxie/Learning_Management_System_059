@@ -17,6 +17,7 @@ public class WindowGenerator {
 
         input = JOptionPane.showInputDialog(frame, prompt);
         while (input == null || input.equals("")) {
+            if (input == null) break;
             JOptionPane.showMessageDialog(frame, "Please enter a valid input.", "Error",
                     JOptionPane.ERROR_MESSAGE);
             input = JOptionPane.showInputDialog(frame, prompt);
