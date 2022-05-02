@@ -13,7 +13,13 @@ import java.io.Serializable;
  * @author Jia Xie, Shreyash, Kundana, Garv
  * @version May 2nd, 2022
  */
-public record Vote(Student student) implements Serializable {
+public class Vote implements Serializable {
+
+    Student student;
+
+    public Vote(Student student) {
+        this.student = student;
+    }
 
     public Student getStudent() {
         return student;
