@@ -5,6 +5,25 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Project 5 -- Learning Management System
+ * <p>
+ *
+ * A class that represents a packet.
+ * ************************************
+ * requestType: an integer that tells the server which kind of request is this.
+ * msg: a String array that helps to communicate
+ * posts: a List of String that helps the client to display the posts
+ * replies: a List of String that helps the client to display the replies
+ * isOperationSuccess: a boolean that illustrates if the action succeed
+ * ************************************
+ *
+ * <p>Purdue University -- CS18000 -- Spring 2022</p>
+ *
+ * @author Nandana, Shreyash, Jason, Garv , lab sec L14
+ * @version May 2nd, 2022
+ */
+
 public class Packet implements Serializable {
 
     private int requestType;

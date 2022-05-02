@@ -127,7 +127,7 @@ A class that initialized the client using sockets and helps to communicate with 
 #### ClientThread
 A class that represents a thread responding to each client.
 
-#### PacketHandle
+#### PacketHandler
 
 A class that process the packet receiving from the client and return a response packet to the client
 

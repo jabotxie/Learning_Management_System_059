@@ -4,14 +4,14 @@ import java.io.*;
 import java.util.Objects;
 
 /**
- * Project 4 -- Learning Management System
+ * Project 5 -- Learning Management System
  * <p>
  * This class represents a user
  *
  * <p>Purdue University -- CS18000 -- Spring 2022</p>
  *
- * @author Jia Xie, Shreyash, Kundana, Garv
- * @version April 11, 2022
+ * @author Nandana, Shreyash, Jason, Garv , lab sec L14
+ * @version May 2nd, 2022
  */
 public class User implements Serializable {
 

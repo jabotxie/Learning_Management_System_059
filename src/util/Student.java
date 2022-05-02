@@ -1,16 +1,15 @@
 package util;
 
 /**
- * Project 4 -- Learning Management System
+ * Project 5 -- Learning Management System
  * <p>
  * A student class that represents a student. It is extended from util.User. The class handles all functionality students can perform such as replying, voting, and viewing
  * their course dashboard.
  *
- *
  * <p>Purdue University -- CS18000 -- Spring 2022</p>
  *
- * @author Kundana Nittala, Jia Xie
- * @version April 11, 2022
+ * @author Nandana, Shreyash, Jason, Garv , lab sec L14
+ * @version May 2nd, 2022
  */
 public class Student extends User {
 

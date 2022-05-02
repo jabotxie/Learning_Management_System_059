@@ -6,7 +6,18 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+/**
+ * Project 5 -- Learning Management System
+ * <p>
+ *
+ * A class that includes the GUI for users to create their account. They can select the account type and create the
+ * account using their own token
+ *
+ * <p>Purdue University -- CS18000 -- Spring 2022</p>
+ *
+ * @author Jia Xie, Shreyash, Kundana, Garv
+ * @version May 2nd, 2022
+ */
 public class AccountCreateUI implements ActionListener {
 
 

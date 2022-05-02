@@ -13,7 +13,18 @@ import java.util.List;
 import static client.Client.username;
 import static util.Packet.ENTER_COURSE;
 import static util.Packet.LOGOUT;
-
+/**
+ * Project 5 -- Learning Management System
+ * <p>
+ *
+ * A class that includes the GUI for the Course dashboard.
+ * Here students will be able to view courses and have option enter a course.
+ *
+ * <p>Purdue University -- CS18000 -- Spring 2022</p>
+ *
+ * @author Jia Xie, Shreyash, Kundana, Garv
+ * @version May 2nd, 2022
+ */
 public class StudentCourseUI implements ActionListener {
 
     JFrame frame;

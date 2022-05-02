@@ -11,6 +11,17 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
+/**
+ * Project 5 -- Learning Management System
+ * <p>
+ *
+ * A class that represents a thread responding to each client.
+ *
+ * <p>Purdue University -- CS18000 -- Spring 2022</p>
+ *
+ * @author Jia Xie, Shreyash, Kundana, Garv
+ * @version May 2nd, 2022
+ */
 public class ClientThread implements Runnable {
     String username;
     Socket socket;

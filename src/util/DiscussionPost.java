@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Project 4 -- Learning Management System
+ * Project 5 -- Learning Management System
  * <p>
  * This class contains methods for the Discussion Posts
  * that can be created and edited by the users i.e Teachers
@@ -16,7 +16,7 @@ import java.util.Objects;
  * <p>Purdue University -- CS18000 -- Spring 2022</p>
  *
  * @author Nandana, Shreyash, Jason, Garv , lab sec L14
- * @version April 9, 2022
+ * @version May 2nd, 2022
  */
 
 public class DiscussionPost implements Comparable<DiscussionPost>, Serializable {

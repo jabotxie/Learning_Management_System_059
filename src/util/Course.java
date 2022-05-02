@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.Objects;
 
 /**
- * Project 4 -- Learning Management System
+ * Project 5 -- Learning Management System
  * <p>
  * A class that represents a course.
  * A course is identified by its title
@@ -15,7 +15,7 @@ import java.util.Objects;
  * <p>Purdue University -- CS18000 -- Spring 2022</p>
  *
  * @author Jia Xie, Shreyash, Kundana, Garv
- * @version April 11, 2022
+ * @version May 2nd, 2022
  */
 public class Course implements Serializable {
 
