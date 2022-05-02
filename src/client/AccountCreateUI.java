@@ -20,7 +20,7 @@ import java.awt.event.ActionListener;
  */
 public class AccountCreateUI implements ActionListener {
 
-
+//Here the JFrames, buttons, labels, etc. are created
     JFrame frame = new JFrame("Learning Management System");
 
     JButton backToLoginButton = new JButton("Back to login");
@@ -36,7 +36,8 @@ public class AccountCreateUI implements ActionListener {
 
     public AccountCreateUI(Point point) {
 
-
+/* When the Teacher radio button is clicked, the mode is switched to T for teacher. When the student radio button is
+   clicked */
         teacherRB.setActionCommand("T");
         teacherRB.setSelected(true);
         studentRB.setActionCommand("S");
@@ -84,16 +85,25 @@ public class AccountCreateUI implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
+        /*Here, when the Back to Login button is clicked, the current frame is disposed and the Account Login screen
+        appears */
+
         if (e.getSource() == backToLoginButton) {
             frame.dispose();
             new AccountLogin();
         }
+
+        /* Here when the Create button is clicked, the system mode is set to the "create type" and a new username and
+        password are stored from the user.*/
         if (e.getSource() == createButton) {
             String userType = group.getSelection().getActionCommand();
             String password = passwordText.getText();
             String username = usernameText.getText();
 
-            Packet response = Client.getResponse(new Packet(Packet.CREATE_ACCOUNT, new String[]{userType, username, password}));
+            Packet response = Client.getResponse(new Packet(Packet.CREATE_ACCOUNT, new String[]{userType, username,
+                    password}));
+
+            //Here, messages are shown based on success or failure of the user choosing a new username and password
             if (response == null) {
                 frame.dispose();
             } else {
