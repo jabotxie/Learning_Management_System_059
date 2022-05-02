@@ -10,6 +10,7 @@ import java.io.IOException;
 /**
  * Project 5 -- Learning Management System
  * <p>
+ *
  * A class that generates windows and is JPanel manager
  *
  * <p>Purdue University -- CS18000 -- Spring 2022</p>

@@ -17,6 +17,7 @@ import static util.Packet.LOGOUT;
 /**
  * Project 5 -- Learning Management System
  * <p>
+ *
  * A class that includes the GUI for the Course dashboard.
  * Here students will be able to view courses and have option enter a course.
  *

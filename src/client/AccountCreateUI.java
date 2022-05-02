@@ -20,7 +20,7 @@ import java.awt.event.ActionListener;
  */
 public class AccountCreateUI implements ActionListener {
 
-//Here the JFrames, buttons, labels, etc. are created
+    //Here the JFrames, buttons, labels, etc. are created
     JFrame frame = new JFrame("Learning Management System");
 
     JButton backToLoginButton = new JButton("Back to login");

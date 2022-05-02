@@ -12,6 +12,7 @@ import java.net.SocketException;
 /**
  * Project 5 -- Learning Management System
  * <p>
+ *
  * A class that initialized the client using sockets and helps to communicate with the server.
  *
  * <p>Purdue University -- CS18000 -- Spring 2022</p>

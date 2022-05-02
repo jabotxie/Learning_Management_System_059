@@ -17,6 +17,7 @@ import java.util.List;
 /**
  * Project 5 -- Learning Management System
  * <p>
+ *
  * A class that included the GUI for discussion board. Student can create post and reply to others' posts.
  * They can also vote for posts they like
  *

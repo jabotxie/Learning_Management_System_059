@@ -3,6 +3,7 @@ package util;
 /**
  * Project 5 -- Learning Management System
  * <p>
+ *
  * This class represents a teacher. It is extended from util.User
  *
  * <p>Purdue University -- CS18000 -- Spring 2022</p>

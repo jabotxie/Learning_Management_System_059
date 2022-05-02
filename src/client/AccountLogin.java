@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 /**
  * Project 5 -- Learning Management System
  * <p>
+ *
  * A class that includes the GUI for the Login to account page. Here students and teachers will be able to enter their
  * existing username and password to access their course dashboard. They can also delete their account in this window.
  *

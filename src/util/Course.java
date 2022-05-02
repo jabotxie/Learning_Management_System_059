@@ -8,6 +8,7 @@ import java.util.Objects;
 /**
  * Project 5 -- Learning Management System
  * <p>
+ *
  * A class that represents a course.
  * A course is identified by its title
  * There are forums in a course

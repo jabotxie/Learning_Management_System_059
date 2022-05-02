@@ -17,6 +17,7 @@ import java.util.List;
 /**
  * Project 5 -- Learning Management System
  * <p>
+ *
  * A class that included the GUI for discussion board. Teachers can create post and reply to others' posts.
  * They can also choose the display method as either sorting by vote numbers or post date
  *

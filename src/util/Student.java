@@ -3,6 +3,7 @@ package util;
 /**
  * Project 5 -- Learning Management System
  * <p>
+ *
  * A student class that represents a student. It is extended from util.User.
  * The class handles all functionality students can perform such as replying, voting, and viewing
  * their course dashboard.

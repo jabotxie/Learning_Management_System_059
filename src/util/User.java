@@ -6,6 +6,7 @@ import java.util.Objects;
 /**
  * Project 5 -- Learning Management System
  * <p>
+ *
  * This class represents a user
  *
  * <p>Purdue University -- CS18000 -- Spring 2022</p>
@@ -35,24 +36,6 @@ public class User implements Serializable {
 
     public String getPassword() {
         return password;
-    }
-
-    public static String getImportedFile(String fileName) throws FileNotFoundException {
-        BufferedReader bf = new BufferedReader(new FileReader(fileName));
-        StringBuilder sb = new StringBuilder();
-        try {
-            String line = bf.readLine();
-            while (line != null) {
-                sb.append(line);
-                line = bf.readLine();
-                if (line != null) {
-                    sb.append('\n');
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return sb.toString();
     }
 
     @Override

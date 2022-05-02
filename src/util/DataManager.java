@@ -11,6 +11,7 @@ import java.util.List;
 /**
  * Project 5 -- Learning Management System
  * <p>
+ *
  * A class that helps to read and store the user information in a format of
  * <p>
  * ************************************
