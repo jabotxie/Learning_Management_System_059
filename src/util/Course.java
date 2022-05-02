@@ -16,6 +16,7 @@ import java.util.Objects;
  * <p>Purdue University -- CS18000 -- Spring 2022</p>
  *
  * @author Jia Xie, Shreyash, Kundana, Garv
+ *
  * @version May 2nd, 2022
  */
 public class Course implements Serializable {
